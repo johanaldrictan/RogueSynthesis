@@ -7,28 +7,30 @@ public class CommanderController : MonoBehaviour
 {
     Ray ray;
     RaycastHit2D hit;
-    Grid grid;
-    Tilemap walkableTiles;
     HoverState hover_state;
     Vector3Int lastTileLoc;
+    MapController mapController;
+
+    public AlliedUnit alliedUnit;
 
     void Start()
     {
-        GameObject tilemapObject = GameObject.FindGameObjectWithTag("Walkable");
-        if (tilemapObject != null)
+        GameObject mapControllerObject = GameObject.FindGameObjectWithTag("MapController");
+        if (mapControllerObject != null)
         {
-            walkableTiles = tilemapObject.GetComponent<Tilemap>();
+            mapController = mapControllerObject.GetComponent<MapController>();
         }
-        if (tilemapObject == null)
+        if (mapControllerObject == null)
         {
             Debug.Log("Cannot find Tilemap object");
         }
-        grid = walkableTiles.GetComponentInParent<Grid>();
+        
+        
     }
     void Update()
     {
-        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        
+        //Start Tile highlighting code
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);  
         hit = Physics2D.Raycast(ray.origin, ray.direction, 100f);
         if (hit)
         {
@@ -42,16 +44,22 @@ public class CommanderController : MonoBehaviour
         if (hover_state == HoverState.HOVER)
         {
             //Mouse is hovering
-            Debug.Log(grid.WorldToCell(hit.point));
+            Debug.Log(mapController.GridToMap(mapController.grid.WorldToCell(hit.point)));
             if(lastTileLoc != null)
-                walkableTiles.SetColor(lastTileLoc, Color.white);
-            lastTileLoc = grid.WorldToCell(hit.point);
-            walkableTiles.SetColor(grid.WorldToCell(hit.point), Color.red);
+                mapController.walkableTiles.SetColor(lastTileLoc, Color.white);
+            lastTileLoc = mapController.grid.WorldToCell(hit.point);
+            mapController.walkableTiles.SetColor(mapController.grid.WorldToCell(hit.point), Color.red);
         }
         else
         {
-            walkableTiles.SetColor(lastTileLoc, Color.white);
+            mapController.walkableTiles.SetColor(lastTileLoc, Color.white);
         }
+        //End Tile highlighting code
+    }
+
+    public void SpawnUnit()
+    {
+        Instantiate(alliedUnit.gameObject)
     }
 
 }
