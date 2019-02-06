@@ -44,8 +44,9 @@ public class CommanderController : MonoBehaviour
         if (hover_state == HoverState.HOVER)
         {
             //Mouse is hovering
-            Debug.Log(mapController.GridToMap(mapController.grid.WorldToCell(hit.point)));
-            if(lastTileLoc != null)
+            //Debug.Log(mapController.GridToMap(mapController.grid.WorldToCell(hit.point)));
+            Debug.Log(mapController.grid.WorldToCell(hit.point));
+            if (lastTileLoc != null)
                 mapController.walkableTiles.SetColor(lastTileLoc, Color.white);
             lastTileLoc = mapController.grid.WorldToCell(hit.point);
             mapController.walkableTiles.SetColor(mapController.grid.WorldToCell(hit.point), Color.red);
@@ -59,7 +60,7 @@ public class CommanderController : MonoBehaviour
 
     public void SpawnUnit()
     {
-        Instantiate(alliedUnit.gameObject)
+        Instantiate(alliedUnit.gameObject);
     }
 
 }

@@ -8,25 +8,38 @@ public class MapController : MonoBehaviour
     public Grid grid;
     public Tilemap walkableTiles;
 
+    //2D grid. value is the weight of the tile
     public int[,] map;
 
+    //change origin. these offsets are the actual coordinates of the left corner tile
     public int mapHeightOffset;
     public int mapWidthOffset;
-    
+
+    public int mapWidth;
+    public int mapHeight;
 
     // Start is called before the first frame update
     void Start()
     {
-        GameObject tilemapObject = GameObject.FindGameObjectWithTag("Tilemap");
-        if (tilemapObject != null)
+        //initialize map
+        //                x         y
+        map = new int[mapWidth, mapHeight];
+        for(int x = mapWidthOffset; x < mapWidth + mapWidthOffset; x++)
         {
-            walkableTiles = tilemapObject.GetComponent<Tilemap>();
+            //Debug.Log("X: " + x);
+            
+            for(int y = mapHeightOffset; y <= mapHeight - mapWidthOffset; y++)
+            {
+                Debug.Log("X: " + x + " Y: " + y);
+                /*
+                switch (walkableTiles.GetTile(new Vector3Int(x,y,0)))
+                {
+                    
+                }
+                */
+            }
+            
         }
-        if (tilemapObject == null)
-        {
-            Debug.Log("Cannot find Tilemap object");
-        }
-        grid = walkableTiles.GetComponentInParent<Grid>();
     }
 
     public Vector2Int GridToMap(Vector3Int gridUnits)
@@ -56,4 +69,14 @@ public class MapController : MonoBehaviour
         return mapCoords;
     }
     
+}
+public enum TileWeight
+{
+    //grass
+    UNOBSTRUCTED = 1,
+    LIGHT_OBS = 2,
+    MEDIUM_OBS = 3,
+    HEAVY_OBS = 4,
+    //mountains, other allies
+    OBSTRUCTED = 99
 }
