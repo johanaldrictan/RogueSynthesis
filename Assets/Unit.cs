@@ -8,21 +8,14 @@ public abstract class Unit : MonoBehaviour
     public bool isSelected;
     public int moveSpeed;
     private Direction direction;
-    private Vector2 position;
-    private MapController mapController;
+    private Vector2Int mapPosition;
 
     private void Start()
     {
-        GameObject mapControllerObject = GameObject.FindGameObjectWithTag("MapController");
-        if (mapControllerObject != null)
-        {
-            mapController = mapControllerObject.GetComponent<MapController>();
-        }
-        else
-        {
-            Debug.Log("Cannot find MapController object");
-        }
         isSelected = false;
+        mapPosition = MapMath.WorldToMap(this.transform.position);
+        //Debug.Log(mapPosition.x);
+        //Debug.Log(mapPosition.y);
     }
 
     public abstract void OnMouseDown();
@@ -33,6 +26,13 @@ public abstract class Unit : MonoBehaviour
         List<Vector2Int> possibleMoveLocs = new List<Vector2Int>();
 
         return possibleMoveLocs;
+    }
+    public void Move(int x, int y)
+    {
+        mapPosition.x = x;
+        mapPosition.y = y;
+        MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
+        this.transform.position = MapController.instance.grid.CellToWorld(MapMath.MapToGrid(mapPosition));
     }
 }
 public enum Direction

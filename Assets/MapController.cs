@@ -21,11 +21,22 @@ public class MapController : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        //each scene load I want a new instance of the mapcontroller but it needs to stay static
+        //needs to load start again in each scene
+        if (instance == null)
+        {
+            instance = this;
+        }
+        InitMap();
     }
 
     // Start is called before the first frame update
     void Start()
+    {
+        
+    }
+
+    private void InitMap()
     {
         //This method of programmatically figuring out what the layout of the map is to ease the workload of designing maps
         //But this is not really optimal for load times??
@@ -34,16 +45,17 @@ public class MapController : MonoBehaviour
         map = new int[mapWidth, mapHeight];
         int mapWidthCounter = 0;
         int mapHeightCounter = 0;
-        for(int x = mapWidthOffset; x < mapWidthOffset + mapWidth; x++)
+        for (int x = mapWidthOffset; x < mapWidthOffset + mapWidth; x++)
         {
             //Debug.Log("MapHeightOffset: " + mapHeightOffset);
             //Debug.Log("MapWidthOffset: " + mapWidthOffset);
             //Debug.Log("map bound: " + (mapHeightOffset - mapHeight));
             //Debug.Log("X: " + x);           
-            for(int y = mapHeightOffset; y > (mapHeightOffset - mapHeight); y--)
+            for (int y = mapHeightOffset; y > (mapHeightOffset - mapHeight); y--)
             {
                 //Debug.Log("X: " + x + " Y: " + y);
-                if (walkableTiles.GetTile(new Vector3Int(x, y, 0))) {
+                if (walkableTiles.GetTile(new Vector3Int(x, y, 0)))
+                {
                     //Debug.Log(walkableTiles.GetTile(new Vector3Int(x, y, 0)).name);
                     switch (walkableTiles.GetTile(new Vector3Int(x, y, 0)).name)
                     {
@@ -57,8 +69,6 @@ public class MapController : MonoBehaviour
 
         }
     }
-
-
     
 }
 public enum TileWeight
@@ -68,6 +78,6 @@ public enum TileWeight
     LIGHT_OBS = 2,
     MEDIUM_OBS = 3,
     HEAVY_OBS = 4,
-    //mountains, other allies
+    //mountains, other units
     OBSTRUCTED = 99
 }

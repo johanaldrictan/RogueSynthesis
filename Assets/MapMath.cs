@@ -22,10 +22,25 @@ public static class MapMath
         };
         return converted;
     }
+    public static Vector3Int MapToGrid(int x, int y)
+    {
+        Vector3Int converted = new Vector3Int
+        {
+            x = x + MapController.instance.mapWidthOffset,
+            y = (y - MapController.instance.mapHeightOffset) * -1
+        };
+        return converted;
+    }
     public static Vector3 MapToWorld(Vector2Int mapUnits)
     {
         Vector3 worldCoords = new Vector3();
         worldCoords = MapController.instance.grid.CellToWorld(MapToGrid(mapUnits));
+        return worldCoords;
+    }
+    public static Vector3 MapToWorld(int x, int y)
+    {
+        Vector3 worldCoords = new Vector3();
+        worldCoords = MapController.instance.grid.CellToWorld(MapToGrid(x,y));
         return worldCoords;
     }
     public static Vector2Int WorldToMap(Vector3 worldCoords)

@@ -9,23 +9,16 @@ public class CommanderController : MonoBehaviour
     RaycastHit2D hit;
     HoverState hover_state;
     Vector3Int lastTileLoc;
-    MapController mapController;
+    public const int MAX_TEAM_SIZE = 3;
 
-    public AlliedUnit alliedUnit;
+    public AlliedUnit alliedUnitPrefab;
+
+    public AlliedUnit[] alliedUnits;
 
     void Start()
     {
-        GameObject mapControllerObject = GameObject.FindGameObjectWithTag("MapController");
-        if (mapControllerObject != null)
-        {
-            mapController = mapControllerObject.GetComponent<MapController>();
-        }
-        if (mapControllerObject == null)
-        {
-            Debug.Log("Cannot find Tilemap object");
-        }
-        
-        
+        alliedUnits = new AlliedUnit[MAX_TEAM_SIZE];
+        alliedUnits[0] = SpawnUnit(0,0);
     }
     void Update()
     {
@@ -45,22 +38,24 @@ public class CommanderController : MonoBehaviour
         {
             //Mouse is hovering
             //Debug.Log(mapController.GridToMap(mapController.grid.WorldToCell(hit.point)));
-            Debug.Log(mapController.grid.WorldToCell(hit.point));
+            //Debug.Log(MapController.instance.grid.WorldToCell(hit.point));
             if (lastTileLoc != null)
-                mapController.walkableTiles.SetColor(lastTileLoc, Color.white);
-            lastTileLoc = mapController.grid.WorldToCell(hit.point);
-            mapController.walkableTiles.SetColor(mapController.grid.WorldToCell(hit.point), Color.red);
+                MapController.instance.walkableTiles.SetColor(lastTileLoc, Color.white);
+            lastTileLoc = MapController.instance.grid.WorldToCell(hit.point);
+            MapController.instance.walkableTiles.SetColor(MapController.instance.grid.WorldToCell(hit.point), Color.red);
         }
         else
         {
-            mapController.walkableTiles.SetColor(lastTileLoc, Color.white);
+            MapController.instance.walkableTiles.SetColor(lastTileLoc, Color.white);
         }
         //End Tile highlighting code
     }
 
-    public void SpawnUnit()
+    //spawn unit at x,y in map units
+    public AlliedUnit SpawnUnit(int x, int y)
     {
-        Instantiate(alliedUnit.gameObject);
+        Vector3 playerPos = MapController.instance.grid.CellToWorld(MapMath.MapToGrid(x,y));
+        return Instantiate(alliedUnitPrefab.gameObject).GetComponent<AlliedUnit>();       
     }
 
 }
