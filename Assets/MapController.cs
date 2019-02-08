@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class MapController : MonoBehaviour
 {
+    public static MapController instance;
     public Grid grid;
     public Tilemap walkableTiles;
 
@@ -18,56 +19,46 @@ public class MapController : MonoBehaviour
     public int mapWidth;
     public int mapHeight;
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        //This method of programmatically figuring out what the layout of the map is to ease the workload of designing maps
+        //But this is not really optimal for load times??
         //initialize map
         //                x         y
         map = new int[mapWidth, mapHeight];
-        for(int x = mapWidthOffset; x < mapWidth + mapWidthOffset; x++)
+        int mapWidthCounter = 0;
+        int mapHeightCounter = 0;
+        for(int x = mapWidthOffset; x < mapWidthOffset + mapWidth; x++)
         {
-            //Debug.Log("X: " + x);
-            
-            for(int y = mapHeightOffset; y <= mapHeight - mapWidthOffset; y++)
+            //Debug.Log("MapHeightOffset: " + mapHeightOffset);
+            //Debug.Log("MapWidthOffset: " + mapWidthOffset);
+            //Debug.Log("map bound: " + (mapHeightOffset - mapHeight));
+            //Debug.Log("X: " + x);           
+            for(int y = mapHeightOffset; y > (mapHeightOffset - mapHeight); y--)
             {
-                Debug.Log("X: " + x + " Y: " + y);
-                /*
-                switch (walkableTiles.GetTile(new Vector3Int(x,y,0)))
-                {
-                    
+                //Debug.Log("X: " + x + " Y: " + y);
+                if (walkableTiles.GetTile(new Vector3Int(x, y, 0))) {
+                    //Debug.Log(walkableTiles.GetTile(new Vector3Int(x, y, 0)).name);
+                    switch (walkableTiles.GetTile(new Vector3Int(x, y, 0)).name)
+                    {
+                        //Grass Tiles
+                        case "landscapeTiles_067":
+                            map[mapWidthCounter, mapHeightCounter] = (int)TileWeight.UNOBSTRUCTED;
+                            break;
+                    }
                 }
-                */
             }
-            
+
         }
     }
 
-    public Vector2Int GridToMap(Vector3Int gridUnits)
-    {
-        Vector2Int converted = new Vector2Int();
-        converted.x = gridUnits.x - mapWidthOffset;
-        converted.y = (gridUnits.y - mapHeightOffset) * -1;
-        return converted;
-    }
-    public Vector3Int MapToGrid(Vector2Int mapUnits)
-    {
-        Vector3Int converted = new Vector3Int();
-        converted.x = mapUnits.x + mapWidthOffset;
-        converted.y = (mapUnits.y - mapHeightOffset)* -1;
-        return converted;
-    }
-    public Vector3 MapToWorld(Vector2Int mapUnits)
-    {
-        Vector3 worldCoords = new Vector3();
-        worldCoords = grid.CellToWorld(MapToGrid(mapUnits));
-        return worldCoords;
-    }
-    public Vector2Int WorldToMap(Vector3 worldCoords)
-    {
-        Vector2Int mapCoords = new Vector2Int();
-        mapCoords = GridToMap(grid.WorldToCell(worldCoords));
-        return mapCoords;
-    }
+
     
 }
 public enum TileWeight
