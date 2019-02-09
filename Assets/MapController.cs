@@ -43,8 +43,6 @@ public class MapController : MonoBehaviour
         //initialize map
         //                x         y
         map = new int[mapWidth, mapHeight];
-        int mapWidthCounter = 0;
-        int mapHeightCounter = 0;
         for (int x = mapWidthOffset; x < mapWidthOffset + mapWidth; x++)
         {
             //Debug.Log("MapHeightOffset: " + mapHeightOffset);
@@ -53,6 +51,7 @@ public class MapController : MonoBehaviour
             //Debug.Log("X: " + x);           
             for (int y = mapHeightOffset; y > (mapHeightOffset - mapHeight); y--)
             {
+                Vector2Int currCoords = MapMath.GridToMap(new Vector3Int(x, y, 0));
                 //Debug.Log("X: " + x + " Y: " + y);
                 if (walkableTiles.GetTile(new Vector3Int(x, y, 0)))
                 {
@@ -61,7 +60,7 @@ public class MapController : MonoBehaviour
                     {
                         //Grass Tiles
                         case "landscapeTiles_067":
-                            map[mapWidthCounter, mapHeightCounter] = (int)TileWeight.UNOBSTRUCTED;
+                            map[currCoords.x, currCoords.y] = (int)TileWeight.UNOBSTRUCTED;
                             break;
                     }
                 }

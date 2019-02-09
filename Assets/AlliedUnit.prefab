@@ -121,7 +121,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAllied: 1
   isSelected: 0
-  moveSpeed: 0
-  direction: 0
-  position: {x: 0, y: 0}
-  mapController: {fileID: 0}
+  moveSpeed: 5

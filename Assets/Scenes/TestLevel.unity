@@ -2530,8 +2530,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fa979e44fc74a840aa5dd0115f5a181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alliedUnit: {fileID: 5579250169849406982, guid: d7f8c5f7df4bb734f805154c3aca8212,
+  alliedUnitPrefab: {fileID: 5579250169849406982, guid: d7f8c5f7df4bb734f805154c3aca8212,
     type: 3}
+  alliedUnits: []
 --- !u!4 &944352711
 Transform:
   m_ObjectHideFlags: 0
