@@ -9,6 +9,7 @@ public class MapController : MonoBehaviour
     public Grid grid;
     public Tilemap walkableTiles;
 
+
     //2D grid. value is the weight of the tile
     public int[,] map;
 

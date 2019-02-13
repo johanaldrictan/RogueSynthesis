@@ -5,12 +5,12 @@ using UnityEngine;
 public class AlliedUnit : Unit
 {
 
-    public override void OnMouseDown()
+    public override void Selected()
     {
         List<Vector2Int> moveLocs = FindMoveableTiles(MapController.instance.map);
-        foreach(Vector2Int loc in moveLocs)
+        foreach (Vector2Int loc in moveLocs)
         {
-            MapController.instance.walkableTiles.SetColor(MapMath.MapToGrid(loc), Color.blue);
+            MapUIController.instance.tileHighlighting.SetTile(MapMath.MapToGrid(loc), MapUIController.instance.movementTile);
         }
     }
 }

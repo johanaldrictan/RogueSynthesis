@@ -5,10 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class CommanderController : MonoBehaviour
 {
-    Ray ray;
-    RaycastHit2D hit;
-    HoverState hover_state;
-    Vector3Int lastTileLoc;
+
     public const int MAX_TEAM_SIZE = 3;
 
     public AlliedUnit alliedUnitPrefab;
@@ -22,33 +19,7 @@ public class CommanderController : MonoBehaviour
     }
     void Update()
     {
-        //Start Tile highlighting code
-        ray = Camera.main.ScreenPointToRay(Input.mousePosition);  
-        hit = Physics2D.Raycast(ray.origin, ray.direction, 100f);
-        if (hit)
-        {
-            hover_state = HoverState.HOVER;
-        }
-        else
-        {
-            hover_state = HoverState.NONE;
-        }
-
-        if (hover_state == HoverState.HOVER)
-        {
-            //Mouse is hovering
-            //Debug.Log(mapController.GridToMap(mapController.grid.WorldToCell(hit.point)));
-            //Debug.Log(MapController.instance.grid.WorldToCell(hit.point));
-            if (lastTileLoc != null)
-                MapController.instance.walkableTiles.SetColor(lastTileLoc, Color.white);
-            lastTileLoc = MapController.instance.grid.WorldToCell(hit.point);
-            MapController.instance.walkableTiles.SetColor(MapController.instance.grid.WorldToCell(hit.point), Color.red);
-        }
-        else
-        {
-            MapController.instance.walkableTiles.SetColor(lastTileLoc, Color.white);
-        }
-        //End Tile highlighting code
+        
     }
 
     //spawn unit at x,y in map units

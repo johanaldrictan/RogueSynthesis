@@ -19,7 +19,7 @@ public abstract class Unit : MonoBehaviour
         //Debug.Log(mapPosition.y);
     }
 
-    public abstract void OnMouseDown();
+    public abstract void Selected();
 
     public List<Vector2Int> FindMoveableTiles(int[,] map)
     {
