@@ -11,6 +11,8 @@ public class MapUIController : MonoBehaviour
     HoverState hover_state;
     Vector3Int lastTileLoc;
 
+    public Vector3Int tilePointer;
+
     public Tilemap tileHighlighting;
     public Tilemap tileSelectorMap;
 
@@ -50,16 +52,21 @@ public class MapUIController : MonoBehaviour
         {
             //Mouse is hovering
             //Debug.Log(mapController.GridToMap(mapController.grid.WorldToCell(hit.point)));
-            //Debug.Log(MapController.instance.grid.WorldToCell(hit.point));
+            //Debug.Log(MapController.instance.grid.CellToWorld(MapController.instance.grid.WorldToCell(hit.point)));
             if (lastTileLoc != null)
                 tileSelectorMap.SetTile(lastTileLoc, null);
             lastTileLoc = MapController.instance.grid.WorldToCell(hit.point);
             tileSelectorMap.SetTile(MapController.instance.grid.WorldToCell(hit.point), tileSelector);
+            tilePointer = MapController.instance.grid.WorldToCell(hit.point);
         }
         else
         {
             tileSelectorMap.SetTile(lastTileLoc, null);
         }
         //End Tile highlighting code
+    }
+    public void ResetMovementTilemap()
+    {
+        
     }
 }

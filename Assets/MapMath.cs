@@ -40,7 +40,7 @@ public static class MapMath
     public static Vector3 MapToWorld(int x, int y)
     {
         Vector3 worldCoords = new Vector3();
-        worldCoords = MapController.instance.grid.CellToWorld(MapToGrid(x,y));
+        worldCoords = MapController.instance.walkableTiles.GetCellCenterWorld(MapToGrid(x,y));
         return worldCoords;
     }
     public static Vector2Int WorldToMap(Vector3 worldCoords)
@@ -48,5 +48,18 @@ public static class MapMath
         Vector2Int mapCoords = new Vector2Int();
         mapCoords = GridToMap(MapController.instance.grid.WorldToCell(worldCoords));
         return mapCoords;
+    }
+    public static bool InMapBounds(Vector2Int loc)
+    {
+        //check x
+        if(loc.x >= MapController.instance.map.GetLowerBound(0) && loc.x <= MapController.instance.map.GetUpperBound(0))
+        {
+            //check y
+            if(loc.y >= MapController.instance.map.GetLowerBound(1) && loc.y <= MapController.instance.map.GetUpperBound(1))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

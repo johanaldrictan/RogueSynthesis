@@ -5,12 +5,17 @@ using UnityEngine;
 public class AlliedUnit : Unit
 {
 
-    public override void Selected()
+    public override void DisplayMovementTiles()
     {
-        List<Vector2Int> moveLocs = FindMoveableTiles(MapController.instance.map);
-        foreach (Vector2Int loc in moveLocs)
+        //clear tilemap
+        MapUIController.instance.tileHighlighting.ClearAllTiles();
+        if (!hasAttacked)
         {
-            MapUIController.instance.tileHighlighting.SetTile(MapMath.MapToGrid(loc), MapUIController.instance.movementTile);
+            Dictionary<Vector2Int, int>.KeyCollection moveLocs = FindMoveableTiles(MapController.instance.map).Keys;
+            foreach (Vector2Int loc in moveLocs)
+            {
+                MapUIController.instance.tileHighlighting.SetTile(MapMath.MapToGrid(loc), MapUIController.instance.movementTile);
+            }
         }
     }
 }

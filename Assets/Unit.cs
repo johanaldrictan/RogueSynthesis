@@ -1,30 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class Unit : MonoBehaviour
 {
     public bool isAllied;
-    public bool isSelected;
+    public bool hasAttacked;
     public int moveSpeed;
     private Direction direction;
     private Vector2Int mapPosition;
 
     private void Start()
     {
-        isSelected = false;
+        hasAttacked = false;
         mapPosition = MapMath.WorldToMap(this.transform.position);
         MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
         //Debug.Log(mapPosition.x);
         //Debug.Log(mapPosition.y);
     }
 
-    public abstract void Selected();
+    public abstract void DisplayMovementTiles();
 
-    public List<Vector2Int> FindMoveableTiles(int[,] map)
+    public Dictionary<Vector2Int, int> FindMoveableTiles(int[,] map)
     {
         //Djikstra's algorithm???
-        List<Vector2Int> possibleMoveLocs = new List<Vector2Int>();
+        Dictionary<Vector2Int, int> possibleMoveLocs = new Dictionary<Vector2Int, int>();
         Queue<Vector2Int> locsToVisit = new Queue<Vector2Int>();
         //dictionary of locs that
         Dictionary<Vector2Int, int> visitedLocs = new Dictionary<Vector2Int, int>();
@@ -33,26 +34,29 @@ public abstract class Unit : MonoBehaviour
         //Add player loc to the queue
         locsToVisit.Enqueue(mapPosition);
         visitedLocs.Add(mapPosition, 0);
-
-        while(locsToVisit.Count != 0)
+        possibleMoveLocs.Add(mapPosition, 0);
+        while (locsToVisit.Count != 0)
         {
-            Vector2Int currLoc = locsToVisit.Dequeue();
-            possibleMoveLocs.Add(currLoc);
+            Vector2Int currLoc = locsToVisit.Dequeue();            
             //get tile neighbors and add them if they havent been visited yet
             foreach (Vector2Int next in GetNeighbors(currLoc))
-            {       
-                //check if neighbor has been visited yet
-                if (!visitedLocs.ContainsKey(next))
+            {
+                if (MapMath.InMapBounds(next))
                 {
-                    //Debug.Log(currLoc.ToString());
-                    int currDist = currLoc != mapPosition ? map[currLoc.x, currLoc.y] + visitedLocs[currLoc] : 1;
-                    //skip processing if tile cant be reached
-                    if (currDist > moveSpeed)
-                        continue;
-                    else
+                    //check if neighbor has been visited yet
+                    if (!visitedLocs.ContainsKey(next))
                     {
-                        locsToVisit.Enqueue(next);
-                        visitedLocs.Add(next, currDist);
+                        //Debug.Log(currLoc.ToString());
+                        int currDist = currLoc != mapPosition ? map[currLoc.x, currLoc.y] + visitedLocs[currLoc] : 1;
+                        //skip processing if tile cant be reached
+                        if (currDist > moveSpeed)
+                            continue;
+                        else
+                        {
+                            locsToVisit.Enqueue(next);
+                            visitedLocs.Add(next, currDist);
+                            possibleMoveLocs.Add(next, currDist);
+                        }
                     }
                 }
             }
