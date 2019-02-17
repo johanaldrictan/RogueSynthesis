@@ -55,30 +55,18 @@ public class MapController : MonoBehaviour
             {
                 Vector2Int currCoords = MapMath.GridToMap(new Vector3Int(x, y, 0));
                 //Debug.Log("X: " + x + " Y: " + y);
+                //null check
                 if (walkableTiles.GetTile(new Vector3Int(x, y, 0)))
                 {
                     //Debug.Log(walkableTiles.GetTile(new Vector3Int(x, y, 0)).name);
-                    switch (walkableTiles.GetTile(new Vector3Int(x, y, 0)).name)
+                    if(TileDatabase.instance.tileDB.ContainsKey(walkableTiles.GetTile(new Vector3Int(x, y, 0)).name))
                     {
-                        //Grass Tiles
-                        case "landscapeTiles_067":
-                            map[currCoords.x, currCoords.y] = (int)TileWeight.UNOBSTRUCTED;
-                            break;
+                        map[currCoords.x, currCoords.y] = (int)TileDatabase.instance.tileDB[walkableTiles.GetTile(new Vector3Int(x, y, 0)).name];
                     }
                 }
             }
 
         }
     }
-    
 }
-public enum TileWeight
-{
-    //grass
-    UNOBSTRUCTED = 1,
-    LIGHT_OBS = 2,
-    MEDIUM_OBS = 3,
-    HEAVY_OBS = 4,
-    //mountains, other units
-    OBSTRUCTED = 99
-}
+

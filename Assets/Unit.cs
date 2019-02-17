@@ -63,6 +63,11 @@ public abstract class Unit : MonoBehaviour
         }
         return possibleMoveLocs;
     }
+    public List<Vector2Int> GetTilePath(Dictionary<Vector2Int, int> locDistFromSourcePair)
+    {
+        List<Vector2Int> tilePath = new List<Vector2Int>();
+        return tilePath;
+    }
     public List<Vector2Int> GetNeighbors(Vector2Int curr)
     {
         List<Vector2Int> neighbors = new List<Vector2Int>();
