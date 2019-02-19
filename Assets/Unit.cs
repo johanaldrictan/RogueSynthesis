@@ -8,9 +8,11 @@ public abstract class Unit : MonoBehaviour
 {
     public bool isAllied;
     public bool hasAttacked;
+    public bool hasMoved;
     public int moveSpeed;
     private Direction direction;
     private Vector2Int mapPosition;
+
 
     private void Start()
     {
@@ -61,27 +63,43 @@ public abstract class Unit : MonoBehaviour
         }
         return possibleMoveLocs;
     }
-    public List<Vector2Int> GetTilePath(Dictionary<Vector2Int, int> possibleMoveLocs, Vector2Int dest)
+    public Stack<Vector2Int> GetMovementPath(Dictionary<Vector2Int, Direction> possibleMoveLocs, Vector2Int dest)
     {
-        List<Vector2Int> tilePath = new List<Vector2Int>();
-        //if for some reason destination is not in the location list return empty
+        Stack<Vector2Int> path = new Stack<Vector2Int>();
         if (!possibleMoveLocs.ContainsKey(dest))
         {
             return null;
         }
-        else
+        Vector2Int currLoc = dest;
+        while(currLoc != mapPosition)
         {
-            
+            path.Push(currLoc);
+            Direction dir = MapMath.GetOppositeDirection(possibleMoveLocs[currLoc]);
+            switch (dir)
+            {
+                case Direction.N:
+                    currLoc = currLoc + MapMath.RelativeNorth;
+                    break;
+                case Direction.S:
+                    currLoc = currLoc + MapMath.RelativeSouth;
+                    break;
+                case Direction.E:
+                    currLoc = currLoc + MapMath.RelativeEast;
+                    break;
+                case Direction.W:
+                    currLoc = currLoc + MapMath.RelativeWest;
+                    break;
+            }
         }
-        return tilePath;
+        return path;
     }
     public Dictionary<Vector2Int, Direction> GetNeighbors(Vector2Int curr)
     {
         Dictionary<Vector2Int, Direction> neighbors = new Dictionary<Vector2Int, Direction>();
         neighbors.Add(new Vector2Int(curr.x, curr.y+1), Direction.N);
-        neighbors.Add(new Vector2Int(curr.x+1, curr.y), Direction.W);
+        neighbors.Add(new Vector2Int(curr.x-1, curr.y), Direction.W);
         neighbors.Add(new Vector2Int(curr.x, curr.y-1), Direction.S);
-        neighbors.Add(new Vector2Int(curr.x-1, curr.y), Direction.E);
+        neighbors.Add(new Vector2Int(curr.x+1, curr.y), Direction.E);
         return neighbors;
     }
     public void Move(int x, int y)
@@ -92,11 +110,4 @@ public abstract class Unit : MonoBehaviour
         this.transform.position = MapController.instance.grid.CellToWorld(MapMath.MapToGrid(mapPosition));
     }
 }
-public enum Direction
-{
-    N,
-    W,
-    E,
-    S,
-    NO_DIR
-}
+

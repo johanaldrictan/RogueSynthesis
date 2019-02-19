@@ -28,7 +28,17 @@ public class CommanderController : MonoBehaviour
         //select next unit
         if (Input.GetKeyDown(KeyCode.Tab))
         {
+            MapUIController.instance.tileHighlighting.ClearAllTiles();
+            MapUIController.instance.pathHighlighting.ClearAllTiles();
             GetNextUnit();
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            //Start Tile highlighting code
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, 100f);
+            Vector2Int dest = MapMath.GridToMap(MapController.instance.grid.WorldToCell(hit.point));
+            alliedUnits[activeUnit].DisplayPath(dest);
         }
     }
 

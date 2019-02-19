@@ -4,6 +4,10 @@ using UnityEngine;
 
 public static class MapMath
 {
+    public static Vector2Int RelativeNorth = new Vector2Int(0, 1);
+    public static Vector2Int RelativeSouth = new Vector2Int(0, -1);
+    public static Vector2Int RelativeEast = new Vector2Int(1, 0);
+    public static Vector2Int RelativeWest = new Vector2Int(-1, 0);
     public static Vector2Int GridToMap(Vector3Int gridUnits)
     {
         Vector2Int converted = new Vector2Int
@@ -62,4 +66,33 @@ public static class MapMath
         }
         return false;
     }
+    //can probably do this mathematically
+    public static Direction GetOppositeDirection(Direction d)
+    {
+        Direction output = Direction.NO_DIR;
+        switch (d)
+        {
+            case Direction.N:
+                output = Direction.S;
+                break;
+            case Direction.S:
+                output = Direction.N;
+                break;
+            case Direction.W:
+                output = Direction.E;
+                break;
+            case Direction.E:
+                output = Direction.W;
+                break;
+        }
+        return output;
+    }
+}
+public enum Direction
+{
+    N,
+    W,
+    E,
+    S,
+    NO_DIR
 }

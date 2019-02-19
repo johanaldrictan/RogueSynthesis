@@ -14,10 +14,12 @@ public class MapUIController : MonoBehaviour
     public Vector3Int tilePointer;
 
     public Tilemap tileHighlighting;
+    public Tilemap pathHighlighting;
     public Tilemap tileSelectorMap;
 
     public TileBase tileSelector;
     public TileBase movementTile;
+    public TileBase attackTile;
 
     private void Awake()
     {
