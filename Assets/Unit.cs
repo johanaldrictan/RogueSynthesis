@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Priority_Queue;
 
 public abstract class Unit : MonoBehaviour
 {
@@ -22,59 +23,65 @@ public abstract class Unit : MonoBehaviour
 
     public abstract void DisplayMovementTiles();
 
-    public Dictionary<Vector2Int, int> FindMoveableTiles(int[,] map)
+    public Dictionary<Vector2Int, Direction> FindMoveableTiles(int[,] map)
     {
-        //Djikstra's algorithm???
-        Dictionary<Vector2Int, int> possibleMoveLocs = new Dictionary<Vector2Int, int>();
-        Queue<Vector2Int> locsToVisit = new Queue<Vector2Int>();
-        //dictionary of locs that
+        SimplePriorityQueue<Vector2Int> locsToVisit = new SimplePriorityQueue<Vector2Int>();
+        //int is a direction flag going to the minimal path
+        Dictionary<Vector2Int, Direction> possibleMoveLocs = new Dictionary<Vector2Int, Direction>();
         Dictionary<Vector2Int, int> visitedLocs = new Dictionary<Vector2Int, int>();
-        
 
         //Add player loc to the queue
-        locsToVisit.Enqueue(mapPosition);
+        locsToVisit.Enqueue(mapPosition,0);
         visitedLocs.Add(mapPosition, 0);
-        possibleMoveLocs.Add(mapPosition, 0);
+        possibleMoveLocs.Add(mapPosition, Direction.NO_DIR);
         while (locsToVisit.Count != 0)
         {
-            Vector2Int currLoc = locsToVisit.Dequeue();            
+            Vector2Int currLoc = locsToVisit.Dequeue();
+            //dont process neighbors if you reach the edge
+            if(visitedLocs[currLoc] >= moveSpeed)
+            {
+                continue;
+            }
             //get tile neighbors and add them if they havent been visited yet
-            foreach (Vector2Int next in GetNeighbors(currLoc))
+            Dictionary<Vector2Int, Direction> neighbors = GetNeighbors(currLoc);
+            foreach (Vector2Int next in neighbors.Keys)
             {
                 if (MapMath.InMapBounds(next))
                 {
-                    //check if neighbor has been visited yet
-                    if (!visitedLocs.ContainsKey(next))
+                    //check cost
+                    int currDist = currLoc != mapPosition ? map[next.x, next.y] + visitedLocs[currLoc] : 1;
+                    if(!visitedLocs.ContainsKey(next) || currDist < visitedLocs[next])
                     {
-                        //Debug.Log(currLoc.ToString());
-                        int currDist = currLoc != mapPosition ? map[currLoc.x, currLoc.y] + visitedLocs[currLoc] : 1;
-                        //skip processing if tile cant be reached
-                        if (currDist > moveSpeed)
-                            continue;
-                        else
-                        {
-                            locsToVisit.Enqueue(next);
-                            visitedLocs.Add(next, currDist);
-                            possibleMoveLocs.Add(next, currDist);
-                        }
+                        visitedLocs.Add(next, currDist);
+                        locsToVisit.Enqueue(next, currDist);
+                        possibleMoveLocs.Add(next, neighbors[next]);
                     }
                 }
             }
         }
         return possibleMoveLocs;
     }
-    public List<Vector2Int> GetTilePath(Dictionary<Vector2Int, int> locDistFromSourcePair)
+    public List<Vector2Int> GetTilePath(Dictionary<Vector2Int, int> possibleMoveLocs, Vector2Int dest)
     {
         List<Vector2Int> tilePath = new List<Vector2Int>();
+        //if for some reason destination is not in the location list return empty
+        if (!possibleMoveLocs.ContainsKey(dest))
+        {
+            return null;
+        }
+        else
+        {
+            
+        }
         return tilePath;
     }
-    public List<Vector2Int> GetNeighbors(Vector2Int curr)
+    public Dictionary<Vector2Int, Direction> GetNeighbors(Vector2Int curr)
     {
-        List<Vector2Int> neighbors = new List<Vector2Int>();
-        neighbors.Add(new Vector2Int(curr.x, curr.y+1));
-        neighbors.Add(new Vector2Int(curr.x+1, curr.y));
-        neighbors.Add(new Vector2Int(curr.x, curr.y-1));
-        neighbors.Add(new Vector2Int(curr.x-1, curr.y));
+        Dictionary<Vector2Int, Direction> neighbors = new Dictionary<Vector2Int, Direction>();
+        neighbors.Add(new Vector2Int(curr.x, curr.y+1), Direction.N);
+        neighbors.Add(new Vector2Int(curr.x+1, curr.y), Direction.W);
+        neighbors.Add(new Vector2Int(curr.x, curr.y-1), Direction.S);
+        neighbors.Add(new Vector2Int(curr.x-1, curr.y), Direction.E);
         return neighbors;
     }
     public void Move(int x, int y)
@@ -87,8 +94,9 @@ public abstract class Unit : MonoBehaviour
 }
 public enum Direction
 {
-    NW,
-    NE,
-    SW,
-    SE
+    N,
+    W,
+    E,
+    S,
+    NO_DIR
 }
