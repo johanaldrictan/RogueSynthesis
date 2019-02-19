@@ -11,13 +11,15 @@ public abstract class Unit : MonoBehaviour
     public bool hasMoved;
     public int moveSpeed;
     private Direction direction;
-    private Vector2Int mapPosition;
+    protected Vector2Int mapPosition;
 
+    protected TileWeight tile;
 
     private void Start()
     {
         hasAttacked = false;
         mapPosition = MapMath.WorldToMap(this.transform.position);
+        tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
         MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
         //Debug.Log(mapPosition.x);
         //Debug.Log(mapPosition.y);
@@ -102,12 +104,15 @@ public abstract class Unit : MonoBehaviour
         neighbors.Add(new Vector2Int(curr.x+1, curr.y), Direction.E);
         return neighbors;
     }
-    public void Move(int x, int y)
+    public virtual void Move(int x, int y)
     {
+        //restore old tilevalue
+        MapController.instance.map[mapPosition.x, mapPosition.y] = (int)tile;
         mapPosition.x = x;
         mapPosition.y = y;
+        tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
         MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
-        this.transform.position = MapController.instance.grid.CellToWorld(MapMath.MapToGrid(mapPosition));
+        this.transform.position = MapMath.MapToWorld(new Vector2Int(x, y));
     }
 }
 

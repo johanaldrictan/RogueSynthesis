@@ -21,6 +21,7 @@ public class CommanderController : MonoBehaviour
         alliedUnits[1] = SpawnUnit(5, 5);
         alliedUnits[2] = SpawnUnit(2, 2);
         activeUnit = 0;
+        alliedUnits[activeUnit].DisplayMovementTiles();
     }
     void Update()
     {
@@ -37,8 +38,15 @@ public class CommanderController : MonoBehaviour
             //Start Tile highlighting code
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, 100f);
-            Vector2Int dest = MapMath.GridToMap(MapController.instance.grid.WorldToCell(hit.point));
-            alliedUnits[activeUnit].DisplayPath(dest);
+            Vector2Int dest = MapMath.WorldToMap(hit.point);
+            if (!alliedUnits[activeUnit].plannedPath.Contains(dest))
+            {
+                alliedUnits[activeUnit].DisplayPath(dest);
+            }
+            else
+            {
+                alliedUnits[activeUnit].Move(dest.x, dest.y);
+            }
         }
     }
 

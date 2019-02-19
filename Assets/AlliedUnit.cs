@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class AlliedUnit : Unit
 {
-    private Stack<Vector2Int> plannedPath;
-    private bool hasNotSelectedMove;
+    public List<Vector2Int> plannedPath;
     public bool isSelected;
-    private void Start()
+    private void Awake()
     {
+        isAllied = true;
         isSelected = false;
-        plannedPath = new Stack<Vector2Int>();
-        hasNotSelectedMove = false;
+        plannedPath = new List<Vector2Int>();
     }
     public override void DisplayMovementTiles()
     {
@@ -30,11 +29,25 @@ public class AlliedUnit : Unit
     {
         MapUIController.instance.pathHighlighting.ClearAllTiles();
         Stack<Vector2Int> path = GetMovementPath(FindMoveableTiles(MapController.instance.map), dest);
-        plannedPath = path;
+        plannedPath.Clear();
+        plannedPath.AddRange(path);
         while(path.Count != 0)
         {
             Vector2Int loc = path.Pop();
             MapUIController.instance.pathHighlighting.SetTile(MapMath.MapToGrid(loc), MapUIController.instance.attackTile);
         }
+    }
+    public override void Move(int x, int y)
+    {
+        MapUIController.instance.pathHighlighting.ClearAllTiles();
+        MapUIController.instance.tileHighlighting.ClearAllTiles();
+        //restore old tilevalue
+        MapController.instance.map[mapPosition.x, mapPosition.y] = (int)tile;
+        mapPosition.x = x;
+        mapPosition.y = y;
+        tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
+        MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
+        this.transform.position = MapMath.MapToWorld(new Vector2Int(x, y));
+        plannedPath.Clear();
     }
 }
