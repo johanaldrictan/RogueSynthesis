@@ -47,7 +47,7 @@ public class AlliedUnit : Unit
         mapPosition.y = y;
         tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
         MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
-        this.transform.position = MapMath.MapToWorld(new Vector2Int(x, y));
+        this.transform.position = MapMath.MapToWorld(x,y);
         plannedPath.Clear();
     }
 }
