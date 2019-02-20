@@ -53,8 +53,8 @@ public abstract class Unit : MonoBehaviour
                 if (MapMath.InMapBounds(next))
                 {
                     //check cost
-                    int currDist = currLoc != mapPosition ? map[next.x, next.y] + visitedLocs[currLoc] : 1;
-                    if(!visitedLocs.ContainsKey(next) || currDist < visitedLocs[next])
+                    int currDist = next != mapPosition ? map[next.x, next.y] + visitedLocs[currLoc] : 1;
+                    if((!visitedLocs.ContainsKey(next) || currDist < visitedLocs[next]) && currDist <= moveSpeed)
                     {
                         visitedLocs.Add(next, currDist);
                         locsToVisit.Enqueue(next, currDist);
@@ -98,10 +98,23 @@ public abstract class Unit : MonoBehaviour
     public Dictionary<Vector2Int, Direction> GetNeighbors(Vector2Int curr)
     {
         Dictionary<Vector2Int, Direction> neighbors = new Dictionary<Vector2Int, Direction>();
-        neighbors.Add(new Vector2Int(curr.x, curr.y+1), Direction.N);
-        neighbors.Add(new Vector2Int(curr.x-1, curr.y), Direction.W);
-        neighbors.Add(new Vector2Int(curr.x, curr.y-1), Direction.S);
-        neighbors.Add(new Vector2Int(curr.x+1, curr.y), Direction.E);
+        //prevent current unit pos from being readded to neighbors
+        if (!mapPosition.Equals(new Vector2Int(curr.x, curr.y + 1)))
+        {
+            neighbors.Add(new Vector2Int(curr.x, curr.y + 1), Direction.N);
+        }
+        if (!mapPosition.Equals(new Vector2Int(curr.x - 1, curr.y)))
+        {
+            neighbors.Add(new Vector2Int(curr.x - 1, curr.y), Direction.W);
+        }
+        if (!mapPosition.Equals(new Vector2Int(curr.x, curr.y - 1)))
+        {
+            neighbors.Add(new Vector2Int(curr.x, curr.y - 1), Direction.S);
+        }
+        if (!mapPosition.Equals(new Vector2Int(curr.x + 1, curr.y)))
+        {
+            neighbors.Add(new Vector2Int(curr.x + 1, curr.y), Direction.E);
+        }
         return neighbors;
     }
     public virtual void Move(int x, int y)

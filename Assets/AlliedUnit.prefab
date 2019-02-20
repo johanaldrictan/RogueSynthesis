@@ -121,4 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAllied: 1
   hasAttacked: 0
-  moveSpeed: 3
+  hasMoved: 0
+  moveSpeed: 4
+  plannedPath: []
+  isSelected: 0
