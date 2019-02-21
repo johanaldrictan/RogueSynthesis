@@ -123,5 +123,6 @@ MonoBehaviour:
   hasAttacked: 0
   hasMoved: 0
   moveSpeed: 4
+  direction: 0
   plannedPath: []
   isSelected: 0

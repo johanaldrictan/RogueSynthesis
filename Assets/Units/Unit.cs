@@ -10,13 +10,16 @@ public abstract class Unit : MonoBehaviour
     public bool hasAttacked;
     public bool hasMoved;
     public int moveSpeed;
-    private Direction direction;
+    public Direction direction;
     protected Vector2Int mapPosition;
+
+    protected int health;
 
     protected TileWeight tile;
 
     private void Start()
     {
+        direction = Direction.N;
         hasAttacked = false;
         mapPosition = MapMath.WorldToMap(this.transform.position);
         tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
