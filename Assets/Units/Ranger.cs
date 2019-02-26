@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ranger : MonoBehaviour
+public class Ranger : AlliedUnit
 {
-    // Start is called before the first frame update
-    void Start()
+    List<Vector2Int> attackTiles;
+    private void Start()
     {
-        
+        attackTiles = new List<Vector2Int>();
     }
-
-    // Update is called once per frame
-    void Update()
+    void Attack(Vector2Int attackLoc)
     {
-        
+        if (attackTiles != null)
+        {
+            //attack at loc
+            attackTiles.Clear();
+        }
     }
+    
 }
