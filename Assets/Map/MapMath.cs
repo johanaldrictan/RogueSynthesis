@@ -87,6 +87,26 @@ public static class MapMath
         }
         return output;
     }
+    public static Vector2Int DirToRelativeLoc(Direction d)
+    {
+        Vector2Int output = new Vector2Int();
+        switch (d)
+        {
+            case Direction.N:
+                output = RelativeNorth;
+                break;
+            case Direction.S:
+                output = RelativeSouth;
+                break;
+            case Direction.W:
+                output = RelativeWest;
+                break;
+            case Direction.E:
+                output = RelativeEast;
+                break;
+        }
+        return output;
+    }
 }
 public enum Direction
 {

@@ -9,13 +9,16 @@ public class Ranger : AlliedUnit
     {
         attackTiles = new List<Vector2Int>();
     }
-    void Attack(Vector2Int attackLoc)
+    void Attack()
     {
         if (attackTiles != null)
         {
-            //attack at loc
+            //attack depending on attack type
             attackTiles.Clear();
         }
     }
-    
+    void GetAttackTiles()
+    {
+        
+    }
 }

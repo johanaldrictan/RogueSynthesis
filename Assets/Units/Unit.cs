@@ -10,6 +10,7 @@ public abstract class Unit : MonoBehaviour
     public bool hasAttacked;
     public bool hasMoved;
     public int moveSpeed;
+    public bool isRanged;
     public Direction direction;
     protected Vector2Int mapPosition;
 
