@@ -20,6 +20,8 @@ public class TileDatabase : MonoBehaviour
         DontDestroyOnLoad(this);
         //then add to tiledb
         tileDB = new Dictionary<string, TileWeight>();
+        //should contain a list of all tiles in the game.
+        //probably should look into scriptable objects?
         tileDB.Add("landscapeTiles_067", TileWeight.UNOBSTRUCTED);
     }
 }
