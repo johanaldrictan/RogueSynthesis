@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using Priority_Queue;
 
 public abstract class Unit : MonoBehaviour
 {
@@ -33,10 +32,12 @@ public abstract class Unit : MonoBehaviour
 
     public Dictionary<Vector2Int, Direction> FindMoveableTiles(int[,] map)
     {
-        SimplePriorityQueue<Vector2Int> locsToVisit = new SimplePriorityQueue<Vector2Int>();
+        
         //int is a direction flag going to the minimal path
         Dictionary<Vector2Int, Direction> possibleMoveLocs = new Dictionary<Vector2Int, Direction>();
+        /*
         Dictionary<Vector2Int, int> visitedLocs = new Dictionary<Vector2Int, int>();
+        PriorityQueue<Vector2Int> locsToVisit = new PriorityQueue<Vector2Int>();
 
         //Add player loc to the queue
         locsToVisit.Enqueue(mapPosition,0);
@@ -67,6 +68,7 @@ public abstract class Unit : MonoBehaviour
                 }
             }
         }
+        */
         return possibleMoveLocs;
     }
     public Stack<Vector2Int> GetMovementPath(Dictionary<Vector2Int, Direction> possibleMoveLocs, Vector2Int dest)
