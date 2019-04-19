@@ -30,6 +30,9 @@ public class AlliedUnit : Unit
         MapUIController.instance.pathHighlighting.ClearAllTiles();
         Stack<Vector2Int> path = GetMovementPath(FindMoveableTiles(MapController.instance.map), dest);
         plannedPath.Clear();
+
+        if (path == null) { return; }
+        
         plannedPath.AddRange(path);
         while(path.Count != 0)
         {

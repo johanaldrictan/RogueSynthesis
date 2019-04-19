@@ -32,44 +32,39 @@ public abstract class Unit : MonoBehaviour
 
     public Dictionary<Vector2Int, Direction> FindMoveableTiles(int[,] map)
     {
-        
-        //int is a direction flag going to the minimal path
-        Dictionary<Vector2Int, Direction> possibleMoveLocs = new Dictionary<Vector2Int, Direction>();
-        /*
-        Dictionary<Vector2Int, int> visitedLocs = new Dictionary<Vector2Int, int>();
-        PriorityQueue<Vector2Int> locsToVisit = new PriorityQueue<Vector2Int>();
+        Dictionary<Vector2Int, Direction> shortestFrom = new Dictionary<Vector2Int, Direction>();
+        Dictionary<Vector2Int, int> movementCost = new Dictionary<Vector2Int, int>();
 
-        //Add player loc to the queue
-        locsToVisit.Enqueue(mapPosition,0);
-        visitedLocs.Add(mapPosition, 0);
-        possibleMoveLocs.Add(mapPosition, Direction.NO_DIR);
-        while (locsToVisit.Count != 0)
+        HashSet<Vector2Int> visited = new HashSet<Vector2Int>();
+        PriorityQueue<Vector2Int> frontier = new PriorityQueue<Vector2Int>();
+        frontier.Enqueue(mapPosition, 0); // Should only contain tiles in range
+        movementCost[mapPosition] = 0; // Contains frontier and visited
+        shortestFrom[mapPosition] = Direction.NO_DIR;
+
+        while (frontier.Count != 0)
         {
-            Vector2Int currLoc = locsToVisit.Dequeue();
-            //dont process neighbors if you reach the edge
-            if(visitedLocs[currLoc] >= moveSpeed)
+            Vector2Int visiting = frontier.Dequeue();
+            if (visited.Contains(visiting)) {continue;} // TODO: Implement changing priority in the PQ, and remove this.
+            
+            Dictionary<Vector2Int, Direction> neighbors = GetNeighbors(visiting);
+            foreach (Vector2Int neighbor in neighbors.Keys)
             {
-                continue;
-            }
-            //get tile neighbors and add them if they havent been visited yet
-            Dictionary<Vector2Int, Direction> neighbors = GetNeighbors(currLoc);
-            foreach (Vector2Int next in neighbors.Keys)
-            {
-                if (MapMath.InMapBounds(next))
+                if (visited.Contains(neighbor) || !MapMath.InMapBounds(neighbor)) { continue; }
+                int nextDist = 1 + movementCost[visiting]; // TODO: When the map is fixed, delete this and uncomment the below line.
+                // int nextDist = map[neighbor.x, neighbor.y] + movementCost[visiting];
+                if (nextDist > moveSpeed) { continue; }
+                if (!movementCost.ContainsKey(neighbor) || nextDist < movementCost[neighbor])
                 {
-                    //check cost
-                    int currDist = next != mapPosition ? map[next.x, next.y] + visitedLocs[currLoc] : 1;
-                    if((!visitedLocs.ContainsKey(next) || currDist < visitedLocs[next]) && currDist <= moveSpeed)
-                    {
-                        visitedLocs.Add(next, currDist);
-                        locsToVisit.Enqueue(next, currDist);
-                        possibleMoveLocs.Add(next, neighbors[next]);
-                    }
+                    frontier.Enqueue(neighbor, nextDist);
+                    movementCost[neighbor] = nextDist;
+                    shortestFrom[neighbor] = neighbors[neighbor];
                 }
             }
+
+            visited.Add(visiting);
         }
-        */
-        return possibleMoveLocs;
+
+        return shortestFrom;
     }
     public Stack<Vector2Int> GetMovementPath(Dictionary<Vector2Int, Direction> possibleMoveLocs, Vector2Int dest)
     {
