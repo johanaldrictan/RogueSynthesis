@@ -3,26 +3,30 @@ using UnityEngine;
 
 public class PriorityQueue<T>
 {
-    List<int> intHeap = new List<int>();
+    List<float> priorityHeap = new List<float>();
     List<T> tHeap = new List<T>();
 
+    const float EPSILON = 0.0000001f;
+    int counter = 0;
+
     public int Count {
-        get {return intHeap.Count;}
+        get {return priorityHeap.Count;}
     }
 
     public void Enqueue(T thing, int priority)
     {
         // put it at the end of the heap, and bubble up
-        intHeap.Add(priority);
+        priorityHeap.Add(priority + EPSILON * counter);
+        counter++;
         tHeap.Add(thing);
 
-        int pos = intHeap.Count - 1;
-        while (intHeap[pos] < intHeap[pos / 2])
+        int pos = priorityHeap.Count - 1;
+        while (priorityHeap[pos] < priorityHeap[pos / 2])
         {
             pos = HeapSwapUp(pos);
         }
 
-        Debug.Log(string.Join(", ", intHeap.ToArray()));
+        Debug.Log(string.Join(", ", priorityHeap.ToArray()));
     }
 
     public T Dequeue()
@@ -31,18 +35,18 @@ public class PriorityQueue<T>
         T thingy = tHeap[0];
         
         // Move the least prioritized over the most prioritized
-        intHeap[0] = intHeap[intHeap.Count - 1];
-        tHeap[0] = tHeap[intHeap.Count - 1];
-        tHeap.RemoveAt(intHeap.Count - 1);
-        intHeap.RemoveAt(intHeap.Count - 1);
+        priorityHeap[0] = priorityHeap[priorityHeap.Count - 1];
+        tHeap[0] = tHeap[priorityHeap.Count - 1];
+        tHeap.RemoveAt(priorityHeap.Count - 1);
+        priorityHeap.RemoveAt(priorityHeap.Count - 1);
 
         int pos = 0;
-        while ((intHeap.Count > 2 * pos + 1 && intHeap[pos] > intHeap[2 * pos + 1]) || (intHeap.Count > 2 * pos + 2 && intHeap[pos] > intHeap[2 * pos + 2]))
+        while ((priorityHeap.Count > 2 * pos + 1 && priorityHeap[pos] > priorityHeap[2 * pos + 1]) || (priorityHeap.Count > 2 * pos + 2 && priorityHeap[pos] > priorityHeap[2 * pos + 2]))
         {
             pos = HeapSwapDown(pos);
         }
 
-        Debug.Log(string.Join(", ", intHeap.ToArray()));
+        Debug.Log(string.Join(", ", priorityHeap.ToArray()));
         return thingy;
     }
 
@@ -73,16 +77,16 @@ public class PriorityQueue<T>
     private int HeapSwapDown(int pos)
     {
         int child = 2 * pos + 1;
-        if (intHeap.Count > child + 1 && intHeap[child] > intHeap[child + 1]) { child++; }
+        if (priorityHeap.Count > child + 1 && priorityHeap[child] > priorityHeap[child + 1]) { child++; }
         Swap(pos, child);
         return child;
     }
 
     private void Swap(int a, int b)
     {
-        int thing = intHeap[a];
-        intHeap[a] = intHeap[b];
-        intHeap[b] = thing;
+        float thing = priorityHeap[a];
+        priorityHeap[a] = priorityHeap[b];
+        priorityHeap[b] = thing;
         T thingy = tHeap[a];
         tHeap[a] = tHeap[b];
         tHeap[b] = thingy;
