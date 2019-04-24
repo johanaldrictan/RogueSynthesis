@@ -50,8 +50,8 @@ public abstract class Unit : MonoBehaviour
             foreach (Vector2Int neighbor in neighbors.Keys)
             {
                 if (visited.Contains(neighbor) || !MapMath.InMapBounds(neighbor)) { continue; }
-                int nextDist = 1 + movementCost[visiting]; // TODO: When the map is fixed, delete this and uncomment the below line.
-                // int nextDist = map[neighbor.x, neighbor.y] + movementCost[visiting];
+                int nextDist = MapController.instance.map[neighbor.x, neighbor.y] + movementCost[visiting];
+                Debug.Log(MapController.instance.map[neighbor.x, neighbor.y]);
                 if (nextDist > moveSpeed) { continue; }
                 if (!movementCost.ContainsKey(neighbor) || nextDist < movementCost[neighbor])
                 {
@@ -121,11 +121,11 @@ public abstract class Unit : MonoBehaviour
     public virtual void Move(int x, int y)
     {
         //restore old tilevalue
-        MapController.instance.map[mapPosition.x, mapPosition.y] = (int)tile;
+        // MapController.instance.map[mapPosition.x, mapPosition.y] = (int)tile;
         mapPosition.x = x;
         mapPosition.y = y;
-        tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
-        MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
+        // tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
+        // MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
         this.transform.position = MapMath.MapToWorld(new Vector2Int(x, y));
     }
 }

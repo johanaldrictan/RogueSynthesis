@@ -26,7 +26,7 @@ public class PriorityQueue<T>
             pos = HeapSwapUp(pos);
         }
 
-        Debug.Log(string.Join(", ", priorityHeap.ToArray()));
+        // Debug.Log(string.Join(", ", priorityHeap.ToArray()));
     }
 
     public T Dequeue()
@@ -46,7 +46,7 @@ public class PriorityQueue<T>
             pos = HeapSwapDown(pos);
         }
 
-        Debug.Log(string.Join(", ", priorityHeap.ToArray()));
+        // Debug.Log(string.Join(", ", priorityHeap.ToArray()));
         return thingy;
     }
 

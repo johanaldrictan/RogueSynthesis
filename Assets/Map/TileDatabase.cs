@@ -22,7 +22,8 @@ public class TileDatabase : MonoBehaviour
         tileDB = new Dictionary<string, TileWeight>();
         //should contain a list of all tiles in the game.
         //probably should look into scriptable objects?
-        tileDB.Add("landscapeTiles_067", TileWeight.UNOBSTRUCTED);
+        tileDB.Add("Grass", TileWeight.UNOBSTRUCTED);
+        tileDB.Add("landscapeTiles_064", TileWeight.LIGHT_OBS);
     }
 }
 public enum TileWeight
