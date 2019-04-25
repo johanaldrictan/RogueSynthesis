@@ -46,6 +46,7 @@ public class CommanderController : MonoBehaviour
             else
             {
                 alliedUnits[activeUnit].Move(dest.x, dest.y);
+                GetNextUnit();
             }
         }
     }

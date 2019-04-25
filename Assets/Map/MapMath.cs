@@ -4,6 +4,13 @@ using UnityEngine;
 
 public static class MapMath
 {
+    // World: X and Y coordinates in Unity
+
+    // Grid: Unity Tilemap Units
+    
+    // Map: 2D Array in MapController.cs
+
+
     public static Vector2Int RelativeNorth = new Vector2Int(0, 1);
     public static Vector2Int RelativeSouth = new Vector2Int(0, -1);
     public static Vector2Int RelativeEast = new Vector2Int(1, 0);
