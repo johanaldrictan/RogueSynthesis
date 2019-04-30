@@ -28,9 +28,11 @@ public class TurnController : MonoBehaviour
         controllers = new List<UnitController>();
         currentTurn = 0;
 
-        UnitController.instance.queueUpEvent.AddListener(enqueueController);
+        UnitController.endTurnEvent.AddListener(nextTurn);
 
-        UnitController.instance.endTurnEvent.AddListener(nextTurn);
+        UnitController.queueUpEvent.AddListener(enqueueController);
+
+        
     }
 
 
@@ -40,7 +42,7 @@ public class TurnController : MonoBehaviour
         // if empty storage
         if (controllers.Count == 0)
         {
-            controllers[0] = controller;
+            controllers.Add(controller);
             startController(0);
             return;
         }
@@ -86,12 +88,15 @@ public class TurnController : MonoBehaviour
 
     protected void nextTurn()
     {
+        // Debug.Log("Next Turn...");
         endController(currentTurn);
 
         if (currentTurn != (controllers.Count - 1))
         { currentTurn++; }
         else
         { currentTurn = 0; }
+
+        // Debug.Log("Starting: Turn " + currentTurn);
 
         startController(currentTurn);
     }

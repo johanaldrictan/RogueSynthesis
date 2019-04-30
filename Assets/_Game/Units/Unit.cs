@@ -16,10 +16,15 @@ public abstract class Unit : MonoBehaviour
 
     protected TileWeight tile;
 
-    private void Start()
+    private void Awake()
     {
         direction = Direction.N;
         hasAttacked = false;
+        hasMoved = false;
+    }
+
+    private void Start()
+    {
         mapPosition = MapMath.WorldToMap(this.transform.position);
         tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
         MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
@@ -50,7 +55,6 @@ public abstract class Unit : MonoBehaviour
             {
                 if (visited.Contains(neighbor) || !MapMath.InMapBounds(neighbor)) { continue; }
                 int nextDist = MapController.instance.map[neighbor.x, neighbor.y] + movementCost[visiting];
-                Debug.Log(MapController.instance.map[neighbor.x, neighbor.y]);
                 if (nextDist > moveSpeed) { continue; }
                 if (!movementCost.ContainsKey(neighbor) || nextDist < movementCost[neighbor])
                 {
@@ -127,6 +131,7 @@ public abstract class Unit : MonoBehaviour
         // MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
         this.transform.position = MapMath.MapToWorld(new Vector2Int(x, y));
         hasMoved = true;
+        hasAttacked = true; // for testing only. CHANGE LATER
     }
 }
 

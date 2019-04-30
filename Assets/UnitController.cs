@@ -8,7 +8,7 @@ using UnityEngine.Events;
 public class UnitControllerUnityEvent : UnityEvent<UnitController> { }
 
 // UnitController is a Base Class for an object that stores and commands Unit objects
-public abstract class UnitController : MonoBehaviour
+public class UnitController : MonoBehaviour
 {
 
     // the maximum number of units allowed to be stored
@@ -35,10 +35,10 @@ public abstract class UnitController : MonoBehaviour
     public int activeUnit;
 
     // Event for queueing up for the TurnController's initialization
-    public UnitControllerUnityEvent queueUpEvent = new UnitControllerUnityEvent();
+    public static UnitControllerUnityEvent queueUpEvent = new UnitControllerUnityEvent();
 
     // Event for asking to end this controller's turn
-    public UnityEvent endTurnEvent = new UnityEvent();
+    public static UnityEvent endTurnEvent = new UnityEvent();
 
     public static UnitController instance;
 
@@ -64,10 +64,13 @@ public abstract class UnitController : MonoBehaviour
     public virtual void Start()
     {
         // I would like to be added to the TurnController
-        queueUpEvent.Invoke(this);
+        queueUpEvent.Invoke(instance);
     }
 
-    public virtual void Update() {}
+    public virtual void Update()
+    {
+
+    }
 
     //spawn unit at x,y in map units
     public Unit SpawnUnit(int x, int y)
@@ -83,12 +86,27 @@ public abstract class UnitController : MonoBehaviour
         for (int i = 0; i < MAX_TEAM_SIZE; i++)
         {
             // if a unit that hasn't moved or attacked exists
-            if (units[i].GetType() == typeof(Unit) && (!units[i].hasAttacked || !units[i].hasMoved))
+            // Debug.Log(units[i].hasAttacked);
+            // Debug.Log(units[i].hasMoved);
+            if ( units[i].GetType().IsSubclassOf(typeof(Unit)) && (!units[i].hasAttacked || !units[i].hasMoved) )
             {
+                // Debug.Log("Turn not over");
                 return false;
             }
         }
         return true;
+    }
+
+    public virtual void resetUnits()
+    {
+        for (int i = 0; i < MAX_TEAM_SIZE; i++)
+        {
+            if (units[i].GetType().IsSubclassOf(typeof(Unit)))
+            {
+                units[i].hasAttacked = false;
+                units[i].hasMoved = false;
+            }
+        }
     }
 
     public bool isMyTurn()

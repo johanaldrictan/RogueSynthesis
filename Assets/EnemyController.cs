@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-// PlayerController is an object that inherits from the UnitController (see UnitController.cs)
-// It is a variety that is user-controlled
-public class PlayerController : UnitController
+// EnemyController is an object that inherits from the UnitController (see UnitController.cs)
+// It is a variety that is controlled by AI to combat a PlayerController
+// CURRENTLY JUST A COPY PASTE OF PLAYERCONTROLLER LMAO
+public class EnemyController : UnitController
 {
     new public const int TURN_WEIGHT = -1;
 
-    new public static PlayerController instance;
+    new public static EnemyController instance;
 
     public override void Awake()
     {
@@ -27,16 +28,16 @@ public class PlayerController : UnitController
         myTurn = true;
 
         units = new AlliedUnit[MAX_TEAM_SIZE];
-        
+
     }
 
     // Start is called before the first frame update
     public override void Start()
     {
         // this is just to test
-        units[0] = SpawnUnit(0, 0);
-        units[1] = SpawnUnit(5, 5);
-        units[2] = SpawnUnit(2, 2);
+        units[0] = SpawnUnit(14, 14);
+        units[1] = SpawnUnit(10, 10);
+        units[2] = SpawnUnit(12, 12);
 
         // I would like to be added to the TurnController
         queueUpEvent.Invoke(instance);

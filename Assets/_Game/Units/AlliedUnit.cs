@@ -9,6 +9,9 @@ public class AlliedUnit : Unit
     private void Awake()
     {
         isSelected = false;
+        direction = Direction.N;
+        hasAttacked = false;
+        hasMoved = false;
         plannedPath = new List<Vector2Int>();
     }
     public override void DisplayMovementTiles()
@@ -51,5 +54,7 @@ public class AlliedUnit : Unit
         MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
         this.transform.position = MapMath.MapToWorld(x,y);
         plannedPath.Clear();
+        hasMoved = true;
+        hasAttacked = true; // for testing only. CHANGE LATER
     }
 }
