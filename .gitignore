@@ -35,3 +35,12 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+#FMOD ignores
+/Assets/FMODStudioCache.asset
+/Assets/FMODStudioCache.asset.meta
+fmod.log
+fmod_editor.log
+
+#Custom ignores
+RogueSynthesisAudio/
