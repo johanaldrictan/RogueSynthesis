@@ -8,7 +8,6 @@ public class AlliedUnit : Unit
     public bool isSelected;
     private void Awake()
     {
-        isAllied = true;
         isSelected = false;
         plannedPath = new List<Vector2Int>();
     }

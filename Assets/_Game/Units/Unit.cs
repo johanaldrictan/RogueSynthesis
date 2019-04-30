@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public abstract class Unit : MonoBehaviour
 {
-    public bool isAllied;
     public bool hasAttacked;
     public bool hasMoved;
     public int moveSpeed;
@@ -127,6 +126,7 @@ public abstract class Unit : MonoBehaviour
         // tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
         // MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
         this.transform.position = MapMath.MapToWorld(new Vector2Int(x, y));
+        hasMoved = true;
     }
 }
 

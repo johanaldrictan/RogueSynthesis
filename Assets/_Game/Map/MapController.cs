@@ -27,6 +27,10 @@ public class MapController : MonoBehaviour
         {
             instance = this;
         }
+        else
+        {
+            Destroy(this.gameObject);
+        }
         InitMap();
     }
 
