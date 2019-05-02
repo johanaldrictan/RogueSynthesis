@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+// A TurnController is a class that is able to manage multiple UnitControllers.
+// It responds to events invoked by UnitControllers;
+// no linking is required other than the presence of both this Class and 1+ UnitController Classes (or SubClasses)
 public class TurnController : MonoBehaviour
 {
     // storage of unit controllers
@@ -26,13 +29,22 @@ public class TurnController : MonoBehaviour
         }
 
         currentTurn = 0;
+    }
 
+    private void OnEnable()
+    {
+        // register for events called by UnitControllers
         UnitController.endTurnEvent.AddListener(nextTurn);
         UnitController.queueUpEvent.AddListener(enqueueController);
     }
 
+    private void OnDisable()
+    {
+        UnitController.endTurnEvent.RemoveListener(nextTurn);
+        UnitController.queueUpEvent.RemoveListener(enqueueController);
+    }
 
-    // takes the UnitController Parameter and adds it to the turn system in the correct order
+    // takes a UnitController and adds it to the turn system in the correct order
     protected void enqueueController(UnitController controller)
     {
         // if empty storage
@@ -51,7 +63,7 @@ public class TurnController : MonoBehaviour
                 {
                     controllers.Insert(i, controller);
 
-                    // if this is the new "first up"
+                    // if this is the new "first place"
                     if (i == 0)
                     {
                         startController(i);
@@ -84,15 +96,8 @@ public class TurnController : MonoBehaviour
 
     protected void nextTurn()
     {
-        // Debug.Log("Next Turn...");
         endController(currentTurn);
-
-        if (currentTurn != (controllers.Count - 1))
-        { currentTurn++; }
-        else
-        { currentTurn = 0; }
-
-        // Debug.Log("Starting: Turn " + currentTurn);
+        currentTurn = ( (currentTurn + 1) % controllers.Count );
         startController(currentTurn);
     }
 }

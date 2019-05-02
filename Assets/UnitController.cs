@@ -7,7 +7,7 @@ using UnityEngine.Events;
 // UnityEvent class; creates an event that passes a UnitController with it
 public class UnitControllerUnityEvent : UnityEvent<UnitController> { }
 
-// UnitController is a Base Class for an object that stores and commands Unit objects
+// UnitController is an Abstract Base Class for an object that stores and commands Unit objects
 public abstract class UnitController : MonoBehaviour
 {
     public UnitController instance;
