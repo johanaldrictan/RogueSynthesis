@@ -8,30 +8,23 @@ using UnityEngine.Events;
 public class UnitControllerUnityEvent : UnityEvent<UnitController> { }
 
 // UnitController is a Base Class for an object that stores and commands Unit objects
-public class UnitController : MonoBehaviour
+public abstract class UnitController : MonoBehaviour
 {
+    public UnitController instance;
 
-    // the maximum number of units allowed to be stored
-    public const int MAX_TEAM_SIZE = 3;
+    private bool myTurn;
+
+    public int maxTeamSize = 3;
 
     // the weight used by the turn system to determine order of the controllers
     // lower is faster
-    public const int TURN_WEIGHT = 0;
-
-    // is it my turn right now?
-    public bool myTurn;
-
-    // stores the unit used by the controller;
-    // likely to be changed later
-    public Unit unitPrefab;
-
+    private const int TURN_WEIGHT = 0;
 
     // storage of units
     // likely to be changed later
     public Unit[] units;
-
+    
     // index of currently active unit
-    // may be changed later
     public int activeUnit;
 
     // Event for queueing up for the TurnController's initialization
@@ -40,23 +33,10 @@ public class UnitController : MonoBehaviour
     // Event for asking to end this controller's turn
     public static UnityEvent endTurnEvent = new UnityEvent();
 
-    public static UnitController instance;
-
 
     public virtual void Awake()
     {
-        // there can only be one
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-
-        // reset storage
-        units = new Unit[MAX_TEAM_SIZE];
+        instance = this;
         myTurn = true;
         activeUnit = 0;
     }
@@ -72,18 +52,18 @@ public class UnitController : MonoBehaviour
 
     }
 
-    //spawn unit at x,y in map units
+    /*spawn unit at x,y in map units
     public Unit SpawnUnit(int x, int y)
     {
         Vector3 playerPos = MapMath.MapToWorld(x, y);
         return Instantiate(unitPrefab.gameObject, playerPos, Quaternion.identity).GetComponent<AlliedUnit>();
     }
-
+    */
 
     // determine whether this controller is ready to end its turn
     public virtual bool isTurnOver()
     {
-        for (int i = 0; i < MAX_TEAM_SIZE; i++)
+        for (int i = 0; i < maxTeamSize; i++)
         {
             // if a unit that hasn't moved or attacked exists
             // Debug.Log(units[i].hasAttacked);
@@ -99,7 +79,7 @@ public class UnitController : MonoBehaviour
 
     public virtual void resetUnits()
     {
-        for (int i = 0; i < MAX_TEAM_SIZE; i++)
+        for (int i = 0; i < maxTeamSize; i++)
         {
             if (units[i].GetType().IsSubclassOf(typeof(Unit)))
             {

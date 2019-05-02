@@ -10,7 +10,7 @@ public class TurnController : MonoBehaviour
 
     public int currentTurn;
 
-    public static TurnController instance = null;
+    public static TurnController instance;
 
     // initialization
     private void Awake()
@@ -23,16 +23,12 @@ public class TurnController : MonoBehaviour
         else
         {
             Destroy(this.gameObject);
-        }   
+        }
 
-        controllers = new List<UnitController>();
         currentTurn = 0;
 
         UnitController.endTurnEvent.AddListener(nextTurn);
-
         UnitController.queueUpEvent.AddListener(enqueueController);
-
-        
     }
 
 
@@ -97,7 +93,6 @@ public class TurnController : MonoBehaviour
         { currentTurn = 0; }
 
         // Debug.Log("Starting: Turn " + currentTurn);
-
         startController(currentTurn);
     }
 }
