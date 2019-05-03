@@ -6,6 +6,7 @@ using UnityEngine.Events;
 // A TurnController is a class that is able to manage multiple UnitControllers.
 // It responds to events invoked by UnitControllers;
 // no linking is required other than the presence of both this Class and 1+ UnitController Classes (or SubClasses)
+
 public class TurnController : MonoBehaviour
 {
     // storage of unit controllers
@@ -40,6 +41,7 @@ public class TurnController : MonoBehaviour
 
     private void OnDisable()
     {
+        // un-register for events called by UnitControllers
         UnitController.endTurnEvent.RemoveListener(nextTurn);
         UnitController.queueUpEvent.RemoveListener(enqueueController);
     }

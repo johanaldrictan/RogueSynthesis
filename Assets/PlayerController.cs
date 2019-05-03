@@ -5,11 +5,16 @@ using UnityEngine.Events;
 
 // PlayerController is an object that inherits from the UnitController (see UnitController.cs)
 // It is a variety that is user-controlled
+// see the UnitController Abstract Class for more information about how this class ought to behave
+
 public class PlayerController : UnitController
 {
     new public const int TURN_WEIGHT = -1;
 
-    new public static PlayerController instance;
+    public override void loadUnits()
+    {
+        
+    }
 
     public override void Awake()
     {
@@ -25,24 +30,14 @@ public class PlayerController : UnitController
 
         activeUnit = 0;
         myTurn = true;
-
-        units = new AlliedUnit[MAX_TEAM_SIZE];
-        
     }
 
-    // Start is called before the first frame update
     public override void Start()
     {
-        // this is just to test
-        units[0] = SpawnUnit(0, 0);
-        units[1] = SpawnUnit(5, 5);
-        units[2] = SpawnUnit(2, 2);
-
         // I would like to be added to the TurnController
         queueUpEvent.Invoke(instance);
     }
 
-    // Update is called once per frame
     public override void Update()
     {
         // if it's not currently this controller's turn, it's not allowed to do anything
@@ -82,15 +77,17 @@ public class PlayerController : UnitController
 
     private void GetNextUnit()
     {
-        // Debug.Log("Getting Next Unit...");
         // check to see if the turn is over
         if (isTurnOver())
         {
-            // Debug.Log("Resetting...");
             resetUnits();
             endTurnEvent.Invoke();
         }
+        if (units.Count != 0)
+        {
 
+        }
+        /*
         if (units.Length != 0)
         {
             int i = activeUnit + 1;
@@ -112,6 +109,7 @@ public class PlayerController : UnitController
                 }
             }
         }
+        */
     }
 
 }
