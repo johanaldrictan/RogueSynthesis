@@ -9,6 +9,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70508dd585e52b341837aa8f38bfd596, type: 3}
+  m_Script: {fileID: 11500000, guid: 69221c0b80c9fdc46952d2b8669c5bc4, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
+  unitName: 
+  unitType: 0
+  sprite: {fileID: 0}
+  moveSpeed: 0
+  HP: 0
+  ATK: 0
+  isRanged: 0
+  Abilities:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11500000, guid: 04c90d49cb91cb44995f2911ad3b9bd7, type: 3}
+        m_MethodName: set_name
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null

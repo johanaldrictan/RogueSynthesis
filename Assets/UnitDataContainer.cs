@@ -5,7 +5,7 @@ using UnityEngine;
 
 // A UnitDataContainer stores parameters regarding to the
 // spawning of a Unit.
-// It is a ScriptableObject storing the UnitData Class of the unit,
+// It stores the UnitData Class of the unit,
 // the (X,Y) spawning position,
 // and the direction it faces when it spawns
 

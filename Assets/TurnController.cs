@@ -96,10 +96,14 @@ public class TurnController : MonoBehaviour
         controllers[index].endTurn();
     }
 
-    protected void nextTurn()
+    protected void nextTurn(UnitController controller)
     {
-        endController(currentTurn);
-        currentTurn = ( (currentTurn + 1) % controllers.Count );
-        startController(currentTurn);
+        // make sure that the controller asking for the next turn currently has control
+        if (controllers[currentTurn] == controller && controller.isMyTurn())
+        {
+            endController(currentTurn);
+            currentTurn = ((currentTurn + 1) % controllers.Count);
+            startController(currentTurn);
+        }
     }
 }

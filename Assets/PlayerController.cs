@@ -18,16 +18,6 @@ public class PlayerController : UnitController
 
     public override void Awake()
     {
-        // there can only be one
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-
         activeUnit = 0;
         myTurn = true;
     }
@@ -35,7 +25,7 @@ public class PlayerController : UnitController
     public override void Start()
     {
         // I would like to be added to the TurnController
-        queueUpEvent.Invoke(instance);
+        queueUpEvent.Invoke(this as PlayerController);
     }
 
     public override void Update()
@@ -81,7 +71,7 @@ public class PlayerController : UnitController
         if (isTurnOver())
         {
             resetUnits();
-            endTurnEvent.Invoke();
+            endTurnEvent.Invoke(this as PlayerController);
         }
         if (units.Count != 0)
         {

@@ -10,7 +10,6 @@ public class UnitControllerUnityEvent : UnityEvent<UnitController> { }
 // UnitController is an Abstract Base Class for an object that stores and commands Unit objects
 public abstract class UnitController : MonoBehaviour
 {
-    public UnitController instance;
 
     public bool myTurn;
 
@@ -31,7 +30,7 @@ public abstract class UnitController : MonoBehaviour
     public static UnitControllerUnityEvent queueUpEvent = new UnitControllerUnityEvent();
 
     // Event for asking a TurnController to end this controller's turn
-    public static UnityEvent endTurnEvent = new UnityEvent();
+    public static UnitControllerUnityEvent endTurnEvent = new UnitControllerUnityEvent();
 
     // Every class that inherits from this one must create a method 
     // that translates unitSpawnData into real units for the units list
@@ -41,16 +40,6 @@ public abstract class UnitController : MonoBehaviour
     // Things done here should probably be done there a well.
     public virtual void Awake()
     {
-        // there can only be one
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-
         myTurn = true;
         activeUnit = 0;
     }
@@ -60,7 +49,7 @@ public abstract class UnitController : MonoBehaviour
     public virtual void Start()
     {
         // I would like to be added to the TurnController
-        queueUpEvent.Invoke(instance);
+        queueUpEvent.Invoke(this);
     }
 
     public virtual void Update()
