@@ -117,12 +117,3 @@ public static class MapMath
         return output;
     }
 }
-
-public enum Direction
-{
-    N,
-    W,
-    E,
-    S,
-    NO_DIR
-}

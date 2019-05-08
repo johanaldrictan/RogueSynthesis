@@ -5,11 +5,9 @@ using UnityEngine;
 public class AlliedUnit : Unit
 {
     public List<Vector2Int> plannedPath;
-    public bool isSelected;
+
     private void Awake()
     {
-        isSelected = false;
-        direction = Direction.N;
         hasAttacked = false;
         hasMoved = false;
         plannedPath = new List<Vector2Int>();

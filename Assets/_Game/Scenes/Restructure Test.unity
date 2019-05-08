@@ -2847,19 +2847,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fda166eec4f84046a560926cea533c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instance: {fileID: 0}
   myTurn: 0
-  unitSpawnData:
-  - data: {fileID: 0}
-    spawnPosition: {x: 0, y: 0}
-    spawnDirection: 0
-  - data: {fileID: 0}
-    spawnPosition: {x: 0, y: 0}
-    spawnDirection: 0
-  - data: {fileID: 0}
-    spawnPosition: {x: 0, y: 0}
-    spawnDirection: 0
   activeUnit: 0
+  unitSpawnData:
+  - data: {fileID: 11400000, guid: 87fc11b9e22649f4490c8d684c736026, type: 2}
+    spawnPosition: {x: 2, y: 3}
+    spawnDirection: 0
 --- !u!4 &1582521908
 Transform:
   m_ObjectHideFlags: 0
@@ -2903,8 +2896,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d434c33d7fad03438c585d197dfea66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllers: []
-  currentTurn: 0
 --- !u!4 &1764177635
 Transform:
   m_ObjectHideFlags: 0

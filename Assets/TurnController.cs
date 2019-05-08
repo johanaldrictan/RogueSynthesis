@@ -10,9 +10,9 @@ using UnityEngine.Events;
 public class TurnController : MonoBehaviour
 {
     // storage of unit controllers
-    public List<UnitController> controllers;
+    private List<UnitController> controllers;
 
-    public int currentTurn;
+    private int currentTurn;
 
     public static TurnController instance;
 
@@ -30,6 +30,7 @@ public class TurnController : MonoBehaviour
         }
 
         currentTurn = 0;
+        controllers = new List<UnitController>();
     }
 
     private void OnEnable()

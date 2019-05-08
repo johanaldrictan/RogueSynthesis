@@ -32,16 +32,13 @@ public abstract class UnitController : MonoBehaviour
     // Event for asking a TurnController to end this controller's turn
     public static UnitControllerUnityEvent endTurnEvent = new UnitControllerUnityEvent();
 
-    // Every class that inherits from this one must create a method 
-    // that translates unitSpawnData into real units for the units list
-    public abstract void loadUnits();
-
     // this should (in theory) always be overridden in subclasses.
     // Things done here should probably be done there a well.
     public virtual void Awake()
     {
         myTurn = true;
         activeUnit = 0;
+        units = new List<Unit>();
     }
 
     // this will probably be overridden most of the time ( like Awake() )
@@ -57,13 +54,36 @@ public abstract class UnitController : MonoBehaviour
 
     }
 
-    /*spawn unit at x,y in map units
-    public Unit SpawnUnit(int x, int y)
+    // Parses unitSpawnData, instantiates and initializes Units
+    // adds the newly instantiated Units to units list
+    public void loadUnits()
     {
-        Vector3 playerPos = MapMath.MapToWorld(x, y);
-        return Instantiate(unitPrefab.gameObject, playerPos, Quaternion.identity).GetComponent<AlliedUnit>();
+        for (int i = 0; i < unitSpawnData.Count; i++)
+        {
+            // parse the spawn location and spawn a new object there
+            Vector3 playerPos = MapMath.MapToWorld(unitSpawnData[i].spawnPosition.x, unitSpawnData[i].spawnPosition.y);
+            GameObject shell = new GameObject();
+            GameObject newUnit = Instantiate(shell, playerPos, Quaternion.identity);
+            Destroy(shell);
+
+            newUnit.AddComponent<SpriteRenderer>();
+
+            // add the correct inherited member of Unit to the object
+            Unit newUnitComponent = null;
+            if (unitSpawnData[i].data.unitType == UnitType.AlliedUnit)
+            { newUnitComponent = newUnit.AddComponent<AlliedUnit>() as AlliedUnit; }
+            else if (unitSpawnData[i].data.unitType == UnitType.EnemyUnit)
+            { /* newUnitComponent = newUnit.AddComponent<EnemyUnit>() as EnemyUnit; */ }
+            else if (unitSpawnData[i].data.unitType == UnitType.Civilian)
+            { /* newUnitComponent = newUnit.AddComponent<Civilian>() as Civilian; */ }
+
+            // give this new Unit the raw data for creating it, set its direction
+            newUnitComponent.unitData = unitSpawnData[i].data;
+            newUnitComponent.direction = unitSpawnData[i].spawnDirection;
+
+            units.Add(newUnit.GetComponent<Unit>());
+        }
     }
-    */
 
     // determine whether this controller is ready to end its turn
     public virtual bool isTurnOver()

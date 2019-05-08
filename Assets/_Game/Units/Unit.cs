@@ -7,18 +7,24 @@ public abstract class Unit : MonoBehaviour
 {
     public bool hasAttacked;
     public bool hasMoved;
-    public int moveSpeed;
+
     public bool isRanged;
     public Direction direction;
     protected Vector2Int mapPosition;
 
-    protected int health;
+    public int health;
+    public int attack;
+    public int moveSpeed;
 
     protected TileWeight tile;
 
+    // storage of the unit's UnitData object
+    // given on instantiation by a UnitController
+    // used to initialize the Unit, kept for future reference (if needed)
+    [System.NonSerialized] public UnitData unitData;
+
     private void Awake()
     {
-        direction = Direction.N;
         hasAttacked = false;
         hasMoved = false;
     }

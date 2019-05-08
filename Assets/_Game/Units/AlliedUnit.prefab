@@ -119,10 +119,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c90d49cb91cb44995f2911ad3b9bd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAllied: 1
   hasAttacked: 0
   hasMoved: 0
   moveSpeed: 4
+  isRanged: 0
   direction: 0
   plannedPath: []
   isSelected: 0
