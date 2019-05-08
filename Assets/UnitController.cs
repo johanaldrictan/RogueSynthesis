@@ -32,7 +32,7 @@ public abstract class UnitController : MonoBehaviour
     // Event for asking a TurnController to end this controller's turn
     public static UnitControllerUnityEvent endTurnEvent = new UnitControllerUnityEvent();
 
-    // this should (in theory) always be overridden in subclasses.
+    // this can be overridden in subclasses.
     // Things done here should probably be done there a well.
     public virtual void Awake()
     {
@@ -41,12 +41,15 @@ public abstract class UnitController : MonoBehaviour
         units = new List<Unit>();
     }
 
-    // this will probably be overridden most of the time ( like Awake() )
-    // remember to invoke the queueUpEvent if so
+    // this can be overridden ( like Awake() )
+    // remember to invoke the queueUpEvent and call loadUnits() if so
     public virtual void Start()
     {
         // I would like to be added to the TurnController
         queueUpEvent.Invoke(this);
+
+        // Initialize my unitSpawnData into real units
+        loadUnits();
     }
 
     public virtual void Update()
@@ -81,6 +84,10 @@ public abstract class UnitController : MonoBehaviour
             newUnitComponent.unitData = unitSpawnData[i].data;
             newUnitComponent.direction = unitSpawnData[i].spawnDirection;
 
+            // i've given you the data you need to make yourself. now make yourself, please
+            newUnitComponent.loadData();
+
+            // add the brand-spankin-new and created unit to your units list
             units.Add(newUnit.GetComponent<Unit>());
         }
     }

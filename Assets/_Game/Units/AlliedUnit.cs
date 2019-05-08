@@ -6,11 +6,13 @@ public class AlliedUnit : Unit
 {
     public List<Vector2Int> plannedPath;
 
-    private void Awake()
+    public override void Awake()
     {
         hasAttacked = false;
         hasMoved = false;
         plannedPath = new List<Vector2Int>();
+        m_SpriteRenderer = this.GetComponent<SpriteRenderer>();
+        m_SpriteRenderer.sortingOrder = 99;
     }
     public override void DisplayMovementTiles()
     {

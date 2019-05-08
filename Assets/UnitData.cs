@@ -24,22 +24,5 @@ public enum UnitType
     Civilian
 };
 
-public enum Direction
-{
-    N,
-    W,
-    E,
-    S,
-    NO_DIR
-}
 
-// A SpriteSet is a container for N,S,E,W facing sprites
-[System.Serializable]
-public class SpriteSet
-{
-    public Sprite north;
-    public Sprite south;
-    public Sprite east;
-    public Sprite west;
-}
 

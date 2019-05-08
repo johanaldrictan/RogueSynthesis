@@ -5,16 +5,19 @@ using UnityEngine.Events;
 
 public abstract class Unit : MonoBehaviour
 {
-    public bool hasAttacked;
-    public bool hasMoved;
-
-    public bool isRanged;
-    public Direction direction;
-    protected Vector2Int mapPosition;
-
+    public string unitName;
     public int health;
     public int attack;
     public int moveSpeed;
+
+    public bool hasAttacked;
+    public bool hasMoved;
+    
+    public Direction direction;
+    protected Vector2Int mapPosition;
+    public SpriteSet sprites;
+    protected SpriteRenderer m_SpriteRenderer;
+
 
     protected TileWeight tile;
 
@@ -23,13 +26,15 @@ public abstract class Unit : MonoBehaviour
     // used to initialize the Unit, kept for future reference (if needed)
     [System.NonSerialized] public UnitData unitData;
 
-    private void Awake()
+    public virtual void Awake()
     {
         hasAttacked = false;
         hasMoved = false;
+        m_SpriteRenderer = this.GetComponent<SpriteRenderer>();
+        m_SpriteRenderer.sortingOrder = 99;
     }
 
-    private void Start()
+    public virtual void Start()
     {
         mapPosition = MapMath.WorldToMap(this.transform.position);
         tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
@@ -39,6 +44,20 @@ public abstract class Unit : MonoBehaviour
     }
 
     public abstract void DisplayMovementTiles();
+
+    // parses unitData to set own variables
+    public void loadData()
+    {
+        // set parameters
+        unitName = unitData.unitName;
+        sprites = unitData.sprites;
+        health = unitData.health;
+        attack = unitData.attack;
+        moveSpeed = unitData.moveSpeed;
+
+        // set the direction to itself (in order to set the sprite)
+        changeDirection(direction);
+    }
 
     public Dictionary<Vector2Int, Direction> FindMoveableTiles(int[,] map)
     {
@@ -75,6 +94,7 @@ public abstract class Unit : MonoBehaviour
 
         return shortestFrom;
     }
+
     public Stack<Vector2Int> GetMovementPath(Dictionary<Vector2Int, Direction> possibleMoveLocs, Vector2Int dest)
     {
         Stack<Vector2Int> path = new Stack<Vector2Int>();
@@ -105,6 +125,7 @@ public abstract class Unit : MonoBehaviour
         }
         return path;
     }
+
     public Dictionary<Vector2Int, Direction> GetNeighbors(Vector2Int curr)
     {
         Dictionary<Vector2Int, Direction> neighbors = new Dictionary<Vector2Int, Direction>();
@@ -127,6 +148,7 @@ public abstract class Unit : MonoBehaviour
         }
         return neighbors;
     }
+
     public virtual void Move(int x, int y)
     {
         //restore old tilevalue
@@ -138,6 +160,20 @@ public abstract class Unit : MonoBehaviour
         this.transform.position = MapMath.MapToWorld(new Vector2Int(x, y));
         hasMoved = true;
         hasAttacked = true; // for testing only. CHANGE LATER
+    }
+
+    public void changeDirection(Direction newDirection)
+    {
+        direction = newDirection;
+
+        if (newDirection == Direction.N)
+        { m_SpriteRenderer.sprite = sprites.north; }
+        else if (newDirection == Direction.S)
+        { m_SpriteRenderer.sprite = sprites.south; }
+        else if (newDirection == Direction.E)
+        { m_SpriteRenderer.sprite = sprites.east; }
+        else if (newDirection == Direction.W)
+        { m_SpriteRenderer.sprite = sprites.west; }
     }
 }
 

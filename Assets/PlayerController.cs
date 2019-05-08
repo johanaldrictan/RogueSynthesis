@@ -11,21 +11,6 @@ public class PlayerController : UnitController
 {
     new public const int TURN_WEIGHT = -1;
 
-    public override void Awake()
-    {
-        activeUnit = 0;
-        myTurn = true;
-        units = new List<Unit>();
-    }
-
-    public override void Start()
-    {
-        // I would like to be added to the TurnController
-        queueUpEvent.Invoke(this as PlayerController);
-
-        // Initialize my unitSpawnData into real units
-        loadUnits();
-    }
 
     public override void Update()
     {
@@ -51,11 +36,11 @@ public class PlayerController : UnitController
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, 100f);
             Vector2Int dest = MapMath.WorldToMap(hit.point);
             AlliedUnit theUnit = units[activeUnit] as AlliedUnit;
-            if (theUnit.plannedPath[-1] != dest && theUnit.plannedPath.Contains(dest))
+            if ( (!theUnit.plannedPath.Contains(dest)) || theUnit.plannedPath[theUnit.plannedPath.Count - 1] != dest )
             {
                 theUnit.DisplayPath(dest);
             }
-            else if (theUnit.plannedPath[-1] == dest && theUnit.plannedPath.Contains(dest))
+            else
             {
                 theUnit.Move(dest.x, dest.y);
                 GetNextUnit();

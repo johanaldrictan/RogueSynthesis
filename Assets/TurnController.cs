@@ -88,14 +88,10 @@ public class TurnController : MonoBehaviour
     }
 
     protected void startController(int index)
-    {
-        controllers[index].startTurn();
-    }
+    { controllers[index].startTurn(); }
 
     protected void endController(int index)
-    {
-        controllers[index].endTurn();
-    }
+    { controllers[index].endTurn(); }
 
     protected void nextTurn(UnitController controller)
     {

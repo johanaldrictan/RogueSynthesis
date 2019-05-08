@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ranger : AlliedUnit
 {
     List<Vector2Int> attackTiles;
-    private void Start()
+    public override void Start()
     {
         attackTiles = new List<Vector2Int>();
     }
