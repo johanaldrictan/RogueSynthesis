@@ -1,0 +1,179 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
+
+public abstract class Unit : MonoBehaviour
+{
+    public string unitName;
+    public int health;
+    public int attack;
+    public int moveSpeed;
+
+    public bool hasAttacked;
+    public bool hasMoved;
+    
+    public Direction direction;
+    protected Vector2Int mapPosition;
+    public SpriteSet sprites;
+    protected SpriteRenderer m_SpriteRenderer;
+
+
+    protected TileWeight tile;
+
+    // storage of the unit's UnitData object
+    // given on instantiation by a UnitController
+    // used to initialize the Unit, kept for future reference (if needed)
+    [System.NonSerialized] public UnitData unitData;
+
+    public virtual void Awake()
+    {
+        hasAttacked = false;
+        hasMoved = false;
+        m_SpriteRenderer = this.GetComponent<SpriteRenderer>();
+        m_SpriteRenderer.sortingOrder = 99;
+    }
+
+    public virtual void Start()
+    {
+        mapPosition = MapMath.WorldToMap(this.transform.position);
+        tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
+        MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
+        //Debug.Log(mapPosition.x);
+        //Debug.Log(mapPosition.y);
+    }
+
+    public abstract void DisplayMovementTiles();
+
+    // parses unitData to set own variables
+    public void loadData()
+    {
+        // set parameters
+        unitName = unitData.unitName;
+        sprites = unitData.sprites;
+        health = unitData.health;
+        attack = unitData.attack;
+        moveSpeed = unitData.moveSpeed;
+
+        // set the direction to itself (in order to set the sprite)
+        changeDirection(direction);
+    }
+
+    public Dictionary<Vector2Int, Direction> FindMoveableTiles(int[,] map)
+    {
+        Dictionary<Vector2Int, Direction> shortestFrom = new Dictionary<Vector2Int, Direction>();
+        Dictionary<Vector2Int, int> movementCost = new Dictionary<Vector2Int, int>();
+
+        HashSet<Vector2Int> visited = new HashSet<Vector2Int>();
+        PriorityQueue<Vector2Int> frontier = new PriorityQueue<Vector2Int>();
+        frontier.Enqueue(mapPosition, 0); // Should only contain tiles in range
+        movementCost[mapPosition] = 0; // Contains frontier and visited
+        shortestFrom[mapPosition] = Direction.NO_DIR;
+
+        while (frontier.Count != 0)
+        {
+            Vector2Int visiting = frontier.Dequeue();
+            if (visited.Contains(visiting)) {continue;} // TODO: Implement changing priority in the PQ, and remove this.
+            
+            Dictionary<Vector2Int, Direction> neighbors = GetNeighbors(visiting);
+            foreach (Vector2Int neighbor in neighbors.Keys)
+            {
+                if (visited.Contains(neighbor) || !MapMath.InMapBounds(neighbor)) { continue; }
+                int nextDist = MapController.instance.map[neighbor.x, neighbor.y] + movementCost[visiting];
+                if (nextDist > moveSpeed) { continue; }
+                if (!movementCost.ContainsKey(neighbor) || nextDist < movementCost[neighbor])
+                {
+                    frontier.Enqueue(neighbor, nextDist);
+                    movementCost[neighbor] = nextDist;
+                    shortestFrom[neighbor] = neighbors[neighbor];
+                }
+            }
+
+            visited.Add(visiting);
+        }
+
+        return shortestFrom;
+    }
+
+    public Stack<Vector2Int> GetMovementPath(Dictionary<Vector2Int, Direction> possibleMoveLocs, Vector2Int dest)
+    {
+        Stack<Vector2Int> path = new Stack<Vector2Int>();
+        if (!possibleMoveLocs.ContainsKey(dest))
+        {
+            return null;
+        }
+        Vector2Int currLoc = dest;
+        while(currLoc != mapPosition)
+        {
+            path.Push(currLoc);
+            Direction dir = MapMath.GetOppositeDirection(possibleMoveLocs[currLoc]);
+            switch (dir)
+            {
+                case Direction.N:
+                    currLoc = currLoc + MapMath.RelativeNorth;
+                    break;
+                case Direction.S:
+                    currLoc = currLoc + MapMath.RelativeSouth;
+                    break;
+                case Direction.E:
+                    currLoc = currLoc + MapMath.RelativeEast;
+                    break;
+                case Direction.W:
+                    currLoc = currLoc + MapMath.RelativeWest;
+                    break;
+            }
+        }
+        return path;
+    }
+
+    public Dictionary<Vector2Int, Direction> GetNeighbors(Vector2Int curr)
+    {
+        Dictionary<Vector2Int, Direction> neighbors = new Dictionary<Vector2Int, Direction>();
+        //prevent current unit pos from being readded to neighbors
+        if (!mapPosition.Equals(new Vector2Int(curr.x, curr.y + 1)))
+        {
+            neighbors.Add(new Vector2Int(curr.x, curr.y + 1), Direction.N);
+        }
+        if (!mapPosition.Equals(new Vector2Int(curr.x - 1, curr.y)))
+        {
+            neighbors.Add(new Vector2Int(curr.x - 1, curr.y), Direction.W);
+        }
+        if (!mapPosition.Equals(new Vector2Int(curr.x, curr.y - 1)))
+        {
+            neighbors.Add(new Vector2Int(curr.x, curr.y - 1), Direction.S);
+        }
+        if (!mapPosition.Equals(new Vector2Int(curr.x + 1, curr.y)))
+        {
+            neighbors.Add(new Vector2Int(curr.x + 1, curr.y), Direction.E);
+        }
+        return neighbors;
+    }
+
+    public virtual void Move(int x, int y)
+    {
+        //restore old tilevalue
+        // MapController.instance.map[mapPosition.x, mapPosition.y] = (int)tile;
+        mapPosition.x = x;
+        mapPosition.y = y;
+        // tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
+        // MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
+        this.transform.position = MapMath.MapToWorld(new Vector2Int(x, y));
+        hasMoved = true;
+        hasAttacked = true; // for testing only. CHANGE LATER
+    }
+
+    public void changeDirection(Direction newDirection)
+    {
+        direction = newDirection;
+
+        if (newDirection == Direction.N)
+        { m_SpriteRenderer.sprite = sprites.north; }
+        else if (newDirection == Direction.S)
+        { m_SpriteRenderer.sprite = sprites.south; }
+        else if (newDirection == Direction.E)
+        { m_SpriteRenderer.sprite = sprites.east; }
+        else if (newDirection == Direction.W)
+        { m_SpriteRenderer.sprite = sprites.west; }
+    }
+}
+
