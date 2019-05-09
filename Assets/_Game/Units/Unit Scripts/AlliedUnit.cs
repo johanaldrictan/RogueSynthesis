@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AlliedUnit : Unit
 {
-    public List<Vector2Int> plannedPath;
+    [System.NonSerialized] public List<Vector2Int> plannedPath;
 
     public override void Awake()
     {
