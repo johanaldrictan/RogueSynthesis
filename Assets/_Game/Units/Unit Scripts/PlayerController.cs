@@ -55,6 +55,7 @@ public class PlayerController : UnitController
         {
             resetUnits();
             endTurnEvent.Invoke(this as PlayerController);
+            CameraController.instance.targetZoom = 5;
         }
         else if (units.Count != 0)
         {
@@ -63,9 +64,10 @@ public class PlayerController : UnitController
             {
                 activeUnit = (activeUnit + 1) % units.Count;
             }
-            while ( !units[activeUnit].gameObject.activeInHierarchy || (units[activeUnit].hasAttacked && units[activeUnit].hasMoved) );
+            while (!units[activeUnit].gameObject.activeInHierarchy || (units[activeUnit].hasAttacked && units[activeUnit].hasMoved) );
 
             units[activeUnit].DisplayMovementTiles();
+            CameraController.instance.targetPos = units[activeUnit].transform.position;
         }
     }
 
