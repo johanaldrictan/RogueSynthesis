@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,8 +12,8 @@ public static class MapMath
     // Map: 2D Array in MapController.cs
 
 
-    public static Vector2Int RelativeNorth = new Vector2Int(0, 1);
-    public static Vector2Int RelativeSouth = new Vector2Int(0, -1);
+    public static Vector2Int RelativeNorth = new Vector2Int(0, -1);
+    public static Vector2Int RelativeSouth = new Vector2Int(0, 1);
     public static Vector2Int RelativeEast = new Vector2Int(1, 0);
     public static Vector2Int RelativeWest = new Vector2Int(-1, 0);
 
@@ -60,19 +61,21 @@ public static class MapMath
         return mapCoords;
     }
 
-    public static bool InMapBounds(Vector2Int loc)
+    public static bool InMapBounds(int x, int y)
     {
         //check x
-        if(loc.x >= MapController.instance.map.GetLowerBound(0) && loc.x <= MapController.instance.map.GetUpperBound(0))
+        if (x >= MapController.instance.map.GetLowerBound(0) && x <= MapController.instance.map.GetUpperBound(0))
         {
             //check y
-            if(loc.y >= MapController.instance.map.GetLowerBound(1) && loc.y <= MapController.instance.map.GetUpperBound(1))
+            if (y >= MapController.instance.map.GetLowerBound(1) && y <= MapController.instance.map.GetUpperBound(1))
             {
                 return true;
             }
         }
         return false;
     }
+
+    public static bool InMapBounds(Vector2Int loc) {return InMapBounds(loc.x, loc.y);}
 
     //can probably do this mathematically
     public static Direction GetOppositeDirection(Direction d)
@@ -91,6 +94,27 @@ public static class MapMath
                 break;
             case Direction.E:
                 output = Direction.W;
+                break;
+        }
+        return output;
+    }
+    
+    public static Direction rotateDirection(Direction d)
+    {
+        Direction output = Direction.NO_DIR;
+        switch (d)
+        {
+            case Direction.N:
+                output = Direction.E;
+                break;
+            case Direction.S:
+                output = Direction.W;
+                break;
+            case Direction.W:
+                output = Direction.N;
+                break;
+            case Direction.E:
+                output = Direction.S;
                 break;
         }
         return output;

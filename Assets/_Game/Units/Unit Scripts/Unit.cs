@@ -43,7 +43,7 @@ public abstract class Unit : MonoBehaviour
         //Debug.Log(mapPosition.y);
     }
 
-    public abstract void DisplayMovementTiles();
+    public abstract void DisplayMovementTiles(Direction targetFacing);
 
     // parses unitData to set own variables
     public void loadData()
@@ -59,33 +59,72 @@ public abstract class Unit : MonoBehaviour
         changeDirection(direction);
     }
 
-    public Dictionary<Vector2Int, Direction> FindMoveableTiles(int[,] map)
-    {
-        Dictionary<Vector2Int, Direction> shortestFrom = new Dictionary<Vector2Int, Direction>();
-        Dictionary<Vector2Int, int> movementCost = new Dictionary<Vector2Int, int>();
+    // public Dictionary<Vector2Int, Direction> FindMoveableTiles(int[,] map)
+    // {
+    //     Dictionary<Vector2Int, Direction> shortestFrom = new Dictionary<Vector2Int, Direction>();
+    //     Dictionary<Vector2Int, int> movementCost = new Dictionary<Vector2Int, int>();
 
-        HashSet<Vector2Int> visited = new HashSet<Vector2Int>();
-        PriorityQueue<Vector2Int> frontier = new PriorityQueue<Vector2Int>();
-        frontier.Enqueue(mapPosition, 0); // Should only contain tiles in range
-        movementCost[mapPosition] = 0; // Contains frontier and visited
-        shortestFrom[mapPosition] = Direction.NO_DIR;
+    //     HashSet<Vector2Int> visited = new HashSet<Vector2Int>();
+    //     PriorityQueue<Vector2Int> frontier = new PriorityQueue<Vector2Int>();
+    //     frontier.Enqueue(mapPosition, 0); // Should only contain tiles in range
+    //     movementCost[mapPosition] = 0; // Contains frontier and visited
+    //     shortestFrom[mapPosition] = Direction.NO_DIR;
+
+    //     while (frontier.Count != 0)
+    //     {
+    //         Vector2Int visiting = frontier.Dequeue();
+    //         if (visited.Contains(visiting)) {continue;} // TODO: Implement changing priority in the PQ, and remove this.
+            
+    //         HashSet<Vector3Int> neighbors = GetNeighbors(visiting.x, visiting.y);
+    //         foreach (Vector2Int neighbor in neighbors)
+    //         {
+    //             if (visited.Contains(neighbor) || !MapMath.InMapBounds(neighbor)) { continue; }
+    //             int nextDist = MapController.instance.map[neighbor.x, neighbor.y] + movementCost[visiting];
+    //             if (nextDist > moveSpeed) { continue; }
+    //             if (!movementCost.ContainsKey(neighbor) || nextDist < movementCost[neighbor])
+    //             {
+    //                 frontier.Enqueue(neighbor, nextDist);
+    //                 movementCost[neighbor] = nextDist;
+    //                 shortestFrom[neighbor] = (Direction)neighbor.y;
+    //             }
+    //         }
+
+    //         visited.Add(visiting);
+    //     }
+
+    //     return shortestFrom;
+    // }
+
+    public Dictionary<Vector3Int, Vector3Int> FindMoveableWithFacing(int[,] map)
+    {
+        // to future contributors: im sorry
+        Dictionary<Vector3Int, Vector3Int> shortestFrom = new Dictionary<Vector3Int, Vector3Int>();
+        Dictionary<Vector3Int, int> movementCost = new Dictionary<Vector3Int, int>();
+        Vector3Int mapPosWithFacing = new Vector3Int(mapPosition.x, mapPosition.y, (int)direction);
+
+        HashSet<Vector3Int> visited = new HashSet<Vector3Int>();
+        PriorityQueue<Vector3Int> frontier = new PriorityQueue<Vector3Int>();
+        frontier.Enqueue(mapPosWithFacing, 0); // Should only contain tiles in range
+        movementCost[mapPosWithFacing] = 0; // Contains frontier and visited
+        shortestFrom[mapPosWithFacing] = mapPosWithFacing;
 
         while (frontier.Count != 0)
         {
-            Vector2Int visiting = frontier.Dequeue();
+            Vector3Int visiting = frontier.Dequeue();
             if (visited.Contains(visiting)) {continue;} // TODO: Implement changing priority in the PQ, and remove this.
             
-            Dictionary<Vector2Int, Direction> neighbors = GetNeighbors(visiting);
-            foreach (Vector2Int neighbor in neighbors.Keys)
+            HashSet<Vector3Int> neighbors = GetNeighbors(visiting.x, visiting.y);
+            foreach (Vector3Int neighbor in neighbors)
             {
-                if (visited.Contains(neighbor) || !MapMath.InMapBounds(neighbor)) { continue; }
+                if (visiting.z == (int)MapMath.GetOppositeDirection((Direction)neighbor.z)) {continue;} // cant backtrack
+                if (visited.Contains(neighbor) || !MapMath.InMapBounds(neighbor.x, neighbor.y)) { continue; }
                 int nextDist = MapController.instance.map[neighbor.x, neighbor.y] + movementCost[visiting];
                 if (nextDist > moveSpeed) { continue; }
                 if (!movementCost.ContainsKey(neighbor) || nextDist < movementCost[neighbor])
                 {
                     frontier.Enqueue(neighbor, nextDist);
                     movementCost[neighbor] = nextDist;
-                    shortestFrom[neighbor] = neighbors[neighbor];
+                    shortestFrom[neighbor] = visiting;
                 }
             }
 
@@ -95,66 +134,45 @@ public abstract class Unit : MonoBehaviour
         return shortestFrom;
     }
 
-    public Stack<Vector2Int> GetMovementPath(Dictionary<Vector2Int, Direction> possibleMoveLocs, Vector2Int dest)
+
+    public Stack<Vector3Int> GetMovementPath(Dictionary<Vector3Int, Vector3Int> possibleMoveLocs, Vector2Int dest, Direction targetDir)
     {
-        Stack<Vector2Int> path = new Stack<Vector2Int>();
+        return GetMovementPath(possibleMoveLocs, new Vector3Int(dest.x, dest.y, (int)targetDir));
+    }
+
+    public Stack<Vector3Int> GetMovementPath(Dictionary<Vector3Int, Vector3Int> possibleMoveLocs, Vector3Int dest)
+    {
+        Stack<Vector3Int> path = new Stack<Vector3Int>();
         if (!possibleMoveLocs.ContainsKey(dest))
         {
             return null;
         }
-        Vector2Int currLoc = dest;
-        while(currLoc != mapPosition)
+        Vector3Int currLoc = dest;
+        while (currLoc != possibleMoveLocs[currLoc])
         {
             path.Push(currLoc);
-            Direction dir = MapMath.GetOppositeDirection(possibleMoveLocs[currLoc]);
-            switch (dir)
-            {
-                case Direction.N:
-                    currLoc = currLoc + MapMath.RelativeNorth;
-                    break;
-                case Direction.S:
-                    currLoc = currLoc + MapMath.RelativeSouth;
-                    break;
-                case Direction.E:
-                    currLoc = currLoc + MapMath.RelativeEast;
-                    break;
-                case Direction.W:
-                    currLoc = currLoc + MapMath.RelativeWest;
-                    break;
-            }
+            currLoc = possibleMoveLocs[currLoc];
         }
         return path;
     }
 
-    public Dictionary<Vector2Int, Direction> GetNeighbors(Vector2Int curr)
+    public HashSet<Vector3Int> GetNeighbors(int x, int y)
     {
-        Dictionary<Vector2Int, Direction> neighbors = new Dictionary<Vector2Int, Direction>();
-        //prevent current unit pos from being readded to neighbors
-        if (!mapPosition.Equals(new Vector2Int(curr.x, curr.y + 1)))
-        {
-            neighbors.Add(new Vector2Int(curr.x, curr.y + 1), Direction.N);
-        }
-        if (!mapPosition.Equals(new Vector2Int(curr.x - 1, curr.y)))
-        {
-            neighbors.Add(new Vector2Int(curr.x - 1, curr.y), Direction.W);
-        }
-        if (!mapPosition.Equals(new Vector2Int(curr.x, curr.y - 1)))
-        {
-            neighbors.Add(new Vector2Int(curr.x, curr.y - 1), Direction.S);
-        }
-        if (!mapPosition.Equals(new Vector2Int(curr.x + 1, curr.y)))
-        {
-            neighbors.Add(new Vector2Int(curr.x + 1, curr.y), Direction.E);
-        }
+        HashSet<Vector3Int> neighbors = new HashSet<Vector3Int>();
+        neighbors.Add(new Vector3Int(x, y - 1, (int)Direction.N));
+        neighbors.Add(new Vector3Int(x - 1, y, (int)Direction.W));
+        neighbors.Add(new Vector3Int(x, y + 1, (int)Direction.S));
+        neighbors.Add(new Vector3Int(x + 1, y, (int)Direction.E));
         return neighbors;
     }
 
-    public virtual void Move(int x, int y)
+    public virtual void Move(int x, int y, Direction targetFacing)
     {
         //restore old tilevalue
         // MapController.instance.map[mapPosition.x, mapPosition.y] = (int)tile;
         mapPosition.x = x;
         mapPosition.y = y;
+        changeDirection(targetFacing);                                 
         // tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
         // MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
         this.transform.position = MapMath.MapToWorld(new Vector2Int(x, y));
