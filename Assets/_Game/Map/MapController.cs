@@ -57,13 +57,15 @@ public class MapController : MonoBehaviour
             {
                 Vector2Int currCoords = MapMath.GridToMap(new Vector3Int(x, y, 0));
                 //Debug.Log("X: " + x + " Y: " + y);
+                map[currCoords.x, currCoords.y] = (int)TileWeight.OBSTRUCTED;
                 //null check
                 if (walkableTiles.GetTile(new Vector3Int(x, y, 0)))
                 {
-                    //Debug.Log(walkableTiles.GetTile(new Vector3Int(x, y, 0)).name);
-                    if(TileDatabase.instance.tileDB.ContainsKey(walkableTiles.GetTile(new Vector3Int(x, y, 0)).name))
+                    // if(TileDatabase.instance.tileDB.ContainsKey(walkableTiles.GetTile(new Vector3Int(x, y, 0)).name))
+                    if (walkableTiles.GetTile(new Vector3Int(x, y, 0)) is WeightedTile)
                     {
-                        map[currCoords.x, currCoords.y] = (int)TileDatabase.instance.tileDB[walkableTiles.GetTile(new Vector3Int(x, y, 0)).name];
+                        // map[currCoords.x, currCoords.y] = (int)TileDatabase.instance.tileDB[walkableTiles.GetTile(new Vector3Int(x, y, 0)).name];
+                        map[currCoords.x, currCoords.y] = (int)(walkableTiles.GetTile(new Vector3Int(x, y, 0)) as WeightedTile).weight;
                     }
                 }
             }
