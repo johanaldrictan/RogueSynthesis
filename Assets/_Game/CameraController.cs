@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
 {
     const float EXTRA_SPACE = 1; // world units, which mostly align with tiles
     const float PAN_SNAPPINESS = 0.1f; // percent (of )
-    const float PAN_SPEED = 3f; //  per second
+    const float PAN_SPEED = 0.05f; //  per second
 
     // if the user moves the camera, this will move in unison.
     // but an external script can change this and the camera won't snap around.
@@ -37,21 +37,20 @@ public class CameraController : MonoBehaviour
         // user input
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
-            targetZoom -= Input.GetAxis("Mouse ScrollWheel") * 60 * Time.deltaTime;
-            camera.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * 60 * Time.deltaTime;
+            targetZoom -= Input.GetAxis("Mouse ScrollWheel");
+            camera.orthographicSize -= Input.GetAxis("Mouse ScrollWheel");
             targetZoom = Math.Max(3, Math.Min(5, targetZoom));
             camera.orthographicSize = Math.Max(3, Math.Min(5, camera.orthographicSize));
         }
 
         // sorry if the lines wrap lmao
-        Vector3 direction = Vector3.zero;
-        if (Input.GetKey(KeyCode.W)) { direction += camera.orthographicSize * Vector3.up; }
-        if (Input.GetKey(KeyCode.A)) { direction += camera.orthographicSize * Vector3.left; }
-        if (Input.GetKey(KeyCode.S)) { direction += camera.orthographicSize * Vector3.down; }
-        if (Input.GetKey(KeyCode.D)) { direction += camera.orthographicSize * Vector3.right; }
-        direction *= PAN_SPEED * Time.deltaTime;
-        targetPos += direction;
-        transform.position += direction; // itll overstep bounds, but thats ok, ish.
+        Vector3 userVel = Vector3.zero;
+        if (Input.GetKey(KeyCode.W)) { userVel += camera.orthographicSize * PAN_SPEED * Vector3.up; }
+        if (Input.GetKey(KeyCode.A)) { userVel += camera.orthographicSize * PAN_SPEED * Vector3.left; }
+        if (Input.GetKey(KeyCode.S)) { userVel += camera.orthographicSize * PAN_SPEED * Vector3.down; }
+        if (Input.GetKey(KeyCode.D)) { userVel += camera.orthographicSize * PAN_SPEED * Vector3.right; }
+        targetPos += userVel;
+        transform.position += userVel; // itll overstep bounds, but thats ok, ish.
 
 
         // if desynced, move until correct.
@@ -60,7 +59,7 @@ public class CameraController : MonoBehaviour
         {
             if (Math.Abs(zoomDiff) > 0.01)
             {
-                camera.orthographicSize += (targetZoom - camera.orthographicSize) * (1-Mathf.Pow(1-ZOOM_SNAPPINESS, Time.deltaTime*60));
+                camera.orthographicSize += (targetZoom - camera.orthographicSize) * ZOOM_SNAPPINESS;
             }
             else
             {
@@ -74,7 +73,7 @@ public class CameraController : MonoBehaviour
             if (squareDist > 0.0001)
             {
                 // yes, ik this isn't the intended use of lerp.
-                transform.position = Vector3.Lerp(transform.position, targetPos, (1-Mathf.Pow(1-PAN_SNAPPINESS, Time.deltaTime*60)));
+                transform.position = Vector3.Lerp(transform.position, targetPos, PAN_SNAPPINESS);
             }
             else
             {

@@ -11,7 +11,6 @@ public class PlayerController : UnitController
 {
     new public const int TURN_WEIGHT = -1;
 
-    Direction targetFacing = Direction.N;
 
     public override void Update()
     {
@@ -29,20 +28,6 @@ public class PlayerController : UnitController
             MapUIController.instance.pathHighlighting.ClearAllTiles();
             GetNextUnit();
         }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            targetFacing = MapMath.rotateDirection(targetFacing);
-            units[activeUnit].DisplayMovementTiles(targetFacing);
-            MapUIController.instance.pathHighlighting.ClearAllTiles();
-            print(targetFacing);
-        }
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            targetFacing = MapMath.rotateDirection(MapMath.rotateDirection(MapMath.rotateDirection(targetFacing)));
-            units[activeUnit].DisplayMovementTiles(targetFacing);
-            MapUIController.instance.pathHighlighting.ClearAllTiles();
-            print(targetFacing);
-        }
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -50,15 +35,14 @@ public class PlayerController : UnitController
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, 100f);
             Vector2Int dest = MapMath.WorldToMap(hit.point);
-            Vector3Int destWFacing = new Vector3Int(dest.x, dest.y, (int)this.targetFacing);
             AlliedUnit theUnit = units[activeUnit] as AlliedUnit;
-            if ( (!theUnit.plannedPath.Contains(destWFacing)) || theUnit.plannedPath[theUnit.plannedPath.Count - 1] != destWFacing )
+            if ( (!theUnit.plannedPath.Contains(dest)) || theUnit.plannedPath[theUnit.plannedPath.Count - 1] != dest )
             {
-                theUnit.DisplayPath(dest, targetFacing);
+                theUnit.DisplayPath(dest);
             }
             else
             {
-                theUnit.Move(dest.x, dest.y, this.targetFacing);
+                theUnit.Move(dest.x, dest.y);
                 GetNextUnit();
             }
         }
@@ -82,8 +66,7 @@ public class PlayerController : UnitController
             }
             while (!units[activeUnit].gameObject.activeInHierarchy || (units[activeUnit].hasAttacked && units[activeUnit].hasMoved) );
 
-            targetFacing = units[activeUnit].direction;
-            units[activeUnit].DisplayMovementTiles(targetFacing);
+            units[activeUnit].DisplayMovementTiles();
             CameraController.instance.targetPos = units[activeUnit].transform.position;
         }
     }
