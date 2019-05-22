@@ -134,10 +134,4 @@ public abstract class UnitController : MonoBehaviour
 
 }
 
-public enum HoverState
-{
-    NONE,
-    HOVER
-}
-
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,7 +15,7 @@ public abstract class Unit : MonoBehaviour
     public bool hasMoved;
     
     public Direction direction;
-    protected Vector2Int mapPosition;
+    public Vector2Int mapPosition;
     public SpriteSet sprites;
     protected SpriteRenderer m_SpriteRenderer;
 
@@ -59,7 +60,43 @@ public abstract class Unit : MonoBehaviour
         changeDirection(direction);
     }
 
-    public Dictionary<Vector2Int, Direction> FindMoveableTiles(int[,] map)
+    public Dictionary<Vector2Int, Direction> FindMoveableTiles(int[,] map, int moveSpeed = -100)
+    {
+        if (moveSpeed == -100) { moveSpeed = this.moveSpeed; }
+        return Unit.FindMoveableTiles(map, this.mapPosition, moveSpeed);
+    }
+
+    public static Dictionary<Vector2Int, Direction> FindMoveableTilesStraight(int[,] map, Vector2Int mapPosition, int moveSpeed)
+    {
+        Dictionary<Vector2Int, Direction> shortestFrom = new Dictionary<Vector2Int, Direction>();
+        Dictionary<Vector2Int, int> movementCost = new Dictionary<Vector2Int, int>();
+        
+        Stack<Vector2Int> frontier = new Stack<Vector2Int>();
+        frontier.Push(mapPosition); // Should only contain tiles in range
+        movementCost[mapPosition] = 0; // Contains frontier and visited
+        shortestFrom[mapPosition] = Direction.NO_DIR;
+
+        while (frontier.Count != 0)
+        {
+            Vector2Int visiting = frontier.Pop();
+
+            Dictionary<Vector2Int, Direction> neighbors = GetNeighbors(visiting);
+            foreach (Vector2Int neighbor in neighbors.Keys)
+            {
+                if (shortestFrom[visiting] != Direction.NO_DIR && neighbors[neighbor] != shortestFrom[visiting]) { continue; }
+                if (!MapMath.InMapBounds(neighbor)) { continue; }
+                int nextDist = MapController.instance.map[neighbor.x, neighbor.y] + movementCost[visiting];
+                if (nextDist > moveSpeed) { continue; }
+                frontier.Push(neighbor);
+                movementCost[neighbor] = nextDist;
+                shortestFrom[neighbor] = neighbors[neighbor];
+            }
+        }
+
+        return shortestFrom;
+    }
+
+    public static Dictionary<Vector2Int, Direction> FindMoveableTiles(int[,] map, Vector2Int mapPosition, int moveSpeed)
     {
         Dictionary<Vector2Int, Direction> shortestFrom = new Dictionary<Vector2Int, Direction>();
         Dictionary<Vector2Int, int> movementCost = new Dictionary<Vector2Int, int>();
@@ -126,26 +163,13 @@ public abstract class Unit : MonoBehaviour
         return path;
     }
 
-    public Dictionary<Vector2Int, Direction> GetNeighbors(Vector2Int curr)
+    public static Dictionary<Vector2Int, Direction> GetNeighbors(Vector2Int curr)
     {
         Dictionary<Vector2Int, Direction> neighbors = new Dictionary<Vector2Int, Direction>();
-        //prevent current unit pos from being readded to neighbors
-        if (!mapPosition.Equals(new Vector2Int(curr.x, curr.y + 1)))
-        {
-            neighbors.Add(new Vector2Int(curr.x, curr.y + 1), Direction.N);
-        }
-        if (!mapPosition.Equals(new Vector2Int(curr.x - 1, curr.y)))
-        {
-            neighbors.Add(new Vector2Int(curr.x - 1, curr.y), Direction.W);
-        }
-        if (!mapPosition.Equals(new Vector2Int(curr.x, curr.y - 1)))
-        {
-            neighbors.Add(new Vector2Int(curr.x, curr.y - 1), Direction.S);
-        }
-        if (!mapPosition.Equals(new Vector2Int(curr.x + 1, curr.y)))
-        {
-            neighbors.Add(new Vector2Int(curr.x + 1, curr.y), Direction.E);
-        }
+        neighbors.Add(new Vector2Int(curr.x, curr.y + 1), Direction.N);
+        neighbors.Add(new Vector2Int(curr.x - 1, curr.y), Direction.W);
+        neighbors.Add(new Vector2Int(curr.x, curr.y - 1), Direction.S);
+        neighbors.Add(new Vector2Int(curr.x + 1, curr.y), Direction.E);
         return neighbors;
     }
 

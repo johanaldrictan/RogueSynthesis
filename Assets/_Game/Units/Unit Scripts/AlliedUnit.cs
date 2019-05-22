@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ public class AlliedUnit : Unit
         m_SpriteRenderer = this.GetComponent<SpriteRenderer>();
         m_SpriteRenderer.sortingOrder = 99;
     }
+    
     public override void DisplayMovementTiles()
     {
         //clear tilemap
@@ -23,25 +25,35 @@ public class AlliedUnit : Unit
             Dictionary<Vector2Int, Direction>.KeyCollection moveLocs = FindMoveableTiles(MapController.instance.map).Keys;
             foreach (Vector2Int loc in moveLocs)
             {
-                MapUIController.instance.tileHighlighting.SetTile(MapMath.MapToGrid(loc), MapUIController.instance.movementTile);
+                MapUIController.instance.RangeHighlight(loc);
             }
         }
     }
-    public void DisplayPath(Vector2Int dest)
+
+    public void DisplayShortestPath(Vector2Int dest)
     {
         MapUIController.instance.pathHighlighting.ClearAllTiles();
         Stack<Vector2Int> path = GetMovementPath(FindMoveableTiles(MapController.instance.map), dest);
-        plannedPath.Clear();
+        //plannedPath.Clear();
 
         if (path == null) { return; }
         
-        plannedPath.AddRange(path);
+        //plannedPath.AddRange(path);
         while(path.Count != 0)
         {
-            Vector2Int loc = path.Pop();
-            MapUIController.instance.pathHighlighting.SetTile(MapMath.MapToGrid(loc), MapUIController.instance.attackTile);
+            Vector2Int loc = path.Pop();    
+            MapUIController.instance.PathHighlight(loc);
         }
     }
+
+    public void DisplayPlannedPath()
+    {
+        foreach (Vector2Int loc in this.plannedPath)
+        {
+            MapUIController.instance.PathHighlight(loc);
+        }
+    }
+
     public override void Move(int x, int y)
     {
         MapUIController.instance.pathHighlighting.ClearAllTiles();
