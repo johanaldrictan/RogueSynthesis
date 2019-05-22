@@ -10,7 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55ca9aca01c47864c9eed2ad667f0010, type: 3}
+<<<<<<< HEAD
   m_Name: Blue
+=======
+  m_Name: New Neighbor Merged Tile
+>>>>>>> a0c4e11123ee4651ce59459e14d155c51cfd881c
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
