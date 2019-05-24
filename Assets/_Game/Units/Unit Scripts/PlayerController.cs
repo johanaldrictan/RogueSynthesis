@@ -116,6 +116,9 @@ public class PlayerController : UnitController
                     {
                         MapUIController.instance.RangeHighlight(tile);
                     }
+
+                    MapUIController.instance.ClearPathHighlight();
+                    theUnit.DisplayPlannedPath();
                 }
             }
         }
@@ -165,8 +168,8 @@ public class PlayerController : UnitController
     private void GetNextUnit()
     {
         // clean up last unit
-        MapUIController.instance.tileHighlighting.ClearAllTiles();
-        MapUIController.instance.pathHighlighting.ClearAllTiles();
+        MapUIController.instance.ClearPathHighlight();
+        MapUIController.instance.ClearRangeHighlight();
         pivots.Clear();
         distances.Clear();
         directions.Clear();

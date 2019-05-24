@@ -11,14 +11,19 @@ public class MapUIController : MonoBehaviour
     public Vector2Int cursorPosition;
 
     public Tilemap tileHighlighting;
-    public Tilemap pathHighlighting;
-    
+    public Tilemap pathHighlightingNS;
+    public Tilemap pathHighlightingEW;
+
     [SerializeField]
     private GameObject tileSelector;
     [SerializeField]
     private TileBase movementTile;
     [SerializeField]
     private TileBase attackTile;
+    [SerializeField]
+    private TileBase pathingTileNS;
+    [SerializeField]
+    private TileBase pathingTileEW;
 
     private void Awake()
     {
@@ -74,7 +79,8 @@ public class MapUIController : MonoBehaviour
 
     public void ClearPathHighlight()
     {
-        pathHighlighting.ClearAllTiles();
+        pathHighlightingNS.ClearAllTiles();
+        pathHighlightingEW.ClearAllTiles();
     }
 
     public void RangeHighlight(Vector2Int mapPos)
@@ -82,19 +88,26 @@ public class MapUIController : MonoBehaviour
         tileHighlighting.SetTile(MapMath.MapToGrid(mapPos), MapUIController.instance.movementTile);
     }
 
-    public void PathHighlight(Vector2Int mapPos)
+    public void PathHighlight(Vector2Int mapPos, bool northSouth)
     {
-        pathHighlighting.SetTile(MapMath.MapToGrid(mapPos), MapUIController.instance.attackTile);
+        if (northSouth)
+        {
+            pathHighlightingNS.SetTile(MapMath.MapToGrid(mapPos), MapUIController.instance.pathingTileNS);
+        }
+        else
+        {
+            pathHighlightingEW.SetTile(MapMath.MapToGrid(mapPos), MapUIController.instance.pathingTileEW);
+        }
     }
 
-    public void PathHighlight(Vector2Int a, Vector2Int b)
+    public void PathHighlight(Vector2Int a, Vector2Int diff)
     {
-        for (int x = Mathf.Min(a.x, b.x); x <= Mathf.Max(a.x, b.x); x++)
-        {
-            for (int y = Mathf.Min(a.y, b.y); y <= Mathf.Max(a.y, b.y); y++)
-            {
-                PathHighlight(new Vector2Int(x, y));
-            }
-        }
+        //for (int x = Mathf.Min(a.x, b.x); x <= Mathf.Max(a.x, b.x); x++)
+        //{
+        //    for (int y = Mathf.Min(a.y, b.y); y <= Mathf.Max(a.y, b.y); y++)
+        //    {
+        //        PathHighlight(new Vector2Int(x, y));
+        //    }
+        //}
     }
 }
