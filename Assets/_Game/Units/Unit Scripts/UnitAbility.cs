@@ -1,24 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
-// THESE DO NOT CURRENTLY WORK
-[CreateAssetMenu]
-public class UnitAbility : ScriptableObject
+
+// UnitAbility is an abstract class that represents an action a Unit can take
+// it contains a range for the ability and a function that executes the action, ending its turn afterwards
+public abstract class UnitAbility : MonoBehaviour
 {
-    private List<UnitAbilityListener> listeners = new List<UnitAbilityListener>();
+    // every Ability must have a range, regardless of whether or not it is used
+    public abstract int getRange();
 
-    public void Raise(Unit source, Unit target)
-    {
-        for (int i = listeners.Count-1; i >= 0; i--)
-        {
-            listeners[i].OnEventRaised(source, target);
-        }
-    }
-
-    public void RegisterListener(UnitAbilityListener listener)
-    { listeners.Add(listener); }
-    public void UnRegisterListener(UnitAbilityListener listener)
-    { listeners.Remove(listener); }
+    // execute() does the action's job, and sets the unit's hasActed to true
+    public abstract void execute(Unit source);
 }
+

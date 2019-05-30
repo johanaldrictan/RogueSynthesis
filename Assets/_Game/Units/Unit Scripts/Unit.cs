@@ -27,6 +27,9 @@ public abstract class Unit : MonoBehaviour
     // used to initialize the Unit, kept for future reference (if needed)
     [System.NonSerialized] public UnitData unitData;
 
+    // the set of abilities that this unit can use on its turn
+    [System.NonSerialized] public HashSet<UnitAbility> abilities;
+
     public virtual void Awake()
     {
         hasAttacked = false;
@@ -55,6 +58,9 @@ public abstract class Unit : MonoBehaviour
         health = unitData.health;
         attack = unitData.attack;
         moveSpeed = unitData.moveSpeed;
+
+        
+        
 
         // set the direction to itself (in order to set the sprite)
         changeDirection(direction);
