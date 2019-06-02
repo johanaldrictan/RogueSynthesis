@@ -28,7 +28,7 @@ public abstract class Unit : MonoBehaviour
     [System.NonSerialized] public UnitData unitData;
 
     // the set of abilities that this unit can use on its turn
-    [System.NonSerialized] public HashSet<UnitAbility> abilities;
+    [System.NonSerialized] public List<UnitAbility> abilities;
 
     public virtual void Awake()
     {
