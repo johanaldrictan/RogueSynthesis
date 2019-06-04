@@ -14,7 +14,8 @@ public class UnitData : ScriptableObject
     public int moveSpeed;
     public int health;
     public int attack;
-    public List<UnitAbility> Abilities;
+
+    public List<Ability> abilities;
 }
 
 public enum UnitType
@@ -23,6 +24,5 @@ public enum UnitType
     EnemyUnit,
     Civilian
 };
-
 
 

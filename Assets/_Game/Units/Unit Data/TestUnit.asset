@@ -18,4 +18,4 @@ MonoBehaviour:
   moveSpeed: 4
   health: 10
   attack: 5
-  Abilities: []
+  abilities: 00000000
