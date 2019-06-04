@@ -16,20 +16,6 @@ public class UnitData : ScriptableObject
     public int attack;
 
     public List<Ability> abilities;
-
-
-
-    private List<UnitAbility> abilityDataBase = new List<UnitAbility> { new Wait() };
-
-    public List<UnitAbility> getAbilities()
-    {
-        List<UnitAbility> result = new List<UnitAbility>();
-        for (int i = 0; i < abilities.Count; i++)
-        {
-
-        }
-        return result;
-    }
 }
 
 public enum UnitType
@@ -40,7 +26,3 @@ public enum UnitType
 };
 
 
-public enum Ability
-{
-    Wait = 0
-};

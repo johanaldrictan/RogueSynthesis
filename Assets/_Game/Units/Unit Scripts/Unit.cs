@@ -28,7 +28,7 @@ public abstract class Unit : MonoBehaviour
     [System.NonSerialized] public UnitData unitData;
 
     // the set of abilities that this unit can use on its turn
-    [System.NonSerialized] public List<UnitAbility> abilities;
+    [System.NonSerialized] List<UnitAbility> availableAbilities;
 
     public virtual void Awake()
     {
@@ -58,8 +58,14 @@ public abstract class Unit : MonoBehaviour
         health = unitData.health;
         attack = unitData.attack;
         moveSpeed = unitData.moveSpeed;
+        availableAbilities = AbilityDatabase.getAbilities(unitData.abilities);
 
-        
+        /*
+        for (int i = 0; i < availableAbilities.Count; i++)
+        {
+            Debug.Log(availableAbilities[i]);
+        }
+        */
         
 
         // set the direction to itself (in order to set the sprite)
