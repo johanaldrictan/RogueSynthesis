@@ -58,7 +58,7 @@ public abstract class Unit : MonoBehaviour
         health = unitData.health;
         attack = unitData.attack;
         moveSpeed = unitData.moveSpeed;
-        availableAbilities = AbilityDatabase.getAbilities(unitData.abilities);
+        availableAbilities = AbilityDatabase.GetAbilities(unitData.abilities);
 
         /*
         for (int i = 0; i < availableAbilities.Count; i++)
@@ -69,7 +69,7 @@ public abstract class Unit : MonoBehaviour
         
 
         // set the direction to itself (in order to set the sprite)
-        changeDirection(direction);
+        ChangeDirection(direction);
     }
 
     public Dictionary<Vector2Int, Direction> FindMoveableTiles(int[,] map, int moveSpeed = -100)
@@ -198,7 +198,7 @@ public abstract class Unit : MonoBehaviour
         hasAttacked = true; // for testing only. CHANGE LATER
     }
 
-    public void changeDirection(Direction newDirection)
+    public void ChangeDirection(Direction newDirection)
     {
         direction = newDirection;
 

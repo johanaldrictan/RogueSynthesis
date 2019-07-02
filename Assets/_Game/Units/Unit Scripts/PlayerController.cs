@@ -75,7 +75,7 @@ public class PlayerController : UnitController
                 if (diff == Vector2Int.zero) // Commit to the path
                 {
                     theUnit.Move(lastPivot.x, lastPivot.y);
-                    theUnit.changeDirection(directions.Peek());
+                    theUnit.ChangeDirection(directions.Peek());
                     GetNextUnit();
                 }
                 else // Extend Path
@@ -174,9 +174,9 @@ public class PlayerController : UnitController
         distances.Clear();
         directions.Clear();
 
-        if (isTurnOver())
+        if (IsTurnOver())
         {
-            resetUnits();
+            ResetUnits();
             endTurnEvent.Invoke(this as PlayerController);
             CameraController.instance.targetZoom = 5;
             activeUnit = -1;

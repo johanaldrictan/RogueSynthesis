@@ -14,7 +14,7 @@ public static class AbilityDatabase
 {
 
     // This method takes a List of Ability enums and returns a List of real Abilities
-    public static List<UnitAbility> getAbilities(List<Ability> abilities)
+    public static List<UnitAbility> GetAbilities(List<Ability> abilities)
     {
         List<UnitAbility> result = new List<UnitAbility>();
 
@@ -22,7 +22,7 @@ public static class AbilityDatabase
         for (int i = 0; i < abilities.Count; i++)
         {
             // remove inferior versions of the current Ability from the result
-            abilityDataBase[(int)abilities[i]].removeInferiors(result);
+            abilityDataBase[(int)abilities[i]].RemoveInferiors(result);
             // add the current Ability to the result
             result.Add(abilityDataBase[(int)abilities[i]]);
         }

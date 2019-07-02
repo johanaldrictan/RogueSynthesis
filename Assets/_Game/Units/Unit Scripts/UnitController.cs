@@ -49,7 +49,7 @@ public abstract class UnitController : MonoBehaviour
         queueUpEvent.Invoke(this);
 
         // Initialize my unitSpawnData into real units
-        loadUnits();
+        LoadUnits();
     }
 
     public virtual void Update()
@@ -59,7 +59,7 @@ public abstract class UnitController : MonoBehaviour
 
     // Parses unitSpawnData, instantiates and initializes Units
     // adds the newly instantiated Units to units list
-    public void loadUnits()
+    public void LoadUnits()
     {
         for (int i = 0; i < unitSpawnData.Count; i++)
         {
@@ -93,7 +93,7 @@ public abstract class UnitController : MonoBehaviour
     }
 
     // determine whether this controller is ready to end its turn
-    public virtual bool isTurnOver()
+    public virtual bool IsTurnOver()
     {
         for (int i = 0; i < units.Count; i++)
         {
@@ -108,7 +108,7 @@ public abstract class UnitController : MonoBehaviour
         return true;
     }
 
-    public virtual void resetUnits()
+    public virtual void ResetUnits()
     {
         for (int i = 0; i < units.Count; i++)
         {
@@ -117,19 +117,19 @@ public abstract class UnitController : MonoBehaviour
         }
     }
 
-    public bool isMyTurn()
+    public bool IsMyTurn()
     { return myTurn; }
 
-    public void startTurn()
+    public void StartTurn()
     { myTurn = true; }
 
-    public void endTurn()
+    public void EndTurn()
     { myTurn = false; }
 
-    public int getWeight()
+    public int GetWeight()
     { return TURN_WEIGHT; }
 
-    public string getName()
+    public string GetName()
     { return name; }
 
 }

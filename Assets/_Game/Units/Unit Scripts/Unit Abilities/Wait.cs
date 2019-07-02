@@ -9,18 +9,18 @@ using UnityEngine;
 
 public class Wait : UnitAbility
 {
-    public override void execute(Unit source)
+    public override void Execute(Unit source)
     {
         source.hasAttacked = true;
         return;
     }
 
-    public override int getRange()
+    public override int GetRange()
     {
         return 0;
     }
 
-    public override bool inferiorComparator(UnitAbility inQuestion)
+    public override bool InferiorComparator(UnitAbility inQuestion)
     {
         return ( inQuestion.GetType() == typeof(Wait) );
     }
