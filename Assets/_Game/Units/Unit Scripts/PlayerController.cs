@@ -176,6 +176,8 @@ public class PlayerController : UnitController
         // }
     }
 
+    public override void endTurn()
+    { endTurnEvent.Invoke(this); }
 
     private void GetNextUnit()
     {
@@ -188,7 +190,7 @@ public class PlayerController : UnitController
 
         if (IsTurnOver())
         {
-            endTurnEvent.Invoke(this as PlayerController);
+            endTurn();
             ResetUnits();
             CameraController.instance.targetZoom = 5;
         }
