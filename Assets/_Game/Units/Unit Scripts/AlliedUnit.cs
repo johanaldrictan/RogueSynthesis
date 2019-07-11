@@ -7,6 +7,13 @@ public class AlliedUnit : Unit
 {
     [System.NonSerialized] public List<Vector2Int> plannedPath;
 
+    // positionMemory is a record of where a unit was, after they moved, and before they acted
+    // if the action should be cancelled, the unit will remember where it should go back to
+    [System.NonSerialized] public Vector2Int positionMemory;
+
+    // similar to positionMemory, directionMemory functions the same, but stores the direction
+    [System.NonSerialized] public Direction directionMemory;
+
     public override void Awake()
     {
         hasAttacked = false;
@@ -69,8 +76,14 @@ public class AlliedUnit : Unit
 
     public override void Move(int x, int y)
     {
+        // remember where we started first
+        positionMemory = mapPosition;
+        directionMemory = direction;
+
+        // clear the highlighting
         MapUIController.instance.ClearPathHighlight();
         MapUIController.instance.ClearRangeHighlight();
+
         //restore old tilevalue
         MapController.instance.map[mapPosition.x, mapPosition.y] = (int)tile;
         mapPosition.x = x;
@@ -80,6 +93,30 @@ public class AlliedUnit : Unit
         this.transform.position = MapMath.MapToWorld(x,y);
         plannedPath.Clear();
         hasMoved = true;
-        hasAttacked = true; // for testing only. CHANGE LATER
+    }
+
+
+    // this function is called in the Update Loop in other modules
+    // therefore, you can treat this function as being called every frame under the correct conditions
+    // conditions: the unit's hasMoved is True, but its hasAttacked is False
+    // meant to get the unit to choose an ability or cancel its movement
+    public override void chooseAbility()
+    {
+        // 0 on the NumPad
+        if (Input.GetKeyDown(KeyCode.Keypad0))
+        {
+            availableAbilities[0].Execute(this);
+            hasAttacked = true;
+            return;
+        }
+
+        // Esc Key = cancel
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Move(positionMemory.x, positionMemory.y);
+            ChangeDirection(directionMemory);
+            hasMoved = false;
+            return;
+        }
     }
 }

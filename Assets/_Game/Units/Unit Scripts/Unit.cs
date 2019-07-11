@@ -195,7 +195,6 @@ public abstract class Unit : MonoBehaviour
         // MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
         this.transform.position = MapMath.MapToWorld(new Vector2Int(x, y));
         hasMoved = true;
-        hasAttacked = true; // for testing only. CHANGE LATER
     }
 
     public void ChangeDirection(Direction newDirection)
@@ -211,5 +210,9 @@ public abstract class Unit : MonoBehaviour
         else if (newDirection == Direction.W)
         { m_SpriteRenderer.sprite = sprites.west; }
     }
+
+
+    // a Unit needs to be able to choose its Ability after it has moved but before its turn has ended
+    public abstract void chooseAbility();
 }
 

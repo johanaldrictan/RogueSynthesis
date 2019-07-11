@@ -11,22 +11,37 @@ public class PlayerController : UnitController
 {
     new public const int TURN_WEIGHT = -1;
     bool tabbed;
+    int distanceSoFar;
+    Vector2Int lastPivot;
 
     Stack<Vector2Int> pivots = new Stack<Vector2Int>();
     Stack<int> distances = new Stack<int>();
     Stack<Direction> directions = new Stack<Direction>();
 
-    public override void Start()
-    {
-        base.Start();
-        activeUnit = -1;
-    }
+
 
     public override void Update()
     {
+        
+
         // if it's not currently this controller's turn, it's not allowed to do anything
         if (!myTurn)
+        { return; }
+
+        // No logic runs without a unit.
+        if (units.Count == 0) { return; }
+
+        // if the current unit has moved but hasn't attacked, it needs to select an ability
+        if (units[activeUnit].hasMoved && !units[activeUnit].hasAttacked)
         {
+            units[activeUnit].chooseAbility();
+            return;
+        }
+
+        // if the current unit has moved and attacked, get the next unit
+        if (units[activeUnit].hasMoved && units[activeUnit].hasAttacked)
+        {
+            GetNextUnit();
             return;
         }
 
@@ -35,16 +50,14 @@ public class PlayerController : UnitController
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             GetNextUnit();
+            return;
         }
-
-        // No logic runs without a unit.
-        if (activeUnit == -1) { return; }
 
         // ----Do Movement----
         AlliedUnit theUnit = units[activeUnit] as AlliedUnit;
         // Get old stuff
-        int distanceSoFar = distances.Peek();
-        Vector2Int lastPivot = pivots.Peek();
+        if (distances.Count != 0) { distanceSoFar = distances.Peek(); }
+        if (pivots.Count != 0) { lastPivot = pivots.Peek(); }
         // Find the tile the cursor most points to.
         if (pivots.Count == 0) { pivots.Push(theUnit.mapPosition); }
         Vector2Int diff = MapUIController.instance.cursorPosition - lastPivot;
@@ -76,7 +89,6 @@ public class PlayerController : UnitController
                 {
                     theUnit.Move(lastPivot.x, lastPivot.y);
                     theUnit.ChangeDirection(directions.Peek());
-                    GetNextUnit();
                 }
                 else // Extend Path
                 {
@@ -164,6 +176,8 @@ public class PlayerController : UnitController
         // }
     }
 
+    public override void endTurn()
+    { endTurnEvent.Invoke(this); }
 
     private void GetNextUnit()
     {
@@ -176,10 +190,9 @@ public class PlayerController : UnitController
 
         if (IsTurnOver())
         {
+            endTurn();
             ResetUnits();
-            endTurnEvent.Invoke(this as PlayerController);
             CameraController.instance.targetZoom = 5;
-            activeUnit = -1;
         }
         else if (units.Count != 0)
         {

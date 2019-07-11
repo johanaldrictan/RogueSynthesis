@@ -108,6 +108,9 @@ public abstract class UnitController : MonoBehaviour
         return true;
     }
 
+    public abstract void endTurn();
+    
+
     public virtual void ResetUnits()
     {
         for (int i = 0; i < units.Count; i++)
@@ -116,6 +119,9 @@ public abstract class UnitController : MonoBehaviour
             units[i].hasMoved = false;
         }
     }
+
+    public void setActiveUnit(int newIndex)
+    { activeUnit = newIndex; }
 
     public bool IsMyTurn()
     { return myTurn; }
