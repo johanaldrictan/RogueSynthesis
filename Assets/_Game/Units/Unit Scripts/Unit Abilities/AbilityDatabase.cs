@@ -30,10 +30,6 @@ public static class AbilityDatabase
         return result;
     }
 
-
-
-
-
     // The list of every member inherited from UnitAbility
     // When writing a new Ability, update the contents of this list manually. 
     // Make sure that the index where you find it is equal to the value in the enum below
@@ -42,6 +38,7 @@ public static class AbilityDatabase
         new Wait()
     };
 }
+
 
 // the name of the ability (in the inspector), referring to the value of the index in the abilityDataBase List.
 // When writing a new Ability, update this enum manually.

@@ -44,7 +44,7 @@ public class PlayerController : UnitController
         if (units.Count == 0) { return; }
 
         // if the current unit has moved but hasn't attacked, it needs to select an ability
-        if (units[activeUnit].hasMoved && !units[activeUnit].hasAttacked)
+        if (units[activeUnit].hasMoved && !units[activeUnit].hasActed)
         {
             abilityPanel.SetActive(true);
             units[activeUnit].chooseAbility();
@@ -52,7 +52,7 @@ public class PlayerController : UnitController
         }
         abilityPanel.SetActive(false);
         // if the current unit has moved and attacked, get the next unit
-        if (units[activeUnit].hasMoved && units[activeUnit].hasAttacked)
+        if (units[activeUnit].hasMoved && units[activeUnit].hasActed)
         {
             abilityPanel.SetActive(false);
             GetNextUnit();
@@ -73,7 +73,7 @@ public class PlayerController : UnitController
         if (distances.Count != 0) { distanceSoFar = distances.Peek(); }
         if (pivots.Count != 0) { lastPivot = pivots.Peek(); }
         // Find the tile the cursor most points to.
-        if (pivots.Count == 0) { pivots.Push(theUnit.mapPosition); }
+        if (pivots.Count == 0) { pivots.Push(theUnit.GetMapPosition()); }
         Vector2Int diff = MapUIController.instance.cursorPosition - lastPivot;
         if (Mathf.Abs(diff.y) > Mathf.Abs(diff.x))
         {
@@ -85,7 +85,7 @@ public class PlayerController : UnitController
         }
         // Check if cursor's snapped position is on a valid straight path.
         // TODO: Maybe dont run this every frame. (i mean its cheaper than whole dijkstras)
-        if (!Unit.FindMoveableTilesStraight(MapController.instance.map, lastPivot, theUnit.moveSpeed - distanceSoFar).ContainsKey(diff + lastPivot))
+        if (!Unit.FindMoveableTilesStraight(MapController.instance.map, lastPivot, theUnit.GetMoveSpeed() - distanceSoFar).ContainsKey(diff + lastPivot))
         {
             // Draw a red arrow for invalid path
         }
@@ -128,7 +128,7 @@ public class PlayerController : UnitController
                         theUnit.plannedPath.Add(lastPivot + Vector2Int.left * x);
                     }
 
-                    Debug.Assert(distanceSoFar <= theUnit.moveSpeed);
+                    Debug.Assert(distanceSoFar <= theUnit.GetMoveSpeed());
                     distances.Push(distanceSoFar);
                     pivots.Push(lastPivot + diff);
 
@@ -138,7 +138,7 @@ public class PlayerController : UnitController
                     if (diff.x < 0) { directions.Push(Direction.W); }
 
                     MapUIController.instance.tileHighlighting.ClearAllTiles();
-                    foreach (Vector2Int tile in Unit.FindMoveableTiles(MapController.instance.map, pivots.Peek(), theUnit.moveSpeed - distanceSoFar).Keys)
+                    foreach (Vector2Int tile in Unit.FindMoveableTiles(MapController.instance.map, pivots.Peek(), theUnit.GetMoveSpeed() - distanceSoFar).Keys)
                     {
                         MapUIController.instance.RangeHighlight(tile);
                     }
@@ -165,32 +165,15 @@ public class PlayerController : UnitController
                 MapUIController.instance.ClearPathHighlight();
                 theUnit.DisplayPlannedPath();
                 MapUIController.instance.tileHighlighting.ClearAllTiles();
-                foreach (Vector2Int tile in Unit.FindMoveableTiles(MapController.instance.map, pivots.Peek(), theUnit.moveSpeed - distances.Peek()).Keys)
+                foreach (Vector2Int tile in Unit.FindMoveableTiles(MapController.instance.map, pivots.Peek(), theUnit.GetMoveSpeed() - distances.Peek()).Keys)
                 {
                     MapUIController.instance.RangeHighlight(tile);
                 }
             }
         }
-
-        // if (Input.GetMouseButtonDown(0))
-        // {
-        //Start Tile highlighting code
-        // Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        // RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, 100f);
-        // Vector2Int dest = MapMath.WorldToMap(hit.point);
-        // if ( (!theUnit.plannedPath.Contains(dest)) || theUnit.plannedPath[theUnit.plannedPath.Count - 1] != dest )
-        // {
-        //     theUnit.DisplayPath(dest);
-        // }
-        // else
-        // {
-        //     theUnit.Move(dest.x, dest.y);
-        //     GetNextUnit();
-        // }
-        // }
     }
 
-    public override void endTurn()
+    public override void RelinquishPower()
     {
         endTurnEvent.Invoke(this);
         timer = 0.0f;
@@ -199,36 +182,53 @@ public class PlayerController : UnitController
 
     private void GetNextUnit()
     {
-        // clean up last unit
+        ClearSpotlight();
+
+        if (IsTurnOver())
+        {
+            Debug.Log("turn is over");
+            RelinquishPower();
+            ResetUnits();
+            CameraController.instance.targetZoom = 5;
+        }
+
+        else
+        {
+            SelectUnit(GetNextIndex());
+        }
+    }
+
+    
+    // clears highlighting for relevant tiles on the current indexed unit
+    public override void ClearSpotlight()
+    {
         MapUIController.instance.ClearPathHighlight();
         MapUIController.instance.ClearRangeHighlight();
         pivots.Clear();
         distances.Clear();
         directions.Clear();
-
-        if (IsTurnOver())
-        {
-            endTurn();
-            ResetUnits();
-            CameraController.instance.targetZoom = 5;
-        }
-        else if (units.Count != 0)
-        {
-            // go through the list, skipping units that are inactive in the heirarchy, or have both moved and attacked already
-            do
-            {
-                activeUnit = (activeUnit + 1) % units.Count;
-            }
-            while (!units[activeUnit].gameObject.activeInHierarchy || (units[activeUnit].hasAttacked && units[activeUnit].hasMoved) );
-
-            units[activeUnit].DisplayMovementTiles();
-            CameraController.instance.targetPos = units[activeUnit].transform.position;
-            pivots.Push(units[activeUnit].mapPosition);
-            distances.Push(0);
-            directions.Push(units[activeUnit].direction);
-            (units[activeUnit] as AlliedUnit).plannedPath.Clear();
-        }
     }
+
+    // highlights relevant tiles for the current index, whatever it is
+    public override void SpotlightActiveUnit()
+    {
+        units[activeUnit].DisplayMovementTiles();
+        CameraController.instance.targetPos = units[activeUnit].transform.position;
+        pivots.Push(units[activeUnit].GetMapPosition());
+        distances.Push(0);
+        directions.Push(units[activeUnit].GetDirection());
+        (units[activeUnit] as AlliedUnit).plannedPath.Clear();
+    }
+
+    // selects the unit at the given Index, highlighting the relevant tiles and setting necessary data
+    public void SelectUnit(int newIndex)
+    {
+        // set up the new unit
+        setActiveUnit(newIndex);
+        SpotlightActiveUnit();
+    }
+
+
 
     public void Wait()
     {

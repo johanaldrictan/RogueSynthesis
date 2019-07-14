@@ -87,12 +87,6 @@ public class TurnController : MonoBehaviour
         }
     }
 
-    protected void StartController(int index)
-    { controllers[index].StartTurn(); }
-
-    protected void EndController(int index)
-    { controllers[index].EndTurn(); }
-
     protected void NextTurn(UnitController controller)
     {
         // make sure that the controller asking for the next turn currently has control
@@ -101,6 +95,14 @@ public class TurnController : MonoBehaviour
             EndController(currentTurn);
             currentTurn = ((currentTurn + 1) % controllers.Count);
             StartController(currentTurn);
+            controllers[currentTurn].SpotlightActiveUnit();
         }
     }
+
+    protected void StartController(int index)
+    { controllers[index].StartTurn(); }
+
+    protected void EndController(int index)
+    { controllers[index].EndTurn(); }
+    
 }

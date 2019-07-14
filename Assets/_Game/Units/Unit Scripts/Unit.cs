@@ -6,20 +6,22 @@ using UnityEngine.Events;
 
 public abstract class Unit : MonoBehaviour
 {
-    public Sprite profile;
-    public string unitName;
-    public int health;
-    public int attack;
-    public int moveSpeed;
+    // Unit's core RPG stats
+    [SerializeField] protected string unitName;
+    [SerializeField] protected int health;
+    [SerializeField] protected int attack;
+    [SerializeField] protected int moveSpeed;
 
-    public bool hasAttacked;
-    public bool hasMoved;
-    
-    public Direction direction;
-    public Vector2Int mapPosition;
+    // booleans
+    [SerializeField] public bool hasActed;
+    [SerializeField] public bool hasMoved;
+
+    // positional data
+    [SerializeField] protected Direction direction;
+    [SerializeField] protected Vector2Int mapPosition;
+
     public SpriteSet sprites;
     protected SpriteRenderer m_SpriteRenderer;
-
 
     protected TileWeight tile;
 
@@ -31,9 +33,12 @@ public abstract class Unit : MonoBehaviour
     // the set of abilities that this unit can use on its turn
     [System.NonSerialized] public List<UnitAbility> availableAbilities;
 
+
+    
+
     public virtual void Awake()
     {
-        hasAttacked = false;
+        hasActed = false;
         hasMoved = false;
         m_SpriteRenderer = this.GetComponent<SpriteRenderer>();
         m_SpriteRenderer.sortingOrder = 99;
@@ -59,6 +64,8 @@ public abstract class Unit : MonoBehaviour
         health = unitData.health;
         attack = unitData.attack;
         moveSpeed = unitData.moveSpeed;
+
+        // convert the unitData's list of ability enums into real abilities, and store them
         availableAbilities = AbilityDatabase.GetAbilities(unitData.abilities);
 
         /*
@@ -67,11 +74,15 @@ public abstract class Unit : MonoBehaviour
             Debug.Log(availableAbilities[i]);
         }
         */
-        
 
         // set the direction to itself (in order to set the sprite)
         ChangeDirection(direction);
     }
+
+
+    // a Unit needs to be able to choose its Ability after it has moved but before its turn has ended
+    public abstract void chooseAbility();
+
 
     public Dictionary<Vector2Int, Direction> FindMoveableTiles(int[,] map, int moveSpeed = -100)
     {
@@ -213,7 +224,43 @@ public abstract class Unit : MonoBehaviour
     }
 
 
-    // a Unit needs to be able to choose its Ability after it has moved but before its turn has ended
-    public abstract void chooseAbility();
+    
+
+
+    // HELPER FUNCTIONS
+
+    public string GetName()
+    { return unitName; }
+
+    public void SetName(string newName)
+    { unitName = newName; }
+
+    public int GetHealth()
+    { return health; }
+
+    public void ChangeHealth(int amount)
+    { health += amount; }
+
+    public int GetAttack()
+    { return attack; }
+
+    public void ChangeAttack(int amount)
+    { attack += amount; }
+
+    public int GetMoveSpeed()
+    { return moveSpeed; }
+
+    public void ChangeMoveSpeed(int amount)
+    { moveSpeed += amount; }
+
+    public Direction GetDirection()
+    { return direction; }
+
+    public void SetDirection(Direction newDirection)
+    { direction = newDirection; }
+
+    public Vector2Int GetMapPosition()
+    { return mapPosition; }
+
 }
 

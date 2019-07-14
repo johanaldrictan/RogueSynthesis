@@ -11,19 +11,20 @@ public class UnitControllerUnityEvent : UnityEvent<UnitController> { }
 public abstract class UnitController : MonoBehaviour
 {
 
-    public bool myTurn;
+    protected bool myTurn;
 
     // the weight used by the turn system to determine order of the controllers
     // lower is faster
-    public const int TURN_WEIGHT = 0;
+    [System.NonSerialized] protected const int TURN_WEIGHT = 0;
 
-    public int activeUnit;
+    // the index of the currently selected Unit in the List
+    [SerializeField] protected int activeUnit;
 
     // storage of real units
     [System.NonSerialized] public List<Unit> units;
 
     // Serialized (Editable in Unity's Inspector) List of data used for initially spawning units
-    [SerializeField] public List<UnitDataContainer> unitSpawnData;
+    [SerializeField] protected List<UnitDataContainer> unitSpawnData;
 
 
     // Event for queueing up to be added to a TurnController
@@ -59,7 +60,7 @@ public abstract class UnitController : MonoBehaviour
 
     // Parses unitSpawnData, instantiates and initializes Units
     // adds the newly instantiated Units to units list
-    public void LoadUnits()
+    protected void LoadUnits()
     {
         for (int i = 0; i < unitSpawnData.Count; i++)
         {
@@ -82,7 +83,7 @@ public abstract class UnitController : MonoBehaviour
 
             // give this new Unit the raw data for creating it, set its direction
             newUnitComponent.unitData = unitSpawnData[i].data;
-            newUnitComponent.direction = unitSpawnData[i].spawnDirection;
+            newUnitComponent.SetDirection(unitSpawnData[i].spawnDirection);
 
             // i've given you the data you need to make yourself. now make yourself, please
             newUnitComponent.loadData();
@@ -98,7 +99,7 @@ public abstract class UnitController : MonoBehaviour
         for (int i = 0; i < units.Count; i++)
         {
             // if a unit that hasn't moved or attacked exists
-            if (!units[i].hasAttacked || !units[i].hasMoved)
+            if (!units[i].hasActed || !units[i].hasMoved)
             {
                 // Debug.Log("Turn not over");
                 return false;
@@ -108,17 +109,52 @@ public abstract class UnitController : MonoBehaviour
         return true;
     }
 
-    public abstract void endTurn();
-    
+    // the function for a UnitController to allow a TurnController to switch to the next phase
+    public abstract void RelinquishPower();
 
     public virtual void ResetUnits()
     {
         for (int i = 0; i < units.Count; i++)
         {
-            units[i].hasAttacked = false;
+            units[i].hasActed = false;
             units[i].hasMoved = false;
         }
     }
+
+    // find the next Index in the list of Units that is available
+    public int GetNextIndex()
+    {
+        int newActiveUnit = activeUnit;
+
+        if (units.Count != 0)
+        {
+            // go through the list, skipping units that are inactive in the heirarchy, or have both moved and attacked already
+            do
+            {
+                newActiveUnit = (newActiveUnit + 1) % units.Count;
+            }
+            while (!units[newActiveUnit].gameObject.activeInHierarchy || (units[newActiveUnit].hasActed && units[newActiveUnit].hasMoved));
+        }
+
+        return newActiveUnit;
+    }
+
+    // clears highlighting for relevant tiles on the current indexed unit
+    public virtual void ClearSpotlight()
+    {
+        MapUIController.instance.ClearPathHighlight();
+        MapUIController.instance.ClearRangeHighlight();
+    }
+
+    // highlights relevant tiles for the current index, whatever it is
+    public virtual void SpotlightActiveUnit()
+    {
+        units[activeUnit].DisplayMovementTiles();
+        CameraController.instance.targetPos = units[activeUnit].transform.position;
+    }
+
+    public int getActiveUnit()
+    { return activeUnit; }
 
     public void setActiveUnit(int newIndex)
     { activeUnit = newIndex; }

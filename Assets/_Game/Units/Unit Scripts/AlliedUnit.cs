@@ -9,25 +9,26 @@ public class AlliedUnit : Unit
 
     // positionMemory is a record of where a unit was, after they moved, and before they acted
     // if the action should be cancelled, the unit will remember where it should go back to
-    [System.NonSerialized] public Vector2Int positionMemory;
+    [SerializeField] public Vector2Int positionMemory;
 
     // similar to positionMemory, directionMemory functions the same, but stores the direction
-    [System.NonSerialized] public Direction directionMemory;
+    [SerializeField] public Direction directionMemory;
 
     public override void Awake()
     {
-        hasAttacked = false;
+        hasActed = false;
         hasMoved = false;
         plannedPath = new List<Vector2Int>();
         m_SpriteRenderer = this.GetComponent<SpriteRenderer>();
         m_SpriteRenderer.sortingOrder = 99;
     }
     
+    // this function highlights tiles that this unit instance can move to
     public override void DisplayMovementTiles()
     {
         //clear tilemap
         MapUIController.instance.tileHighlighting.ClearAllTiles();
-        if (!hasAttacked)
+        if (!hasMoved)
         {
             Dictionary<Vector2Int, Direction>.KeyCollection moveLocs = FindMoveableTiles(MapController.instance.map).Keys;
             foreach (Vector2Int loc in moveLocs)
@@ -36,22 +37,7 @@ public class AlliedUnit : Unit
             }
         }
     }
-
-    //public void DisplayShortestPath(Vector2Int dest)
-    //{
-    //    MapUIController.instance.ClearPathHighlight();
-    //    Stack<Vector2Int> path = GetMovementPath(FindMoveableTiles(MapController.instance.map), dest);
-    //    //plannedPath.Clear();
-
-    //    if (path == null) { return; }
-        
-    //    //plannedPath.AddRange(path);
-    //    while(path.Count != 0)
-    //    {
-    //        Vector2Int loc = path.Pop();    
-    //        MapUIController.instance.PathHighlight(loc);
-    //    }
-    //}
+    
 
     public void DisplayPlannedPath()
     {
@@ -98,15 +84,17 @@ public class AlliedUnit : Unit
 
     // this function is called in the Update Loop in other modules
     // therefore, you can treat this function as being called every frame under the correct conditions
-    // conditions: the unit's hasMoved is True, but its hasAttacked is False
+    // conditions: the unit's hasMoved is True, but its hasActed is False
     // meant to get the unit to choose an ability or cancel its movement
+    // THIS CURRENT SOLUTION IS TEMPORARY
     public override void chooseAbility()
     {
         // 0 on the NumPad
         if (Input.GetKeyDown(KeyCode.Keypad0) || PlayerController.wait == true)
         {
+            
             availableAbilities[0].Execute(this);
-            hasAttacked = true;
+            hasActed = true;
             PlayerController.wait = false;
             return;
         }
@@ -121,4 +109,25 @@ public class AlliedUnit : Unit
             return;
         }
     }
+
 }
+
+
+
+
+
+//public void DisplayShortestPath(Vector2Int dest)
+//{
+//    MapUIController.instance.ClearPathHighlight();
+//    Stack<Vector2Int> path = GetMovementPath(FindMoveableTiles(MapController.instance.map), dest);
+//    //plannedPath.Clear();
+
+//    if (path == null) { return; }
+
+//    //plannedPath.AddRange(path);
+//    while(path.Count != 0)
+//    {
+//        Vector2Int loc = path.Pop();    
+//        MapUIController.instance.PathHighlight(loc);
+//    }
+//}

@@ -10,4 +10,5 @@ public class SpriteSet : ScriptableObject
     public Sprite south;
     public Sprite east;
     public Sprite west;
+    public Sprite portrait;
 }
