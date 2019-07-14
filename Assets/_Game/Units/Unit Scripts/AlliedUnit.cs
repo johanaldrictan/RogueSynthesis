@@ -103,19 +103,21 @@ public class AlliedUnit : Unit
     public override void chooseAbility()
     {
         // 0 on the NumPad
-        if (Input.GetKeyDown(KeyCode.Keypad0))
+        if (Input.GetKeyDown(KeyCode.Keypad0) || PlayerController.wait == true)
         {
             availableAbilities[0].Execute(this);
             hasAttacked = true;
+            PlayerController.wait = false;
             return;
         }
 
         // Esc Key = cancel
-        else if (Input.GetKeyDown(KeyCode.Escape))
+        else if (Input.GetKeyDown(KeyCode.Escape) || PlayerController.cancel == true)
         {
             Move(positionMemory.x, positionMemory.y);
             ChangeDirection(directionMemory);
             hasMoved = false;
+            PlayerController.cancel = false;
             return;
         }
     }

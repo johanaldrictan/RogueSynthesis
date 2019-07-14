@@ -6,12 +6,18 @@ public class UI_Operator : MonoBehaviour
 {
 
     public GameObject rightClickPanel;
+    public GameObject self;
 
+    public bool mouseOnObject;
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnMouseEnter()
     {
-        
+        mouseOnObject = true;
+    }
+
+    private void OnMouseExit()
+    {
+        mouseOnObject = false;
     }
 
     // Update is called once per frame
@@ -23,6 +29,11 @@ public class UI_Operator : MonoBehaviour
             rightClickPanel.SetActive(true);
             //var mouseCoord = Vector3(Input.mousePosition);
             Debug.Log(Input.mousePosition);
+        }
+
+        if (this.name == "Unit-stats Pop-up Window" && Input.GetMouseButtonDown(0) && !mouseOnObject)
+        {
+            self.SetActive(false);
         }
     }
 }
