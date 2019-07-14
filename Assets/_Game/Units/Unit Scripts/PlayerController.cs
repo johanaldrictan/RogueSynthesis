@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 // PlayerController is an object that inherits from the UnitController (see UnitController.cs)
 // It is a variety that is user-controlled
@@ -14,15 +15,26 @@ public class PlayerController : UnitController
     int distanceSoFar;
     Vector2Int lastPivot;
 
+    public static bool wait;
+    public static bool cancel;
+
     Stack<Vector2Int> pivots = new Stack<Vector2Int>();
     Stack<int> distances = new Stack<int>();
     Stack<Direction> directions = new Stack<Direction>();
 
+    public GameObject abilityPanel;
+    public TextMeshProUGUI phaseText;
 
+    private float timer;
 
     public override void Update()
     {
-        
+        timer += Time.deltaTime;
+
+        if (timer >= 2)
+        {
+            phaseText.text = "";
+        }
 
         // if it's not currently this controller's turn, it's not allowed to do anything
         if (!myTurn)
@@ -34,13 +46,15 @@ public class PlayerController : UnitController
         // if the current unit has moved but hasn't attacked, it needs to select an ability
         if (units[activeUnit].hasMoved && !units[activeUnit].hasAttacked)
         {
+            abilityPanel.SetActive(true);
             units[activeUnit].chooseAbility();
             return;
         }
-
+        abilityPanel.SetActive(false);
         // if the current unit has moved and attacked, get the next unit
         if (units[activeUnit].hasMoved && units[activeUnit].hasAttacked)
         {
+            abilityPanel.SetActive(false);
             GetNextUnit();
             return;
         }
@@ -177,7 +191,11 @@ public class PlayerController : UnitController
     }
 
     public override void endTurn()
-    { endTurnEvent.Invoke(this); }
+    {
+        endTurnEvent.Invoke(this);
+        timer = 0.0f;
+        phaseText.text = this.name + " Phase";
+    }
 
     private void GetNextUnit()
     {
@@ -210,6 +228,16 @@ public class PlayerController : UnitController
             directions.Push(units[activeUnit].direction);
             (units[activeUnit] as AlliedUnit).plannedPath.Clear();
         }
+    }
+
+    public void Wait()
+    {
+        wait = true;
+    }
+
+    public void Cancel()
+    {
+        cancel = true;
     }
 
 }

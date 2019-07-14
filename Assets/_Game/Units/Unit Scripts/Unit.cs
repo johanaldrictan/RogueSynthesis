@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 public abstract class Unit : MonoBehaviour
 {
+    public Sprite profile;
     public string unitName;
     public int health;
     public int attack;
