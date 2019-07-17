@@ -9,7 +9,6 @@ public abstract class Unit : MonoBehaviour
     // Unit's core RPG stats
     [SerializeField] protected string unitName;
     [SerializeField] protected int health;
-    [SerializeField] protected int attack;
     [SerializeField] protected int moveSpeed;
 
     // booleans

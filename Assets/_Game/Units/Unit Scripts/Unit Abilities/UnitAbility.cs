@@ -23,4 +23,3 @@ public abstract class UnitAbility
     public void RemoveInferiors(List<UnitAbility> toFilter)
     { toFilter.RemoveAll(InferiorComparator); }
 }
-

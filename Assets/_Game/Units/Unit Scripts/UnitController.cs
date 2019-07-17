@@ -26,6 +26,8 @@ public abstract class UnitController : MonoBehaviour
     // Serialized (Editable in Unity's Inspector) List of data used for initially spawning units
     [SerializeField] protected List<UnitDataContainer> unitSpawnData;
 
+    // reference to the TurnController's positional data storage
+    [System.NonSerialized] public UnitPositionStorage positionalData;
 
     // Event for queueing up to be added to a TurnController
     public static UnitControllerUnityEvent queueUpEvent = new UnitControllerUnityEvent();
