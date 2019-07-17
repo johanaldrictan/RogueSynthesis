@@ -66,14 +66,23 @@ public class AlliedUnit : Unit
         positionMemory = mapPosition;
         directionMemory = direction;
 
+        // remove old coordinates from globalPositionalData
+        globalPositionalData.RemoveUnit(mapPosition);
+
         // clear the highlighting
         MapUIController.instance.ClearPathHighlight();
         MapUIController.instance.ClearRangeHighlight();
 
         //restore old tilevalue
         MapController.instance.map[mapPosition.x, mapPosition.y] = (int)tile;
+
+        // set new coordinates
         mapPosition.x = x;
         mapPosition.y = y;
+
+        // update the globalPositionalData
+        globalPositionalData.AddUnit(mapPosition, this);
+
         tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
         MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
         this.transform.position = MapMath.MapToWorld(x,y);
@@ -92,10 +101,17 @@ public class AlliedUnit : Unit
         // 0 on the NumPad
         if (Input.GetKeyDown(KeyCode.Keypad0) || PlayerController.wait == true)
         {
-            
             availableAbilities[0].Execute(this);
             hasActed = true;
             PlayerController.wait = false;
+            return;
+        }
+
+        // 1 on the NumPad
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            availableAbilities[1].Execute(this);
+            hasActed = true;
             return;
         }
 

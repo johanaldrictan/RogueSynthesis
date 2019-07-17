@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// This is a database that stores all possible types of UnitAbility objects
+// This is a database that stores all possible types of activatable Abilities
 
 // If you want to create a new Ability:
 // 1. Implement that ability by making an inherited member of the UnitAbility Abstract class
-// 2. Make this script known of that new ability's existence by manually filling out the spaces where necessary. follow the comments.
+// 2. Make this script known of that new ability's existence by manually filling out the spaces where necessary. The areas are marked by "**********************"
 // 3. Make sure that the steps from #2 are all done in the same order
 
 public static class AbilityDatabase
@@ -33,9 +33,10 @@ public static class AbilityDatabase
     // The list of every member inherited from UnitAbility
     // When writing a new Ability, update the contents of this list manually. 
     // Make sure that the index where you find it is equal to the value in the enum below
-    private static List<UnitAbility> abilityDataBase = new List<UnitAbility>
+    private static List<UnitAbility> abilityDataBase = new List<UnitAbility> // ***************************
     {
-        new Wait()
+        new Wait(),
+        new Cleave()
     };
 }
 
@@ -43,7 +44,8 @@ public static class AbilityDatabase
 // the name of the ability (in the inspector), referring to the value of the index in the abilityDataBase List.
 // When writing a new Ability, update this enum manually.
 // Make sure that its value is the correct index in the list
-public enum Ability
+public enum Ability // ****************
 {
-    Wait = 0
+    Wait = 0,
+    Cleave = 1
 };

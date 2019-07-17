@@ -186,7 +186,6 @@ public class PlayerController : UnitController
 
         if (IsTurnOver())
         {
-            Debug.Log("turn is over");
             RelinquishPower();
             ResetUnits();
             CameraController.instance.targetZoom = 5;

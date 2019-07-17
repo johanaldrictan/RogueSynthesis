@@ -13,7 +13,7 @@ public class TurnController : MonoBehaviour
     private List<UnitController> controllers;
 
     // storage of Unit Positional Data
-    private UnitPositionStorage positionalData;
+    private UnitPositionStorage globalPositionalData;
 
     private int currentTurn;
 
@@ -34,7 +34,7 @@ public class TurnController : MonoBehaviour
 
         currentTurn = 0;
         controllers = new List<UnitController>();
-        positionalData = new UnitPositionStorage();
+        globalPositionalData = new UnitPositionStorage();
     }
 
     private void OnEnable()
@@ -54,7 +54,7 @@ public class TurnController : MonoBehaviour
     // takes a UnitController and adds it to the turn system in the correct order
     protected void EnqueueController(UnitController controller)
     {
-        controller.positionalData = this.positionalData;
+        controller.globalPositionalData = this.globalPositionalData;
 
         // if empty storage
         if (controllers.Count == 0)

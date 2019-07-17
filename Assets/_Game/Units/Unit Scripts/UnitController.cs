@@ -27,7 +27,7 @@ public abstract class UnitController : MonoBehaviour
     [SerializeField] protected List<UnitDataContainer> unitSpawnData;
 
     // reference to the TurnController's positional data storage
-    [System.NonSerialized] public UnitPositionStorage positionalData;
+    [System.NonSerialized] public UnitPositionStorage globalPositionalData;
 
     // Event for queueing up to be added to a TurnController
     public static UnitControllerUnityEvent queueUpEvent = new UnitControllerUnityEvent();
@@ -76,16 +76,28 @@ public abstract class UnitController : MonoBehaviour
 
             // add the correct inherited member of Unit to the object
             Unit newUnitComponent = null;
-            if (unitSpawnData[i].data.unitType == UnitType.AlliedUnit)
-            { newUnitComponent = newUnit.AddComponent<AlliedUnit>() as AlliedUnit; }
-            else if (unitSpawnData[i].data.unitType == UnitType.EnemyUnit)
-            { /* newUnitComponent = newUnit.AddComponent<EnemyUnit>() as EnemyUnit; */ }
-            else if (unitSpawnData[i].data.unitType == UnitType.Civilian)
-            { /* newUnitComponent = newUnit.AddComponent<Civilian>() as Civilian; */ }
+            switch (unitSpawnData[i].data.unitType)
+            {
+                case UnitType.AlliedUnit:
+                    newUnitComponent = newUnit.AddComponent<AlliedUnit>() as AlliedUnit;
+                    break;
+
+                case UnitType.EnemyUnit:
+                    break;
+
+                case UnitType.Civilian:
+                    break;
+
+                default:
+                    newUnitComponent = newUnit.AddComponent<AlliedUnit>() as AlliedUnit;
+                    break;
+            }
 
             // give this new Unit the raw data for creating it, set its direction
             newUnitComponent.unitData = unitSpawnData[i].data;
             newUnitComponent.SetDirection(unitSpawnData[i].spawnDirection);
+            newUnitComponent.globalPositionalData = this.globalPositionalData;
+            newUnitComponent.globalPositionalData.AddUnit(unitSpawnData[i].spawnPosition, newUnitComponent);
 
             // i've given you the data you need to make yourself. now make yourself, please
             newUnitComponent.loadData();

@@ -638,13 +638,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeUnit: 0
   unitSpawnData:
-  - data: {fileID: 11400000, guid: 87fc11b9e22649f4490c8d684c736026, type: 2}
+  - data: {fileID: 11400000, guid: 22c2139a50d01e24fa0148c0f24b93a5, type: 2}
     spawnPosition: {x: 12, y: 13}
     spawnDirection: 3
-  - data: {fileID: 11400000, guid: 87fc11b9e22649f4490c8d684c736026, type: 2}
+  - data: {fileID: 11400000, guid: 22c2139a50d01e24fa0148c0f24b93a5, type: 2}
     spawnPosition: {x: 10, y: 10}
     spawnDirection: 1
-  - data: {fileID: 11400000, guid: 87fc11b9e22649f4490c8d684c736026, type: 2}
+  - data: {fileID: 11400000, guid: 22c2139a50d01e24fa0148c0f24b93a5, type: 2}
     spawnPosition: {x: 14, y: 12}
     spawnDirection: 2
   abilityPanel: {fileID: 1549085493}

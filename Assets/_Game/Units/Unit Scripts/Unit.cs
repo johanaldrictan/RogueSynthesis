@@ -18,6 +18,7 @@ public abstract class Unit : MonoBehaviour
     // positional data
     [SerializeField] protected Direction direction;
     [SerializeField] protected Vector2Int mapPosition;
+    [System.NonSerialized] public UnitPositionStorage globalPositionalData;
 
     public SpriteSet sprites;
     protected SpriteRenderer m_SpriteRenderer;
@@ -61,7 +62,6 @@ public abstract class Unit : MonoBehaviour
         unitName = unitData.unitName;
         sprites = unitData.sprites;
         health = unitData.health;
-        attack = unitData.attack;
         moveSpeed = unitData.moveSpeed;
 
         // convert the unitData's list of ability enums into real abilities, and store them
@@ -198,10 +198,19 @@ public abstract class Unit : MonoBehaviour
 
     public virtual void Move(int x, int y)
     {
-        //restore old tilevalue
+        // remove old coordinates from globalPositionalData
+        globalPositionalData.RemoveUnit(mapPosition);
+
+        // restore old tilevalue
         // MapController.instance.map[mapPosition.x, mapPosition.y] = (int)tile;
+
+        // set new coordinates
         mapPosition.x = x;
         mapPosition.y = y;
+
+        // update the globalPositionalData
+        globalPositionalData.AddUnit(mapPosition, this);
+
         // tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
         // MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
         this.transform.position = MapMath.MapToWorld(new Vector2Int(x, y));
@@ -239,12 +248,6 @@ public abstract class Unit : MonoBehaviour
 
     public void ChangeHealth(int amount)
     { health += amount; }
-
-    public int GetAttack()
-    { return attack; }
-
-    public void ChangeAttack(int amount)
-    { attack += amount; }
 
     public int GetMoveSpeed()
     { return moveSpeed; }

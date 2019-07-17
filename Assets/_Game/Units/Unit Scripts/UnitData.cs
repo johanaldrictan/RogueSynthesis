@@ -13,7 +13,6 @@ public class UnitData : ScriptableObject
     public SpriteSet sprites;
     public int moveSpeed;
     public int health;
-    public int attack;
 
     public List<Ability> abilities;
 }

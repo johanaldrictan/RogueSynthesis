@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,12 +11,12 @@ using UnityEngine;
 public class UnitPositionStorage
 {
     // the storage of units. 
-    private Dictionary<Tuple<int, int>, Unit> storage;
+    private Dictionary<Vector2Int, Unit> storage;
 
     // constructor. simply creates the storage Dictionary
     public UnitPositionStorage()
     {
-        storage = new Dictionary<Tuple<int, int>, Unit>();
+        storage = new Dictionary<Vector2Int, Unit>();
     }
 
     // wipes the storage
@@ -27,31 +26,27 @@ public class UnitPositionStorage
     }
 
     // adds a given unit, and its positional data, into storage
-    public void StoreUnit(int x, int y, Unit theUnit)
+    public void AddUnit(Vector2Int location, Unit theUnit)
     {
-        Tuple<int, int> convertedTuple = new Tuple<int, int>(x, y);
-
-        if (storage.ContainsKey(convertedTuple))
+        if (storage.ContainsKey(location))
         {
             Debug.Log("UnitPositionSorage: This isn't supposed to fire. Something is trying to be stored in a location that is already occupied.");
             return;
         }
         else
         {
-            storage.Add(convertedTuple, theUnit);
+            storage.Add(location, theUnit);
             return;
         }
     }
 
     // removes the given key from storage, if anything exists at that key
     // returns true if something was actually erased
-    public bool RemoveUnit(int x, int y)
+    public bool RemoveUnit(Vector2Int location)
     {
-        Tuple<int, int> convertedTuple = new Tuple<int, int>(x, y);
-
-        if (storage.ContainsKey(convertedTuple))
+        if (storage.ContainsKey(location))
         {
-            storage.Remove(convertedTuple);
+            storage.Remove(location);
             return true;
         }
         else
@@ -63,13 +58,11 @@ public class UnitPositionStorage
     // takes a coordinate as an argument
     // if a unit exists at that coordinate, returns that unit
     // otherwise returns null
-    public Unit SearchLocation(int x, int y)
+    public Unit SearchLocation(Vector2Int location)
     {
-        Tuple<int, int> convertedTuple = new Tuple<int, int>(x, y);
-
-        if (storage.ContainsKey(convertedTuple))
+        if (storage.ContainsKey(location))
         {
-            return storage[convertedTuple];
+            return storage[location];
         }
         else
         {
@@ -81,7 +74,7 @@ public class UnitPositionStorage
     public void DebugPrint()
     {
         // iterate through each key-value pair in storage
-        foreach (KeyValuePair <Tuple<int, int>, Unit> entry in storage)
+        foreach (KeyValuePair <Vector2Int, Unit > entry in storage)
         {
             Debug.Log("UnitPositionStorage: " + entry.Key + " --> " + entry.Value);
         }
