@@ -7004,12 +7004,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerSentences:
   - Player Phase
-  - Player Phase Text 1
-  - Player Phase Text 2
+  - Player Phase
+  - Player Phase
   EnemySentences:
   - Enemy Phase
-  - Enemy Phase Text 1
-  - Enemy Phase Text 2
+  - Enemy Phase
+  - Enemy Phase
 --- !u!1 &1764177633
 GameObject:
   m_ObjectHideFlags: 0
