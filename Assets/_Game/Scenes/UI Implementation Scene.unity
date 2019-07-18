@@ -649,6 +649,7 @@ MonoBehaviour:
     spawnDirection: 2
   abilityPanel: {fileID: 1549085493}
   phaseText: {fileID: 1757592497}
+  flavorText: {fileID: 1757592495}
 --- !u!4 &526139874
 Transform:
   m_ObjectHideFlags: 0
@@ -6659,6 +6660,7 @@ MonoBehaviour:
     spawnDirection: 2
   abilityPanel: {fileID: 1549085493}
   phaseText: {fileID: 1757592497}
+  flavorText: {fileID: 1757592495}
 --- !u!4 &1582521908
 Transform:
   m_ObjectHideFlags: 0
@@ -6841,6 +6843,7 @@ GameObject:
   - component: {fileID: 1757592496}
   - component: {fileID: 1757592498}
   - component: {fileID: 1757592497}
+  - component: {fileID: 1757592499}
   m_Layer: 5
   m_Name: Phase Indicator
   m_TagString: Untagged
@@ -6864,7 +6867,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 17, y: 146}
+  m_AnchoredPosition: {x: 17, y: 15}
   m_SizeDelta: {x: 233.9, y: 55.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1757592497
@@ -6987,6 +6990,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1757592495}
   m_CullTransparentMesh: 0
+--- !u!114 &1757592499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757592495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae5e325607d743748de09e7002ae53f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerSentences:
+  - Player Phase
+  - Player Phase Text 1
+  - Player Phase Text 2
+  EnemySentences:
+  - Enemy Phase
+  - Enemy Phase Text 1
+  - Enemy Phase Text 2
 --- !u!1 &1764177633
 GameObject:
   m_ObjectHideFlags: 0

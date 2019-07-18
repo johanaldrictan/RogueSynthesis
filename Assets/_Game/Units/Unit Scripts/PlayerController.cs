@@ -24,6 +24,8 @@ public class PlayerController : UnitController
 
     public GameObject abilityPanel;
     public TextMeshProUGUI phaseText;
+    public GameObject flavorText;
+    private int randomIndex;
 
     private float timer;
 
@@ -177,7 +179,17 @@ public class PlayerController : UnitController
     {
         endTurnEvent.Invoke(this);
         timer = 0.0f;
-        phaseText.text = this.name + " Phase";
+        if (this.name == "Player")
+        {
+            randomIndex = Random.Range(0, flavorText.GetComponent<flavorText>().EnemySentences.Length);
+            phaseText.text = flavorText.GetComponent<flavorText>().EnemySentences[randomIndex];
+
+        } else if (this.name == "Enemy")
+        {
+            randomIndex = Random.Range(0, flavorText.GetComponent<flavorText>().PlayerSentences.Length);
+            phaseText.text = flavorText.GetComponent<flavorText>().PlayerSentences[randomIndex];
+        }
+        //phaseText.text = this.name + " Phase";
     }
 
     private void GetNextUnit()
