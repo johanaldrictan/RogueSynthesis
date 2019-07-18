@@ -8,10 +8,10 @@ using UnityEngine;
 
 public abstract class Attack : UnitAbility
 {
-    // LineAttacks deal damage, and need a variable for how much damage it does
+    // Attacks deal damage, and need a variable for how much damage it does
     public abstract int GetDamage();
 
-    // LineAttacks have an area of effect, and need a way to get that effect for multiple purposes like applying damage or visual effects
+    // Attacks have an area of effect, and need a way to get that effect for multiple purposes like applying damage or visual effects
     public abstract List<Vector2Int> GetAreaOfEffect(Unit source);
 
     public abstract void DealEffects(Unit target);
@@ -24,7 +24,7 @@ public abstract class Attack : UnitAbility
         foreach (Vector2Int tile in area)
         {
             Unit searchResult = source.globalPositionalData.SearchLocation(tile);
-            if ( searchResult != null)
+            if (searchResult != null)
             {
                 DealEffects(searchResult);
             }
