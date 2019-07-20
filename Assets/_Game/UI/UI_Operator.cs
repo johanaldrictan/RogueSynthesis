@@ -7,6 +7,7 @@ public class UI_Operator : MonoBehaviour
 
     public GameObject rightClickPanel;
     public GameObject self;
+    public GameObject unitPanel;
 
     public bool mouseOnObject;
 
@@ -23,6 +24,8 @@ public class UI_Operator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(GetComponent<Unit>().GetName()) ;
+        //Debug.Log(GetComponent<UnitController>().getActiveUnit());
         Vector3 mouse = Input.mousePosition;
         if (Input.GetMouseButtonDown(1))
         {

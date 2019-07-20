@@ -25,6 +25,9 @@ public class PlayerController : UnitController
     public GameObject abilityPanel;
     public TextMeshProUGUI phaseText;
     public GameObject flavorText;
+    public TextMeshProUGUI nameText;
+    public TextMeshProUGUI healthText;
+    public TextMeshProUGUI statText;
     private int randomIndex;
 
     private float timer;
@@ -32,7 +35,7 @@ public class PlayerController : UnitController
     public override void Update()
     {
         timer += Time.deltaTime;
-
+        Debug.Log(timer);
         if (timer >= 2)
         {
             phaseText.text = "";
@@ -236,7 +239,13 @@ public class PlayerController : UnitController
     {
         // set up the new unit
         setActiveUnit(newIndex);
+        Debug.Log(newIndex);
+        Debug.Log(units[activeUnit].GetName());
+        
         SpotlightActiveUnit();
+        nameText.text = units[activeUnit].GetName();
+        healthText.text = "Health: " + units[activeUnit].GetHealth();
+        statText.text = "Move Speed: " + units[activeUnit].GetMoveSpeed();
     }
 
 
