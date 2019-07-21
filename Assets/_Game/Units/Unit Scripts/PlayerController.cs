@@ -35,7 +35,7 @@ public class PlayerController : UnitController
     public override void Update()
     {
         timer += Time.deltaTime;
-        Debug.Log(timer);
+        //Debug.Log(timer);
         if (timer >= 2)
         {
             phaseText.text = "";
