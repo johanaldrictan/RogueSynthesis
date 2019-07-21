@@ -22,4 +22,17 @@ public abstract class UnitAbility
     // Examples: the same Ability, inferior versions of this Ability (Gun IV > Gun III)
     public void RemoveInferiors(List<UnitAbility> toFilter)
     { toFilter.RemoveAll(InferiorComparator); }
+    
+    // Takes a List of UnitAbility and checks to see if this Ability is inferior to any of those in the list
+    public bool AmIInferior(List<UnitAbility> contenders)
+    {
+        foreach (UnitAbility ability in contenders)
+        {
+            if (ability.InferiorComparator(this))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

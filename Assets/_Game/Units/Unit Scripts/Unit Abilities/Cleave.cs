@@ -4,7 +4,7 @@ using UnityEngine;
 
 // Cleave is an Ability derrived form the Attack Abstract Class (UnitAbility)
 // Cleave hits opponents from an origin based on the unit's facing direction and range, 
-// and also damages tiles in an 'X' shaped pattern from the origin
+// and also damages tiles so that the area of effect forms a perpendicular line of 3 tiles long
 
 // If you want to create a new UnitAbility, refer to the comments/code on UnitAbility.cs and AbilityDatabase.cs
 
@@ -29,10 +29,18 @@ public class Cleave : Attack
         { return result; }
 
         result.Add(origin);
-        if (MapMath.InMapBounds(new Vector2Int(origin.x + 1, origin.y + 1))) { result.Add(new Vector2Int(origin.x + 1, origin.y + 1)); }
-        if (MapMath.InMapBounds(new Vector2Int(origin.x + 1, origin.y - 1))) { result.Add(new Vector2Int(origin.x + 1, origin.y - 1)); }
-        if (MapMath.InMapBounds(new Vector2Int(origin.x - 1, origin.y + 1))) { result.Add(new Vector2Int(origin.x - 1, origin.y + 1)); }
-        if (MapMath.InMapBounds(new Vector2Int(origin.x - 1, origin.y - 1))) { result.Add(new Vector2Int(origin.x - 1, origin.y - 1)); }
+
+        if (source.GetDirection() == Direction.N || source.GetDirection() == Direction.S)
+        {
+            if (MapMath.InMapBounds(new Vector2Int(origin.x + 1, origin.y))) { result.Add(new Vector2Int(origin.x + 1, origin.y)); }
+            if (MapMath.InMapBounds(new Vector2Int(origin.x - 1, origin.y))) { result.Add(new Vector2Int(origin.x - 1, origin.y)); }
+        }
+        else if (source.GetDirection() == Direction.E || source.GetDirection() == Direction.W)
+        {
+            if (MapMath.InMapBounds(new Vector2Int(origin.x, origin.y + 1))) { result.Add(new Vector2Int(origin.x, origin.y + 1)); }
+            if (MapMath.InMapBounds(new Vector2Int(origin.x, origin.y - 1))) { result.Add(new Vector2Int(origin.x, origin.y - 1)); }
+        }
+        
 
         return result;
     }

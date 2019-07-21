@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// Wait is a UnitAbility that does nothing, setting the Unit to hasActed = True
+// Wait is a UnitAbility that does nothing
 
 // If you want to create a new UnitAbility, refer to the comments/code on UnitAbility.cs and AbilityDatabase.cs
 
@@ -11,7 +11,6 @@ public class Wait : UnitAbility
 {
     public override void Execute(Unit source)
     {
-        source.hasActed = true;
         return;
     }
 

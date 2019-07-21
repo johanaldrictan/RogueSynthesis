@@ -23,8 +23,9 @@ public static class AbilityDatabase
         {
             // remove inferior versions of the current Ability from the result
             abilityDataBase[(int)abilities[i]].RemoveInferiors(result);
-            // add the current Ability to the result
-            result.Add(abilityDataBase[(int)abilities[i]]);
+            // add the current Ability to the result, if it isn't inferior
+            if (! abilityDataBase[(int)abilities[i]].AmIInferior(result))
+            { result.Add(abilityDataBase[(int)abilities[i]]); }
         }
 
         return result;
