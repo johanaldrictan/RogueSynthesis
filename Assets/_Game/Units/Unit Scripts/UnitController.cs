@@ -53,6 +53,7 @@ public abstract class UnitController : MonoBehaviour
 
         // Initialize my unitSpawnData into real units
         LoadUnits();
+
     }
 
     public virtual void Update()
