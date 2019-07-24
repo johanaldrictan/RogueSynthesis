@@ -23,20 +23,11 @@ public class PlayerController : UnitController
     Stack<Direction> directions = new Stack<Direction>();
 
     public GameObject abilityPanel;
-    public TextMeshProUGUI phaseText;
-    public GameObject flavorText;
-    private int randomIndex;
-
-    private float timer;
+    public GameObject UI;
+    public int playerID;
 
     public override void Update()
     {
-        timer += Time.deltaTime;
-
-        if (timer >= 2)
-        {
-            phaseText.text = "";
-        }
 
         // if it's not currently this controller's turn, it's not allowed to do anything
         if (!myTurn)
@@ -66,6 +57,7 @@ public class PlayerController : UnitController
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             GetNextUnit();
+            UI.GetComponent<UI_Operator>().InitializeUI();
             return;
         }
 
@@ -178,18 +170,8 @@ public class PlayerController : UnitController
     public override void RelinquishPower()
     {
         endTurnEvent.Invoke(this);
-        timer = 0.0f;
-        if (this.name == "Player")
-        {
-            randomIndex = Random.Range(0, flavorText.GetComponent<flavorText>().EnemySentences.Length);
-            phaseText.text = flavorText.GetComponent<flavorText>().EnemySentences[randomIndex];
-
-        } else if (this.name == "Enemy")
-        {
-            randomIndex = Random.Range(0, flavorText.GetComponent<flavorText>().PlayerSentences.Length);
-            phaseText.text = flavorText.GetComponent<flavorText>().PlayerSentences[randomIndex];
-        }
-        //phaseText.text = this.name + " Phase";
+        UI.GetComponent<UI_Operator>().SetPhaseText(playerID);
+        UI.GetComponent<UI_Operator>().PhaseTextDisplay();
     }
 
     private void GetNextUnit()
@@ -237,9 +219,14 @@ public class PlayerController : UnitController
         // set up the new unit
         setActiveUnit(newIndex);
         SpotlightActiveUnit();
+        UI.GetComponent<UI_Operator>().SetTextInfo(units[activeUnit].GetHealth(), units[activeUnit].GetName(), units[activeUnit].GetMoveSpeed());
     }
 
-
+    public void Next()
+    {
+        GetNextUnit();
+        return;
+    }
 
     public void Wait()
     {
