@@ -10,7 +10,6 @@ public static class MapMath
     
     // Map: 2D Array in MapController.cs
 
-
     public static Vector2Int RelativeNorth = new Vector2Int(0, 1);
     public static Vector2Int RelativeSouth = new Vector2Int(0, -1);
     public static Vector2Int RelativeEast = new Vector2Int(1, 0);
@@ -95,7 +94,11 @@ public static class MapMath
         }
         return output;
     }
-
+    /// <summary>
+    /// Finds the relative location "in front" of the unit
+    /// </summary>
+    /// <param name="d"></param>
+    /// <returns>Location of the tile in front of the unit, relative to the unit</returns>
     public static Vector2Int DirToRelativeLoc(Direction d)
     {
         Vector2Int output = new Vector2Int();
