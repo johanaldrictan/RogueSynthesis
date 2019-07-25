@@ -98,30 +98,31 @@ public class AlliedUnit : Unit
     // THIS CURRENT SOLUTION IS TEMPORARY
     public override void chooseAbility()
     {
-        // 0 on the NumPad
-        if (Input.GetKeyDown(KeyCode.Keypad0) || PlayerController.wait == true)
+        // 0 on the NumPad (wait)
+        if (Input.GetKeyDown(KeyCode.Keypad0) || PlayerController.ability == 1)
         {
             availableAbilities[0].Execute(this);
             hasActed = true;
-            PlayerController.wait = false;
+            PlayerController.ability = 0;
             return;
         }
 
         // 1 on the NumPad
-        if (Input.GetKeyDown(KeyCode.Keypad1))
+        if (Input.GetKeyDown(KeyCode.Keypad1) || PlayerController.ability == 2)
         {
             availableAbilities[1].Execute(this);
             hasActed = true;
+            PlayerController.ability = 0;
             return;
         }
 
         // Esc Key = cancel
-        else if (Input.GetKeyDown(KeyCode.Escape) || PlayerController.cancel == true)
+        else if (Input.GetKeyDown(KeyCode.Escape) || PlayerController.ability == 3)
         {
             Move(positionMemory.x, positionMemory.y);
             ChangeDirection(directionMemory);
             hasMoved = false;
-            PlayerController.cancel = false;
+            PlayerController.ability = 0;
             return;
         }
     }

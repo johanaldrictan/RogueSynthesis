@@ -15,8 +15,7 @@ public class PlayerController : UnitController
     int distanceSoFar;
     Vector2Int lastPivot;
 
-    public static bool wait;
-    public static bool cancel;
+    public static int ability;
 
     Stack<Vector2Int> pivots = new Stack<Vector2Int>();
     Stack<int> distances = new Stack<int>();
@@ -228,14 +227,9 @@ public class PlayerController : UnitController
         return;
     }
 
-    public void Wait()
+    public void AbilityManual(int abilityID)
     {
-        wait = true;
-    }
-
-    public void Cancel()
-    {
-        cancel = true;
+        ability = abilityID;
     }
 
 }
