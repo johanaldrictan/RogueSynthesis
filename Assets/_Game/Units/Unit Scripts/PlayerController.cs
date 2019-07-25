@@ -169,6 +169,7 @@ public class PlayerController : UnitController
 
     public override void RelinquishPower()
     {
+        ResetUnits();
         endTurnEvent.Invoke(this);
         UI.GetComponent<UI_Operator>().SetPhaseText(playerID);
         UI.GetComponent<UI_Operator>().PhaseTextDisplay();
@@ -181,7 +182,6 @@ public class PlayerController : UnitController
         if (IsTurnOver())
         {
             RelinquishPower();
-            ResetUnits();
             CameraController.instance.targetZoom = 5;
         }
 

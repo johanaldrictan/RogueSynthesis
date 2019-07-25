@@ -8063,7 +8063,7 @@ MonoBehaviour:
   activeUnit: 0
   unitSpawnData:
   - data: {fileID: 11400000, guid: 87fc11b9e22649f4490c8d684c736026, type: 2}
-    spawnPosition: {x: 2, y: 3}
+    spawnPosition: {x: 1, y: 0}
     spawnDirection: 0
   - data: {fileID: 11400000, guid: 87fc11b9e22649f4490c8d684c736026, type: 2}
     spawnPosition: {x: 2, y: 6}

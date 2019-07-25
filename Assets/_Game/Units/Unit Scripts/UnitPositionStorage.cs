@@ -74,7 +74,7 @@ public class UnitPositionStorage
     public void DebugPrint()
     {
         // iterate through each key-value pair in storage
-        foreach (KeyValuePair <Vector2Int, Unit > entry in storage)
+        foreach (KeyValuePair <Vector2Int, Unit> entry in storage)
         {
             Debug.Log("UnitPositionStorage: " + entry.Key + " --> " + entry.Value);
         }

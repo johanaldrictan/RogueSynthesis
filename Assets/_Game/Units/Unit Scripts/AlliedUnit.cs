@@ -108,7 +108,7 @@ public class AlliedUnit : Unit
         }
 
         // 1 on the NumPad
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.Keypad1))
         {
             availableAbilities[1].Execute(this);
             hasActed = true;

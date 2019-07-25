@@ -34,8 +34,6 @@ public abstract class Unit : MonoBehaviour
     [System.NonSerialized] public List<UnitAbility> availableAbilities;
 
 
-    
-
     public virtual void Awake()
     {
         hasActed = false;
@@ -49,8 +47,6 @@ public abstract class Unit : MonoBehaviour
         mapPosition = MapMath.WorldToMap(this.transform.position);
         tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
         MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
-        //Debug.Log(mapPosition.x);
-        //Debug.Log(mapPosition.y);
     }
 
     public abstract void DisplayMovementTiles();
@@ -155,6 +151,7 @@ public abstract class Unit : MonoBehaviour
         return shortestFrom;
     }
 
+
     public Stack<Vector2Int> GetMovementPath(Dictionary<Vector2Int, Direction> possibleMoveLocs, Vector2Int dest)
     {
         Stack<Vector2Int> path = new Stack<Vector2Int>();
@@ -202,7 +199,7 @@ public abstract class Unit : MonoBehaviour
         globalPositionalData.RemoveUnit(mapPosition);
 
         // restore old tilevalue
-        // MapController.instance.map[mapPosition.x, mapPosition.y] = (int)tile;
+        MapController.instance.map[mapPosition.x, mapPosition.y] = (int)tile;
 
         // set new coordinates
         mapPosition.x = x;
@@ -211,8 +208,8 @@ public abstract class Unit : MonoBehaviour
         // update the globalPositionalData
         globalPositionalData.AddUnit(mapPosition, this);
 
-        // tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
-        // MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
+        tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
+        MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
         this.transform.position = MapMath.MapToWorld(new Vector2Int(x, y));
         hasMoved = true;
     }
@@ -232,10 +229,32 @@ public abstract class Unit : MonoBehaviour
     }
 
 
-    
+    // "Kill me."
+    // "Later."
+    // this function doesn't actually destroy the Unit. Instead, it just makes it invisible/non-interactable
+    public virtual void KillMe()
+    {
+        health = 0;
+        hasMoved = true;
+        hasActed = true;
+        this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        globalPositionalData.RemoveUnit(mapPosition);
+        MapController.instance.map[mapPosition.x, mapPosition.y] = (int)tile;
+    }
 
-
-    // HELPER FUNCTIONS
+    // This takes a 'dead' unit and gets it back in the world
+    // refreshes stats, etc
+    public virtual void Revive(Vector2Int position)
+    {
+        //if (globalPositionalData.SearchLocation(position) != null || )
+        health = unitData.health;
+        hasMoved = false;
+        hasActed = false;
+        this.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        globalPositionalData.AddUnit(mapPosition, this);
+        tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
+        MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
+    }
 
     public string GetName()
     { return unitName; }
@@ -247,7 +266,13 @@ public abstract class Unit : MonoBehaviour
     { return health; }
 
     public void ChangeHealth(int amount)
-    { health += amount; }
+    {
+        health += amount;
+        if (health <= 0)
+        {
+            KillMe();
+        }
+    }
 
     public int GetMoveSpeed()
     { return moveSpeed; }
