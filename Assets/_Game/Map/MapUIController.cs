@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 public class MapUIController : MonoBehaviour
 {
     public static MapUIController instance;
+    private bool verboseMode = false;
     
     [HideInInspector]
     public Vector2Int cursorPosition;
@@ -39,12 +40,21 @@ public class MapUIController : MonoBehaviour
         
     }
 
+    private void OnDrawGizmos()
+    {
+        if (!verboseMode)
+            verboseMode = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         cursorPosition = MapMath.WorldToMap(ray.origin * -10f/ray.origin.z);
-        tileSelector.transform.position = MapMath.MapToWorld(cursorPosition); // ay lmao     
+        //Debug.Log("Cursor Position(World Pos): " + ray.origin);
+        Debug.Log("Cursor Position(Grid Pos): " + MapMath.GridToMap(MapMath.MapToGrid(cursorPosition)));
+        Debug.Log("Cursor Position(Map Pos): " + cursorPosition);
+        tileSelector.transform.position = MapMath.MapToWorld(cursorPosition);    
 
         // if (hit)
         // {
