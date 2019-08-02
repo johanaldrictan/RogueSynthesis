@@ -29,6 +29,9 @@ public class Cleave : Attack
         if (! MapMath.InMapBounds(origin))
         { return result; }
 
+        Debug.Log( "Unit at (" + source.GetMapPosition().x + ", " + source.GetMapPosition().y + ") " 
+            + source.GetDirection() + " is Cleaving at Origin Point (" + origin.x + ", " + origin.y + ")" );
+
         result.Add(origin);
 
         if (source.GetDirection() == Direction.N || source.GetDirection() == Direction.S)
@@ -58,6 +61,6 @@ public class Cleave : Attack
 
     protected override bool InferiorComparator(UnitAbility inQuestion)
     {
-        return ( base.InferiorComparator(inQuestion) || inQuestion.GetType() == typeof(Attack) );
+        return (inQuestion.GetType() == typeof(Cleave));
     }
 }

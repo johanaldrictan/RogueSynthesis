@@ -27,7 +27,6 @@ public class PlayerController : UnitController
 
     public override void Update()
     {
-
         // if it's not currently this controller's turn, it's not allowed to do anything
         if (!myTurn)
         { return; }
@@ -42,7 +41,10 @@ public class PlayerController : UnitController
             units[activeUnit].chooseAbility();
             return;
         }
-        abilityPanel.SetActive(false);
+        else
+        { abilityPanel.SetActive(false); }
+        
+
         // if the current unit has moved and attacked, get the next unit
         if (units[activeUnit].hasMoved && units[activeUnit].hasActed)
         {
@@ -64,9 +66,9 @@ public class PlayerController : UnitController
         AlliedUnit theUnit = units[activeUnit] as AlliedUnit;
         // Get old stuff
         if (distances.Count != 0) { distanceSoFar = distances.Peek(); }
-        if (pivots.Count != 0) { lastPivot = pivots.Peek(); }
-        // Find the tile the cursor most points to.
         if (pivots.Count == 0) { pivots.Push(theUnit.GetMapPosition()); }
+        // Find the tile the cursor most points to.
+        lastPivot = pivots.Peek();
         Vector2Int diff = MapUIController.instance.cursorPosition - lastPivot;
         if (Mathf.Abs(diff.y) > Mathf.Abs(diff.x))
         {
@@ -96,6 +98,7 @@ public class PlayerController : UnitController
                 {
                     theUnit.Move(lastPivot.x, lastPivot.y);
                     theUnit.ChangeDirection(directions.Peek());
+                    ClearSpotlight();
                 }
                 else // Extend Path
                 {
@@ -125,8 +128,8 @@ public class PlayerController : UnitController
                     distances.Push(distanceSoFar);
                     pivots.Push(lastPivot + diff);
 
-                    if (diff.y < 0) { directions.Push(Direction.N); }
-                    if (diff.y > 0) { directions.Push(Direction.S); }
+                    if (diff.y > 0) { directions.Push(Direction.N); }
+                    if (diff.y < 0) { directions.Push(Direction.S); }
                     if (diff.x > 0) { directions.Push(Direction.E); }
                     if (diff.x < 0) { directions.Push(Direction.W); }
 

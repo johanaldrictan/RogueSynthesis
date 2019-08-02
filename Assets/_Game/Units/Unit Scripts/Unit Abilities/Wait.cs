@@ -21,6 +21,6 @@ public class Wait : UnitAbility
 
     protected override bool InferiorComparator(UnitAbility inQuestion)
     {
-        return ( inQuestion.GetType() == typeof(Wait) );
+        return (inQuestion.GetType() == typeof(Wait));
     }
 }

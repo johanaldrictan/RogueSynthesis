@@ -14,6 +14,7 @@ public abstract class Attack : UnitAbility
     // Attacks have an area of effect, and need a way to get that effect for multiple purposes like applying damage or visual effects
     public abstract List<Vector2Int> GetAreaOfEffect(Unit source);
 
+    // This funciton takes a Unit that is to be hit with the Attack. The function deals the associated effects of the attack to the given Unit
     public abstract void DealEffects(Unit target);
 
 
@@ -31,9 +32,4 @@ public abstract class Attack : UnitAbility
         }
     }
 
-    
-    protected override bool InferiorComparator(UnitAbility inQuestion)
-    {
-        return (inQuestion.GetType() == typeof(Attack));
-    }
 }
