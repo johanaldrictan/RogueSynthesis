@@ -50,9 +50,9 @@ public class MapUIController : MonoBehaviour
         cursorPosition = MapMath.WorldToMap(ray.origin * -10f/ray.origin.z);
         //Debug.Log("Cursor Position(World Pos): " + ray.origin);
         //Debug.Log("Cursor Position(Grid Pos): " + MapController.instance.walkableTiles.WorldToCell(ray.origin));
-        Debug.Log("Cursor Position(Map Pos): " + cursorPosition);
-        //Debug.Log("Cursor Position(Grid Pos 2): " + MapMath.MapToGrid(cursorPosition));
-        tileSelector.transform.position = MapMath.MapToWorld(cursorPosition);    
+        //Debug.Log("Cursor Position(Map Pos): " + cursorPosition);
+        if (MapController.instance.walkableTiles.GetTile(MapMath.MapToGrid(cursorPosition)) != null)
+            tileSelector.transform.position = MapMath.MapToWorld(cursorPosition);
 
     }
 
