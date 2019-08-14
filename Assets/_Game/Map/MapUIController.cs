@@ -6,10 +6,13 @@ using UnityEngine.Tilemaps;
 public class MapUIController : MonoBehaviour
 {
     public static MapUIController instance;
-    private bool verboseMode = false;
     
     [HideInInspector]
     public Vector2Int cursorPosition;
+
+    //private caching to save on garbage collection passes
+    [HideInInspector]
+    Ray ray;
 
     public Tilemap tileHighlighting;
     public Tilemap pathHighlightingNS;
@@ -40,46 +43,17 @@ public class MapUIController : MonoBehaviour
         
     }
 
-    private void OnDrawGizmos()
-    {
-        if (!verboseMode)
-            verboseMode = true;
-    }
-
     // Update is called once per frame
     void Update()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         cursorPosition = MapMath.WorldToMap(ray.origin * -10f/ray.origin.z);
         //Debug.Log("Cursor Position(World Pos): " + ray.origin);
-        Debug.Log("Cursor Position(Grid Pos): " + MapMath.GridToMap(MapMath.MapToGrid(cursorPosition)));
+        //Debug.Log("Cursor Position(Grid Pos): " + MapController.instance.walkableTiles.WorldToCell(ray.origin));
         Debug.Log("Cursor Position(Map Pos): " + cursorPosition);
+        //Debug.Log("Cursor Position(Grid Pos 2): " + MapMath.MapToGrid(cursorPosition));
         tileSelector.transform.position = MapMath.MapToWorld(cursorPosition);    
 
-        // if (hit)
-        // {
-        //     hover_state = HoverState.HOVER;
-        // }
-        // else
-        // {
-        //     hover_state = HoverState.NONE;
-        // }
-
-        // if (hover_state == HoverState.HOVER)
-        // {
-        //     //Mouse is hovering
-        //     //Debug.Log(mapController.GridToMap(mapController.grid.WorldToCell(hit.point)));
-        //     //Debug.Log(MapController.instance.grid.CellToWorld(MapController.instance.grid.WorldToCell(hit.point)));
-        //     if (lastTileLoc != null)
-        //         tileSelectorMap.SetTile(lastTileLoc, null);
-        //     lastTileLoc = MapController.instance.grid.WorldToCell(hit.point);
-        //     tilePointer = MapController.instance.grid.WorldToCell(hit.point);
-        // }
-        // else
-        // {
-        //     tileSelectorMap.SetTile(lastTileLoc, null);
-        // }
-        //End Tile highlighting code
     }
 
     public void ClearRangeHighlight()
