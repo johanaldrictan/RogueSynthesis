@@ -19,8 +19,8 @@ public static class MapMath
     {
         Vector2Int converted = new Vector2Int
         {
-            x = gridUnits.x - MapController.instance.mapWidthOffset,
-            y = (gridUnits.y - MapController.instance.mapHeightOffset) * -1
+            x = -gridUnits.y + MapController.instance.mapHeightOffset,
+            y = gridUnits.x - MapController.instance.mapWidthOffset
         };
         return converted;
     }
@@ -34,8 +34,8 @@ public static class MapMath
     {
         Vector3Int converted = new Vector3Int
         {
-            x = x + MapController.instance.mapWidthOffset,
-            y = (y - MapController.instance.mapHeightOffset) * -1
+            x = y + MapController.instance.mapWidthOffset,
+            y = -x + MapController.instance.mapHeightOffset
         };
         return converted;
     }
@@ -95,10 +95,9 @@ public static class MapMath
         return output;
     }
     /// <summary>
-    /// Finds the relative location "in front" of the unit
+    /// Returns a vector to be added to the location of the unit to get the tile in front of the unit
     /// </summary>
     /// <param name="d"></param>
-    /// <returns>Location of the tile in front of the unit, relative to the unit</returns>
     public static Vector2Int DirToRelativeLoc(Direction d)
     {
         Vector2Int output = new Vector2Int();
