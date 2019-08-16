@@ -23,6 +23,9 @@ public abstract class Unit : MonoBehaviour
     public SpriteSet sprites;
     protected SpriteRenderer m_SpriteRenderer;
 
+    // This event fires whenever a Unit goes to or below 0 HP. It calls out to the TurnController to take this instance and kill it
+    public static UnitControllerUnityEvent deathEvent = new UnitControllerUnityEvent();
+
     protected TileWeight tile;
 
     // storage of the unit's UnitData object
