@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+// UnityEvent class; creates an event that passes a Unit with it
+public class UnitUnityEvent : UnityEvent<Unit> { }
+
 public abstract class Unit : MonoBehaviour
 {
     // Unit's core RPG stats
@@ -23,9 +26,6 @@ public abstract class Unit : MonoBehaviour
     public SpriteSet sprites;
     protected SpriteRenderer m_SpriteRenderer;
 
-    // This event fires whenever a Unit goes to or below 0 HP. It calls out to the TurnController to take this instance and kill it
-    public static UnitControllerUnityEvent deathEvent = new UnitControllerUnityEvent();
-
     protected TileWeight tile;
 
     // storage of the unit's UnitData object
@@ -35,6 +35,10 @@ public abstract class Unit : MonoBehaviour
 
     // the set of abilities that this unit can use on its turn
     [System.NonSerialized] public List<UnitAbility> availableAbilities;
+
+    // This event fires whenever a Unit dies. 
+    // It passes a reference to itself so that other scripts can do what they need to do
+    public static UnitUnityEvent deathEvent = new UnitUnityEvent();
 
 
     public virtual void Awake()
@@ -234,7 +238,11 @@ public abstract class Unit : MonoBehaviour
 
     // "Kill me."
     // "Later."
-    // this function doesn't actually destroy the Unit. Instead, it just makes it invisible/non-interactable
+    // this function essentially destroys the Unit (but not actually) by doing 3 things:
+    // - hide the sprite renderer
+    // - remove the Unit from the Global Positional Data
+    // - reset the tile that it was occupying
+    // it then calls out that it's dying, so that other scripts can do what they're supposed to
     public virtual void KillMe()
     {
         health = 0;
@@ -243,10 +251,14 @@ public abstract class Unit : MonoBehaviour
         this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         globalPositionalData.RemoveUnit(mapPosition);
         MapController.instance.map[mapPosition.x, mapPosition.y] = (int)tile;
+
+        // "Hey guys, I'm dying. If anyone needs a reference to me, here it is."
+        deathEvent.Invoke(this);
     }
 
     // This takes a 'dead' unit and gets it back in the world
     // refreshes stats, etc
+    // NOT DONE
     public virtual void Revive(Vector2Int position)
     {
         //if (globalPositionalData.SearchLocation(position) != null || )

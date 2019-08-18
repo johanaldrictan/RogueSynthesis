@@ -27,6 +27,8 @@ public class PlayerController : UnitController
 
     public override void Update()
     {
+        Debug.Log(units.Count);
+
         // if it's not currently this controller's turn, it's not allowed to do anything
         if (!myTurn)
         { return; }
