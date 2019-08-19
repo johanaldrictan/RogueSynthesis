@@ -13,8 +13,20 @@ public class Graveyard : MonoBehaviour
     [System.NonSerialized] private List<Unit> allies;
     [System.NonSerialized] private List<Unit> civilians;
 
+    public static Graveyard instance;
+
     private void Awake()
     {
+        // there can only be one
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+
         enemies = new List<Unit>();
         allies = new List<Unit>();
         civilians = new List<Unit>();
@@ -47,7 +59,7 @@ public class Graveyard : MonoBehaviour
                 break;
 
             case UnitType.EnemyUnit:
-                // enemies.Add(target as EnemyUnit);
+                enemies.Add(target as EnemyUnit);
                 break;
 
             case UnitType.Civilian:

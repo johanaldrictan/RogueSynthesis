@@ -1,16 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using TMPro;
 
-// PlayerController is an object that inherits from the UnitController (see UnitController.cs)
-// It is a variety that is user-controlled
-// see the UnitController Abstract Class for more information about how this class ought to behave
-
-public class PlayerController : UnitController
+public class EnemyController : UnitController
 {
-    new public const int TURN_WEIGHT = -1;
+    new public const int TURN_WEIGHT = 1;
     bool tabbed;
     int distanceSoFar;
     Vector2Int lastPivot;
@@ -43,7 +37,7 @@ public class PlayerController : UnitController
         }
         else
         { abilityPanel.SetActive(false); }
-        
+
 
         // if the current unit has moved and attacked, get the next unit
         if (units[activeUnit].hasMoved && units[activeUnit].hasActed)
@@ -144,7 +138,7 @@ public class PlayerController : UnitController
                 }
             }
         }
-        
+
         if (Input.GetMouseButtonDown(1) && !Input.GetMouseButtonDown(0))
         {
             if (pivots.Count > 1)
@@ -193,7 +187,7 @@ public class PlayerController : UnitController
         }
     }
 
-    
+
     // clears highlighting for relevant tiles on the current indexed unit
     public override void ClearSpotlight()
     {
@@ -233,5 +227,4 @@ public class PlayerController : UnitController
     {
         return TURN_WEIGHT;
     }
-
 }

@@ -359,7 +359,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1582521907}
+      - m_Target: {fileID: 0}
         m_MethodName: RelinquishPower
         m_Mode: 1
         m_Arguments:
@@ -815,7 +815,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1582521907}
+      - m_Target: {fileID: 0}
         m_MethodName: AbilityManual
         m_Mode: 3
         m_Arguments:
@@ -4618,9 +4618,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f03548be55676484f87264351ad96e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies: []
-  allies: []
-  civilians: []
 --- !u!4 &1249516851
 Transform:
   m_ObjectHideFlags: 0
@@ -8114,7 +8111,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1582521906}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fda166eec4f84046a560926cea533c5, type: 3}
+  m_Script: {fileID: 11500000, guid: eb871b54213de234ab565a8a933013a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   activeUnit: 0
@@ -8616,7 +8613,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1582521907}
+      - m_Target: {fileID: 0}
         m_MethodName: AbilityManual
         m_Mode: 3
         m_Arguments:
@@ -9576,7 +9573,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1582521907}
+      - m_Target: {fileID: 0}
         m_MethodName: AbilityManual
         m_Mode: 3
         m_Arguments:

@@ -94,6 +94,7 @@ public abstract class UnitController : MonoBehaviour
                     break;
 
                 case UnitType.EnemyUnit:
+                    newUnitComponent = newUnit.AddComponent<EnemyUnit>() as EnemyUnit;
                     break;
 
                 case UnitType.Civilian:
@@ -211,7 +212,7 @@ public abstract class UnitController : MonoBehaviour
     public void EndTurn()
     { myTurn = false; }
 
-    public int GetWeight()
+    public virtual int GetWeight()
     { return TURN_WEIGHT; }
 
     public string GetName()
