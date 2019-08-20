@@ -5,6 +5,7 @@ using UnityEngine;
 // Cleave is an Ability derrived form the Attack Abstract Class (UnitAbility)
 // Cleave hits opponents from an origin based on the unit's facing direction and range, 
 // and also damages tiles so that the area of effect forms a perpendicular line of 3 tiles long
+// simply put, deals damage in front of the unit, in a 3 tile wide perpendicular line
 
 // If you want to create a new UnitAbility, refer to the comments/code on UnitAbility.cs and AbilityDatabase.cs
 
@@ -27,6 +28,9 @@ public class Cleave : Attack
 
         if (! MapMath.InMapBounds(origin))
         { return result; }
+
+        Debug.Log( "Unit at (" + source.GetMapPosition().x + ", " + source.GetMapPosition().y + ") " 
+            + source.GetDirection() + " is Cleaving at Origin Point (" + origin.x + ", " + origin.y + ")" );
 
         result.Add(origin);
 
@@ -57,6 +61,6 @@ public class Cleave : Attack
 
     protected override bool InferiorComparator(UnitAbility inQuestion)
     {
-        return ( base.InferiorComparator(inQuestion) || inQuestion.GetType() == typeof(Attack) );
+        return (inQuestion.GetType() == typeof(Cleave));
     }
 }

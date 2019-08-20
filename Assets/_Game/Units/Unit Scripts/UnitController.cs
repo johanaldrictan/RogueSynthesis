@@ -37,11 +37,21 @@ public abstract class UnitController : MonoBehaviour
 
     // this can be overridden in subclasses.
     // Things done here should probably be done there a well.
-    public virtual void Awake()
+    protected virtual void Awake()
     {
         myTurn = true;
         activeUnit = 0;
         units = new List<Unit>();
+    }
+
+    private void OnEnable()
+    {
+        Unit.deathEvent.AddListener(RemoveUnit);
+    }
+
+    private void OnDisable()
+    {
+        Unit.deathEvent.RemoveListener(RemoveUnit);
     }
 
     // this can be overridden ( like Awake() )
@@ -58,7 +68,7 @@ public abstract class UnitController : MonoBehaviour
 
     public virtual void Update()
     {
-
+        // Debug.Log(units.Count);
     }
 
     // Parses unitSpawnData, instantiates and initializes Units
@@ -106,6 +116,24 @@ public abstract class UnitController : MonoBehaviour
             // add the brand-spankin-new and created unit to your units list
             units.Add(newUnit.GetComponent<Unit>());
         }
+    }
+
+    // removeUnit takes a Unit object and removes it from the units List, if it finds an that Unit in the list
+    // it also makes sure that the activeUnit index doesn't get messed up
+    protected void RemoveUnit(Unit wanted)
+    {
+        // Search for the wanted unit, and get the index of where it is
+        int index = units.FindIndex(x => x == wanted);
+
+        // stop if you didn't find the unit
+        if (index == -1)
+        { return; }
+
+        units.Remove(wanted);
+
+        // make sure the activeUnit index is correct, since the list just shifted
+        if (index < activeUnit)
+        { activeUnit--; }
     }
 
     // determine whether this controller is ready to end its turn
