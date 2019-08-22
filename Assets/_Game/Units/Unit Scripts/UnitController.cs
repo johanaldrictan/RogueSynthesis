@@ -1,13 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
-
-// UnityEvent class; creates an event that passes a UnitController with it
-public class UnitControllerUnityEvent : UnityEvent<UnitController> { }
 
 // UnitController is an Abstract Base Class for an object that stores and commands Unit objects
+
 public abstract class UnitController : MonoBehaviour
 {
 

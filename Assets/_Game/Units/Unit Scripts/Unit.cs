@@ -2,10 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
-// UnityEvent class; creates an event that passes a Unit with it
-public class UnitUnityEvent : UnityEvent<Unit> { }
+// A Unit is the base abstract form of, well, a Unit. Every kind of Unit does what's defined here
 
 public abstract class Unit : MonoBehaviour
 {

@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// AlliedUnit: A type of Unit that is controller by the Player
+// Refer to Unit.cs if you want to see how a Unit ought to behave
+
 public class AlliedUnit : Unit
 {
     [System.NonSerialized] public List<Vector2Int> plannedPath;

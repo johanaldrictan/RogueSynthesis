@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// An EnemyController is an object that inherits from the UnitController (see UnitController.cs)
+// It is a variety that is NOT (Shouldn't be, but is right now lol) user-controlled
+// see the UnitController Abstract Class for more information about how this class ought to behave
+
 public class EnemyController : UnitController
 {
     new public const int TURN_WEIGHT = 1;

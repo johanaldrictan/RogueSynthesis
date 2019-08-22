@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// EnemyUnit: A type of Unit that is controller by AI. Work in progress...
+// Refer to Unit.cs if you want to see how a Unit ought to behave
+
 public class EnemyUnit : Unit
 {
     [System.NonSerialized] public List<Vector2Int> plannedPath;
