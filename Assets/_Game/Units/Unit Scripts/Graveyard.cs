@@ -8,9 +8,13 @@ using UnityEngine;
 
 public class Graveyard : MonoBehaviour
 {
-    // the storages of dead enemy units. 
+    // the storage of dead EnemyUnit Objects
     [System.NonSerialized] private List<Unit> enemies;
+
+    // the storage of dead AlliedUnit Objects. These will be converted into enemy units
     [System.NonSerialized] private List<Unit> allies;
+
+    // the storage of dead Civilian Objects. 
     [System.NonSerialized] private List<Unit> civilians;
 
     public static Graveyard instance;
@@ -34,6 +38,7 @@ public class Graveyard : MonoBehaviour
 
     private void OnEnable()
     {
+        // When a Unit calls out while it is dying, the Graveyard shall answer, taking in the Unit
         Unit.deathEvent.AddListener(EnqueueUnit);
     }
 
@@ -49,7 +54,7 @@ public class Graveyard : MonoBehaviour
         civilians.Clear();
     }
     
-    // takes a Unit and adds it to the correct section of storage
+    // takes a Unit and adds it to the correct section of the storage
     private void EnqueueUnit(Unit target)
     {
         switch (target.unitData.unitType)
