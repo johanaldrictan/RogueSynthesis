@@ -5,6 +5,7 @@ using UnityEngine;
 // An EnemyController is an object that inherits from the UnitController (see UnitController.cs)
 // It is a variety that is NOT (Shouldn't be, but is right now lol) user-controlled
 // see the UnitController Abstract Class for more information about how this class ought to behave
+// work in progress... currently just a copy-paste of PlayerController
 
 public class EnemyController : UnitController
 {

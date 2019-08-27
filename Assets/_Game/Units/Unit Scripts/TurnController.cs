@@ -14,7 +14,11 @@ public class TurnController : MonoBehaviour
     // storage of Unit Positional Data
     private UnitPositionStorage globalPositionalData;
 
+    // the index of the controllers List that is currently the active controller
     private int currentTurn;
+
+    // the number of full rounds that have passed
+    private int currentRound;
 
     public static TurnController instance;
 
@@ -32,6 +36,7 @@ public class TurnController : MonoBehaviour
         }
 
         currentTurn = 0;
+        currentRound = 1;
         controllers = new List<UnitController>();
         globalPositionalData = new UnitPositionStorage();
     }
@@ -99,6 +104,8 @@ public class TurnController : MonoBehaviour
         {
             EndController(currentTurn);
             currentTurn = ((currentTurn + 1) % controllers.Count);
+            if (currentTurn == 0)
+            { currentRound += 1; }
             StartController(currentTurn);
             controllers[currentTurn].SpotlightActiveUnit();
         }
@@ -109,5 +116,9 @@ public class TurnController : MonoBehaviour
 
     protected void EndController(int index)
     { controllers[index].EndTurn(); }
+
+    // gets the current Round (full-round) number
+    public int GetRound()
+    { return currentRound; }
     
 }

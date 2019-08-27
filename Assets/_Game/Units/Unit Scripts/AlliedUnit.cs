@@ -24,6 +24,7 @@ public class AlliedUnit : Unit
         plannedPath = new List<Vector2Int>();
         m_SpriteRenderer = this.GetComponent<SpriteRenderer>();
         m_SpriteRenderer.sortingOrder = 99;
+        deathData = new Stack<DeathData>();
     }
     
     // this function highlights tiles that this unit instance can move to

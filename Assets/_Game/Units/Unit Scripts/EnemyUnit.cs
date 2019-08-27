@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// EnemyUnit: A type of Unit that is controller by AI. Work in progress...
+// EnemyUnit: A type of Unit that is controller by AI. 
+// Work in progress... just a copy-paste of AlliedUnit right now
 // Refer to Unit.cs if you want to see how a Unit ought to behave
 
 public class EnemyUnit : Unit
@@ -23,6 +24,7 @@ public class EnemyUnit : Unit
         plannedPath = new List<Vector2Int>();
         m_SpriteRenderer = this.GetComponent<SpriteRenderer>();
         m_SpriteRenderer.sortingOrder = 99;
+        deathData = new Stack<DeathData>();
     }
 
     // this function highlights tiles that this unit instance can move to

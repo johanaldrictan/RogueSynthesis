@@ -13,7 +13,7 @@ public class Cleave : Attack
 {
     public override void DealEffects(Unit target, Unit source)
     {
-        target.ChangeHealth( GetDamage() * (-1) );
+        target.ChangeHealth( (GetDamage()*(-1)), source, this );
     }
 
     public override List<Vector2Int> GetAreaOfEffect(Unit source)

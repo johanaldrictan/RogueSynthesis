@@ -34,6 +34,9 @@ public abstract class Unit : MonoBehaviour
     // the set of abilities that this unit can use on its turn
     [System.NonSerialized] public List<UnitAbility> availableAbilities;
 
+    // a Stack of death data. Every time the Unit dies, it creates a new one
+    [System.NonSerialized] protected Stack<DeathData> deathData;
+
     // This event fires whenever a Unit dies. 
     // It passes a reference to itself so that other scripts can do what they need to do
     public static UnitUnityEvent deathEvent = new UnitUnityEvent();
@@ -45,6 +48,7 @@ public abstract class Unit : MonoBehaviour
         hasMoved = false;
         m_SpriteRenderer = this.GetComponent<SpriteRenderer>();
         m_SpriteRenderer.sortingOrder = 99;
+        deathData = new Stack<DeathData>();
     }
 
     public virtual void Start()
@@ -241,9 +245,10 @@ public abstract class Unit : MonoBehaviour
     // - remove the Unit from the Global Positional Data
     // - reset the tile that it was occupying
     // it then calls out that it's dying, so that other scripts can do what they're supposed to
-    public virtual void KillMe()
+    public virtual void KillMe(DeathData data)
     {
         health = 0;
+        deathData.Push(data);
         hasMoved = true;
         hasActed = true;
         this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
@@ -255,7 +260,7 @@ public abstract class Unit : MonoBehaviour
     }
 
     // This takes a 'dead' unit and gets it back in the world
-    // refreshes stats, etc
+    // refreshes stats, health to full, etc
     // NOT DONE
     public virtual void Revive(Vector2Int position)
     {
@@ -278,12 +283,13 @@ public abstract class Unit : MonoBehaviour
     public int GetHealth()
     { return health; }
 
-    public void ChangeHealth(int amount)
+    public void ChangeHealth(int amount, Unit source, UnitAbility attack)
     {
         health += amount;
         if (health <= 0)
         {
-            KillMe();
+            DeathData data = new DeathData(source, attack, amount);
+            KillMe(data);
         }
     }
 
