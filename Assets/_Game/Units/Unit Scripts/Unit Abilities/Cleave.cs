@@ -11,7 +11,7 @@ using UnityEngine;
 
 public class Cleave : Attack
 {
-    public override void DealEffects(Unit target)
+    public override void DealEffects(Unit target, Unit source)
     {
         target.ChangeHealth( GetDamage() * (-1) );
     }

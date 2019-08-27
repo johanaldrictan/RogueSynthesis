@@ -15,7 +15,7 @@ public abstract class Attack : UnitAbility
     public abstract List<Vector2Int> GetAreaOfEffect(Unit source);
 
     // This funciton takes a Unit that is to be hit with the Attack. The function deals the associated effects of the attack to the given Unit
-    public abstract void DealEffects(Unit target);
+    public abstract void DealEffects(Unit target, Unit source);
 
 
     // get the area of effect. iterate through it, dealing effects to each unit found
@@ -27,7 +27,7 @@ public abstract class Attack : UnitAbility
             Unit searchResult = source.globalPositionalData.SearchLocation(tile);
             if (searchResult != null)
             {
-                DealEffects(searchResult);
+                DealEffects(searchResult, source);
             }
         }
     }
