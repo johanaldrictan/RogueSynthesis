@@ -35,12 +35,26 @@ public abstract class Unit : MonoBehaviour
     [System.NonSerialized] public List<UnitAbility> availableAbilities;
 
     // a Stack of death data. Every time the Unit dies, it creates a new one
-    [System.NonSerialized] protected Stack<DeathData> deathData;
+    [System.NonSerialized] public Stack<DeathData> deathData;
 
     // This event fires whenever a Unit dies. 
     // It passes a reference to itself so that other scripts can do what they need to do
     public static UnitUnityEvent deathEvent = new UnitUnityEvent();
 
+    // A special constructor that takes a Unit as a parameter and copies it
+    public Unit(Unit toCopy)
+    {
+        unitName = toCopy.GetName();
+        health = toCopy.GetHealth();
+        moveSpeed = toCopy.GetMoveSpeed();
+        direction = toCopy.GetDirection();
+        mapPosition = toCopy.GetMapPosition();
+        globalPositionalData = toCopy.globalPositionalData;
+        sprites = toCopy.sprites;
+        unitData = toCopy.unitData;
+        availableAbilities = toCopy.availableAbilities;
+        deathData = toCopy.deathData;
+    }
 
     public virtual void Awake()
     {
@@ -48,6 +62,7 @@ public abstract class Unit : MonoBehaviour
         hasMoved = false;
         m_SpriteRenderer = this.GetComponent<SpriteRenderer>();
         m_SpriteRenderer.sortingOrder = 99;
+        if (deathData.Count == 0)
         deathData = new Stack<DeathData>();
     }
 
@@ -288,7 +303,7 @@ public abstract class Unit : MonoBehaviour
         health += amount;
         if (health <= 0)
         {
-            DeathData data = new DeathData(source, attack, amount);
+            DeathData data = new DeathData(source, attack, amount, mapPosition, direction);
             KillMe(data);
         }
     }

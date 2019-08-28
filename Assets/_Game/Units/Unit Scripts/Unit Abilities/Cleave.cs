@@ -11,11 +11,15 @@ using UnityEngine;
 
 public class Cleave : Attack
 {
+    // We're just doing straight damage here
     public override void DealEffects(Unit target, Unit source)
     {
         target.ChangeHealth( (GetDamage()*(-1)), source, this );
     }
 
+    // we're making a list of coordinates that this attack reaches
+    // Cleave has an origin point range tiles in front of the Unit (default 1)
+    // it also hits the two adjacent squares on either side of the origin
     public override List<Vector2Int> GetAreaOfEffect(Unit source)
     {
         List<Vector2Int> result = new List<Vector2Int>();
@@ -29,8 +33,10 @@ public class Cleave : Attack
         if (! MapMath.InMapBounds(origin))
         { return result; }
 
+        /*
         Debug.Log( "Unit at (" + source.GetMapPosition().x + ", " + source.GetMapPosition().y + ") " 
             + source.GetDirection() + " is Cleaving at Origin Point (" + origin.x + ", " + origin.y + ")" );
+        */
 
         result.Add(origin);
 

@@ -47,7 +47,7 @@ public class Graveyard : MonoBehaviour
         Unit.deathEvent.RemoveListener(EnqueueUnit);
     }
 
-    public void Wipe()
+    private void Wipe()
     {
         enemies.Clear();
         allies.Clear();
@@ -68,7 +68,7 @@ public class Graveyard : MonoBehaviour
                 break;
 
             case UnitType.Civilian:
-                // civilians.Add(target as Civilian);
+                // civilians.Add(target as Civilian); <-- Civilians don't exist yet lmao
                 break;
 
             default:
