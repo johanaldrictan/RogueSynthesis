@@ -42,19 +42,7 @@ public abstract class Unit : MonoBehaviour
     public static UnitUnityEvent deathEvent = new UnitUnityEvent();
 
     // A special constructor that takes a Unit as a parameter and copies it
-    public Unit(Unit toCopy)
-    {
-        unitName = toCopy.GetName();
-        health = toCopy.GetHealth();
-        moveSpeed = toCopy.GetMoveSpeed();
-        direction = toCopy.GetDirection();
-        mapPosition = toCopy.GetMapPosition();
-        globalPositionalData = toCopy.globalPositionalData;
-        sprites = toCopy.sprites;
-        unitData = toCopy.unitData;
-        availableAbilities = toCopy.availableAbilities;
-        deathData = toCopy.deathData;
-    }
+    
 
     public virtual void Awake()
     {
