@@ -55,4 +55,10 @@ public class DeathData
     {
         return deathDirection;
     }
+
+    //  prints the contents of this object to the Debug Console
+    public void DebugLog()
+    {
+        Debug.Log("Killer: " + killer + "; Finishing Ability: " + finishingAbility + "; Damage Taken: " + damageTaken + "; Location: " + deathLocation + "; Direction: " + deathDirection);
+    }
 }

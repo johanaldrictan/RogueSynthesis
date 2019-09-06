@@ -51,7 +51,7 @@ public abstract class Unit : MonoBehaviour
         m_SpriteRenderer = this.GetComponent<SpriteRenderer>();
         m_SpriteRenderer.sortingOrder = 99;
         if (deathData.Count == 0)
-        deathData = new Stack<DeathData>();
+        { deathData = new Stack<DeathData>(); }
     }
 
     public virtual void Start()
