@@ -9,13 +9,7 @@ using UnityEngine;
 public class Graveyard : MonoBehaviour
 {
     // the storage of dead EnemyUnit Objects
-    [System.NonSerialized] private List<Unit> enemies;
-
-    // the storage of dead AlliedUnit Objects. These will be converted into enemy units
-    [System.NonSerialized] private List<Unit> allies;
-
-    // the storage of dead Civilian Objects. 
-    [System.NonSerialized] private List<Unit> civilians;
+    [System.NonSerialized] private List<Unit> deadUnits;
 
     public static Graveyard instance;
 
@@ -31,9 +25,7 @@ public class Graveyard : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        enemies = new List<Unit>();
-        allies = new List<Unit>();
-        civilians = new List<Unit>();
+        deadUnits = new List<Unit>();
     }
 
     private void OnEnable()
@@ -49,30 +41,43 @@ public class Graveyard : MonoBehaviour
 
     private void Wipe()
     {
-        enemies.Clear();
-        allies.Clear();
-        civilians.Clear();
+        deadUnits.Clear();
     }
     
     // takes a Unit and adds it to the correct section of the storage
     private void EnqueueUnit(Unit target)
     {
-        switch (target.unitData.unitType)
+        deadUnits.Add(target);
+    }
+
+    // this method iterates through the entire storage of dead Units
+    // it converts all of the Units that meet the conditions of the parameter function into EnemyUnits
+    // it also removes the original Units from the graveyard and returns the final converted EnemyUnits
+    public List<EnemyUnit> ConvertToEnemies(ConversionCondition comparator)
+    {
+        List<EnemyUnit> result = new List<EnemyUnit>();
+
+        // iterate backwards through the units, because we may remove them as we go
+        for (int i = deadUnits.Count - 1; i > 0; i--)
         {
-            case UnitType.AlliedUnit:
-                allies.Add(target as AlliedUnit);
-                break;
+            // if the given conditions are met with this particular unit
+            if (comparator(deadUnits[i]))
+            {
+                // Get references
+                var oldComponent = deadUnits[i];
+                GameObject unitToConvert = deadUnits[i].gameObject;
 
-            case UnitType.EnemyUnit:
-                enemies.Add(target as EnemyUnit);
-                break;
+                // convert the GameObject: add an EnemyUnit component, transfer data over, and then delete the old component
+                EnemyUnit newEnemyComponent = unitToConvert.AddComponent<EnemyUnit>() as EnemyUnit;
+                UnitConversions.UnitToEnemy(oldComponent, newEnemyComponent);
+                deadUnits.RemoveAt(i);
+                Destroy(oldComponent);
 
-            case UnitType.Civilian:
-                // civilians.Add(target as Civilian); <-- Civilians don't exist yet lmao
-                break;
-
-            default:
-                break;
+                // put it away to return at the end
+                result.Add(newEnemyComponent);
+            }
         }
+
+        return result;
     }
 }

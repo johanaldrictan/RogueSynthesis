@@ -18,20 +18,6 @@ public class AlliedUnit : Unit
     [SerializeField] public Direction directionMemory;
 
 
-    public AlliedUnit(Unit toCopy)
-    {
-        unitName = toCopy.GetName();
-        health = toCopy.GetHealth();
-        moveSpeed = toCopy.GetMoveSpeed();
-        direction = toCopy.GetDirection();
-        mapPosition = toCopy.GetMapPosition();
-        globalPositionalData = toCopy.globalPositionalData;
-        sprites = toCopy.sprites;
-        unitData = toCopy.unitData;
-        availableAbilities = toCopy.availableAbilities;
-        deathData = toCopy.deathData;
-    }
-
     public override void Awake()
     {
         hasActed = false;

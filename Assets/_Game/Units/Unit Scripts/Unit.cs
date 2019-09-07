@@ -286,6 +286,9 @@ public abstract class Unit : MonoBehaviour
     public int GetHealth()
     { return health; }
 
+    public void SetHealth(int newHealth)
+    { health = newHealth; }
+
     public void ChangeHealth(int amount, Unit source, UnitAbility attack)
     {
         health += amount;
@@ -299,7 +302,7 @@ public abstract class Unit : MonoBehaviour
     public int GetMoveSpeed()
     { return moveSpeed; }
 
-    public void ChangeMoveSpeed(int amount)
+    public void SetMoveSpeed(int amount)
     { moveSpeed += amount; }
 
     public Direction GetDirection()
@@ -310,6 +313,9 @@ public abstract class Unit : MonoBehaviour
 
     public Vector2Int GetMapPosition()
     { return mapPosition; }
+
+    public void SetMapPosition(Vector2Int newPosition)
+    { mapPosition = newPosition; }
 
 }
 
