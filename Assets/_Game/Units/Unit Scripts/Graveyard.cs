@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // The Graveyard is an object that stores and manages dead Units
-// It will also eventually be able to convert Units from one type to another (such as AlliedUnit --> EnemyUnit)
+// It will also convert Units from one type to another (such as AlliedUnit --> EnemyUnit)
 // Whenever a Unit dies, this object will snag a reference to it before it does
 
 public class Graveyard : MonoBehaviour
 {
-    // the storage of dead EnemyUnit Objects
+    // the storage of dead Units
     [System.NonSerialized] private List<Unit> deadUnits;
 
     public static Graveyard instance;
