@@ -25,7 +25,7 @@ public class EnemyUnit : Unit
         plannedPath = new List<Vector2Int>();
         m_SpriteRenderer = this.GetComponent<SpriteRenderer>();
         m_SpriteRenderer.sortingOrder = 99;
-        deathData = new Stack<DeathData>();
+        Deaths = new Stack<DeathData>();
     }
 
     // this function highlights tiles that this unit instance can move to
@@ -106,7 +106,7 @@ public class EnemyUnit : Unit
         // 0 on the NumPad (wait)
         if (Input.GetKeyDown(KeyCode.Keypad0) || PlayerController.ability == 1)
         {
-            availableAbilities[0].Execute(this);
+            AvailableAbilities[0].Execute(this);
             hasActed = true;
             PlayerController.ability = 0;
             return;
@@ -115,7 +115,7 @@ public class EnemyUnit : Unit
         // 1 on the NumPad
         else if (Input.GetKeyDown(KeyCode.Keypad1) || PlayerController.ability == 2)
         {
-            availableAbilities[1].Execute(this);
+            AvailableAbilities[1].Execute(this);
             hasActed = true;
             PlayerController.ability = 0;
             return;

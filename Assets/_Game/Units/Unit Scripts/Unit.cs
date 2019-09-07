@@ -29,17 +29,17 @@ public abstract class Unit : MonoBehaviour
     // storage of the unit's UnitData object
     // given on instantiation by a UnitController
     // used to initialize the Unit, kept for future reference (if needed)
-    [System.NonSerialized] public UnitData unitData;
+    [System.NonSerialized] public UnitData StartData;
 
     // the set of abilities that this unit can use on its turn
-    [System.NonSerialized] public List<UnitAbility> availableAbilities;
+    [System.NonSerialized] public List<UnitAbility> AvailableAbilities;
 
     // a Stack of death data. Every time the Unit dies, it creates a new one
-    [System.NonSerialized] public Stack<DeathData> deathData;
+    [System.NonSerialized] public Stack<DeathData> Deaths;
 
     // This event fires whenever a Unit dies. 
     // It passes a reference to itself so that other scripts can do what they need to do
-    public static UnitUnityEvent deathEvent = new UnitUnityEvent();
+    public static UnitUnityEvent DeathEvent = new UnitUnityEvent();
 
     // A special constructor that takes a Unit as a parameter and copies it
     
@@ -50,8 +50,8 @@ public abstract class Unit : MonoBehaviour
         hasMoved = false;
         m_SpriteRenderer = this.GetComponent<SpriteRenderer>();
         m_SpriteRenderer.sortingOrder = 99;
-        if (deathData.Count == 0)
-        { deathData = new Stack<DeathData>(); }
+        if (Deaths.Count == 0)
+        { Deaths = new Stack<DeathData>(); }
     }
 
     public virtual void Start()
@@ -67,13 +67,13 @@ public abstract class Unit : MonoBehaviour
     public void loadData()
     {
         // set parameters
-        unitName = unitData.unitName;
-        sprites = unitData.sprites;
-        health = unitData.health;
-        moveSpeed = unitData.moveSpeed;
+        unitName = StartData.unitName;
+        sprites = StartData.sprites;
+        health = StartData.health;
+        moveSpeed = StartData.moveSpeed;
 
         // convert the unitData's list of ability enums into real abilities, and store them
-        availableAbilities = AbilityDatabase.GetAbilities(unitData.abilities);
+        AvailableAbilities = AbilityDatabase.GetAbilities(StartData.abilities);
 
         /*
         for (int i = 0; i < availableAbilities.Count; i++)
@@ -251,7 +251,7 @@ public abstract class Unit : MonoBehaviour
     public virtual void KillMe(DeathData data)
     {
         health = 0;
-        deathData.Push(data);
+        Deaths.Push(data);
         hasMoved = true;
         hasActed = true;
         this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
@@ -259,7 +259,7 @@ public abstract class Unit : MonoBehaviour
         MapController.instance.map[mapPosition.x, mapPosition.y] = (int)tile;
 
         // "Hey guys, I'm dying. If anyone needs a reference to me, here it is."
-        deathEvent.Invoke(this);
+        DeathEvent.Invoke(this);
     }
 
     // This takes a 'dead' unit and gets it back in the world
@@ -268,7 +268,7 @@ public abstract class Unit : MonoBehaviour
     public virtual void Revive(Vector2Int position)
     {
         //if (globalPositionalData.SearchLocation(position) != null || )
-        health = unitData.health;
+        health = StartData.health;
         hasMoved = false;
         hasActed = false;
         this.gameObject.GetComponent<SpriteRenderer>().enabled = true;

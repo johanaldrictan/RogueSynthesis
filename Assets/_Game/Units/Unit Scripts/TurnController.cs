@@ -20,6 +20,9 @@ public class TurnController : MonoBehaviour
     // the number of full rounds that have passed
     private int currentRound;
 
+    // A UnityEvent that is called whenver a turn ends. it asks for any Units that should be turned into enemies to happen
+    public static ConversionConditionUnityEvent ToEnemyEvent = new ConversionConditionUnityEvent();
+
     public static TurnController instance;
 
     // initialization
@@ -44,15 +47,15 @@ public class TurnController : MonoBehaviour
     private void OnEnable()
     {
         // register for events called by UnitControllers
-        UnitController.endTurnEvent.AddListener(NextTurn);
-        UnitController.queueUpEvent.AddListener(EnqueueController);
+        UnitController.EndTurnEvent.AddListener(NextTurn);
+        UnitController.QueueUpEvent.AddListener(EnqueueController);
     }
 
     private void OnDisable()
     {
         // un-register for events called by UnitControllers
-        UnitController.endTurnEvent.RemoveListener(NextTurn);
-        UnitController.queueUpEvent.RemoveListener(EnqueueController);
+        UnitController.EndTurnEvent.RemoveListener(NextTurn);
+        UnitController.QueueUpEvent.RemoveListener(EnqueueController);
     }
 
     // takes a UnitController and adds it to the turn system in the correct order
@@ -107,6 +110,11 @@ public class TurnController : MonoBehaviour
             if (currentTurn == 0)
             { currentRound += 1; }
             StartController(currentTurn);
+
+            // if there's any Allied Units that died to enemy units, convert them to enemies
+            // IF                                      I'm an AlliedUnit    AND       The person who most recently killed me is an EnemyUnit
+            ToEnemyEvent.Invoke(unit => unit.GetType()  == typeof(AlliedUnit) && unit.Deaths.Peek().GetKiller().GetType() == typeof(EnemyUnit));
+
             controllers[currentTurn].SpotlightActiveUnit();
         }
     }
