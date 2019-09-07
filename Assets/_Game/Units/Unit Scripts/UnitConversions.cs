@@ -16,8 +16,8 @@ public static class UnitConversions
         target.SetMapPosition(toCopy.GetMapPosition());
         target.globalPositionalData = toCopy.globalPositionalData;
         target.sprites = toCopy.sprites;
-        target.unitData = toCopy.unitData;
-        target.availableAbilities = toCopy.availableAbilities;
-        target.deathData = toCopy.deathData;
+        target.StartData = toCopy.StartData;
+        target.AvailableAbilities = toCopy.AvailableAbilities;
+        target.Deaths = toCopy.Deaths;
     }
 }

@@ -27,10 +27,10 @@ public abstract class UnitController : MonoBehaviour
     [System.NonSerialized] public UnitPositionStorage globalPositionalData;
 
     // Event for queueing up to be added to a TurnController
-    public static UnitControllerUnityEvent queueUpEvent = new UnitControllerUnityEvent();
+    public static UnitControllerUnityEvent QueueUpEvent = new UnitControllerUnityEvent();
 
     // Event for asking a TurnController to end this controller's turn
-    public static UnitControllerUnityEvent endTurnEvent = new UnitControllerUnityEvent();
+    public static UnitControllerUnityEvent EndTurnEvent = new UnitControllerUnityEvent();
 
     // this can be overridden in subclasses.
     // Things done here should probably be done there a well.
@@ -43,12 +43,12 @@ public abstract class UnitController : MonoBehaviour
 
     private void OnEnable()
     {
-        Unit.deathEvent.AddListener(RemoveUnit);
+        Unit.DeathEvent.AddListener(RemoveUnit);
     }
 
     private void OnDisable()
     {
-        Unit.deathEvent.RemoveListener(RemoveUnit);
+        Unit.DeathEvent.RemoveListener(RemoveUnit);
     }
 
     // this can be overridden ( like Awake() )
@@ -56,7 +56,7 @@ public abstract class UnitController : MonoBehaviour
     public virtual void Start()
     {
         // I would like to be added to the TurnController
-        queueUpEvent.Invoke(this);
+        QueueUpEvent.Invoke(this);
 
         // Initialize my unitSpawnData into real units
         LoadUnits();
@@ -103,7 +103,7 @@ public abstract class UnitController : MonoBehaviour
             }
 
             // give this new Unit the raw data for creating it, set its direction
-            newUnitComponent.unitData = unitSpawnData[i].data;
+            newUnitComponent.StartData = unitSpawnData[i].data;
             newUnitComponent.SetDirection(unitSpawnData[i].spawnDirection);
             newUnitComponent.globalPositionalData = this.globalPositionalData;
             newUnitComponent.globalPositionalData.AddUnit(unitSpawnData[i].spawnPosition, newUnitComponent);

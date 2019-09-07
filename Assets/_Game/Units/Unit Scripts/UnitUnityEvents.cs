@@ -17,6 +17,9 @@ public class UnitUnityEvent : UnityEvent<Unit> { }
 // Creates an event that passes a List of Units with it
 public class ListofUnitUnityEvent : UnityEvent<List<Unit>> { }
 
+// Creates an event that passes a ConversionCondition with it
+public class ConversionConditionUnityEvent : UnityEvent<ConversionCondition> { }
+
 
 
 // DELEGATE

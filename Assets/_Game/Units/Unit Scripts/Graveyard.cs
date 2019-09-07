@@ -11,6 +11,9 @@ public class Graveyard : MonoBehaviour
     // the storage of dead EnemyUnit Objects
     [System.NonSerialized] private List<Unit> deadUnits;
 
+    // This is a UnityEvent that fires when new Enemies are created by the Graveyard.
+    public static ListofUnitUnityEvent NewEnemiesEvent = new ListofUnitUnityEvent();
+
     public static Graveyard instance;
 
     private void Awake()
@@ -31,12 +34,14 @@ public class Graveyard : MonoBehaviour
     private void OnEnable()
     {
         // When a Unit calls out while it is dying, the Graveyard shall answer, taking in the Unit
-        Unit.deathEvent.AddListener(EnqueueUnit);
+        Unit.DeathEvent.AddListener(EnqueueUnit);
+        TurnController.ToEnemyEvent.AddListener(ConvertToEnemies);
     }
 
     private void OnDisable()
     {
-        Unit.deathEvent.RemoveListener(EnqueueUnit);
+        Unit.DeathEvent.RemoveListener(EnqueueUnit);
+        TurnController.ToEnemyEvent.RemoveListener(ConvertToEnemies);
     }
 
     private void Wipe()
@@ -52,10 +57,10 @@ public class Graveyard : MonoBehaviour
 
     // this method iterates through the entire storage of dead Units
     // it converts all of the Units that meet the conditions of the parameter function into EnemyUnits
-    // it also removes the original Units from the graveyard and returns the final converted EnemyUnits
-    public List<EnemyUnit> ConvertToEnemies(ConversionCondition comparator)
+    // it also removes the original Units from the graveyard and sends out the final converted EnemyUnits
+    public void ConvertToEnemies(ConversionCondition comparator)
     {
-        List<EnemyUnit> result = new List<EnemyUnit>();
+        List<Unit> result = new List<Unit>();
 
         // iterate backwards through the units, because we may remove them as we go
         for (int i = deadUnits.Count - 1; i > 0; i--)
@@ -77,7 +82,7 @@ public class Graveyard : MonoBehaviour
                 result.Add(newEnemyComponent);
             }
         }
-
-        return result;
+        // "I've made new enemies, if anyone wants them"
+        NewEnemiesEvent.Invoke(result);
     }
 }
