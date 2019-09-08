@@ -170,10 +170,13 @@ public class PlayerController : UnitController
 
     public override void RelinquishPower()
     {
-        ResetUnits();
-        EndTurnEvent.Invoke(this);
-        UI.GetComponent<UI_Operator>().SetPhaseText(playerID);
-        UI.GetComponent<UI_Operator>().PhaseTextDisplay();
+        if (IsMyTurn())
+        {
+            ResetUnits();
+            EndTurnEvent.Invoke(this);
+            UI.GetComponent<UI_Operator>().SetPhaseText(playerID);
+            UI.GetComponent<UI_Operator>().PhaseTextDisplay();
+        }
     }
 
     public void GetNextUnit()

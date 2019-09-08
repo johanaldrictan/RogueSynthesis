@@ -134,6 +134,19 @@ public abstract class UnitController : MonoBehaviour
         { activeUnit--; }
     }
 
+    // takes a list of Units and adds it to the controller's storage of Units
+    protected void AddUnits(List<Unit> inputList)
+    {
+        foreach (Unit unit in inputList)
+        {
+            units.Add(unit);
+            if (unit.GetHealth() == 0)
+            {
+                unit.Revive(unit.Deaths.Peek().GetDeathLocation(), unit.Deaths.Peek().GetDeathDirection());
+            }
+        }
+    }
+
     // determine whether this controller is ready to end its turn
     public virtual bool IsTurnOver()
     {

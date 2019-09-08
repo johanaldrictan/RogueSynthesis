@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: TestUnit
   m_EditorClassIdentifier: 
   unitName: TestAlliedUnit
-  unitType: 0
+  unitType: 1
   sprites: {fileID: 11400000, guid: ce4e78ea9ee586141b652c5b9176045d, type: 2}
   moveSpeed: 4
   health: 10
-  attack: 5
-  abilities: 00000000
+  abilities: 0000000001000000

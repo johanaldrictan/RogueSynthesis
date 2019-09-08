@@ -265,7 +265,7 @@ public abstract class Unit : MonoBehaviour
     // This takes a 'dead' unit and gets it back in the world
     // refreshes stats, health to full, etc
     // NOT DONE
-    public virtual void Revive(Vector2Int position)
+    public virtual void Revive(Vector2Int position, Direction direction)
     {
         //if (globalPositionalData.SearchLocation(position) != null || )
         health = StartData.health;
@@ -275,6 +275,7 @@ public abstract class Unit : MonoBehaviour
         globalPositionalData.AddUnit(mapPosition, this);
         tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
         MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
+        SetDirection(direction);
     }
 
     public string GetName()
@@ -295,6 +296,7 @@ public abstract class Unit : MonoBehaviour
         if (health <= 0)
         {
             DeathData data = new DeathData(source, attack, amount, mapPosition, direction);
+            data.DebugLog();
             KillMe(data);
         }
     }

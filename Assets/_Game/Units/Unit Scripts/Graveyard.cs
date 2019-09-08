@@ -61,13 +61,14 @@ public class Graveyard : MonoBehaviour
     public void ConvertToEnemies(ConversionCondition comparator)
     {
         List<Unit> result = new List<Unit>();
-
         // iterate backwards through the units, because we may remove them as we go
-        for (int i = deadUnits.Count - 1; i > 0; i--)
+        for (int i = deadUnits.Count - 1; i >= 0; i--)
         {
             // if the given conditions are met with this particular unit
             if (comparator(deadUnits[i]))
             {
+                Debug.Log("Converting Unit " + deadUnits[i].GetName() + " into EnemyUnit");
+
                 // Get references
                 var oldComponent = deadUnits[i];
                 GameObject unitToConvert = deadUnits[i].gameObject;

@@ -359,7 +359,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1582521907}
         m_MethodName: RelinquishPower
         m_Mode: 1
         m_Arguments:
@@ -1391,7 +1391,7 @@ MonoBehaviour:
     spawnPosition: {x: 10, y: 10}
     spawnDirection: 1
   - data: {fileID: 11400000, guid: 22c2139a50d01e24fa0148c0f24b93a5, type: 2}
-    spawnPosition: {x: 14, y: 12}
+    spawnPosition: {x: 12, y: 11}
     spawnDirection: 2
   abilityPanel: {fileID: 1549085493}
   UI: {fileID: 826912452}
@@ -8117,13 +8117,13 @@ MonoBehaviour:
   activeUnit: 0
   unitSpawnData:
   - data: {fileID: 11400000, guid: 87fc11b9e22649f4490c8d684c736026, type: 2}
-    spawnPosition: {x: 1, y: 0}
+    spawnPosition: {x: 7, y: 7}
     spawnDirection: 0
   - data: {fileID: 11400000, guid: 87fc11b9e22649f4490c8d684c736026, type: 2}
-    spawnPosition: {x: 2, y: 6}
+    spawnPosition: {x: 6, y: 7}
     spawnDirection: 1
   - data: {fileID: 11400000, guid: 87fc11b9e22649f4490c8d684c736026, type: 2}
-    spawnPosition: {x: 1, y: 2}
+    spawnPosition: {x: 9, y: 7}
     spawnDirection: 2
   abilityPanel: {fileID: 1549085493}
   UI: {fileID: 826912452}

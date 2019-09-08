@@ -23,7 +23,17 @@ public class EnemyController : UnitController
     public GameObject abilityPanel;
     public GameObject UI;
     public int playerID;
-    
+
+
+    private void OnEnable()
+    {
+        Graveyard.NewEnemiesEvent.AddListener(AddUnits);
+    }
+
+    private void OnDisable()
+    {
+        Graveyard.NewEnemiesEvent.RemoveListener(AddUnits);
+    }
 
     public override void Update()
     {
@@ -63,7 +73,7 @@ public class EnemyController : UnitController
         }
 
         // ----Do Movement----
-        AlliedUnit theUnit = units[activeUnit] as AlliedUnit;
+        EnemyUnit theUnit = units[activeUnit] as EnemyUnit;
         // Get old stuff
         if (distances.Count != 0) { distanceSoFar = distances.Peek(); }
         if (pivots.Count == 0) { pivots.Push(theUnit.GetMapPosition()); }
@@ -171,10 +181,13 @@ public class EnemyController : UnitController
 
     public override void RelinquishPower()
     {
-        ResetUnits();
-        EndTurnEvent.Invoke(this);
-        UI.GetComponent<UI_Operator>().SetPhaseText(playerID);
-        UI.GetComponent<UI_Operator>().PhaseTextDisplay();
+        if (IsMyTurn())
+        {
+            ResetUnits();
+            EndTurnEvent.Invoke(this);
+            UI.GetComponent<UI_Operator>().SetPhaseText(playerID);
+            UI.GetComponent<UI_Operator>().PhaseTextDisplay();
+        }
     }
 
     public void GetNextUnit()
@@ -212,7 +225,7 @@ public class EnemyController : UnitController
         pivots.Push(units[activeUnit].GetMapPosition());
         distances.Push(0);
         directions.Push(units[activeUnit].GetDirection());
-        (units[activeUnit] as AlliedUnit).plannedPath.Clear();
+        (units[activeUnit] as EnemyUnit).plannedPath.Clear();
     }
 
     // selects the unit at the given Index, highlighting the relevant tiles and setting necessary data
