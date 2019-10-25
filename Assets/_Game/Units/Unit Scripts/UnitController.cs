@@ -193,20 +193,6 @@ public abstract class UnitController : MonoBehaviour
         return newActiveUnit;
     }
 
-    // clears highlighting for relevant tiles on the current indexed unit
-    public virtual void ClearSpotlight()
-    {
-        MapUIController.instance.ClearPathHighlight();
-        MapUIController.instance.ClearRangeHighlight();
-    }
-
-    // highlights relevant tiles for the current index, whatever it is
-    public virtual void SpotlightActiveUnit()
-    {
-        units[activeUnit].DisplayMovementTiles();
-        CameraController.instance.targetPos = units[activeUnit].transform.position;
-    }
-
     public int getActiveUnit()
     { return activeUnit; }
 
@@ -216,10 +202,10 @@ public abstract class UnitController : MonoBehaviour
     public bool IsMyTurn()
     { return myTurn; }
 
-    public void StartTurn()
+    public virtual void StartTurn()
     { myTurn = true; }
 
-    public void EndTurn()
+    public virtual void EndTurn()
     { myTurn = false; }
 
     public virtual int GetWeight()

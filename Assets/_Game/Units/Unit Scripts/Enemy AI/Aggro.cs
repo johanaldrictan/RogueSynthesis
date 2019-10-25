@@ -4,7 +4,7 @@ using UnityEngine;
 
 /// <summary>
 /// Aggro is a type of EnemyAction that represents the Unit taking offensive actions
-/// This Action entails moving towards an enemy and then attacking it
+/// This Action entails picking an enemy, moving towards it and then attacking it
 /// </summary>
 
 public class Aggro : EnemyAction
@@ -15,16 +15,11 @@ public class Aggro : EnemyAction
         myUnit = unit;
     }
 
-    // TEMPORARY. Currently Aggro is the only option, so it will always be chosen.
+    // TEMPORARY. Currently Aggro is currently the only implemented option, so it will always be chosen.
     // Once more EnemyAction objects are created, this function must be returned to.
     protected override void Evaluate()
     {
         significance = 10.0f;
-    }
-
-    protected override void Execute(ActionData data)
-    {
-        throw new System.NotImplementedException();
     }
 
     protected override ActionData GetActionData()

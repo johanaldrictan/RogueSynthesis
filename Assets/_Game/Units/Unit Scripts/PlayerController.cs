@@ -37,7 +37,7 @@ public class PlayerController : UnitController
         if (units[activeUnit].hasMoved && !units[activeUnit].hasActed)
         {
             abilityPanel.SetActive(true);
-            units[activeUnit].chooseAbility();
+            units[activeUnit].ChooseAbility();
             return;
         }
         else
@@ -197,7 +197,7 @@ public class PlayerController : UnitController
 
     
     // clears highlighting for relevant tiles on the current indexed unit
-    public override void ClearSpotlight()
+    public void ClearSpotlight()
     {
         MapUIController.instance.ClearPathHighlight();
         MapUIController.instance.ClearRangeHighlight();
@@ -207,9 +207,9 @@ public class PlayerController : UnitController
     }
 
     // highlights relevant tiles for the current index, whatever it is
-    public override void SpotlightActiveUnit()
+    public void SpotlightActiveUnit()
     {
-        units[activeUnit].DisplayMovementTiles();
+        (units[activeUnit] as AlliedUnit).DisplayMovementTiles();
         CameraController.instance.targetPos = units[activeUnit].transform.position;
         pivots.Push(units[activeUnit].GetMapPosition());
         distances.Push(0);
@@ -224,6 +224,18 @@ public class PlayerController : UnitController
         setActiveUnit(newIndex);
         SpotlightActiveUnit();
         UI.GetComponent<UI_Operator>().SetTextInfo(units[activeUnit].GetHealth(), units[activeUnit].GetName(), units[activeUnit].GetMoveSpeed());
+    }
+
+    public override void StartTurn()
+    { 
+        myTurn = true;
+        SpotlightActiveUnit();
+    }
+
+    public override void EndTurn()
+    { 
+        myTurn = false;
+        ClearSpotlight();
     }
 
     public void AbilityManual(int abilityID)

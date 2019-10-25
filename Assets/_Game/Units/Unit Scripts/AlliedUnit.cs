@@ -29,7 +29,7 @@ public class AlliedUnit : Unit
     }
     
     // this function highlights tiles that this unit instance can move to
-    public override void DisplayMovementTiles()
+    public void DisplayMovementTiles()
     {
         //clear tilemap
         MapUIController.instance.tileHighlighting.ClearAllTiles();
@@ -101,7 +101,7 @@ public class AlliedUnit : Unit
     // conditions: the unit's hasMoved is True, but its hasActed is False
     // meant to get the unit to choose an ability or cancel its movement
     // THIS CURRENT SOLUTION IS TEMPORARY
-    public override void chooseAbility()
+    public override void ChooseAbility()
     {
         // 0 on the NumPad (wait)
         if (Input.GetKeyDown(KeyCode.Keypad0) || PlayerController.ability == 1)

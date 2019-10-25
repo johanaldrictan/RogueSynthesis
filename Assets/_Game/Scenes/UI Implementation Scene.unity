@@ -8111,20 +8111,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1582521906}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb871b54213de234ab565a8a933013a3, type: 3}
+  m_Script: {fileID: 11500000, guid: d3692ae158d4fef4b8f4857330e708ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   activeUnit: 0
   unitSpawnData:
   - data: {fileID: 11400000, guid: 87fc11b9e22649f4490c8d684c736026, type: 2}
-    spawnPosition: {x: 7, y: 7}
+    spawnPosition: {x: 5, y: 5}
     spawnDirection: 0
   - data: {fileID: 11400000, guid: 87fc11b9e22649f4490c8d684c736026, type: 2}
-    spawnPosition: {x: 6, y: 7}
+    spawnPosition: {x: 5, y: 7}
     spawnDirection: 1
   - data: {fileID: 11400000, guid: 87fc11b9e22649f4490c8d684c736026, type: 2}
-    spawnPosition: {x: 9, y: 7}
-    spawnDirection: 2
+    spawnPosition: {x: 4, y: 6}
+    spawnDirection: 3
   abilityPanel: {fileID: 1549085493}
   UI: {fileID: 826912452}
   playerID: 1

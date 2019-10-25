@@ -41,8 +41,10 @@ public abstract class Unit : MonoBehaviour
     // It passes a reference to itself so that other scripts can do what they need to do
     public static UnitUnityEvent DeathEvent = new UnitUnityEvent();
 
-    // A special constructor that takes a Unit as a parameter and copies it
-    
+
+
+    // a Unit needs to be able to choose its Ability after it has moved but before its turn has ended
+    public abstract void ChooseAbility();
 
     public virtual void Awake()
     {
@@ -60,8 +62,6 @@ public abstract class Unit : MonoBehaviour
         tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
         MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
     }
-
-    public abstract void DisplayMovementTiles();
 
     // parses unitData to set own variables
     public void loadData()
@@ -85,10 +85,6 @@ public abstract class Unit : MonoBehaviour
         // set the direction to itself (in order to set the sprite)
         ChangeDirection(direction);
     }
-
-
-    // a Unit needs to be able to choose its Ability after it has moved but before its turn has ended
-    public abstract void chooseAbility();
 
 
     public Dictionary<Vector2Int, Direction> FindMoveableTiles(int[,] map, int moveSpeed = -100)

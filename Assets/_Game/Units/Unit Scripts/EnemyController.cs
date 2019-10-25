@@ -48,7 +48,7 @@ public class EnemyController : UnitController
         if (units[activeUnit].hasMoved && !units[activeUnit].hasActed)
         {
             abilityPanel.SetActive(true);
-            units[activeUnit].chooseAbility();
+            units[activeUnit].ChooseAbility();
             return;
         }
         else
@@ -206,35 +206,11 @@ public class EnemyController : UnitController
         }
     }
 
-
-    // clears highlighting for relevant tiles on the current indexed unit
-    public override void ClearSpotlight()
-    {
-        MapUIController.instance.ClearPathHighlight();
-        MapUIController.instance.ClearRangeHighlight();
-        pivots.Clear();
-        distances.Clear();
-        directions.Clear();
-    }
-
-    // highlights relevant tiles for the current index, whatever it is
-    public override void SpotlightActiveUnit()
-    {
-        units[activeUnit].DisplayMovementTiles();
-        CameraController.instance.targetPos = units[activeUnit].transform.position;
-        pivots.Push(units[activeUnit].GetMapPosition());
-        distances.Push(0);
-        directions.Push(units[activeUnit].GetDirection());
-        (units[activeUnit] as EnemyUnit).plannedPath.Clear();
-    }
-
     // selects the unit at the given Index, highlighting the relevant tiles and setting necessary data
     public void SelectUnit(int newIndex)
     {
         // set up the new unit
         setActiveUnit(newIndex);
-        SpotlightActiveUnit();
-        UI.GetComponent<UI_Operator>().SetTextInfo(units[activeUnit].GetHealth(), units[activeUnit].GetName(), units[activeUnit].GetMoveSpeed());
     }
 
     public void AbilityManual(int abilityID)
