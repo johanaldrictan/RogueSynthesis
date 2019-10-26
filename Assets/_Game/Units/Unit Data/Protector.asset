@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69221c0b80c9fdc46952d2b8669c5bc4, type: 3}
-  m_Name: TestProtector
+  m_Name: Protector
   m_EditorClassIdentifier: 
   unitName: Protector
   unitType: 0
