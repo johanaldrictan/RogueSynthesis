@@ -26,11 +26,11 @@ public abstract class EnemyAction
 
     // This function looks at the game-field and evalates it, resulting in a float significance.
     // The function stores the float within the object
-    protected abstract void Evaluate();
+    public abstract void Evaluate();
 
     // This function evaluates the game-field 
     // It then creates and returns an ActionData object referring to the steps for executing the action
-    protected abstract ActionData GetActionData();
+    public abstract ActionData GetActionData();
 
 
     public float GetSignificance()

@@ -226,18 +226,6 @@ public class PlayerController : UnitController
         UI.GetComponent<UI_Operator>().SetTextInfo(units[activeUnit].GetHealth(), units[activeUnit].GetName(), units[activeUnit].GetMoveSpeed());
     }
 
-    public override void StartTurn()
-    { 
-        myTurn = true;
-        SpotlightActiveUnit();
-    }
-
-    public override void EndTurn()
-    { 
-        myTurn = false;
-        ClearSpotlight();
-    }
-
     public void AbilityManual(int abilityID)
     {
         ability = abilityID;

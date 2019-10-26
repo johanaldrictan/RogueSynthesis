@@ -105,6 +105,11 @@ public class TurnController : MonoBehaviour
         // make sure that the controller asking for the next turn currently has control
         if (controllers[currentTurn] == controller && controller.IsMyTurn())
         {
+            if (controllers[currentTurn].GetType() == typeof(PlayerController))
+            {
+                (controllers[currentTurn] as PlayerController).ClearSpotlight();
+            }
+
             EndController(currentTurn);
             currentTurn = ((currentTurn + 1) % controllers.Count);
             if (currentTurn == 0)
@@ -114,6 +119,11 @@ public class TurnController : MonoBehaviour
             // if there's any Allied Units that died to enemy units, convert them to enemies
             // IF                                      I'm an AlliedUnit    AND       The person who most recently killed me is an EnemyUnit
             ToEnemyEvent.Invoke(unit => unit.GetType()  == typeof(AlliedUnit) && unit.Deaths.Peek().GetKiller().GetType() == typeof(EnemyUnit));
+
+            if (controllers[currentTurn].GetType() == typeof(PlayerController))
+            {
+                (controllers[currentTurn] as PlayerController).SpotlightActiveUnit();
+            }
         }
     }
 

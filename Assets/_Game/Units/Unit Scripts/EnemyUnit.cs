@@ -32,9 +32,51 @@ public class EnemyUnit : Unit
         };
     }
 
+    // this function is called when the EnemyUnit needs to know what it's going to do
+    // it evaluates its possibleActions, selects the best one, and asks it to create ActionData to store
+    public void NewActionData()
+    {
+        if (possibleActions.Count != 0)
+        {
+            EnemyAction bestAction = null;
+            float highestSignificance = 0.0f;
+
+            // for each possible action:
+            foreach (EnemyAction action in possibleActions)
+            {
+                // evaluate its significance level
+                action.Evaluate();
+
+                // check if it currently has the highest significance
+                if (action.GetSignificance() > highestSignificance)
+                {
+                    bestAction = action;
+                    highestSignificance = action.GetSignificance();
+                }
+            }
+
+            plannedActionData = bestAction.GetActionData();
+        }
+    }
+
+    // if there is a movement pattern planned, move in that way.
+    public void ChooseMovement()
+    {
+        if (plannedActionData != null)
+        {
+            
+        }
+        hasMoved = true;
+    }
+
+    // if there is a planned ability to activate, execute that ability
     public override void ChooseAbility()
     {
-        throw new System.NotImplementedException();
+        if (plannedActionData != null)
+        {
+            AvailableAbilities[plannedActionData.GetAbilityIndex()].Execute(this);
+        }
+        hasActed = true;
     }
 
 

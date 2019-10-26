@@ -16,13 +16,13 @@ public class Aggro : EnemyAction
     }
 
     // TEMPORARY. Currently Aggro is currently the only implemented option, so it will always be chosen.
-    // Once more EnemyAction objects are created, this function must be returned to.
-    protected override void Evaluate()
+    // Once more EnemyAction objects are created, this function must be edited.
+    public override void Evaluate()
     {
         significance = 10.0f;
     }
 
-    protected override ActionData GetActionData()
+    public override ActionData GetActionData()
     {
         throw new System.NotImplementedException();
     }

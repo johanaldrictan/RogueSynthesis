@@ -202,10 +202,10 @@ public abstract class UnitController : MonoBehaviour
     public bool IsMyTurn()
     { return myTurn; }
 
-    public virtual void StartTurn()
+    public void StartTurn()
     { myTurn = true; }
 
-    public virtual void EndTurn()
+    public void EndTurn()
     { myTurn = false; }
 
     public virtual int GetWeight()
