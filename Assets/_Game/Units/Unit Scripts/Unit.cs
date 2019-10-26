@@ -271,7 +271,7 @@ public abstract class Unit : MonoBehaviour
         globalPositionalData.AddUnit(mapPosition, this);
         tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
         MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
-        ChangeDirection(Direction.S);
+        SetDirection(Direction.S);
     }
 
     public string GetName()
@@ -305,6 +305,9 @@ public abstract class Unit : MonoBehaviour
 
     public Direction GetDirection()
     { return direction; }
+
+    public void SetDirection(Direction newDirection)
+    { direction = newDirection; }
 
     public Vector2Int GetMapPosition()
     { return mapPosition; }

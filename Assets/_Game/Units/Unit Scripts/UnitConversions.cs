@@ -12,7 +12,7 @@ public static class UnitConversions
         target.SetName(toCopy.GetName());
         target.SetHealth(toCopy.GetHealth());
         target.SetMoveSpeed(toCopy.GetMoveSpeed());
-        target.ChangeDirection(toCopy.GetDirection());
+        target.SetDirection(toCopy.GetDirection());
         target.SetMapPosition(toCopy.GetMapPosition());
         target.globalPositionalData = toCopy.globalPositionalData;
         target.sprites = toCopy.sprites;

@@ -104,7 +104,7 @@ public abstract class UnitController : MonoBehaviour
 
             // give this new Unit the raw data for creating it, set its direction
             newUnitComponent.StartData = unitSpawnData[i].data;
-            newUnitComponent.ChangeDirection(Direction.S);
+            newUnitComponent.SetDirection(Direction.S);
             newUnitComponent.globalPositionalData = this.globalPositionalData;
             newUnitComponent.globalPositionalData.AddUnit(unitSpawnData[i].spawnPosition, newUnitComponent);
 
