@@ -9,25 +9,24 @@ using UnityEngine;
 
 public class ActionData
 {
-    // the (x, y) coordinates the unit starts at before acting
+    // the (x, y) coordinates the unit starts at before moving
     private Vector2Int startingPosition;
 
-    // the cardinal direction that the Unit faces before acting
-    private Direction startingDirection;
+    // the cardinal direction that the Unit faces to execute its ability
+    private Direction abilityDirection;
 
-    // the stack of movement directions that the unit walks through
-    // the top of the stack is the first step; continuously Pop() for step-by-step directions to move
-    private Stack<Direction> movement;
+    // the (x, y) coordinates the unit ends at after moving
+    private Vector2Int endingPosition;
 
     // the index of the Unit's Ability list to activate after it moves
     private int abilityIndex;
 
     // Constructor. Takes the variables necessary for the object and stores them
-    public ActionData(Vector2Int start, Direction direction, Stack<Direction> move, int index)
+    public ActionData(Vector2Int start, Direction direction, Vector2Int move, int index)
     {
         startingPosition = start;
-        startingDirection = direction;
-        movement = move;
+        abilityDirection = direction;
+        endingPosition = move;
         abilityIndex = index;
     }
 
@@ -36,14 +35,14 @@ public class ActionData
         return startingPosition;
     }
 
-    public Direction GetStartingDirection()
+    public Direction GetAbilityDirection()
     {
-        return startingDirection;
+        return abilityDirection;
     }
-
-    public Stack<Direction> GetMovement()
+    
+    public Vector2Int GetEndingPosition()
     {
-        return movement;
+        return endingPosition;
     }
 
     public int GetAbilityIndex()

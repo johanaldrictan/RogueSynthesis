@@ -20,14 +20,14 @@ public class Cleave : Attack
     // we're making a list of coordinates that this attack reaches
     // Cleave has an origin point range tiles in front of the Unit (default 1)
     // it also hits the two adjacent squares on either side of the origin
-    public override List<Vector2Int> GetAreaOfEffect(Unit source)
+    public override List<Vector2Int> GetAreaOfEffect(Unit source, Direction direction)
     {
         List<Vector2Int> result = new List<Vector2Int>();
         Vector2Int origin = source.GetMapPosition();
 
         for (int i = 0; i < GetRange(); i++)
         {
-            origin += MapMath.DirToRelativeLoc(source.GetDirection());
+            origin += MapMath.DirToRelativeLoc(direction);
         }
 
         if (! MapMath.InMapBounds(origin))
@@ -40,12 +40,12 @@ public class Cleave : Attack
 
         result.Add(origin);
 
-        if (source.GetDirection() == Direction.N || source.GetDirection() == Direction.S)
+        if (direction == Direction.N || direction == Direction.S)
         {
             if (MapMath.InMapBounds(new Vector2Int(origin.x + 1, origin.y))) { result.Add(new Vector2Int(origin.x + 1, origin.y)); }
             if (MapMath.InMapBounds(new Vector2Int(origin.x - 1, origin.y))) { result.Add(new Vector2Int(origin.x - 1, origin.y)); }
         }
-        else if (source.GetDirection() == Direction.E || source.GetDirection() == Direction.W)
+        else if (direction == Direction.E || direction == Direction.W)
         {
             if (MapMath.InMapBounds(new Vector2Int(origin.x, origin.y + 1))) { result.Add(new Vector2Int(origin.x, origin.y + 1)); }
             if (MapMath.InMapBounds(new Vector2Int(origin.x, origin.y - 1))) { result.Add(new Vector2Int(origin.x, origin.y - 1)); }

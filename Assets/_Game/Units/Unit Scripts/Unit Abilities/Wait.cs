@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class Wait : UnitAbility
 {
-    public override void Execute(Unit source)
+    public override void Execute(Unit source, Direction direction)
     {
         return;
     }

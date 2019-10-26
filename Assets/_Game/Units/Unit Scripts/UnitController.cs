@@ -104,7 +104,7 @@ public abstract class UnitController : MonoBehaviour
 
             // give this new Unit the raw data for creating it, set its direction
             newUnitComponent.StartData = unitSpawnData[i].data;
-            newUnitComponent.SetDirection(unitSpawnData[i].spawnDirection);
+            newUnitComponent.ChangeDirection(Direction.S);
             newUnitComponent.globalPositionalData = this.globalPositionalData;
             newUnitComponent.globalPositionalData.AddUnit(unitSpawnData[i].spawnPosition, newUnitComponent);
 
@@ -142,7 +142,7 @@ public abstract class UnitController : MonoBehaviour
             units.Add(unit);
             if (unit.GetHealth() == 0)
             {
-                unit.Revive(unit.Deaths.Peek().GetDeathLocation(), unit.Deaths.Peek().GetDeathDirection());
+                unit.Revive(unit.Deaths.Peek().GetDeathLocation());
             }
         }
     }

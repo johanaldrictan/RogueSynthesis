@@ -18,17 +18,13 @@ public class DeathData
     // Where was I when I died?
     private Vector2Int deathLocation;
 
-    // What Directino was I facing when I died?
-    private Direction deathDirection;
-
     // Constructor. Takes references to the data it needs to store
-    public DeathData(Unit source, UnitAbility attack, int damage, Vector2Int location, Direction direction)
+    public DeathData(Unit source, UnitAbility attack, int damage, Vector2Int location)
     {
         killer = source;
         finishingAbility = attack;
         damageTaken = damage;
         deathLocation = location;
-        deathDirection = direction;
     }
 
     public Unit GetKiller()
@@ -51,14 +47,9 @@ public class DeathData
         return deathLocation;
     }
 
-    public Direction GetDeathDirection()
-    {
-        return deathDirection;
-    }
-
     //  prints the contents of this object to the Debug Console
     public void DebugLog()
     {
-        Debug.Log("Killer: " + killer + "; Finishing Ability: " + finishingAbility + "; Damage Taken: " + damageTaken + "; Location: " + deathLocation + "; Direction: " + deathDirection);
+        Debug.Log("Killer: " + killer + "; Finishing Ability: " + finishingAbility + "; Damage Taken: " + damageTaken + "; Location: " + deathLocation);
     }
 }

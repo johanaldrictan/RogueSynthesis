@@ -74,7 +74,7 @@ public class EnemyUnit : Unit
     {
         if (plannedActionData != null)
         {
-            AvailableAbilities[plannedActionData.GetAbilityIndex()].Execute(this);
+            AvailableAbilities[plannedActionData.GetAbilityIndex()].Execute(this, plannedActionData.GetAbilityDirection());
         }
         hasActed = true;
     }

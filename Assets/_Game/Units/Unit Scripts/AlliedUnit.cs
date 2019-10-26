@@ -14,10 +14,6 @@ public class AlliedUnit : Unit
     // if the action should be cancelled, the unit will remember where it should go back to
     [SerializeField] public Vector2Int positionMemory;
 
-    // similar to positionMemory, directionMemory functions the same, but stores the direction
-    [SerializeField] public Direction directionMemory;
-
-
     public override void Awake()
     {
         hasActed = false;
@@ -69,7 +65,6 @@ public class AlliedUnit : Unit
     {
         // remember where we started first
         positionMemory = mapPosition;
-        directionMemory = direction;
 
         // remove old coordinates from globalPositionalData
         globalPositionalData.RemoveUnit(mapPosition);
@@ -106,7 +101,7 @@ public class AlliedUnit : Unit
         // 0 on the NumPad (wait)
         if (Input.GetKeyDown(KeyCode.Keypad0) || PlayerController.ability == 1)
         {
-            AvailableAbilities[0].Execute(this);
+            AvailableAbilities[0].Execute(this, Direction.S); // CHANGE THIS
             hasActed = true;
             PlayerController.ability = 0;
             return;
@@ -115,7 +110,7 @@ public class AlliedUnit : Unit
         // 1 on the NumPad
         else if (Input.GetKeyDown(KeyCode.Keypad1) || PlayerController.ability == 2)
         {
-            AvailableAbilities[1].Execute(this);
+            AvailableAbilities[1].Execute(this, Direction.S); // CHANGE THIS
             hasActed = true;
             PlayerController.ability = 0;
             return;
@@ -125,7 +120,7 @@ public class AlliedUnit : Unit
         else if (Input.GetKeyDown(KeyCode.Escape) || PlayerController.ability == 3)
         {
             Move(positionMemory.x, positionMemory.y);
-            ChangeDirection(directionMemory);
+            ChangeDirection(Direction.S);
             hasMoved = false;
             PlayerController.ability = 0;
             return;

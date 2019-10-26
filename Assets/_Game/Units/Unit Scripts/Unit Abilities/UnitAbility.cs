@@ -11,7 +11,7 @@ public abstract class UnitAbility
     public abstract int GetRange();
 
     // execute() does the action's job, and sets the unit's hasActed to True
-    public abstract void Execute(Unit source);
+    public abstract void Execute(Unit source, Direction direction);
 
     // takes a UnitAbility object, returns True when the parameter shouldn't exist with this one at the same time
     // Examples: the same Ability, inferior versions of this Ability (Gun IV > Gun III)

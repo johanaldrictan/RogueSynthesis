@@ -83,7 +83,7 @@ public abstract class Unit : MonoBehaviour
         */
 
         // set the direction to itself (in order to set the sprite)
-        ChangeDirection(direction);
+        ChangeDirection(Direction.S);
     }
 
 
@@ -261,7 +261,7 @@ public abstract class Unit : MonoBehaviour
     // This takes a 'dead' unit and gets it back in the world
     // refreshes stats, health to full, etc
     // NOT DONE
-    public virtual void Revive(Vector2Int position, Direction direction)
+    public virtual void Revive(Vector2Int position)
     {
         //if (globalPositionalData.SearchLocation(position) != null || )
         health = StartData.health;
@@ -271,7 +271,7 @@ public abstract class Unit : MonoBehaviour
         globalPositionalData.AddUnit(mapPosition, this);
         tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
         MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
-        SetDirection(direction);
+        ChangeDirection(Direction.S);
     }
 
     public string GetName()
@@ -291,7 +291,7 @@ public abstract class Unit : MonoBehaviour
         health += amount;
         if (health <= 0)
         {
-            DeathData data = new DeathData(source, attack, amount, mapPosition, direction);
+            DeathData data = new DeathData(source, attack, amount, mapPosition);
             data.DebugLog();
             KillMe(data);
         }
@@ -305,9 +305,6 @@ public abstract class Unit : MonoBehaviour
 
     public Direction GetDirection()
     { return direction; }
-
-    public void SetDirection(Direction newDirection)
-    { direction = newDirection; }
 
     public Vector2Int GetMapPosition()
     { return mapPosition; }

@@ -14,5 +14,4 @@ public class UnitDataContainer
 {
     public UnitData data;
     public Vector2Int spawnPosition;
-    public Direction spawnDirection;
 }
