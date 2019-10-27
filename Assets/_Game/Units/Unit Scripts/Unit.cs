@@ -316,5 +316,13 @@ public abstract class Unit : MonoBehaviour
     public void SetMapPosition(Vector2Int newPosition)
     { mapPosition = newPosition; }
 
+
+    //TODO: SHOULD HAVE SOME BETTER WAY TO INDICATE WHAT UNIT A PLAYER IS CURRENTLY CONTROLLING
+    public void HighlightUnit()
+    { m_SpriteRenderer.color = Color.red; }
+
+    public void UnhighlightUnit()
+    { m_SpriteRenderer.color = Color.white; }
+
 }
 

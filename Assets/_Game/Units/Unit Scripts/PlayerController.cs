@@ -121,6 +121,7 @@ public class PlayerController : UnitController
     {
         MapUIController.instance.ClearPathHighlight();
         MapUIController.instance.ClearRangeHighlight();
+        units[activeUnit].UnhighlightUnit();
         //pivots.Clear();
         //distances.Clear();
         //directions.Clear();
@@ -131,6 +132,7 @@ public class PlayerController : UnitController
     {
         (units[activeUnit] as AlliedUnit).DisplayMovementTiles();
         CameraController.instance.targetPos = units[activeUnit].transform.position;
+        units[activeUnit].HighlightUnit();
         //pivots.Push(units[activeUnit].GetMapPosition());
         //distances.Push(0);
         //directions.Push(units[activeUnit].GetDirection());
