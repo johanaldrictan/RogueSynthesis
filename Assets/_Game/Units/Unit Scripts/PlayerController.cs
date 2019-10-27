@@ -34,6 +34,15 @@ public class PlayerController : UnitController
         // No logic runs without a unit.
         if (units.Count == 0) { return; }
 
+        //check for tab input
+        //select next unit
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            GetNextUnit();
+            UI.GetComponent<UI_Operator>().InitializeUI();
+            return;
+        }
+
         if(theUnit.hasMoved && !theUnit.hasTurned)
         {
             theUnit.ChooseDirection();
@@ -58,29 +67,23 @@ public class PlayerController : UnitController
             GetNextUnit();
             return;
         }
-
-        //check for tab input
-        //select next unit
-        if (Input.GetKeyDown(KeyCode.Tab))
+        //Only process if the unit has not moved
+        if (!theUnit.hasMoved)
         {
-            GetNextUnit();
-            UI.GetComponent<UI_Operator>().InitializeUI();
-            return;
-        }
+            // ----Do Movement----
+            Vector2Int dest = MapUIController.instance.cursorPosition;
 
-        // ----Do Movement----
-        Vector2Int dest = MapUIController.instance.cursorPosition; 
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (theUnit.plannedPath.Contains(dest)) // Commit to the path
+            if (Input.GetMouseButtonDown(0))
             {
-                theUnit.Move(dest.x, dest.y);
-                ClearSpotlight();
-            }
-            else 
-            {
-                theUnit.DisplayShortestPath(dest);
+                if (theUnit.plannedPath.Contains(dest)) // Commit to the path
+                {
+                    theUnit.Move(dest.x, dest.y);
+                    ClearSpotlight();
+                }
+                else
+                {
+                    theUnit.DisplayShortestPath(dest);
+                }
             }
         }
     }

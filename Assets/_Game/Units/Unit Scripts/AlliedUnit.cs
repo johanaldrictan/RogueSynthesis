@@ -125,8 +125,9 @@ public class AlliedUnit : Unit
         else if (Input.GetKeyDown(KeyCode.Escape) || PlayerController.ability == 3)
         {
             Move(positionMemory.x, positionMemory.y);
-            ChangeDirection(Direction.S);
+            ChangeDirection(directionMemory);
             hasMoved = false;
+            hasTurned = false;
             PlayerController.ability = 0;
             return;
         }
