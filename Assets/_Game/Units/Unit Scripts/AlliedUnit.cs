@@ -15,8 +15,12 @@ public class AlliedUnit : Unit
     [SerializeField] public Vector2Int positionMemory;
     [SerializeField] public Direction directionMemory;
 
+    [SerializeField]
+    public bool hasTurned;
+
     public override void Awake()
     {
+        hasTurned = false;
         hasActed = false;
         hasMoved = false;
         plannedPath = new List<Vector2Int>();
@@ -140,6 +144,35 @@ public class AlliedUnit : Unit
         {
             Vector2Int loc = path.Pop();
             MapUIController.instance.PathHighlight(loc, true);
+        }
+    }
+    //ANDREW NEEDS TO WORK ON GETTING BUTTONS FOR THIS WORKING AS WELL
+    public void ChooseDirection()
+    {
+        directionMemory = this.direction;
+        if(Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            this.ChangeDirection(Direction.N);
+            hasTurned = true;
+            return;
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            this.ChangeDirection(Direction.S);
+            hasTurned = true;
+            return;
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            this.ChangeDirection(Direction.W);
+            hasTurned = true;
+            return;
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            this.ChangeDirection(Direction.E);
+            hasTurned = true;
+            return;
         }
     }
 }

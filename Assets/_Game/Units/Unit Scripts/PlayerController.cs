@@ -26,6 +26,7 @@ public class PlayerController : UnitController
 
     public override void Update()
     {
+        AlliedUnit theUnit = units[activeUnit] as AlliedUnit;
         // if it's not currently this controller's turn, it's not allowed to do anything
         if (!myTurn)
         { return; }
@@ -33,11 +34,17 @@ public class PlayerController : UnitController
         // No logic runs without a unit.
         if (units.Count == 0) { return; }
 
+        if(theUnit.hasMoved && !theUnit.hasTurned)
+        {
+            theUnit.ChooseDirection();
+            return;
+        }
+
         // if the current unit has moved but hasn't attacked, it needs to select an ability
-        if (units[activeUnit].hasMoved && !units[activeUnit].hasActed)
+        if (theUnit.hasMoved && theUnit.hasTurned && !theUnit.hasActed)
         {
             abilityPanel.SetActive(true);
-            units[activeUnit].ChooseAbility();
+            theUnit.ChooseAbility();
             return;
         }
         else
@@ -45,7 +52,7 @@ public class PlayerController : UnitController
         
 
         // if the current unit has moved and attacked, get the next unit
-        if (units[activeUnit].hasMoved && units[activeUnit].hasActed)
+        if (theUnit.hasMoved && theUnit.hasTurned && theUnit.hasActed)
         {
             abilityPanel.SetActive(false);
             GetNextUnit();
@@ -62,111 +69,20 @@ public class PlayerController : UnitController
         }
 
         // ----Do Movement----
-        AlliedUnit theUnit = units[activeUnit] as AlliedUnit;
-        // Get old stuff
-        //if (distances.Count != 0) { distanceSoFar = distances.Peek(); }
-        //if (pivots.Count == 0) { pivots.Push(theUnit.GetMapPosition()); }
-        // Find the tile the cursor most points to.
-        //lastPosition = pivots.Peek();
-        Vector2Int dest = MapUIController.instance.cursorPosition; //- lastPosition;
-        /*
-        if (Mathf.Abs(diff.y) > Mathf.Abs(diff.x))
-        {
-            diff.x = 0;
-        }
-        else
-        {
-            diff.y = 0;
-        }*/
-        // Draw the path so far
-        //MapUIController.instance.ClearPathHighlight();
-        //theUnit.DisplayPlannedPath();
-        // Draw the new part after the pivot
-        //MapUIController.instance.PathHighlight(lastPosition, lastPosition + diff);
+        Vector2Int dest = MapUIController.instance.cursorPosition; 
 
         if (Input.GetMouseButtonDown(0))
         {
             if (theUnit.plannedPath.Contains(dest)) // Commit to the path
             {
                 theUnit.Move(dest.x, dest.y);
-                //DO DIRECTION CODE HERE
-
                 ClearSpotlight();
             }
-            else // Extend Path
+            else 
             {
                 theUnit.DisplayShortestPath(dest);
-                /*
-                // grr. copy paste
-                if (diff.y >= 0)
-                {
-                    for (int y = 1; y <= diff.y; y++)
-                    {
-                        distanceSoFar += MapController.instance.map[lastPosition.x, lastPosition.y + y];
-                        theUnit.plannedPath.Add(lastPosition + Vector2Int.up * y);
-                    }
-                }
-                else
-                {
-                    for (int y = 1; y <= -diff.y; y++)
-                    {
-                        distanceSoFar += MapController.instance.map[lastPosition.x, lastPosition.y - y];
-                        theUnit.plannedPath.Add(lastPosition + Vector2Int.down * y);
-                    }
-                }
-                if (diff.x >= 0)
-                {
-                    for (int x = 1; x <= diff.x; x++)
-                    {
-                        distanceSoFar += MapController.instance.map[lastPosition.x + x, lastPosition.y];
-                        theUnit.plannedPath.Add(lastPosition + Vector2Int.right * x);
-                    }
-                }
-                else
-                {
-                    for (int x = 1; x <= -diff.x; x++)
-                    {
-                        distanceSoFar += MapController.instance.map[lastPosition.x - x, lastPosition.y];
-                        theUnit.plannedPath.Add(lastPosition + Vector2Int.left * x);
-                    }
-                }
-                Debug.Assert(distanceSoFar <= theUnit.GetMoveSpeed());
-                distances.Push(distanceSoFar);
-                pivots.Push(lastPosition + diff);
-
-                MapUIController.instance.tileHighlighting.ClearAllTiles();
-                foreach (Vector2Int tile in Unit.FindMoveableTiles(MapController.instance.map, pivots.Peek(), theUnit.GetMoveSpeed() - distanceSoFar).Keys)
-                {
-                    MapUIController.instance.RangeHighlight(tile);
-                }
-
-                MapUIController.instance.ClearPathHighlight();
-                theUnit.DisplayPlannedPath();
-                */
             }
         }
-        /*
-        if (Input.GetMouseButtonDown(1) && !Input.GetMouseButtonDown(0))
-        {
-            if (pivots.Count > 1)
-            {
-                pivots.Pop();
-                distances.Pop();
-
-                while (theUnit.plannedPath.Count != 0 && theUnit.plannedPath[theUnit.plannedPath.Count - 1] != pivots.Peek())
-                {
-                    theUnit.plannedPath.RemoveAt(theUnit.plannedPath.Count - 1);
-                }
-
-                MapUIController.instance.ClearPathHighlight();
-                theUnit.DisplayPlannedPath();
-                MapUIController.instance.tileHighlighting.ClearAllTiles();
-                foreach (Vector2Int tile in Unit.FindMoveableTiles(MapController.instance.map, pivots.Peek(), theUnit.GetMoveSpeed() - distances.Peek()).Keys)
-                {
-                    MapUIController.instance.RangeHighlight(tile);
-                }
-            }
-        }*/
     }
 
     public override void RelinquishPower()
