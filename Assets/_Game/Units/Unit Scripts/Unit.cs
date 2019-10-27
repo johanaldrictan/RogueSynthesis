@@ -92,7 +92,7 @@ public abstract class Unit : MonoBehaviour
         if (moveSpeed == -100) { moveSpeed = this.moveSpeed; }
         return Unit.FindMoveableTiles(map, this.mapPosition, moveSpeed);
     }
-
+    /*
     public static Dictionary<Vector2Int, Direction> FindMoveableTilesStraight(int[,] map, Vector2Int mapPosition, int moveSpeed)
     {
         Dictionary<Vector2Int, Direction> shortestFrom = new Dictionary<Vector2Int, Direction>();
@@ -119,9 +119,10 @@ public abstract class Unit : MonoBehaviour
                 shortestFrom[neighbor] = neighbors[neighbor];
             }
         }
-
         return shortestFrom;
-    }
+        
+        
+    }*/
 
     public static Dictionary<Vector2Int, Direction> FindMoveableTiles(int[,] map, Vector2Int mapPosition, int moveSpeed)
     {

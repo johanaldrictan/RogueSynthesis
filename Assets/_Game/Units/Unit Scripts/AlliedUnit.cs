@@ -13,6 +13,7 @@ public class AlliedUnit : Unit
     // positionMemory is a record of where a unit was, after they moved, and before they acted
     // if the action should be cancelled, the unit will remember where it should go back to
     [SerializeField] public Vector2Int positionMemory;
+    [SerializeField] public Direction directionMemory;
 
     public override void Awake()
     {
@@ -126,25 +127,24 @@ public class AlliedUnit : Unit
             return;
         }
     }
+    public void DisplayShortestPath(Vector2Int dest)
+    {
+        MapUIController.instance.ClearPathHighlight();
+        Stack<Vector2Int> path = GetMovementPath(FindMoveableTiles(MapController.instance.map), dest);
+        plannedPath.Clear();
 
+        if (path == null) { return; }
+
+        plannedPath.AddRange(path);
+        while (path.Count != 0)
+        {
+            Vector2Int loc = path.Pop();
+            MapUIController.instance.PathHighlight(loc, true);
+        }
+    }
 }
 
 
 
 
 
-//public void DisplayShortestPath(Vector2Int dest)
-//{
-//    MapUIController.instance.ClearPathHighlight();
-//    Stack<Vector2Int> path = GetMovementPath(FindMoveableTiles(MapController.instance.map), dest);
-//    //plannedPath.Clear();
-
-//    if (path == null) { return; }
-
-//    //plannedPath.AddRange(path);
-//    while(path.Count != 0)
-//    {
-//        Vector2Int loc = path.Pop();    
-//        MapUIController.instance.PathHighlight(loc);
-//    }
-//}
