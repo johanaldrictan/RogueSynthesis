@@ -13,12 +13,13 @@ public class Focus : Attack
 {
     public Focus()
     {
-        isAOE = true;
+        isAOE = false;
     }
     // We're just doing straight damage here
     public override void DealEffects(Unit target, Unit source)
     {
-        target.ChangeHealth( (GetDamage()*(-1)), source, this );
+        if (source.GetDamageReduction() < 5)
+            source.SetDamageReduction(1);
     }
 
     public override void DealDelayedEffect(Unit target, Unit source)

@@ -11,6 +11,7 @@ public abstract class Unit : MonoBehaviour
     [SerializeField] protected string unitName;
     [SerializeField] protected int health;
     [SerializeField] protected int moveSpeed;
+    [SerializeField] protected int damageReduction;
 
     // booleans
     [SerializeField] public bool hasActed;
@@ -73,6 +74,7 @@ public abstract class Unit : MonoBehaviour
         sprites = StartData.sprites;
         health = StartData.health;
         moveSpeed = StartData.moveSpeed;
+        damageReduction = 0;
 
         // convert the unitData's list of ability enums into real abilities, and store them
         AvailableAbilities = AbilityDatabase.GetAbilities(StartData.abilities);
@@ -281,7 +283,7 @@ public abstract class Unit : MonoBehaviour
 
     public void ChangeHealth(int amount, Unit source, UnitAbility attack)
     {
-        health += amount;
+        health += (amount - damageReduction);
         if (health <= 0)
         {
             DeathData data = new DeathData(source, attack, amount, mapPosition);
@@ -295,6 +297,12 @@ public abstract class Unit : MonoBehaviour
 
     public void SetMoveSpeed(int amount)
     { moveSpeed += amount; }
+
+    public int GetDamageReduction()
+    { return damageReduction; }
+
+    public void SetDamageReduction(int amount)
+    { damageReduction += amount; }
 
     public Direction GetDirection()
     { return direction; }
