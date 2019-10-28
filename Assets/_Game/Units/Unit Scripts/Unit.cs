@@ -13,11 +13,12 @@ public abstract class Unit : MonoBehaviour
     [SerializeField] protected int moveSpeed;
     [SerializeField] protected int damageReduction;
 
+
     // booleans
     [SerializeField] public bool hasActed;
     [SerializeField] public bool hasMoved;
-
-    //
+    [SerializeField] public bool isImmobilized;
+    
 
     // positional data
     [SerializeField] protected Direction direction;
@@ -53,6 +54,7 @@ public abstract class Unit : MonoBehaviour
     {
         hasActed = false;
         hasMoved = false;
+        isImmobilized = false;
         m_SpriteRenderer = this.GetComponent<SpriteRenderer>();
         m_SpriteRenderer.sortingOrder = 99;
         if (Deaths.Count == 0)
