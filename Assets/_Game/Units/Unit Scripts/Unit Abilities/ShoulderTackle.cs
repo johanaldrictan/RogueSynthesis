@@ -9,10 +9,76 @@ using UnityEngine;
 
 public class ShoulderTackle : Attack
 {
-    // We're just doing straight damage here
+    // TODO: NEED TO FIX CASE WHEN THERE IS SOMETHING BEHIND TARGET
     public override void DealEffects(Unit target, Unit source)
     {
-        target.ChangeHealth((GetDamage() * (-1)), source, this);
+        int pushback = 3;
+
+        if (target != null)
+        {
+            target.ChangeHealth((GetDamage() * (-1)), source, this);
+            Vector2Int diff = target.GetMapPosition() - source.GetMapPosition();
+            Debug.Assert(source.GetDirection() != Direction.NO_DIR);
+            Vector2Int newLocation = source.GetMapPosition();
+            if (source.GetDirection() == Direction.N || source.GetDirection() == Direction.S)
+            {
+                newLocation = new Vector2Int(source.GetMapPosition().x, source.GetMapPosition().y + (diff.y-1));
+            }
+            else
+            {
+                newLocation = new Vector2Int(source.GetMapPosition().x + (diff.x-1), source.GetMapPosition().y);
+            }
+            //check new location for issues, if so, stay at current loc
+            source.Move(newLocation.x, newLocation.y);
+            Vector2Int pushbackLoc = target.GetMapPosition() + (MapMath.DirToRelativeLoc(source.GetDirection()) * pushback);
+            //look for collisions
+            List<Vector2Int> pushbackArea = GetAreaOfEffect(target, source.GetDirection());
+            Vector2Int? searchResult = null;
+            foreach (Vector2Int tile in pushbackArea)
+            {
+                if (MapController.instance.map[tile.x, tile.y] == (int)TileWeight.OBSTRUCTED)
+                {
+                    searchResult = tile;
+                    break;
+                }
+            }
+            if(searchResult != null)
+            {
+                Debug.Log(searchResult);
+                Vector2Int newPushDiff = (Vector2Int)searchResult - target.GetMapPosition();
+                Debug.Log(newPushDiff);
+                //change pushbackLoc in some way
+                if (source.GetDirection() == Direction.N || source.GetDirection() == Direction.S)
+                {
+                    pushbackLoc = new Vector2Int(target.GetMapPosition().x, target.GetMapPosition().y + (newPushDiff.y));
+                }
+                else
+                {
+                    pushbackLoc = new Vector2Int(target.GetMapPosition().x + (newPushDiff.x), target.GetMapPosition().y);
+                }
+                Debug.Log(pushbackLoc);
+            }
+            //maybe do out of bounds checks here to kill unit if pushed out of bounds or on certain tiles
+            if (MapMath.InMapBounds(pushbackLoc))
+                target.Move(pushbackLoc.x, pushbackLoc.y);
+            //else if()
+            else
+            {
+                DeathData data = new DeathData(source, this, GetDamage(), target.GetMapPosition());
+                target.KillMe(data);
+            }
+        }
+        else
+        {
+            Vector2Int newLocation = source.GetMapPosition() + (MapMath.DirToRelativeLoc(source.GetDirection()) * pushback);
+            source.Move(newLocation.x, newLocation.y);
+        }
+        
+        
+    }
+    public override void DealDelayedEffect(Unit target, Unit source)
+    {
+        //this has no delayed effect
     }
 
     // we're making a list of coordinates that this attack reaches
@@ -23,10 +89,7 @@ public class ShoulderTackle : Attack
         List<Vector2Int> result = new List<Vector2Int>();
         Vector2Int origin = source.GetMapPosition();
 
-        for (int i = 0; i < GetRange(); i++)
-        {
-            origin += MapMath.DirToRelativeLoc(direction);
-        }
+        origin += MapMath.DirToRelativeLoc(direction);
 
         if (!MapMath.InMapBounds(origin))
         { return result; }
@@ -35,21 +98,38 @@ public class ShoulderTackle : Attack
         Debug.Log( "Unit at (" + source.GetMapPosition().x + ", " + source.GetMapPosition().y + ") " 
             + source.GetDirection() + " is Cleaving at Origin Point (" + origin.x + ", " + origin.y + ")" );
         */
-
+        //one tile forward
         result.Add(origin);
 
-        if (direction == Direction.N || direction == Direction.S)
+        for (int i = 0; i < GetRange() - 1; i++)
         {
-            if (MapMath.InMapBounds(new Vector2Int(origin.x + 1, origin.y))) { result.Add(new Vector2Int(origin.x + 1, origin.y)); }
-            if (MapMath.InMapBounds(new Vector2Int(origin.x - 1, origin.y))) { result.Add(new Vector2Int(origin.x - 1, origin.y)); }
+            origin += MapMath.DirToRelativeLoc(direction);
+            result.Add(origin);
         }
-        else if (direction == Direction.E || direction == Direction.W)
+        return result;
+    }
+    public List<Vector2Int> GetAreaOfEffect(Unit source, Direction direction, int pushbackDist)
+    {
+        List<Vector2Int> result = new List<Vector2Int>();
+        Vector2Int origin = source.GetMapPosition();
+
+        origin += MapMath.DirToRelativeLoc(direction);
+
+        if (!MapMath.InMapBounds(origin))
+        { return result; }
+
+        /*
+        Debug.Log( "Unit at (" + source.GetMapPosition().x + ", " + source.GetMapPosition().y + ") " 
+            + source.GetDirection() + " is Cleaving at Origin Point (" + origin.x + ", " + origin.y + ")" );
+        */
+        //one tile forward
+        result.Add(origin);
+
+        for (int i = 0; i < pushbackDist - 1; i++)
         {
-            if (MapMath.InMapBounds(new Vector2Int(origin.x, origin.y + 1))) { result.Add(new Vector2Int(origin.x, origin.y + 1)); }
-            if (MapMath.InMapBounds(new Vector2Int(origin.x, origin.y - 1))) { result.Add(new Vector2Int(origin.x, origin.y - 1)); }
+            origin += MapMath.DirToRelativeLoc(direction);
+            result.Add(origin);
         }
-
-
         return result;
     }
 

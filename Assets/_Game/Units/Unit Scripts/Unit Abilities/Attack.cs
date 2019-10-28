@@ -8,6 +8,7 @@ using UnityEngine;
 
 public abstract class Attack : UnitAbility
 {
+    public bool isAOE;
     // Attacks deal damage, and need a variable for how much damage it does
     public abstract int GetDamage();
 
@@ -17,14 +18,37 @@ public abstract class Attack : UnitAbility
     // This funciton takes a Unit that is to be hit with the Attack. The function deals the associated effects of the attack to the given Unit
     public abstract void DealEffects(Unit target, Unit source);
 
+    public abstract void DealDelayedEffect(Unit target, Unit source);
 
     // get the area of effect. iterate through it, dealing effects to each unit found
     public override void Execute(Unit source, Direction direction)
     {
         List<Vector2Int> area = GetAreaOfEffect(source, direction);
-        foreach (Vector2Int tile in area)
+        //Debug.Log(direction);
+        //if it is an aoe attack, deal effects to every circle 
+        if (isAOE)
         {
-            Unit searchResult = source.globalPositionalData.SearchLocation(tile);
+            foreach (Vector2Int tile in area)
+            {
+                Unit searchResult = source.globalPositionalData.SearchLocation(tile);
+                if (searchResult != null)
+                {
+                    DealEffects(searchResult, source);
+                }
+            }
+        }
+        else
+        {
+            Unit searchResult = null;
+            foreach (Vector2Int tile in area)
+            {
+                searchResult = source.globalPositionalData.SearchLocation(tile);
+                if (searchResult != null)
+                {
+                    break;
+                }
+            }
+            //deal damage to first unit found
             if (searchResult != null)
             {
                 DealEffects(searchResult, source);

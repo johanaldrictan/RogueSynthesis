@@ -59,6 +59,7 @@ public static class MapMath
         return mapCoords;
     }
 
+    //TODO: might need to fix for non square maps
     public static bool InMapBounds(Vector2Int loc)
     {
         //check x
@@ -117,6 +118,15 @@ public static class MapMath
                 break;
         }
         return output;
+    }
+    public static Dictionary<Vector2Int, Direction> GetNeighbors(Vector2Int curr)
+    {
+        Dictionary<Vector2Int, Direction> neighbors = new Dictionary<Vector2Int, Direction>();
+        neighbors.Add(new Vector2Int(curr.x, curr.y + 1), Direction.N);
+        neighbors.Add(new Vector2Int(curr.x - 1, curr.y), Direction.W);
+        neighbors.Add(new Vector2Int(curr.x, curr.y - 1), Direction.S);
+        neighbors.Add(new Vector2Int(curr.x + 1, curr.y), Direction.E);
+        return neighbors;
     }
 }
 

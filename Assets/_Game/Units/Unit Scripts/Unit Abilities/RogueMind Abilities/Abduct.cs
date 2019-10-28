@@ -9,16 +9,16 @@ using UnityEngine;
 
 // If you want to create a new UnitAbility, refer to the comments/code on UnitAbility.cs and AbilityDatabase.cs
 
-public class Cleave : Attack
+public class Abduct : Attack
 {
-    public Cleave()
+    public Abduct()
     {
         isAOE = true;
     }
     // We're just doing straight damage here
     public override void DealEffects(Unit target, Unit source)
     {
-        target.ChangeHealth( (GetDamage()*(-1)), source, this );
+        
     }
 
     public override void DealDelayedEffect(Unit target, Unit source)
@@ -32,33 +32,7 @@ public class Cleave : Attack
     public override List<Vector2Int> GetAreaOfEffect(Unit source, Direction direction)
     {
         List<Vector2Int> result = new List<Vector2Int>();
-        Vector2Int origin = source.GetMapPosition();
-
-        for (int i = 0; i < GetRange(); i++)
-        {
-            origin += MapMath.DirToRelativeLoc(direction);
-        }
-
-        if (! MapMath.InMapBounds(origin))
-        { return result; }
-
-        /*
-        Debug.Log( "Unit at (" + source.GetMapPosition().x + ", " + source.GetMapPosition().y + ") " 
-            + source.GetDirection() + " is Cleaving at Origin Point (" + origin.x + ", " + origin.y + ")" );
-        */
-
-        result.Add(origin);
-
-        if (direction == Direction.N || direction == Direction.S)
-        {
-            if (MapMath.InMapBounds(new Vector2Int(origin.x + 1, origin.y))) { result.Add(new Vector2Int(origin.x + 1, origin.y)); }
-            if (MapMath.InMapBounds(new Vector2Int(origin.x - 1, origin.y))) { result.Add(new Vector2Int(origin.x - 1, origin.y)); }
-        }
-        else if (direction == Direction.E || direction == Direction.W)
-        {
-            if (MapMath.InMapBounds(new Vector2Int(origin.x, origin.y + 1))) { result.Add(new Vector2Int(origin.x, origin.y + 1)); }
-            if (MapMath.InMapBounds(new Vector2Int(origin.x, origin.y - 1))) { result.Add(new Vector2Int(origin.x, origin.y - 1)); }
-        }
+        
         
 
         return result;

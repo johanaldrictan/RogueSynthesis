@@ -9,9 +9,9 @@ using UnityEngine;
 
 // If you want to create a new UnitAbility, refer to the comments/code on UnitAbility.cs and AbilityDatabase.cs
 
-public class Cleave : Attack
+public class Infect : Attack
 {
-    public Cleave()
+    public Infect()
     {
         isAOE = true;
     }

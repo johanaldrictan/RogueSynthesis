@@ -16,6 +16,8 @@ public abstract class Unit : MonoBehaviour
     [SerializeField] public bool hasActed;
     [SerializeField] public bool hasMoved;
 
+    //
+
     // positional data
     [SerializeField] protected Direction direction;
     [SerializeField] protected Vector2Int mapPosition;
@@ -140,7 +142,7 @@ public abstract class Unit : MonoBehaviour
             Vector2Int visiting = frontier.Dequeue();
             if (visited.Contains(visiting)) {continue;} // TODO: Implement changing priority in the PQ, and remove this.
             
-            Dictionary<Vector2Int, Direction> neighbors = GetNeighbors(visiting);
+            Dictionary<Vector2Int, Direction> neighbors = MapMath.GetNeighbors(visiting);
             foreach (Vector2Int neighbor in neighbors.Keys)
             {
                 if (visited.Contains(neighbor) || !MapMath.InMapBounds(neighbor)) { continue; }
@@ -190,16 +192,6 @@ public abstract class Unit : MonoBehaviour
             }
         }
         return path;
-    }
-
-    public static Dictionary<Vector2Int, Direction> GetNeighbors(Vector2Int curr)
-    {
-        Dictionary<Vector2Int, Direction> neighbors = new Dictionary<Vector2Int, Direction>();
-        neighbors.Add(new Vector2Int(curr.x, curr.y + 1), Direction.N);
-        neighbors.Add(new Vector2Int(curr.x - 1, curr.y), Direction.W);
-        neighbors.Add(new Vector2Int(curr.x, curr.y - 1), Direction.S);
-        neighbors.Add(new Vector2Int(curr.x + 1, curr.y), Direction.E);
-        return neighbors;
     }
 
     public virtual void Move(int x, int y)
