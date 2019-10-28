@@ -25,7 +25,7 @@ public abstract class Attack : UnitAbility
     {
         List<Vector2Int> area = GetAreaOfEffect(source, direction);
         //Debug.Log(direction);
-        //if it is an aoe attack, deal effects to every circle 
+        //if it is an aoe attack, deal effects to every unit 
         if (isAOE)
         {
             foreach (Vector2Int tile in area)

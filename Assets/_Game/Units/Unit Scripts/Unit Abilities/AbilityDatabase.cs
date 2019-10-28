@@ -56,5 +56,12 @@ public enum Ability // ****************
 {
     Wait = 0,
     Cleave = 1,
-    ShoulderTackle = 2
+    ShoulderTackle = 2,
+    Abduct = 3,
+    Swipe = 4,
+    Focus = 5,
+    ImmobilizationBeam = 6,
+    WatcherGaze = 7,
+    Infect = 8,
+
 };
