@@ -38,7 +38,13 @@ public static class AbilityDatabase
     {
         new Wait(),
         new Cleave(),
-        new ShoulderTackle()
+        new ShoulderTackle(),
+        new Abduct(),
+        new Swipe(),
+        new Focus(),
+        new ImmobilizationBeam(),
+        new WatcherGaze(),
+        new Infect()
     };
 }
 
