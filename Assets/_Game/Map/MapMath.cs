@@ -119,6 +119,19 @@ public static class MapMath
         }
         return output;
     }
+    public static Direction LocToDirection(Vector2Int diff)
+    {
+        Direction d = Direction.NO_DIR;
+        if (diff.y > 0)
+            d = Direction.N;
+        else if (diff.y < 0)
+            d = Direction.S;
+        if (diff.x > 0)
+            d = Direction.E;
+        else if (diff.x < 0)
+            d = Direction.W;
+        return d;
+    }
     public static Dictionary<Vector2Int, Direction> GetNeighbors(Vector2Int curr)
     {
         Dictionary<Vector2Int, Direction> neighbors = new Dictionary<Vector2Int, Direction>();

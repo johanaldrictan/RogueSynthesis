@@ -18,16 +18,23 @@ public class Infect : Attack
             //deal core damage to central target
             target.ChangeHealth((GetDamage() * (-1)), source, this);
         }
-        List<Vector2Int> area = AttackHelper.GetCircleAOE(target.GetMapPosition(), source.GetDirection(), GetRange());
+        Vector2Int origin = source.GetMapPosition();
+        origin += MapMath.DirToRelativeLoc(source.GetDirection());
+        List<Vector2Int> area = AttackHelper.GetCircleAOE(origin, source.GetDirection(), GetRange());
         //skip first one(center)
-        for (int i = 1; i < area.Count; i++)
+        for (int i = 0; i < area.Count; i++)
         {
+            if (area[i] == source.GetMapPosition())
+                continue;
             Unit searchResult = source.globalPositionalData.SearchLocation(area[i]);
-            if(searchResult != null)
-                searchResult.ChangeHealth((GetDamage() * -1)/3, source, this);
-        }
-        
-        DeathData data = new DeathData(source, this, 99, target.GetMapPosition());
+            if (searchResult != null)
+            {
+                searchResult.ChangeHealth((GetDamage() * -1) / 3, source, this);
+                Vector2Int diff = searchResult.GetMapPosition() - origin;
+                AttackHelper.DisplaceUnit(searchResult, source, this, 1, MapMath.LocToDirection(diff));
+            }
+        }       
+        DeathData data = new DeathData(source, this, 99, source.GetMapPosition());
         source.KillMe(data);
     }
 

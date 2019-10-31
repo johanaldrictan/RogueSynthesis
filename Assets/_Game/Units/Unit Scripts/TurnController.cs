@@ -23,7 +23,11 @@ public class TurnController : MonoBehaviour
     // A UnityEvent that is called whenver a turn ends. it asks for any Units that should be turned into enemies to happen
     public static ConversionConditionUnityEvent ToEnemyEvent = new ConversionConditionUnityEvent();
 
+    public static AttackUnityEvent DelayedAttackEvent = new AttackUnityEvent();
+
     public static TurnController instance;
+    public List<Attack> delayedAttacks;
+
 
     // initialization
     private void Awake()
@@ -49,6 +53,7 @@ public class TurnController : MonoBehaviour
         // register for events called by UnitControllers
         UnitController.EndTurnEvent.AddListener(NextTurn);
         UnitController.QueueUpEvent.AddListener(EnqueueController);
+        //DelayedAttackEvent.AddListener()
     }
 
     private void OnDisable()
