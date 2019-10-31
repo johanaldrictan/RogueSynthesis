@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// Class containing a list of attack patterns 
 /// </summary>
-public static class AttackPatterns
+public static class AttackHelper
 {
     public static List<Vector2Int> GetTShapedAOE(Vector2Int source, Direction direction, int abilityRange)
     {
@@ -97,5 +97,58 @@ public static class AttackPatterns
         }
 
         return circleList;
+    }
+    /// <summary>
+    /// Knocks target unit in a line with a given direction.
+    /// </summary>
+    /// <param name="target"></param>
+    /// <param name="knockback"></param>
+    /// <param name="kbDirection"></param>
+    public static void DisplaceUnit(Unit target, Unit source, Attack ability, int knockback, Direction kbDirection)
+    {
+        //look for collisions
+        Vector2Int pushbackLoc = target.GetMapPosition() + (MapMath.DirToRelativeLoc(kbDirection) * knockback);
+        List<Vector2Int> pushbackArea = GetLineAOE(target.GetMapPosition(), kbDirection, knockback);
+        Vector2Int? searchResult = null;
+        foreach (Vector2Int tile in pushbackArea)
+        {
+            if (MapController.instance.map[tile.x, tile.y] == (int)TileWeight.OBSTRUCTED)
+            {
+                searchResult = tile;
+                break;
+            }
+        }
+        if (searchResult != null)
+        {
+            Vector2Int diff = (Vector2Int)searchResult - target.GetMapPosition();
+            Vector2Int absDiff = new Vector2Int(Mathf.Abs(diff.x), Mathf.Abs(diff.y));
+            Debug.Assert(source.GetDirection() != Direction.NO_DIR);
+            //Debug.Log(pushbackLoc);
+            switch (source.GetDirection())
+            {
+                case Direction.N:
+                    pushbackLoc = new Vector2Int(target.GetMapPosition().x, target.GetMapPosition().y + (absDiff.y - 1));
+                    break;
+                case Direction.S:
+                    pushbackLoc = new Vector2Int(target.GetMapPosition().x, target.GetMapPosition().y - (absDiff.y - 1));
+                    break;
+                case Direction.W:
+                    pushbackLoc = new Vector2Int(target.GetMapPosition().x - (absDiff.x - 1), target.GetMapPosition().y);
+                    break;
+                case Direction.E:
+                    pushbackLoc = new Vector2Int(target.GetMapPosition().x + (absDiff.x - 1), target.GetMapPosition().y);
+                    break;
+            }
+            //Debug.Log(newLocation);
+        }
+        if (MapMath.InMapBounds(pushbackLoc))
+            target.Move(pushbackLoc.x, pushbackLoc.y);
+        //else if()
+        else
+        {
+            DeathData data = new DeathData(source, ability, ability.GetDamage(), target.GetMapPosition());
+            target.KillMe(data);
+        }
+        
     }
 }

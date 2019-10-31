@@ -28,7 +28,7 @@ public class ImmobilizationBeam : Attack
 
     public override List<Vector2Int> GetAreaOfEffect(Unit source, Direction direction)
     {
-        List<Vector2Int> result = AttackPatterns.GetLineAOE(source.GetMapPosition(), direction, GetRange());
+        List<Vector2Int> result = AttackHelper.GetLineAOE(source.GetMapPosition(), direction, GetRange());
         return result;
     }
 

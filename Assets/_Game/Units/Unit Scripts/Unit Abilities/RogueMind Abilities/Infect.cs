@@ -18,7 +18,7 @@ public class Infect : Attack
             //deal core damage to central target
             target.ChangeHealth((GetDamage() * (-1)), source, this);
         }
-        List<Vector2Int> area = AttackPatterns.GetCircleAOE(target.GetMapPosition(), source.GetDirection(), GetRange());
+        List<Vector2Int> area = AttackHelper.GetCircleAOE(target.GetMapPosition(), source.GetDirection(), GetRange());
         //skip first one(center)
         for (int i = 1; i < area.Count; i++)
         {

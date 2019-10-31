@@ -17,56 +17,32 @@ public class ShoulderTackle : Attack
         if (target != null)
         {
             target.ChangeHealth((GetDamage() * (-1)), source, this);
+            
             Vector2Int diff = target.GetMapPosition() - source.GetMapPosition();
+            Vector2Int absDiff = new Vector2Int(Mathf.Abs(diff.x), Mathf.Abs(diff.y));
             Debug.Assert(source.GetDirection() != Direction.NO_DIR);
             Vector2Int newLocation = source.GetMapPosition();
-            if (source.GetDirection() == Direction.N || source.GetDirection() == Direction.S)
+            //Debug.Log(newLocation);
+            switch (source.GetDirection())
             {
-                newLocation = new Vector2Int(source.GetMapPosition().x, source.GetMapPosition().y + (diff.y-1));
+                case Direction.N:
+                    newLocation = new Vector2Int(source.GetMapPosition().x, source.GetMapPosition().y + (absDiff.y-1));
+                    break;
+                case Direction.S:
+                    newLocation = new Vector2Int(source.GetMapPosition().x, source.GetMapPosition().y - (absDiff.y-1));
+                    break;
+                case Direction.W:
+                    newLocation = new Vector2Int(source.GetMapPosition().x - (absDiff.x-1), source.GetMapPosition().y);
+                    break;
+                case Direction.E:
+                    newLocation = new Vector2Int(source.GetMapPosition().x + (absDiff.x-1), source.GetMapPosition().y);
+                    break;
             }
-            else
-            {
-                newLocation = new Vector2Int(source.GetMapPosition().x + (diff.x-1), source.GetMapPosition().y);
-            }
+            //Debug.Log(newLocation);
             //check new location for issues, if so, stay at current loc
             source.Move(newLocation.x, newLocation.y);
-            Vector2Int pushbackLoc = target.GetMapPosition() + (MapMath.DirToRelativeLoc(source.GetDirection()) * pushback);
-            //look for collisions
-            List<Vector2Int> pushbackArea = GetAreaOfEffect(target, source.GetDirection());
-            Vector2Int? searchResult = null;
-            foreach (Vector2Int tile in pushbackArea)
-            {
-                if (MapController.instance.map[tile.x, tile.y] == (int)TileWeight.OBSTRUCTED)
-                {
-                    searchResult = tile;
-                    break;
-                }
-            }
-            if(searchResult != null)
-            {
-                Debug.Log(searchResult);
-                Vector2Int newPushDiff = (Vector2Int)searchResult - target.GetMapPosition();
-                Debug.Log(newPushDiff);
-                //change pushbackLoc in some way
-                if (source.GetDirection() == Direction.N || source.GetDirection() == Direction.S)
-                {
-                    pushbackLoc = new Vector2Int(target.GetMapPosition().x, target.GetMapPosition().y + (newPushDiff.y));
-                }
-                else
-                {
-                    pushbackLoc = new Vector2Int(target.GetMapPosition().x + (newPushDiff.x), target.GetMapPosition().y);
-                }
-                Debug.Log(pushbackLoc);
-            }
-            //maybe do out of bounds checks here to kill unit if pushed out of bounds or on certain tiles
-            if (MapMath.InMapBounds(pushbackLoc))
-                target.Move(pushbackLoc.x, pushbackLoc.y);
-            //else if()
-            else
-            {
-                DeathData data = new DeathData(source, this, GetDamage(), target.GetMapPosition());
-                target.KillMe(data);
-            }
+            AttackHelper.DisplaceUnit(target, source, this, pushback, source.GetDirection());
+            
         }
         else
         {

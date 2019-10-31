@@ -48,11 +48,7 @@ public abstract class Attack : UnitAbility
                     break;
                 }
             }
-            //deal damage to first unit found
-            if (searchResult != null)
-            {
-                DealEffects(searchResult, source);
-            }
+            DealEffects(searchResult, source);
         }
     }
 
