@@ -43,14 +43,14 @@ public class PlayerController : UnitController
             return;
         }
 
-        if(theUnit.hasMoved && !theUnit.hasTurned)
+        if(theUnit.hasMoved && !theUnit.hasPivoted)
         {
             theUnit.ChooseDirection();
             return;
         }
 
         // if the current unit has moved but hasn't attacked, it needs to select an ability
-        if (theUnit.hasMoved && theUnit.hasTurned && !theUnit.hasActed)
+        if (theUnit.hasMoved && theUnit.hasPivoted && !theUnit.hasActed)
         {
             abilityPanel.SetActive(true);
             theUnit.ChooseAbility();
@@ -61,7 +61,7 @@ public class PlayerController : UnitController
         
 
         // if the current unit has moved and attacked, get the next unit
-        if (theUnit.hasMoved && theUnit.hasTurned && theUnit.hasActed)
+        if (theUnit.hasMoved && theUnit.hasPivoted && theUnit.hasActed)
         {
             abilityPanel.SetActive(false);
             GetNextUnit();

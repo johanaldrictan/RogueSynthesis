@@ -22,11 +22,11 @@ public class ActionData
     private int abilityIndex;
 
     // Constructor. Takes the variables necessary for the object and stores them
-    public ActionData(Vector2Int start, Direction direction, Vector2Int move, int index)
+    public ActionData(Vector2Int start, Vector2Int end, Direction direction, int index)
     {
         startingPosition = start;
         abilityDirection = direction;
-        endingPosition = move;
+        endingPosition = end;
         abilityIndex = index;
     }
 

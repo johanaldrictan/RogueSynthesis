@@ -16,11 +16,11 @@ public class AlliedUnit : Unit
     [SerializeField] public Direction directionMemory;
 
     [SerializeField]
-    public bool hasTurned;
+    public bool hasPivoted;
 
     public override void Awake()
     {
-        hasTurned = false;
+        hasPivoted = false;
         hasActed = false;
         hasMoved = false;
         plannedPath = new List<Vector2Int>();
@@ -127,7 +127,7 @@ public class AlliedUnit : Unit
             Move(positionMemory.x, positionMemory.y);
             ChangeDirection(directionMemory);
             hasMoved = false;
-            hasTurned = false;
+            hasPivoted = false;
             PlayerController.ability = 0;
             return;
         }
@@ -154,25 +154,25 @@ public class AlliedUnit : Unit
         if(Input.GetKeyDown(KeyCode.UpArrow))
         {
             this.ChangeDirection(Direction.N);
-            hasTurned = true;
+            hasPivoted = true;
             return;
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             this.ChangeDirection(Direction.S);
-            hasTurned = true;
+            hasPivoted = true;
             return;
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             this.ChangeDirection(Direction.W);
-            hasTurned = true;
+            hasPivoted = true;
             return;
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             this.ChangeDirection(Direction.E);
-            hasTurned = true;
+            hasPivoted = true;
             return;
         }
     }
