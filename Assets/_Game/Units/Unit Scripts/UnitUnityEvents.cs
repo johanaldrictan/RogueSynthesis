@@ -26,3 +26,5 @@ public class AttackUnityEvent : UnityEvent<Attack> { }
 // DELEGATE
 
 public delegate bool ConversionCondition(Unit inQuestion);
+
+public delegate void Effect(Unit target);

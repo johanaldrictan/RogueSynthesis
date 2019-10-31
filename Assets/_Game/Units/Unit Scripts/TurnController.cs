@@ -6,6 +6,9 @@ using UnityEngine;
 // It responds to events invoked by UnitControllers;
 // no linking is required other than the presence of both this Class and 1+ UnitController Classes (or SubClasses)
 
+// TurnController also handles delayed effects from Abilities. 
+// They receive those effects and trigger them when they are supposed to be triggered.
+
 public class TurnController : MonoBehaviour
 {
     // storage of unit controllers
@@ -19,6 +22,11 @@ public class TurnController : MonoBehaviour
 
     // the number of full rounds that have passed
     private int currentRound;
+
+    // the storage of delayed Ability effects that have yet to occur
+    // whenever this List is evaluated, the last item in the List is first to be evaluated.
+    // adding an item to the List shoves it to the front of the List
+    private List<DelayedEffect> delayedEffects;
 
     // A UnityEvent that is called whenver a turn ends. it asks for any Units that should be turned into enemies to happen
     public static ConversionConditionUnityEvent ToEnemyEvent = new ConversionConditionUnityEvent();
@@ -42,6 +50,7 @@ public class TurnController : MonoBehaviour
         currentRound = 1;
         controllers = new List<UnitController>();
         globalPositionalData = new UnitPositionStorage();
+        delayedEffects = new List<DelayedEffect>();
     }
 
     private void OnEnable()
@@ -105,7 +114,7 @@ public class TurnController : MonoBehaviour
         // make sure that the controller asking for the next turn currently has control
         if (controllers[currentTurn] == controller && controller.IsMyTurn())
         {
-            if (controllers[currentTurn].GetType() == typeof(PlayerController))
+            if (controllers[currentTurn] is PlayerController)
             {
                 (controllers[currentTurn] as PlayerController).ClearSpotlight();
             }
@@ -123,15 +132,51 @@ public class TurnController : MonoBehaviour
             }
 
             // if there's any Allied Units that died to enemy units, convert them to enemies
-            // IF                                      I'm an AlliedUnit    AND       The person who most recently killed me is an EnemyUnit
-            ToEnemyEvent.Invoke(unit => unit.GetType()  == typeof(AlliedUnit) && unit.Deaths.Peek().GetKiller().GetType() == typeof(EnemyUnit));
+            // IF:                     I'm an AlliedUnit  AND  The person who most recently killed me is an EnemyUnit
+            ToEnemyEvent.Invoke(unit => unit is AlliedUnit && unit.Deaths.Peek().GetKiller() is EnemyUnit);
 
-            if (controllers[currentTurn].GetType() == typeof(PlayerController))
+            if (controllers[currentTurn] is PlayerController)
             {
                 (controllers[currentTurn] as PlayerController).SpotlightActiveUnit();
             }
+
+            CycleEffects();
         }
     }
+
+    // this function evaluates the storage of DelayedEffects
+    // each one gets Ticked if it's the correct time to do so
+    // if an Effect gets Ticked below 0, it triggers and is then removed from the storage
+    protected void CycleEffects()
+    {
+        for (int i = delayedEffects.Count - 1; i >= 0; i--)
+        {
+            // if it is currently the correct turn for this particular Effect, Tick it.
+            switch(delayedEffects[i].GetTriggerType())
+            {
+                case UnitType.AlliedUnit:
+                    if (controllers[currentTurn] is PlayerController)
+                    { delayedEffects[i].Tick(); }
+                    break;
+
+                case UnitType.EnemyUnit:
+                    if (controllers[currentTurn] is EnemyController)
+                    { delayedEffects[i].Tick(); }
+                    break;
+
+                default:
+                    break;
+            }
+
+            // when an Effect is Ticked below 0, Trigger and remove it
+            if (delayedEffects[i].GetTimer() < 0)
+            {
+                delayedEffects[i].Trigger();
+                delayedEffects.RemoveAt(i);
+            }
+        }
+    }
+
 
     protected void StartController(int index)
     { controllers[index].StartTurn(); }
