@@ -120,6 +120,8 @@ public static class AttackHelper
         }
         if (searchResult != null)
         {
+            //deal damage when we cant go full knockback dist
+            target.ChangeHealth(-1, source, ability);
             Vector2Int diff = (Vector2Int)searchResult - target.GetMapPosition();
             Vector2Int absDiff = new Vector2Int(Mathf.Abs(diff.x), Mathf.Abs(diff.y));
             Debug.Assert(source.GetDirection() != Direction.NO_DIR);
@@ -149,6 +151,5 @@ public static class AttackHelper
             DeathData data = new DeathData(source, ability, ability.GetDamage(), target.GetMapPosition());
             target.KillMe(data);
         }
-        
     }
 }

@@ -41,7 +41,7 @@ public class ShoulderTackle : Attack
             //Debug.Log(newLocation);
             //check new location for issues, if so, stay at current loc
             source.Move(newLocation.x, newLocation.y);
-            AttackHelper.DisplaceUnit(target, source, this, pushback, source.GetDirection());
+            bool stopped = AttackHelper.DisplaceUnit(target, source, this, pushback, source.GetDirection());
             
         }
         else
