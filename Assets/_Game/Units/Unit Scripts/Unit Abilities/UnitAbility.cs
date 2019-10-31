@@ -17,6 +17,10 @@ public abstract class UnitAbility
     // Examples: the same Ability, inferior versions of this Ability (Gun IV > Gun III)
     protected abstract bool InferiorComparator(UnitAbility inQuestion);
 
+    // NewDelayedEffectEvent is a UnityEvent that fires whenever a DelayedEffect is created and needs to be dealt with
+    // The TurnController will respond to this event by adding the passed DelayedEffect object to its list of effects to deal with
+    public static DelayedEffectUnityEvent NewDelayedEffectEvent = new DelayedEffectUnityEvent();
+
 
     // Takes a List of UnitAbility and removes from it any UnitAbility that can't exist at the same time as this one
     // Examples: the same Ability, inferior versions of this Ability (Gun IV > Gun III)

@@ -31,11 +31,6 @@ public class Infect : Attack
         source.KillMe(data);
     }
 
-    public override void DealDelayedEffect(Unit target, Unit source)
-    {
-        //do nothing because this does not have a delayed effect
-    }
-
     public override List<Vector2Int> GetAreaOfEffect(Unit source, Direction direction)
     {
         //get tile in front
@@ -67,6 +62,6 @@ public class Infect : Attack
 
     protected override bool InferiorComparator(UnitAbility inQuestion)
     {
-        return (inQuestion.GetType() == typeof(Cleave));
+        return (inQuestion.GetType() == typeof(Infect));
     }
 }

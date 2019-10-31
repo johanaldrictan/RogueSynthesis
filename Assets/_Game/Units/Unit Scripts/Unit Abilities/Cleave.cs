@@ -15,15 +15,11 @@ public class Cleave : Attack
     {
         isAOE = true;
     }
+
     // We're just doing straight damage here
     public override void DealEffects(Unit target, Unit source)
     {
         target.ChangeHealth( (GetDamage()*(-1)), source, this );
-    }
-
-    public override void DealDelayedEffect(Unit target, Unit source)
-    {
-        //do nothing because this does not have a delayed effect
     }
 
     // we're making a list of coordinates that this attack reaches
@@ -31,8 +27,7 @@ public class Cleave : Attack
     // it also hits the two adjacent squares on either side of the origin
     public override List<Vector2Int> GetAreaOfEffect(Unit source, Direction direction)
     {
-        List<Vector2Int> result = AttackHelper.GetTShapedAOE(source.GetMapPosition(), direction, GetRange());      
-        return result;
+        return AttackHelper.GetTShapedAOE(source.GetMapPosition(), direction, GetRange());      
     }
 
     public override int GetDamage()

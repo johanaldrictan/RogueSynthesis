@@ -21,7 +21,7 @@ public class ListofUnitUnityEvent : UnityEvent<List<Unit>> { }
 public class ConversionConditionUnityEvent : UnityEvent<ConversionCondition> { }
 
 // Creates an event that passes an Attack with it
-public class AttackUnityEvent : UnityEvent<Attack> { }
+public class DelayedEffectUnityEvent : UnityEvent<DelayedEffect> { }
 
 // DELEGATE
 

@@ -17,11 +17,6 @@ public class WatcherGaze : Attack
         target.ChangeHealth( (GetDamage()*(-1)), source, this);
     }
 
-    public override void DealDelayedEffect(Unit target, Unit source)
-    {
-        //do nothing because this does not have a delayed effect
-    }
-
     public override List<Vector2Int> GetAreaOfEffect(Unit source, Direction direction)
     {
         List<Vector2Int> result = AttackHelper.GetLineAOE(source.GetMapPosition(), direction, GetRange());
@@ -40,6 +35,6 @@ public class WatcherGaze : Attack
 
     protected override bool InferiorComparator(UnitAbility inQuestion)
     {
-        return (inQuestion.GetType() == typeof(Cleave));
+        return (inQuestion.GetType() == typeof(WatcherGaze));
     }
 }

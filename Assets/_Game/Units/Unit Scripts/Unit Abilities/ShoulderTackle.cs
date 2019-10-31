@@ -52,14 +52,8 @@ public class ShoulderTackle : Attack
         
         
     }
-    public override void DealDelayedEffect(Unit target, Unit source)
-    {
-        //this has no delayed effect
-    }
 
     // we're making a list of coordinates that this attack reaches
-    // Cleave has an origin point range tiles in front of the Unit (default 1)
-    // it also hits the two adjacent squares on either side of the origin
     public override List<Vector2Int> GetAreaOfEffect(Unit source, Direction direction)
     {
         List<Vector2Int> result = new List<Vector2Int>();
@@ -84,6 +78,7 @@ public class ShoulderTackle : Attack
         }
         return result;
     }
+
     public List<Vector2Int> GetAreaOfEffect(Unit source, Direction direction, int pushbackDist)
     {
         List<Vector2Int> result = new List<Vector2Int>();
@@ -121,7 +116,7 @@ public class ShoulderTackle : Attack
 
     protected override bool InferiorComparator(UnitAbility inQuestion)
     {
-        return (inQuestion.GetType() == typeof(Cleave));
+        return (inQuestion.GetType() == typeof(ShoulderTackle));
     }
 }
 

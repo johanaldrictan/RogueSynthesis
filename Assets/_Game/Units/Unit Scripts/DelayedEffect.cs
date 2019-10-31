@@ -18,11 +18,15 @@ public class DelayedEffect
 
     // timer is an integer representing how many turns are left until this effect should activate
     // calling Tick() will reduce this number by 1.
-    // An effect should activate when its timer is at 0 or less and is then afterwards Ticked
+    // An effect should activate when its timer is below 0
     private int timer;
 
+    // atEnd refers to whether this Effect should activate at the start of the turn or at the end of the turn
+    // for example, specifying triggerType as a Playercontroller and atEnd to false makes this Effect trigger at the start of the Player Phase.
+    private bool atEnd;
+
     // triggerType refers to the type of controller that should cause this object's timer to Tick.
-    // for example, specifying this variable as a Playercontroller 
+    // for example, specifying triggerType as a Playercontroller and atEnd to false makes this Effect trigger at the start of the Player Phase.
     private UnitType triggerType;
 
     // if this effect targets a specified area, it will be stored here.
@@ -34,23 +38,25 @@ public class DelayedEffect
     private List<Unit> effectTargets;
 
     // this constructor will create a version of this object where it will target an area once the effect activates
-    public DelayedEffect(Effect eff, UnitPositionStorage positions, int time, UnitType trigger, List<Vector2Int> area)
+    public DelayedEffect(Effect eff, UnitPositionStorage positions, int time, UnitType trigger, bool end, List<Vector2Int> area)
     {
         effect = eff;
         globalPositionalData = positions;
         timer = time;
         triggerType = trigger;
+        atEnd = end;
         areaOfEffect = area;
         effectTargets = null;
     }
 
     // this constructor will create a version of this object where it will target specific Units once the effect activates
-    public DelayedEffect(Effect eff, UnitPositionStorage positions, int time, UnitType trigger, List<Unit> targets)
+    public DelayedEffect(Effect eff, UnitPositionStorage positions, int time, UnitType trigger, bool end, List<Unit> targets)
     {
         effect = eff;
         globalPositionalData = positions;
         timer = time;
         triggerType = trigger;
+        atEnd = end;
         areaOfEffect = null;
         effectTargets = targets;
     }
@@ -97,6 +103,11 @@ public class DelayedEffect
     public UnitType GetTriggerType()
     {
         return triggerType;
+    }
+
+    public bool AtEnd()
+    {
+        return atEnd;
     }
 
 }

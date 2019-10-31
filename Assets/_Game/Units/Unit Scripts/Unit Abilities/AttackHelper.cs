@@ -38,6 +38,8 @@ public static class AttackHelper
         }
         return result;
     }
+
+
     public static List<Vector2Int> GetLineAOE(Vector2Int source, Direction direction, int abilityRange)
     {
         List<Vector2Int> result = new List<Vector2Int>();
@@ -62,6 +64,8 @@ public static class AttackHelper
         }
         return result;
     }
+
+
     //variation of the findmovetiles alg to save time in devising an algorithm. 
     public static List<Vector2Int> GetCircleAOE(Vector2Int source, Direction direction, int abilityRadius)
     {

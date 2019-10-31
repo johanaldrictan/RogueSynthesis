@@ -58,6 +58,7 @@ public class TurnController : MonoBehaviour
         // register for events called by UnitControllers
         UnitController.EndTurnEvent.AddListener(NextTurn);
         UnitController.QueueUpEvent.AddListener(EnqueueController);
+        UnitAbility.NewDelayedEffectEvent.AddListener(EnqueueDelayedEffect);
     }
 
     private void OnDisable()
@@ -65,6 +66,7 @@ public class TurnController : MonoBehaviour
         // un-register for events called by UnitControllers
         UnitController.EndTurnEvent.RemoveListener(NextTurn);
         UnitController.QueueUpEvent.RemoveListener(EnqueueController);
+        UnitAbility.NewDelayedEffectEvent.RemoveListener(EnqueueDelayedEffect);
     }
 
     // takes a UnitController and adds it to the turn system in the correct order
@@ -109,58 +111,59 @@ public class TurnController : MonoBehaviour
         }
     }
 
+    // EnqueueDelayedEffect takes a DelayedEffect object and adds it to its storage
+    // This function adds the object to the front, because when evaluating the List it starts from the back
+    protected void EnqueueDelayedEffect(DelayedEffect effect)
+    {
+        delayedEffects.Insert(0, effect);
+    }
+
     protected void NextTurn(UnitController controller)
     {
         // make sure that the controller asking for the next turn currently has control
         if (controllers[currentTurn] == controller && controller.IsMyTurn())
         {
+            CycleEffects(false);
+
             if (controllers[currentTurn] is PlayerController)
-            {
-                (controllers[currentTurn] as PlayerController).ClearSpotlight();
-            }
+            { (controllers[currentTurn] as PlayerController).ClearSpotlight(); }
 
             EndController(currentTurn);
             currentTurn = ((currentTurn + 1) % controllers.Count);
             if (currentTurn == 0)
             { currentRound += 1; }
-            StartController(currentTurn);
-
-            if(controllers[currentTurn] is EnemyController)
-            {
-                //should be enemy controller's turn
-                
-            }
 
             // if there's any Allied Units that died to enemy units, convert them to enemies
             // IF:                     I'm an AlliedUnit  AND  The person who most recently killed me is an EnemyUnit
             ToEnemyEvent.Invoke(unit => unit is AlliedUnit && unit.Deaths.Peek().GetKiller() is EnemyUnit);
 
-            if (controllers[currentTurn] is PlayerController)
-            {
-                (controllers[currentTurn] as PlayerController).SpotlightActiveUnit();
-            }
+            StartController(currentTurn);
 
-            CycleEffects();
+            CycleEffects(true);
+
+            if (controllers[currentTurn] is PlayerController)
+            { (controllers[currentTurn] as PlayerController).SpotlightActiveUnit(); }
         }
     }
 
     // this function evaluates the storage of DelayedEffects
     // each one gets Ticked if it's the correct time to do so
     // if an Effect gets Ticked below 0, it triggers and is then removed from the storage
-    protected void CycleEffects()
+    // the parameter, atEnd, refers to whether this function is being called at the start or at the end of the turn
+    protected void CycleEffects(bool atEnd)
     {
         for (int i = delayedEffects.Count - 1; i >= 0; i--)
         {
-            // if it is currently the correct turn for this particular Effect, Tick it.
+            // if it is currently the correct turn and section for this particular Effect, Tick it.
             switch(delayedEffects[i].GetTriggerType())
             {
                 case UnitType.AlliedUnit:
-                    if (controllers[currentTurn] is PlayerController)
+                    if (controllers[currentTurn] is PlayerController && atEnd == delayedEffects[i].AtEnd())
                     { delayedEffects[i].Tick(); }
                     break;
 
                 case UnitType.EnemyUnit:
-                    if (controllers[currentTurn] is EnemyController)
+                    if (controllers[currentTurn] is EnemyController && atEnd == delayedEffects[i].AtEnd())
                     { delayedEffects[i].Tick(); }
                     break;
 
