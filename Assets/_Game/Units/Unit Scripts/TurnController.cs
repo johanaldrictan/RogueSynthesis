@@ -32,6 +32,8 @@ public class TurnController : MonoBehaviour
     public static ConversionConditionUnityEvent ToEnemyEvent = new ConversionConditionUnityEvent();
 
     public static TurnController instance;
+    public List<Attack> delayedAttacks;
+
 
     // initialization
     private void Awake()
