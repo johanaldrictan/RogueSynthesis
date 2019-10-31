@@ -17,4 +17,4 @@ MonoBehaviour:
   sprites: {fileID: 11400000, guid: ce4e78ea9ee586141b652c5b9176045d, type: 2}
   moveSpeed: 6
   health: 35
-  abilities: 0000000001000000
+  abilities: 000000000100000002000000

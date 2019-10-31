@@ -170,8 +170,16 @@ public abstract class UnitController : MonoBehaviour
     {
         for (int i = 0; i < units.Count; i++)
         {
-            units[i].hasActed = false;
-            units[i].hasMoved = false;
+            if (units[i].isImmobilized)
+            {
+                units[i].isImmobilized = false;
+                continue;
+            }
+            else
+            {
+                units[i].hasActed = false;
+                units[i].hasMoved = false;
+            }
         }
     }
 

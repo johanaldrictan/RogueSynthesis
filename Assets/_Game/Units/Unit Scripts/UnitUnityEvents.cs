@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 // This is a place to define all UnityEvent Objects and Delegates for general use by all Scripts.
-// Specifically for scripts associated with Untis
+// Specifically for scripts associated with Units
 
 // UNITYEVENT
 
@@ -20,7 +20,8 @@ public class ListofUnitUnityEvent : UnityEvent<List<Unit>> { }
 // Creates an event that passes a ConversionCondition with it
 public class ConversionConditionUnityEvent : UnityEvent<ConversionCondition> { }
 
-
+// Creates an event that passes an Attack with it
+public class AttackUnityEvent : UnityEvent<Attack> { }
 
 // DELEGATE
 

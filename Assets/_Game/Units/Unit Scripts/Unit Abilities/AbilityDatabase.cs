@@ -37,7 +37,14 @@ public static class AbilityDatabase
     private static List<UnitAbility> abilityDataBase = new List<UnitAbility> // ***************************
     {
         new Wait(),
-        new Cleave()
+        new Cleave(),
+        new ShoulderTackle(),
+        new Abduct(),
+        new Swipe(),
+        new Focus(),
+        new ImmobilizationBeam(),
+        new WatcherGaze(),
+        new Infect()
     };
 }
 
@@ -48,5 +55,13 @@ public static class AbilityDatabase
 public enum Ability // ****************
 {
     Wait = 0,
-    Cleave = 1
+    Cleave = 1,
+    ShoulderTackle = 2,
+    Abduct = 3,
+    Swipe = 4,
+    Focus = 5,
+    ImmobilizationBeam = 6,
+    WatcherGaze = 7,
+    Infect = 8,
+
 };

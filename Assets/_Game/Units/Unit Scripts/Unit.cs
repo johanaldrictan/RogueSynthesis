@@ -11,10 +11,14 @@ public abstract class Unit : MonoBehaviour
     [SerializeField] protected string unitName;
     [SerializeField] protected int health;
     [SerializeField] protected int moveSpeed;
+    [SerializeField] protected int damageReduction;
+
 
     // booleans
     [SerializeField] public bool hasActed;
     [SerializeField] public bool hasMoved;
+    [SerializeField] public bool isImmobilized;
+    
 
     // positional data
     [SerializeField] protected Direction direction;
@@ -50,6 +54,7 @@ public abstract class Unit : MonoBehaviour
     {
         hasActed = false;
         hasMoved = false;
+        isImmobilized = false;
         m_SpriteRenderer = this.GetComponent<SpriteRenderer>();
         m_SpriteRenderer.sortingOrder = 99;
         if (Deaths.Count == 0)
@@ -71,6 +76,7 @@ public abstract class Unit : MonoBehaviour
         sprites = StartData.sprites;
         health = StartData.health;
         moveSpeed = StartData.moveSpeed;
+        damageReduction = 0;
 
         // convert the unitData's list of ability enums into real abilities, and store them
         AvailableAbilities = AbilityDatabase.GetAbilities(StartData.abilities);
@@ -140,7 +146,7 @@ public abstract class Unit : MonoBehaviour
             Vector2Int visiting = frontier.Dequeue();
             if (visited.Contains(visiting)) {continue;} // TODO: Implement changing priority in the PQ, and remove this.
             
-            Dictionary<Vector2Int, Direction> neighbors = GetNeighbors(visiting);
+            Dictionary<Vector2Int, Direction> neighbors = MapMath.GetNeighbors(visiting);
             foreach (Vector2Int neighbor in neighbors.Keys)
             {
                 if (visited.Contains(neighbor) || !MapMath.InMapBounds(neighbor)) { continue; }
@@ -190,16 +196,6 @@ public abstract class Unit : MonoBehaviour
             }
         }
         return path;
-    }
-
-    public static Dictionary<Vector2Int, Direction> GetNeighbors(Vector2Int curr)
-    {
-        Dictionary<Vector2Int, Direction> neighbors = new Dictionary<Vector2Int, Direction>();
-        neighbors.Add(new Vector2Int(curr.x, curr.y + 1), Direction.N);
-        neighbors.Add(new Vector2Int(curr.x - 1, curr.y), Direction.W);
-        neighbors.Add(new Vector2Int(curr.x, curr.y - 1), Direction.S);
-        neighbors.Add(new Vector2Int(curr.x + 1, curr.y), Direction.E);
-        return neighbors;
     }
 
     public virtual void Move(int x, int y)
@@ -289,7 +285,7 @@ public abstract class Unit : MonoBehaviour
 
     public void ChangeHealth(int amount, Unit source, UnitAbility attack)
     {
-        health += amount;
+        health += (amount - damageReduction);
         if (health <= 0)
         {
             DeathData data = new DeathData(source, attack, amount, mapPosition);
@@ -303,6 +299,12 @@ public abstract class Unit : MonoBehaviour
 
     public void SetMoveSpeed(int amount)
     { moveSpeed += amount; }
+
+    public int GetDamageReduction()
+    { return damageReduction; }
+
+    public void SetDamageReduction(int amount)
+    { damageReduction += amount; }
 
     public Direction GetDirection()
     { return direction; }

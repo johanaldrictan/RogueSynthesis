@@ -106,7 +106,7 @@ public class AlliedUnit : Unit
         // 0 on the NumPad (wait)
         if (Input.GetKeyDown(KeyCode.Keypad0) || PlayerController.ability == 1)
         {
-            AvailableAbilities[0].Execute(this, Direction.S); // CHANGE THIS
+            AvailableAbilities[0].Execute(this, direction); // CHANGE THIS
             hasActed = true;
             PlayerController.ability = 0;
             return;
@@ -115,7 +115,7 @@ public class AlliedUnit : Unit
         // 1 on the NumPad
         else if (Input.GetKeyDown(KeyCode.Keypad1) || PlayerController.ability == 2)
         {
-            AvailableAbilities[1].Execute(this, Direction.S); // CHANGE THIS
+            AvailableAbilities[1].Execute(this, direction); // CHANGE THIS
             hasActed = true;
             PlayerController.ability = 0;
             return;

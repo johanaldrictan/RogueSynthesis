@@ -116,6 +116,12 @@ public class TurnController : MonoBehaviour
             { currentRound += 1; }
             StartController(currentTurn);
 
+            if(controllers[currentTurn] is EnemyController)
+            {
+                //should be enemy controller's turn
+                
+            }
+
             // if there's any Allied Units that died to enemy units, convert them to enemies
             // IF                                      I'm an AlliedUnit    AND       The person who most recently killed me is an EnemyUnit
             ToEnemyEvent.Invoke(unit => unit.GetType()  == typeof(AlliedUnit) && unit.Deaths.Peek().GetKiller().GetType() == typeof(EnemyUnit));
