@@ -57,6 +57,7 @@ public abstract class Unit : MonoBehaviour
         hasActed = false;
         hasMoved = false;
         isImmobilized = false;
+        attackBuffed = false;
         m_SpriteRenderer = this.GetComponent<SpriteRenderer>();
         m_SpriteRenderer.sortingOrder = 99;
         if (Deaths.Count == 0)
@@ -203,6 +204,7 @@ public abstract class Unit : MonoBehaviour
 
     public virtual void Move(int x, int y)
     {
+        attackBuffed = false;
         // remove old coordinates from globalPositionalData
         globalPositionalData.RemoveUnit(mapPosition);
 

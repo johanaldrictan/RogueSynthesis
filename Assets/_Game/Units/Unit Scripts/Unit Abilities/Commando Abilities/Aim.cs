@@ -10,10 +10,7 @@ public class Aim : Attack
     }
     public override void DealEffects(Unit target, Unit source)
     {
-        int attackModifier = 0;
-        if (source.attackBuffed)
-            attackModifier = damageBuff;
-        target.ChangeHealth(((GetDamage() + attackModifier) * (-1)), source, this);
+        source.attackBuffed = true;
     }
 
     public override List<Vector2Int> GetAreaOfEffect(Unit source, Direction direction)
@@ -25,12 +22,12 @@ public class Aim : Attack
 
     public override int GetDamage()
     {
-        return 20;
+        return 0;
     }
 
     public override int GetRange()
     {
-        return 16;
+        return 0;
     }
 
     protected override bool InferiorComparator(UnitAbility inQuestion)
