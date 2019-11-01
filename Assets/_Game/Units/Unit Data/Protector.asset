@@ -15,6 +15,7 @@ MonoBehaviour:
   unitName: Protector
   unitType: 0
   sprites: {fileID: 11400000, guid: ce4e78ea9ee586141b652c5b9176045d, type: 2}
+  portrait: {fileID: 21300000, guid: c478d297269654ab1b3b56aa692e5250, type: 3}
   moveSpeed: 6
   health: 35
   abilities: 000000000100000002000000

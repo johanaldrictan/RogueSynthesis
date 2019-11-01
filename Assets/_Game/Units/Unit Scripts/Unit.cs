@@ -7,6 +7,9 @@ using UnityEngine;
 
 public abstract class Unit : MonoBehaviour
 {
+    // General Unit Information
+    Sprite portrait;
+
     // Unit's core RPG stats
     [SerializeField] protected string unitName;
     [SerializeField] protected int health;
@@ -68,9 +71,10 @@ public abstract class Unit : MonoBehaviour
     }
 
     // parses unitData to set own variables
-    public void loadData()
+    public void LoadData()
     {
         // set parameters
+        portrait = StartData.portrait;
         unitName = StartData.unitName;
         sprites = StartData.sprites;
         health = StartData.health;
@@ -269,6 +273,9 @@ public abstract class Unit : MonoBehaviour
         MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
         SetDirection(Direction.S);
     }
+
+    public Sprite GetPortrait()
+    { return portrait; }
 
     public string GetName()
     { return unitName; }

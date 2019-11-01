@@ -109,7 +109,7 @@ public abstract class UnitController : MonoBehaviour
             newUnitComponent.globalPositionalData.AddUnit(unitSpawnData[i].spawnPosition, newUnitComponent);
 
             // i've given you the data you need to make yourself. now make yourself, please
-            newUnitComponent.loadData();
+            newUnitComponent.LoadData();
 
             // add the brand-spankin-new and created unit to your units list
             units.Add(newUnit.GetComponent<Unit>());
