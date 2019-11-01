@@ -120,6 +120,94 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &57431291
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 57431292}
+  - component: {fileID: 57431295}
+  - component: {fileID: 57431294}
+  - component: {fileID: 57431293}
+  m_Layer: 5
+  m_Name: Image (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &57431292
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57431291}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 907131813}
+  m_Father: {fileID: 261868553}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.05, y: -0.0084894}
+  m_SizeDelta: {x: 106.44, y: 106.33}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &57431293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57431291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
+--- !u!114 &57431294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57431291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.75686276}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: c968cdf9a5a794a61ad4afb6c8170969, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &57431295
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57431291}
+  m_CullTransparentMesh: 0
 --- !u!1 &65426691
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,8 +242,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 68.6, y: -117}
-  m_SizeDelta: {x: 537, y: 149.6}
+  m_AnchoredPosition: {x: 68.6, y: -134.5}
+  m_SizeDelta: {x: 537, y: 114.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &65426693
 MonoBehaviour:
@@ -354,7 +442,7 @@ GameObject:
   - component: {fileID: 261868555}
   - component: {fileID: 261868554}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Profile Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -371,7 +459,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 907131813}
+  - {fileID: 57431292}
   m_Father: {fileID: 633113656}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -387,7 +475,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 261868552}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
   m_Name: 
@@ -855,7 +943,7 @@ GameObject:
   - component: {fileID: 907131815}
   - component: {fileID: 907131814}
   m_Layer: 5
-  m_Name: Image (3)
+  m_Name: Profile Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -872,13 +960,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 261868553}
+  m_Father: {fileID: 57431292}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.2775, y: -1.11}
-  m_SizeDelta: {x: 109.04, y: 107.58}
+  m_AnchoredPosition: {x: -0.5599669, y: 0.60649604}
+  m_SizeDelta: {x: 105.316, y: 105.118}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &907131814
 MonoBehaviour:
@@ -893,12 +981,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.75686276}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c968cdf9a5a794a61ad4afb6c8170969, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -945,6 +1033,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72897cc08d62b429a994f96e73a5838d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  portrait: {fileID: 907131814}
+  nameDisplay: {fileID: 848937743}
   textDisplay: {fileID: 65426693}
   sentences:
   - Why are you here, Captain?
@@ -968,6 +1058,20 @@ MonoBehaviour:
     you and your troops strength, I will not question it. But your strength will be
     tested, and for the sake of humanity and the future you desire, I hope that it
     is enough.
+  dialogArray:
+  - portrait: {fileID: 21300000, guid: 37a31cafd595d42088f5023af4521034, type: 3}
+    name: Lissandra
+    sentence: Why are you here, Captain?
+  - portrait: {fileID: 21300000, guid: c478d297269654ab1b3b56aa692e5250, type: 3}
+    name: Bella
+    sentence: What do you mean?
+  - portrait: {fileID: 21300000, guid: 37a31cafd595d42088f5023af4521034, type: 3}
+    name: Lissandra
+    sentence: What drives you? Why are you here?
+  - portrait: {fileID: 21300000, guid: c478d297269654ab1b3b56aa692e5250, type: 3}
+    name: Bella
+    sentence: "Fighting the Rogue Mind? It\u2019s the only thing we can do. And it\u2019s
+      the right thing to do."
   typingSpeed: 0.01
 --- !u!4 &1171017994
 Transform:
