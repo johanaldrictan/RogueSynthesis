@@ -12,6 +12,7 @@ public abstract class Attack : UnitAbility
     // AOE's will deal effects to all Units found in the Area
     // Non-AOE's will deal the effect to the first Unit found only
     public bool isAOE;
+    public int damageBuff;
 
     // Attacks deal damage, and need a variable for how much damage it does
     public abstract int GetDamage();

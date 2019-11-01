@@ -13,12 +13,11 @@ public abstract class Unit : MonoBehaviour
     [SerializeField] protected int moveSpeed;
     [SerializeField] protected int damageReduction;
 
-
     // booleans
     [SerializeField] public bool hasActed;
     [SerializeField] public bool hasMoved;
     [SerializeField] public bool isImmobilized;
-    
+    [SerializeField] public bool attackBuffed;
 
     // positional data
     [SerializeField] protected Direction direction;
