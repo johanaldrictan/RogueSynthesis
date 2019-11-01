@@ -11,6 +11,7 @@ public class UnitData : ScriptableObject
     public string unitName;
     public UnitType unitType;
     public SpriteSet sprites;
+    public Sprite portrait;
     public int moveSpeed;
     public int health;
 

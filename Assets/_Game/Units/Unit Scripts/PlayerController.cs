@@ -145,7 +145,9 @@ public class PlayerController : UnitController
         // set up the new unit
         setActiveUnit(newIndex);
         SpotlightActiveUnit();
-        UI.GetComponent<UI_Operator>().SetTextInfo(units[activeUnit].GetHealth(), units[activeUnit].GetName(), units[activeUnit].GetMoveSpeed());
+        UI.GetComponent<UI_Operator>().unit = units[activeUnit];
+        UI.GetComponent<UI_Operator>().SetInfo();
+        
     }
 
     public void AbilityManual(int abilityID)

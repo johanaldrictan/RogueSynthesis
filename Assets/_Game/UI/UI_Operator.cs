@@ -1,18 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class UI_Operator : MonoBehaviour
 {
-
+    [Header("UI Panels")]
     public GameObject actionPanel;
     public GameObject profilePanel;
     //public GameObject self;
     public GameObject phasePanel;
+
+    [Header("Unit Information")]
+    public Unit unit;
+    public Image portrait;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI statText;
+
+    [Header("Miscellaneous Text")]
     public TextMeshProUGUI phaseText;
     public GameObject flavorText;
     private int randomIndex;
@@ -22,11 +29,12 @@ public class UI_Operator : MonoBehaviour
         PhaseTextDisplay();
     }
 
-    public void SetTextInfo(int health, string name, int moveSpeed)
+    public void SetInfo()
     {
-        healthText.text = "Health: " + health;
-        nameText.text = name;
-        statText.text = "Move Speed: " + moveSpeed;
+        healthText.text = "Health: " + unit.GetHealth();
+        nameText.text = unit.GetName();
+        statText.text = "Move Speed: " + unit.GetMoveSpeed();
+        portrait.sprite = unit.GetPortrait();
     }
 
     public void SetPhaseText(int playerID)
