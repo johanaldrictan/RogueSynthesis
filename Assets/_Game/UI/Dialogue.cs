@@ -27,7 +27,7 @@ public class Dialogue : MonoBehaviour
 
     IEnumerator Type()
     {
-        foreach (char letter in sentences[index].ToCharArray())
+        foreach (char letter in sentences[index])
         {
             textDisplay.text += letter;
             yield return new WaitForSeconds(typingSpeed);
