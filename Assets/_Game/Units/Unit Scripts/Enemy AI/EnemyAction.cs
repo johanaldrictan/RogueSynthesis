@@ -14,7 +14,7 @@ public abstract class EnemyAction
     protected EnemyUnit myUnit;
 
     // significance is the float value that represents how useful a particular action would be compared to others.
-    // the higher this float is, the more effective and realistic activating this ability should be.
+    // the higher this float is, the more effective and realistic this option should be.
     // a value of 0.0 signifies the lowest possible significance, and 10.0 represents the highest possible significance.
     protected float significance;
 

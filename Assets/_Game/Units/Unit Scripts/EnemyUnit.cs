@@ -12,10 +12,13 @@ public class EnemyUnit : Unit
     // its value is either null or contains the action that it will next execute.
     private ActionData plannedActionData;
 
+    // a Dictionary storing the possible tiles that this unit can move into during its turn
+    public Dictionary<Vector2Int, Direction> MoveableTiles;
+
     // possibleActions is the List of actions that this EnemyUnit can choose to take.
     // each of these actions are evaluated and one is executed on its turn.
     private List<EnemyAction> possibleActions;
-
+    
     public override void Awake()
     {
         hasActed = false;
@@ -24,6 +27,7 @@ public class EnemyUnit : Unit
         m_SpriteRenderer.sortingOrder = 99;
         Deaths = new Stack<DeathData>();
         plannedActionData = null;
+        MoveableTiles = new Dictionary<Vector2Int, Direction>();
         
         // create the list of possible actions to take
         possibleActions = new List<EnemyAction>
@@ -38,6 +42,8 @@ public class EnemyUnit : Unit
     {
         if (possibleActions.Count != 0)
         {
+            MoveableTiles = FindMoveableTiles(MapController.instance.map);
+
             EnemyAction bestAction = null;
             float highestSignificance = 0.0f;
 
@@ -64,7 +70,8 @@ public class EnemyUnit : Unit
     {
         if (plannedActionData != null)
         {
-            
+            Move(plannedActionData.GetEndingPosition().x, plannedActionData.GetEndingPosition().y);
+            ChangeDirection(plannedActionData.GetAbilityDirection());
         }
         hasMoved = true;
     }
@@ -76,6 +83,7 @@ public class EnemyUnit : Unit
         {
             AvailableAbilities[plannedActionData.GetAbilityIndex()].Execute(this, plannedActionData.GetAbilityDirection());
         }
+        ChangeDirection(Direction.S);
         hasActed = true;
     }
 
