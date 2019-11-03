@@ -27,4 +27,4 @@ public class DelayedEffectUnityEvent : UnityEvent<DelayedEffect> { }
 
 public delegate bool ConversionCondition(Unit inQuestion);
 
-public delegate void Effect(Unit target);
+public delegate void Effect(Unit target, Unit source);

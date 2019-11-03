@@ -21,6 +21,7 @@ public abstract class Unit : MonoBehaviour
     [SerializeField] public bool hasMoved;
     [SerializeField] public bool isImmobilized;
     [SerializeField] public bool attackBuffed;
+    [SerializeField] public bool damageReductionBuffed;
 
     // positional data
     [SerializeField] protected Direction direction;
@@ -58,6 +59,7 @@ public abstract class Unit : MonoBehaviour
         hasMoved = false;
         isImmobilized = false;
         attackBuffed = false;
+        damageReductionBuffed = false;
         m_SpriteRenderer = this.GetComponent<SpriteRenderer>();
         m_SpriteRenderer.sortingOrder = 99;
         if (Deaths.Count == 0)
@@ -293,7 +295,10 @@ public abstract class Unit : MonoBehaviour
 
     public void ChangeHealth(int amount, Unit source, UnitAbility attack)
     {
-        health += (amount - damageReduction);
+        if (damageReductionBuffed)
+            health += (amount - 10);
+        else
+            health += (amount - damageReduction);
         if (health <= 0)
         {
             DeathData data = new DeathData(source, attack, amount, mapPosition);
