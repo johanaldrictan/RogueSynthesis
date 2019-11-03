@@ -37,8 +37,11 @@ public class DelayedEffect
     // otherwise this will be null
     private List<Unit> effectTargets;
 
+    //This is needed for effects that affect target health. Change health requires a source unit.
+    private Unit sourceUnit;
+
     // this constructor will create a version of this object where it will target an area once the effect activates
-    public DelayedEffect(Effect eff, UnitPositionStorage positions, int time, UnitType trigger, bool end, List<Vector2Int> area)
+    public DelayedEffect(Effect eff, UnitPositionStorage positions, int time, UnitType trigger, bool end, List<Vector2Int> area, Unit source)
     {
         effect = eff;
         globalPositionalData = positions;
@@ -47,10 +50,11 @@ public class DelayedEffect
         atEnd = end;
         areaOfEffect = area;
         effectTargets = null;
+        sourceUnit = source;
     }
 
     // this constructor will create a version of this object where it will target specific Units once the effect activates
-    public DelayedEffect(Effect eff, UnitPositionStorage positions, int time, UnitType trigger, bool end, List<Unit> targets)
+    public DelayedEffect(Effect eff, UnitPositionStorage positions, int time, UnitType trigger, bool end, List<Unit> targets, Unit source)
     {
         effect = eff;
         globalPositionalData = positions;
@@ -59,6 +63,7 @@ public class DelayedEffect
         atEnd = end;
         areaOfEffect = null;
         effectTargets = targets;
+        sourceUnit = source;
     }
 
     // this function triggers the Effect.
@@ -73,7 +78,7 @@ public class DelayedEffect
                 Unit searchResult = globalPositionalData.SearchLocation(coordinate);
                 if (searchResult != null)
                 {
-                    effect(searchResult);
+                    effect(searchResult, sourceUnit);
                 }
             }
         }
@@ -83,7 +88,7 @@ public class DelayedEffect
         {
             foreach(Unit target in effectTargets)
             {
-                effect(target);
+                effect(target, sourceUnit);
             }
         }
     }

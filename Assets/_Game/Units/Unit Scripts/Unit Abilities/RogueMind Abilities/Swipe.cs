@@ -10,10 +10,15 @@ public class Swipe : Attack
     {
         isAOE = true;
     }
-    // We're just doing straight damage here
     public override void DealEffects(Unit target, Unit source)
     {
-        target.ChangeHealth( (GetDamage()*(-1)), source, this );
+        DelayedEffect delayedEffect = new DelayedEffect(SwipeAttack, source.globalPositionalData, 1, UnitType.AlliedUnit, true, GetAreaOfEffect(source, source.GetDirection()), source);
+        NewDelayedEffectEvent.Invoke(delayedEffect);
+    }
+
+    public void SwipeAttack(Unit target, Unit source)
+    {
+        target.ChangeHealth((GetDamage() * (-1)), source, this);
     }
 
     public override List<Vector2Int> GetAreaOfEffect(Unit source, Direction direction)
