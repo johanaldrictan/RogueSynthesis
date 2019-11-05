@@ -34,6 +34,15 @@ public class EnemyUnit : Unit
         plannedActionData = null;
         MoveableTiles = new Dictionary<Vector2Int, Direction>();
         
+        
+    }
+
+    public override void Start()
+    {
+        mapPosition = MapMath.WorldToMap(this.transform.position);
+        tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
+        MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
+
         // create the list of possible action categories to take
         possibleActions = new List<EnemyAction>
         {
@@ -77,6 +86,12 @@ public class EnemyUnit : Unit
             }
 
             plannedActionData = bestAction.GetActionData();
+
+            // This useful Debug statement will print to the console the details of what this Unit committed to doing
+            Debug.Log("EnemyUnit " + this + " at Starting Position " + this.GetMapPosition()
+                + " has committed to moving to " + plannedActionData.GetEndingPosition() + " and using " 
+                + this.AvailableAbilities[plannedActionData.GetAbilityIndex()] + " in direction " 
+                + plannedActionData.GetAbilityDirection());
         }
     }
 
