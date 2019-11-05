@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,9 +23,15 @@ public class Aggro : EnemyAction
         significance = 10.0f;
     }
 
-    public override ActionData GetActionData()
+    protected override void SignifyAbility(AbilityOption option)
     {
-        // **********************
-        throw new System.NotImplementedException();
+        
+    }
+
+    protected override Tuple<Vector2Int, Direction> CommitMovement()
+    {
+        Tuple<Vector2Int, Direction> result = new Tuple<Vector2Int, Direction>(myUnit.GetMapPosition(), Direction.S);
+
+        return result;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +19,12 @@ public abstract class EnemyAction
     // a value of 0.0 signifies the lowest possible significance, and 10.0 represents the highest possible significance.
     protected float significance;
 
+    // chosenAbility is the index of the Ability that this Unit has committed to activating.
+    protected int committedAbility;
+
+    // chosenMovement is the data regarding the movement that the Unit has committed to doing
+    protected Tuple<Vector2Int, Direction> committedMovement;
+
     // constructor. Takes a unit and assigns it to myUnit
     public EnemyAction(EnemyUnit unit)
     {
@@ -30,11 +37,48 @@ public abstract class EnemyAction
 
     // This function evaluates the game-field 
     // It then creates and returns an ActionData object referring to the steps for executing the action
-    public abstract ActionData GetActionData();
+    public ActionData GetActionData()
+    {
+        // first, find the best ability in terms of significance.
+        List<AbilityOption> options = myUnit.GetAbilityOptions();
+        int bestAbility = 0;
+        float highestSignificance = 0.0f;
+
+        // for each possible action:
+        for (int i = 0; i < options.Count; i++)
+        {
+            // evaluate the significance of this particular option
+            SignifyAbility(options[i]);
+
+            // check if it has the highest significance
+            if (options[i].GetSignificance() > highestSignificance)
+            {
+                bestAbility = i;
+                highestSignificance = options[i].GetSignificance();
+            }
+        }
+
+        committedAbility = bestAbility;
+        committedMovement = CommitMovement();
+        return new ActionData(committedMovement.Item1, committedMovement.Item2, committedAbility);
+    }
 
 
     public float GetSignificance()
     {
         return significance;
     }
+
+    // Takes an AbilityOption object and evaluates/sets its significance
+    // this function is abstract because way in which an ability is given significance is biased based on the type of EnemyAction that has been decided upon
+    // for example, being Aggro will value different things when choosing an option as opposed to being Defensive
+    protected abstract void SignifyAbility(AbilityOption option);
+
+    // Decides the best Movement option to choose
+    // this is biased/has a heuristic: the ability that is being used has already been chosen at this point.
+    // this function is abstract because way in which an ability is given significance is biased based on the type of EnemyAction that has been decided upon
+    // for example, being Aggro will value different things when choosing an option as opposed to being Defensive
+    protected abstract Tuple<Vector2Int, Direction> CommitMovement();
+
+    
 }

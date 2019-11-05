@@ -9,9 +9,6 @@ using UnityEngine;
 
 public class ActionData
 {
-    // the (x, y) coordinates the unit starts at before moving
-    private Vector2Int startingPosition;
-
     // the cardinal direction that the Unit faces to execute its ability
     private Direction abilityDirection;
 
@@ -22,17 +19,11 @@ public class ActionData
     private int abilityIndex;
 
     // Constructor. Takes the variables necessary for the object and stores them
-    public ActionData(Vector2Int start, Vector2Int end, Direction direction, int index)
+    public ActionData(Vector2Int end, Direction direction, int index)
     {
-        startingPosition = start;
         abilityDirection = direction;
         endingPosition = end;
         abilityIndex = index;
-    }
-
-    public Vector2Int GetStartingPosition()
-    {
-        return startingPosition;
     }
 
     public Direction GetAbilityDirection()

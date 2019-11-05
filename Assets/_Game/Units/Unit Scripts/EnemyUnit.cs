@@ -18,6 +18,11 @@ public class EnemyUnit : Unit
     // possibleActions is the List of actions that this EnemyUnit can choose to take.
     // each of these actions are evaluated and one is executed on its turn.
     private List<EnemyAction> possibleActions;
+
+    // this is the storage of AbilityOption objects for each of this Unit's abilities. 
+    // Each ability will be evaluated separately and each store independent data
+    // this list will mirror the Unit's list of Abilities: the index of an object in this list will be the same as the index of the Ability list for the relevant item
+    private List<AbilityOption> possibleAbilities;
     
     public override void Awake()
     {
@@ -29,11 +34,18 @@ public class EnemyUnit : Unit
         plannedActionData = null;
         MoveableTiles = new Dictionary<Vector2Int, Direction>();
         
-        // create the list of possible actions to take
+        // create the list of possible action categories to take
         possibleActions = new List<EnemyAction>
         {
             new Aggro(this)
         };
+
+        // create list of possible abilities to choose from
+        possibleAbilities = new List<AbilityOption>();
+        foreach (UnitAbility ability in this.AvailableAbilities)
+        {
+            possibleAbilities.Add(new AbilityOption(this, ability));
+        }
     }
 
     // this function is called when the EnemyUnit needs to know what it's going to do
@@ -42,7 +54,10 @@ public class EnemyUnit : Unit
     {
         if (possibleActions.Count != 0)
         {
+            // get data about the board-state, possible options, etc
             MoveableTiles = FindMoveableTiles(MapController.instance.map);
+            foreach(AbilityOption option in possibleAbilities)
+            { option.EvaluateAffectableTiles(); }
 
             EnemyAction bestAction = null;
             float highestSignificance = 0.0f;
@@ -87,6 +102,9 @@ public class EnemyUnit : Unit
         hasActed = true;
     }
 
-
+    public List<AbilityOption> GetAbilityOptions()
+    {
+        return possibleAbilities;
+    }
    
 }

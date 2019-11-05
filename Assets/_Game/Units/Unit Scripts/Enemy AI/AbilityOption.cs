@@ -5,7 +5,6 @@ using UnityEngine;
 
 /// <summary>
 /// AbilityOption is an object used to store a possible ability the EnemyController can choose
-/// these are used specifically for when a Unit has decided to Aggro, and is choosing a specific aggressive ability
 /// this script stores and caluclates values in order to help determine viabilities between abilities
 /// </summary>
 
@@ -66,23 +65,35 @@ public class AbilityOption
     // This function will evaluate the tiles in which this ability can reach, and update the affectableTiles Dictionary to its correct state
     public void EvaluateAffectableTiles()
     {
-        // the Ability that this object stores must be a type of Attack, as those Abilities have affectable areas.
+        ResetAffectableTiles();
+
+        // Attacks have affectable areas. Therefore, only those types of UnitAbilities need to be evaluated
         // if not an Attack, this function will only add the tile that the unit is occupying
         if (!ability.GetType().IsSubclassOf(typeof(Attack)))
         {
             affectableTiles[sourceUnit.GetMapPosition()] = new Tuple<Vector2Int, Direction>(sourceUnit.GetMapPosition(), Direction.S);
             return;
         }
-        // otherwise, this ability is a type of Attack.
-        // iterate through 
-        else
+
+        // otherwise, if this ability is a type of Attack, iterate through
+        else if (ability.GetType().IsSubclassOf(typeof(Attack)))
         {
+            // iterate three times: first for all possible moveable tiles, second for all cardinal directions, third for each tile in the area of effect at that location
             List<Direction> directionsToCheck = new List<Direction> {Direction.N, Direction.S, Direction.E, Direction.W};
             foreach(Vector2Int tile in sourceUnit.MoveableTiles.Keys)
             {
                 foreach(Direction direction in directionsToCheck)
                 {
-                    // ****************
+                    List<Vector2Int> areaOfEffect = (ability as Attack).GetAreaOfEffect(tile, direction);
+
+                    foreach(Vector2Int affectedTile in areaOfEffect)
+                    {
+                        // add the tile to the affectableTiles Dictionary if it's a new Key
+                        if (! affectableTiles.ContainsKey(affectedTile))
+                        {
+                            affectableTiles[affectedTile] = new Tuple<Vector2Int, Direction>(tile, direction);
+                        }
+                    }
                 }
             }
         }
