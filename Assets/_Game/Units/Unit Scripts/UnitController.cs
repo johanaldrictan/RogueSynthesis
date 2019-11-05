@@ -170,6 +170,7 @@ public abstract class UnitController : MonoBehaviour
     {
         for (int i = 0; i < units.Count; i++)
         {
+            units[i].damageReductionBuffed = false;
             if (units[i].isImmobilized)
             {
                 units[i].isImmobilized = false;
