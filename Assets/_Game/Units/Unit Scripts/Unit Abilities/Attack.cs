@@ -18,7 +18,7 @@ public abstract class Attack : UnitAbility
     public abstract int GetDamage();
 
     // Attacks have an area of effect, and need a way to get that effect for multiple purposes like applying damage or visual effects
-    public abstract List<Vector2Int> GetAreaOfEffect(Unit source, Direction direction);
+    public abstract List<Vector2Int> GetAreaOfEffect(Vector2Int source, Direction direction);
 
     // This funciton takes a Unit that is to be hit with the Attack. The function deals the associated effects of the attack to the given Unit
     public abstract void DealEffects(Unit target, Unit source);
@@ -26,7 +26,7 @@ public abstract class Attack : UnitAbility
     // get the area of effect. iterate through it, dealing effects to each unit found
     public override void Execute(Unit source, Direction direction)
     {
-        List<Vector2Int> area = GetAreaOfEffect(source, direction);
+        List<Vector2Int> area = GetAreaOfEffect(source.GetMapPosition(), direction);
 
         //Debug.Log(direction);
 

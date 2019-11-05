@@ -13,10 +13,10 @@ public class Aim : Attack
         source.attackBuffed = true;
     }
 
-    public override List<Vector2Int> GetAreaOfEffect(Unit source, Direction direction)
+    public override List<Vector2Int> GetAreaOfEffect(Vector2Int source, Direction direction)
     {
         List<Vector2Int> result = new List<Vector2Int>();
-        result.Add(source.GetMapPosition());
+        result.Add(source);
         return result;
     }
 

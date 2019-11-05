@@ -25,9 +25,9 @@ public class Cleave : Attack
     // we're making a list of coordinates that this attack reaches
     // Cleave has an origin point range tiles in front of the Unit (default 1)
     // it also hits the two adjacent squares on either side of the origin
-    public override List<Vector2Int> GetAreaOfEffect(Unit source, Direction direction)
+    public override List<Vector2Int> GetAreaOfEffect(Vector2Int source, Direction direction)
     {
-        return AttackHelper.GetTShapedAOE(source.GetMapPosition(), direction, GetRange());      
+        return AttackHelper.GetTShapedAOE(source, direction, GetRange());      
     }
 
     public override int GetDamage()

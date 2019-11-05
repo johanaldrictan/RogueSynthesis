@@ -38,11 +38,11 @@ public class Infect : Attack
         source.KillMe(data);
     }
 
-    public override List<Vector2Int> GetAreaOfEffect(Unit source, Direction direction)
+    public override List<Vector2Int> GetAreaOfEffect(Vector2Int source, Direction direction)
     {
         //get tile in front
         List<Vector2Int> result = new List<Vector2Int>();
-        Vector2Int origin = source.GetMapPosition();
+        Vector2Int origin = source;
         origin += MapMath.DirToRelativeLoc(direction);
 
         if (!MapMath.InMapBounds(origin))

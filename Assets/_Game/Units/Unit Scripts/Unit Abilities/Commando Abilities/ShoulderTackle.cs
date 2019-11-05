@@ -54,10 +54,10 @@ public class ShoulderTackle : Attack
     }
 
     // we're making a list of coordinates that this attack reaches
-    public override List<Vector2Int> GetAreaOfEffect(Unit source, Direction direction)
+    public override List<Vector2Int> GetAreaOfEffect(Vector2Int source, Direction direction)
     {
         List<Vector2Int> result = new List<Vector2Int>();
-        Vector2Int origin = source.GetMapPosition();
+        Vector2Int origin = source;
 
         origin += MapMath.DirToRelativeLoc(direction);
 

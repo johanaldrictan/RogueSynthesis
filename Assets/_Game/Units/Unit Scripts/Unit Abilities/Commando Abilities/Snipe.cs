@@ -17,9 +17,9 @@ public class Snipe : Attack
         target.ChangeHealth(((GetDamage() + attackModifier) * (-1)), source, this);
     }
 
-    public override List<Vector2Int> GetAreaOfEffect(Unit source, Direction direction)
+    public override List<Vector2Int> GetAreaOfEffect(Vector2Int source, Direction direction)
     {
-        List<Vector2Int> result = AttackHelper.GetLineAOE(source.GetMapPosition(), direction, GetRange());
+        List<Vector2Int> result = AttackHelper.GetLineAOE(source, direction, GetRange());
         return result;
     }
 
