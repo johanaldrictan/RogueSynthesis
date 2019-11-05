@@ -23,6 +23,11 @@ public class AbilityOption
     // 2: the direction the Unit must face from that coordinate to affect the key location
     private Dictionary<Vector2Int, Tuple<Vector2Int, Direction>> affectableTiles;
 
+    // affectableUnits is a dictionary storing all possible Units that this particular ability can affect
+    // the keys are (x, y) coordinates of the Unit's position
+    // the values are the Units themselves
+    private Dictionary<Vector2Int, Unit> affectableUnits;
+
     // significance is the float value that represents how useful this particular Ability would be compared to others.
     // the higher this float is, the more effective and realistic activating this ability should be.
     // a value of 0.0 signifies the lowest possible significance, and 10.0 represents the highest possible significance.
@@ -34,6 +39,7 @@ public class AbilityOption
         sourceUnit = source;
         ability = abil;
         affectableTiles = new Dictionary<Vector2Int, Tuple<Vector2Int, Direction>>();
+        affectableUnits = new Dictionary<Vector2Int, Unit>();
         significance = 0.0f;
     }
 
@@ -42,14 +48,22 @@ public class AbilityOption
         return significance;
     }
 
-    public void SetSignificance(int newValue)
+    public void SetSignificance(float newValue)
     {
         significance = newValue;
     }
 
-    public void AddToSignificance(int rightHandValue)
+    public void AddToSignificance(float rightHandValue)
     {
         significance += rightHandValue;
+        if (significance < 0.0f)
+        {
+            significance = 0.0f;
+        }
+        else if (significance > 10.0f)
+        {
+            significance = 10.0f;
+        }
     }
 
     public Dictionary<Vector2Int, Tuple<Vector2Int, Direction>> GetAffectableTiles()
@@ -62,16 +76,28 @@ public class AbilityOption
         affectableTiles.Clear();
     }
 
+    public Dictionary<Vector2Int, Unit> GetAffectableUnits()
+    {
+        return affectableUnits;
+    }
+
+    public void ResetAffectableUnits()
+    {
+        affectableUnits.Clear();
+    }
+
     // This function will evaluate the tiles in which this ability can reach, and update the affectableTiles Dictionary to its correct state
     public void EvaluateAffectableTiles()
     {
         ResetAffectableTiles();
+        ResetAffectableUnits();
 
         // Attacks have affectable areas. Therefore, only those types of UnitAbilities need to be evaluated
         // if not an Attack, this function will only add the tile that the unit is occupying
         if (!ability.GetType().IsSubclassOf(typeof(Attack)))
         {
             affectableTiles[sourceUnit.GetMapPosition()] = new Tuple<Vector2Int, Direction>(sourceUnit.GetMapPosition(), Direction.S);
+            affectableUnits[sourceUnit.GetMapPosition()] = sourceUnit;
             return;
         }
 
@@ -92,6 +118,13 @@ public class AbilityOption
                         if (! affectableTiles.ContainsKey(affectedTile))
                         {
                             affectableTiles[affectedTile] = new Tuple<Vector2Int, Direction>(tile, direction);
+
+                            // check if there's a Unit here. if there is one and it's new, add it to the affectableUnits
+                            Unit searchResult = sourceUnit.globalPositionalData.SearchLocation();
+                            if (searchResult != null && !affectableUnits.ContainsKey(affectedTile))
+                            {
+                                affectableUnits[affectedTile] = searchResult;
+                            }
                         }
                     }
                 }

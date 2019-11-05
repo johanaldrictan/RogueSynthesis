@@ -25,7 +25,17 @@ public class Aggro : EnemyAction
 
     protected override void SignifyAbility(AbilityOption option)
     {
-        
+        // wait should be the last option chosen. If every other option is negative Infinity (AKA impossible), then this will be chosen 
+        if (option is Wait)
+        {
+            option.SetSignificance(0.0f);
+            return;
+        }
+
+        if (option.GetType().IsSubclassOf(typeof(Attack)))
+        {
+
+        }
     }
 
     protected override Tuple<Vector2Int, Direction> CommitMovement()

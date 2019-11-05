@@ -63,12 +63,6 @@ public abstract class EnemyAction
         return new ActionData(committedMovement.Item1, committedMovement.Item2, committedAbility);
     }
 
-
-    public float GetSignificance()
-    {
-        return significance;
-    }
-
     // Takes an AbilityOption object and evaluates/sets its significance
     // this function is abstract because way in which an ability is given significance is biased based on the type of EnemyAction that has been decided upon
     // for example, being Aggro will value different things when choosing an option as opposed to being Defensive
@@ -80,5 +74,30 @@ public abstract class EnemyAction
     // for example, being Aggro will value different things when choosing an option as opposed to being Defensive
     protected abstract Tuple<Vector2Int, Direction> CommitMovement();
 
-    
+
+
+
+    public float GetSignificance()
+    {
+        return significance;
+    }
+
+    public void SetSignificance(float newValue)
+    {
+        significance = newValue;
+    }
+
+    public void AddToSignificance(float rightHandValue)
+    {
+        significance += rightHandValue;
+        if (significance < 0.0f)
+        {
+            significance = 0.0f;
+        }
+        else if (significance > 10.0f)
+        {
+            significance = 10.0f;
+        }
+    }
+
 }
