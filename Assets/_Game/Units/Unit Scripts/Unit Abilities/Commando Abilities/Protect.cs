@@ -2,36 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Protect : Attack
+public class Protect : UnitAbility
 {
-    public Protect()
-    {
-        isAOE = false;
-    }
-    public override void DealEffects(Unit target, Unit source)
+    public override void Execute(Unit source, Direction direction)
     {
         source.damageReductionBuffed = true;
     }
 
-    public override List<Vector2Int> GetAreaOfEffect(Vector2Int source, Direction direction)
-    {
-        List<Vector2Int> result = new List<Vector2Int>();
-
-        return result;
-    }
-
-    public override int GetDamage()
-    {
-        return 20;
-    }
-
     public override int GetRange()
     {
-        return 16;
+        return 0;
     }
 
     protected override bool InferiorComparator(UnitAbility inQuestion)
     {
-        return (inQuestion.GetType() == typeof(Snipe));
+        return (inQuestion.GetType() == typeof(Protect));
     }
 }
