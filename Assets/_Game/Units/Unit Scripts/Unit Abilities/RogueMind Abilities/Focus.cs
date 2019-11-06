@@ -7,11 +7,16 @@ using UnityEngine;
 
 public class Focus : UnitAbility
 {
-
+    
     public override void Execute(Unit source, Direction direction)
     {
         if (source.GetDamageReduction() < 5)
             source.SetDamageReduction(1);
+    }
+
+    public override List<EffectState> GetEffectState()
+    {
+        return new List<EffectState>() { EffectState.BUFF_DR };
     }
 
     public override int GetRange()

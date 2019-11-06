@@ -42,4 +42,9 @@ public class Swipe : Attack
     {
         return (inQuestion.GetType() == typeof(Swipe));
     }
+
+    public override List<EffectState> GetEffectState()
+    {
+        return new List<EffectState> { EffectState.DAMAGE };
+    }
 }

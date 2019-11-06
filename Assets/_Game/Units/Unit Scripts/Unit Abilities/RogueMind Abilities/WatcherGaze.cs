@@ -28,6 +28,11 @@ public class WatcherGaze : Attack
         return 18;
     }
 
+    public override List<EffectState> GetEffectState()
+    {
+        return new List<EffectState> { EffectState.DAMAGE};
+    }
+
     public override int GetRange()
     {
         return 3;

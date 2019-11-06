@@ -14,6 +14,11 @@ public class Wait : UnitAbility
         return;
     }
 
+    public override List<EffectState> GetEffectState()
+    {
+        return new List<EffectState>();
+    }
+
     public override int GetRange()
     {
         return 0;

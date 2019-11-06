@@ -62,6 +62,11 @@ public class Infect : Attack
         return 15;
     }
 
+    public override List<EffectState> GetEffectState()
+    {
+        return new List<EffectState>() { EffectState.DAMAGE, EffectState.KNOCKBACK };
+    }
+
     public override int GetRange()
     {
         return 1;

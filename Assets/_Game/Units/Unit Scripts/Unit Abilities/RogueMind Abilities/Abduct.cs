@@ -30,6 +30,11 @@ public class Abduct : Attack
         return 5;
     }
 
+    public override List<EffectState> GetEffectState()
+    {
+        return new List<EffectState> { EffectState.DAMAGE, EffectState.DISABLE };
+    }
+
     public override int GetRange()
     {
         return 1;

@@ -7,6 +7,8 @@ using UnityEngine;
 
 public abstract class UnitAbility
 {
+    public abstract List<EffectState> GetEffectState();
+
     // every Ability must have a range, regardless of whether or not it is used
     public abstract int GetRange();
 
@@ -39,4 +41,12 @@ public abstract class UnitAbility
         }
         return false;
     }
+}
+public enum EffectState
+{
+    DAMAGE,
+    BUFF_DR,
+    STUN,
+    KNOCKBACK,
+    DISABLE
 }

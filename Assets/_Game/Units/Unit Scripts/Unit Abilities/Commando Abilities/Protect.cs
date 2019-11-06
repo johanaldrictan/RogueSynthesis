@@ -6,7 +6,12 @@ public class Protect : UnitAbility
 {
     public override void Execute(Unit source, Direction direction)
     {
-        source.damageReductionBuffed = true;
+        
+    }
+
+    public override List<EffectState> GetEffectState()
+    {
+        return new List<EffectState>() { EffectState.BUFF_DR };
     }
 
     public override int GetRange()
