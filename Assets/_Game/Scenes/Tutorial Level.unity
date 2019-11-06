@@ -5538,8 +5538,8 @@ MonoBehaviour:
   walkableTiles: {fileID: 113653242}
   mapHeightOffset: 8
   mapWidthOffset: -13
-  mapWidth: 17
-  mapHeight: 25
+  mapWidth: 16
+  mapHeight: 24
 --- !u!156049354 &1398607106
 Grid:
   m_ObjectHideFlags: 0

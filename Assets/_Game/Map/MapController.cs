@@ -46,7 +46,8 @@ public class MapController : MonoBehaviour
         //But this is not really optimal for load times??
         //initialize map
         //                x         y
-        map = new int[mapWidth, mapHeight];
+        map = new int[mapWidth+1, mapHeight+1];
+
         for (int x = mapWidthOffset; x < mapWidthOffset + mapWidth; x++)
         {
             //Debug.Log("MapHeightOffset: " + mapHeightOffset);
@@ -56,16 +57,20 @@ public class MapController : MonoBehaviour
             for (int y = mapHeightOffset; y > (mapHeightOffset - mapHeight); y--)
             {
                 Vector2Int currCoords = MapMath.GridToMap(new Vector3Int(x, y, 0));
+                //Debug.Log(currCoords.ToString());
                 //Debug.Log("X: " + x + " Y: " + y);
-                map[currCoords.x, currCoords.y] = (int)TileWeight.OBSTRUCTED;
-                //null check
-                if (walkableTiles.GetTile(new Vector3Int(x, y, 0)))
+                if (MapMath.InMapBounds(currCoords))
                 {
-                    // if(TileDatabase.instance.tileDB.ContainsKey(walkableTiles.GetTile(new Vector3Int(x, y, 0)).name))
-                    if (walkableTiles.GetTile(new Vector3Int(x, y, 0)) is WeightedTile)
+                    map[currCoords.x, currCoords.y] = (int)TileWeight.OBSTRUCTED;
+                    //null check
+                    if (walkableTiles.GetTile(new Vector3Int(x, y, 0)))
                     {
-                        // map[currCoords.x, currCoords.y] = (int)TileDatabase.instance.tileDB[walkableTiles.GetTile(new Vector3Int(x, y, 0)).name];
-                        map[currCoords.x, currCoords.y] = (int)(walkableTiles.GetTile(new Vector3Int(x, y, 0)) as WeightedTile).weight;
+                        // if(TileDatabase.instance.tileDB.ContainsKey(walkableTiles.GetTile(new Vector3Int(x, y, 0)).name))
+                        if (walkableTiles.GetTile(new Vector3Int(x, y, 0)) is WeightedTile)
+                        {
+                            // map[currCoords.x, currCoords.y] = (int)TileDatabase.instance.tileDB[walkableTiles.GetTile(new Vector3Int(x, y, 0)).name];
+                            map[currCoords.x, currCoords.y] = (int)(walkableTiles.GetTile(new Vector3Int(x, y, 0)) as WeightedTile).weight;
+                        }
                     }
                 }
             }
