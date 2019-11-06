@@ -295,13 +295,14 @@ public abstract class Unit : MonoBehaviour
 
     public void ChangeHealth(int amount, Unit source, UnitAbility attack)
     {
+        int newDamage = 0;
         if (amount > 0)
         {
-            int newDamage = amount;
+            newDamage = amount;
         }
         else
         {
-            int newDamage = amount - damageReduction;
+            newDamage = amount - damageReduction;
         }
 
         health += (newDamage);
