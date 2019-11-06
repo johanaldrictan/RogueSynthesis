@@ -15,9 +15,6 @@ public class AlliedUnit : Unit
     [SerializeField] public Vector2Int positionMemory;
     [SerializeField] public Direction directionMemory;
 
-    [SerializeField]
-    public bool hasPivoted;
-
     public override void Awake()
     {
         hasPivoted = false;

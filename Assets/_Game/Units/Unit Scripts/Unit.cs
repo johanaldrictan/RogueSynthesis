@@ -19,6 +19,7 @@ public abstract class Unit : MonoBehaviour
     // booleans
     [SerializeField] public bool hasActed;
     [SerializeField] public bool hasMoved;
+    [SerializeField] public bool hasPivoted;
     [SerializeField] public bool isImmobilized;
     [SerializeField] public bool attackBuffed;
     [SerializeField] public bool damageReductionBuffed;
