@@ -19,10 +19,13 @@ public abstract class EnemyAction
     // a value of 0.0 signifies the lowest possible significance, and 10.0 represents the highest possible significance.
     protected float significance;
 
-    // chosenAbility is the index of the Ability that this Unit has committed to activating.
-    protected int committedAbility;
+    // committedAbilityOption is the option that this Unit has committed to activating
+    protected AbilityOption committedAbilityOption;
 
-    // chosenMovement is the data regarding the movement that the Unit has committed to doing
+    // committedAbilityIndex is the index of the Ability that this Unit has committed to activating.
+    protected int committedAbilityIndex;
+
+    // committedMovement is the data regarding the movement that the Unit has committed to doing
     protected Tuple<Vector2Int, Direction> committedMovement;
 
     // constructor. Takes a unit and assigns it to myUnit
@@ -41,26 +44,26 @@ public abstract class EnemyAction
     {
         // first, find the best ability in terms of significance.
         List<AbilityOption> options = myUnit.GetAbilityOptions();
-        int bestAbility = 0;
-        float highestSignificance = 0.0f;
+        float highestSignificance = float.NegativeInfinity;
 
         // for each possible action:
         for (int i = 0; i < options.Count; i++)
         {
             // evaluate the significance of this particular option
             SignifyAbility(options[i]);
+            Debug.Log("Ability: " + options[i].GetAbility() + " | Significance: " + options[i].GetSignificance());
 
             // check if it has the highest significance
-            if (options[i].GetSignificance() > highestSignificance)
+            if (options[i].GetSignificance() >= highestSignificance)
             {
-                bestAbility = i;
+                committedAbilityIndex = i;
+                committedAbilityOption = options[i];
                 highestSignificance = options[i].GetSignificance();
             }
         }
 
-        committedAbility = bestAbility;
         committedMovement = CommitMovement();
-        return new ActionData(committedMovement.Item1, committedMovement.Item2, committedAbility);
+        return new ActionData(committedMovement.Item1, committedMovement.Item2, committedAbilityIndex);
     }
 
     // Takes an AbilityOption object and evaluates/sets its significance

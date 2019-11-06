@@ -26,15 +26,58 @@ public class Aggro : EnemyAction
     protected override void SignifyAbility(AbilityOption option)
     {
         // wait should be the last option chosen. If every other option is negative Infinity (AKA impossible), then this will be chosen 
-        if (option is Wait)
+        if (option.GetAbility() is Wait)
         {
             option.SetSignificance(0.0f);
             return;
         }
 
-        if (option.GetType().IsSubclassOf(typeof(Attack)))
+        // if the Ability is an Attack
+        if (option.GetAbility().GetType().IsSubclassOf(typeof(Attack)))
         {
+            option.SetSignificance(0.0f);
+            Dictionary<Vector2Int, Unit> affectableUnits = option.GetAffectableUnits();
+            // if there are Units that this Attack could reach/affect
+            if (affectableUnits.Count > 0)
+            {
+                foreach(Vector2Int key in affectableUnits.Keys)
+                {
+                    // we don't want to attack EnemyUnits
+                    if (! (affectableUnits[key] is EnemyUnit))
+                    {
+                        // if using this ability would reduce this Unit's HP to 0 or below,
+                        // definitely consider doing this.
+                        if (affectableUnits[key].GetHealth() <= (option.GetAbility() as Attack).GetDamage())
+                        {
+                            option.SetSignificance(10.0f);
+                        }
 
+                        else
+                        {
+                            // the significance of this ability against this Unit is the ratio of how much of the Unit's current health that the ability will deal, out of 10.0
+                            float contendingSignificance = ( (float)((option.GetAbility() as Attack).GetDamage()) / (float)(affectableUnits[key].GetHealth()) * 10.0f );
+                            if (option.GetSignificance() <= contendingSignificance)
+                            {
+                                option.SetSignificance(contendingSignificance);
+                            }
+                        }
+                    }
+                }
+            }
+
+            // at this point, if this Attack cannot reach any opposing Units. Do NOT use it
+            if (affectableUnits.Count <= 0 || option.GetSignificance() <= 0.0f)
+            {
+                option.SetSignificance(float.NegativeInfinity);
+                return;
+            }
+        }
+        // this Ability is not an Attack nor Wait
+        // set it to a relatively low significance, as Attacking should be done if possible/better
+        else
+        {
+            option.SetSignificance(2.0f);
+            return;
         }
     }
 

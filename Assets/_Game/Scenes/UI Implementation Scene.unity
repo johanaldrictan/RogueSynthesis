@@ -8138,11 +8138,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeUnit: 0
   unitSpawnData:
-  - data: {fileID: 11400000, guid: 87fc11b9e22649f4490c8d684c736026, type: 2}
+  - data: {fileID: 11400000, guid: 326a34c240654204b95027781c70d151, type: 2}
     spawnPosition: {x: 5, y: 5}
-  - data: {fileID: 11400000, guid: 87fc11b9e22649f4490c8d684c736026, type: 2}
+  - data: {fileID: 11400000, guid: 326a34c240654204b95027781c70d151, type: 2}
     spawnPosition: {x: 5, y: 7}
-  - data: {fileID: 11400000, guid: 87fc11b9e22649f4490c8d684c736026, type: 2}
+  - data: {fileID: 11400000, guid: 326a34c240654204b95027781c70d151, type: 2}
     spawnPosition: {x: 4, y: 6}
   abilityPanel: {fileID: 1549085493}
   UI: {fileID: 826912452}
