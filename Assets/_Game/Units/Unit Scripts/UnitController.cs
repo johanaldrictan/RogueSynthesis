@@ -180,6 +180,7 @@ public abstract class UnitController : MonoBehaviour
             {
                 units[i].hasActed = false;
                 units[i].hasMoved = false;
+                units[i].hasPivoted = false;
             }
         }
     }
