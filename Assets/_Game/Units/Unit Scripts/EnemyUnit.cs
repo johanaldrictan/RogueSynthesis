@@ -33,8 +33,6 @@ public class EnemyUnit : Unit
         Deaths = new Stack<DeathData>();
         plannedActionData = null;
         MoveableTiles = new Dictionary<Vector2Int, Direction>();
-        
-        
     }
 
     public override void Start()

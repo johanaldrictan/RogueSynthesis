@@ -296,10 +296,18 @@ public abstract class Unit : MonoBehaviour
 
     public void ChangeHealth(int amount, Unit source, UnitAbility attack)
     {
-        if (damageReductionBuffed)
-            health += (amount - 10);
+        int newDamage = 0;
+        if (amount > 0)
+        {
+            newDamage = amount;
+        }
         else
-            health += (amount - damageReduction);
+        {
+            newDamage = amount - damageReduction;
+        }
+
+        health += (newDamage);
+
         if (health <= 0)
         {
             DeathData data = new DeathData(source, attack, amount, mapPosition);
