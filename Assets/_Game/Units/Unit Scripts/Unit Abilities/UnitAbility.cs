@@ -46,6 +46,7 @@ public enum EffectState
 {
     DAMAGE,
     BUFF_DR,
+    BUFF_DMG,
     STUN,
     KNOCKBACK,
     DISABLE
