@@ -119,6 +119,11 @@ public class ShoulderTackle : Attack
         return 3;
     }
 
+    public override List<EffectState> GetEffectState()
+    {
+        return new List<EffectState> { EffectState.DAMAGE, EffectState.KNOCKBACK };
+    }
+
     protected override bool InferiorComparator(UnitAbility inQuestion)
     {
         return (inQuestion.GetType() == typeof(ShoulderTackle));

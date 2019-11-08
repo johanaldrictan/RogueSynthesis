@@ -38,6 +38,11 @@ public class Snipe : Attack
         return 16;
     }
 
+    public override List<EffectState> GetEffectState()
+    {
+        return new List<EffectState> { EffectState.DAMAGE };
+    }
+
     protected override bool InferiorComparator(UnitAbility inQuestion)
     {
         return (inQuestion.GetType() == typeof(Snipe));

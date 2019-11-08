@@ -45,6 +45,11 @@ public class Cleave : Attack
         return 1;
     }
 
+    public override List<EffectState> GetEffectState()
+    {
+        return new List<EffectState> { EffectState.DAMAGE };
+    }
+
     protected override bool InferiorComparator(UnitAbility inQuestion)
     {
         return (inQuestion.GetType() == typeof(Cleave));
