@@ -25,6 +25,11 @@ public class Aim : Attack
         return 0;
     }
 
+    public override List<EffectState> GetEffectState()
+    {
+        return new List<EffectState> { EffectState.BUFF_DR };
+    }
+
     public override int GetRange()
     {
         return 0;

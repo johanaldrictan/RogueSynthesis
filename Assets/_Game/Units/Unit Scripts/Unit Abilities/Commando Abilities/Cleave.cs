@@ -35,6 +35,11 @@ public class Cleave : Attack
         return 5;
     }
 
+    public override List<EffectState> GetEffectState()
+    {
+        return new List<EffectState> { EffectState.DAMAGE, EffectState.STUN };
+    }
+
     public override int GetRange()
     {
         return 1;
