@@ -20,6 +20,7 @@ public class Cleave : Attack
     public override void DealEffects(Unit target, Unit source)
     {
         target.ChangeHealth( (GetDamage()*(-1)), source, this );
+        target.isImmobilized = true;
     }
 
     // we're making a list of coordinates that this attack reaches
@@ -43,11 +44,6 @@ public class Cleave : Attack
     public override int GetRange()
     {
         return 1;
-    }
-
-    public override List<EffectState> GetEffectState()
-    {
-        return new List<EffectState> { EffectState.DAMAGE };
     }
 
     protected override bool InferiorComparator(UnitAbility inQuestion)
