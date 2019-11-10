@@ -28,14 +28,14 @@ public class Snipe : Attack
         return 20;
     }
 
-    public override int GetRange()
-    {
-        return 16;
-    }
-
     public override List<EffectState> GetEffectState()
     {
         return new List<EffectState> { EffectState.DAMAGE };
+    }
+
+    public override int GetRange()
+    {
+        return 16;
     }
 
     protected override bool InferiorComparator(UnitAbility inQuestion)
