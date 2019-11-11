@@ -127,9 +127,15 @@ public class Aggro : EnemyAction
         }
 
         // If this Ability cannot affect any meaningful Units: Do NOT use it
-        if ((bestTarget.x == -1 && bestTarget.y == -1) || affectableUnits.Keys.Count <= 0)
+        // IF:    This ability deals some sort of effect   AND      either: there is no bestTarget NOR affectable Unit
+        if ( option.GetAbility().GetEffectState().Count > 0 && ((bestTarget.x == -1 && bestTarget.y == -1) || affectableUnits.Keys.Count <= 0) )
         {
             option.SetSignificance(float.NegativeInfinity);
+        }
+        else if (option.GetAbility() is Wait)
+        {
+            // wait should be zero, AKA it should only be chosen if everything else is an awful choice
+            option.SetSignificance(0.0f);
         }
         else
         {
