@@ -35,7 +35,7 @@ MonoBehaviour:
   m_Flags: 1
   m_ColliderType: 1
   m_Sprites:
-  - {fileID: 21300000, guid: ba91b185a1845b841be9202583a08ca0, type: 3}
+  - {fileID: 21300000, guid: 7e11fb6071088479496907bd3fd4ea5a, type: 3}
   - {fileID: 21300000, guid: 9386c5030fcce42409315347be7b8723, type: 3}
   - {fileID: 21300000, guid: ba91b185a1845b841be9202583a08ca0, type: 3}
   - {fileID: 21300000, guid: 9386c5030fcce42409315347be7b8723, type: 3}
