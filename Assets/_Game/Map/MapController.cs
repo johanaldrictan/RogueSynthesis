@@ -67,13 +67,16 @@ public class MapController : MonoBehaviour
             foreach (Vector2Int neighbor in neighbors.Keys)
             {
                 //check if there are tiles in that location, check if its not in weightedMap dict
-                if (walkableTiles.GetTile(new Vector3Int(neighbor.x, neighbor.y, 0)) && !visited.Contains(neighbor) && !MapMath.InMapBounds(neighbor))
+                if (walkableTiles.GetTile(new Vector3Int(neighbor.x, neighbor.y, 0)))
                 {
-                    frontier.Enqueue(neighbor);
-                    if (walkableTiles.GetTile(new Vector3Int(neighbor.x, neighbor.y, 0)) is WeightedTile)
+                    if (!visited.Contains(neighbor) && !MapMath.InMapBounds(neighbor))
                     {
-                        //Debug.Log(neighbor);
-                        weightedMap.Add(neighbor, (int)(walkableTiles.GetTile(new Vector3Int(neighbor.x, neighbor.y, 0)) as WeightedTile).weight);
+                        frontier.Enqueue(neighbor);
+                        if (walkableTiles.GetTile(new Vector3Int(neighbor.x, neighbor.y, 0)) is WeightedTile)
+                        {
+                            //Debug.Log(neighbor);
+                            weightedMap.Add(neighbor, (int)(walkableTiles.GetTile(new Vector3Int(neighbor.x, neighbor.y, 0)) as WeightedTile).weight);
+                        }
                     }
                 }
             }
