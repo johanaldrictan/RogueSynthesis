@@ -92,10 +92,10 @@ public class CameraController : MonoBehaviour
     {   
         // Super inefficient, but it'll only get called once.
         // also singletons lmao.
-        Vector3 left = MapMath.MapToWorld(0, 0);
-        Vector3 right = MapMath.MapToWorld(MapController.instance.mapWidth, MapController.instance.mapHeight);
-        Vector3 up = MapMath.MapToWorld(MapController.instance.mapWidth, 0);
-        Vector3 down = MapMath.MapToWorld(0, MapController.instance.mapHeight);
+        Vector3 left = MapMath.MapToWorld(MapController.instance.mostWest, MapController.instance.mostSouth);
+        Vector3 right = MapMath.MapToWorld(MapController.instance.mostEast, MapController.instance.mostNorth);
+        Vector3 up = MapMath.MapToWorld(MapController.instance.mostEast, MapController.instance.mostSouth);
+        Vector3 down = MapMath.MapToWorld(MapController.instance.mostWest, MapController.instance.mostNorth);
 
         // the extra space is twice as big in the y direction, but thats fine.
         negativeLimit = new Vector2(left.x - 0.5f, down.y) - Vector2.one * EXTRA_SPACE;

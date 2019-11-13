@@ -38,8 +38,8 @@ public class EnemyUnit : Unit
     public override void Start()
     {
         mapPosition = MapMath.WorldToMap(this.transform.position);
-        tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
-        MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
+        tile = (TileWeight)MapController.instance.weightedMap[mapPosition];
+        MapController.instance.weightedMap[mapPosition] = (int)TileWeight.OBSTRUCTED;
 
         // create the list of possible action categories to take
         possibleActions = new List<EnemyAction>
@@ -62,7 +62,7 @@ public class EnemyUnit : Unit
         if (possibleActions.Count != 0)
         {
             // get data about the board-state, possible options, etc
-            MoveableTiles = FindMoveableTiles(MapController.instance.map);
+            MoveableTiles = FindMoveableTiles(MapController.instance.weightedMap);
             foreach(AbilityOption option in possibleAbilities)
             { option.EvaluateAffectableTiles(); }
 

@@ -33,7 +33,7 @@ public class AlliedUnit : Unit
         MapUIController.instance.tileHighlighting.ClearAllTiles();
         if (!hasMoved)
         {
-            Dictionary<Vector2Int, Direction>.KeyCollection moveLocs = FindMoveableTiles(MapController.instance.map).Keys;
+            Dictionary<Vector2Int, Direction>.KeyCollection moveLocs = FindMoveableTiles(MapController.instance.weightedMap).Keys;
             foreach (Vector2Int loc in moveLocs)
             {
                 MapUIController.instance.RangeHighlight(loc);
@@ -76,7 +76,7 @@ public class AlliedUnit : Unit
         MapUIController.instance.ClearRangeHighlight();
 
         //restore old tilevalue
-        MapController.instance.map[mapPosition.x, mapPosition.y] = (int)tile;
+        MapController.instance.weightedMap[mapPosition] = (int)tile;
 
         // set new coordinates
         mapPosition.x = x;
@@ -85,8 +85,8 @@ public class AlliedUnit : Unit
         // update the globalPositionalData
         globalPositionalData.AddUnit(mapPosition, this);
 
-        tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
-        MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
+        tile = (TileWeight)MapController.instance.weightedMap[mapPosition];
+        MapController.instance.weightedMap[mapPosition] = (int)TileWeight.OBSTRUCTED;
         this.transform.position = MapMath.MapToWorld(x,y);
         plannedPath.Clear();
         hasMoved = true;
@@ -132,7 +132,7 @@ public class AlliedUnit : Unit
     public void DisplayShortestPath(Vector2Int dest)
     {
         MapUIController.instance.ClearPathHighlight();
-        Stack<Vector2Int> path = GetMovementPath(FindMoveableTiles(MapController.instance.map), dest);
+        Stack<Vector2Int> path = GetMovementPath(FindMoveableTiles(MapController.instance.weightedMap), dest);
         plannedPath.Clear();
 
         if (path == null) { return; }
