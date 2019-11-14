@@ -74,10 +74,10 @@ public class UI_Operator : MonoBehaviour
     {
 
         //phasePanel.SetActive(true);
-        Debug.Log("bbbb");
+        //Debug.Log("bbbb");
         yield return new WaitForSeconds(2);
         phaseAnimator.SetTrigger("New Trigger");
-        Debug.Log("asdf");
+        //Debug.Log("asdf");
         //phasePanel.SetActive(false);
     }
 
