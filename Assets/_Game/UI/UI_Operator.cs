@@ -12,6 +12,9 @@ public class UI_Operator : MonoBehaviour
     //public GameObject self;
     public GameObject phasePanel;
 
+    [Header("Animators")]
+    public Animator phaseAnimator;
+
     [Header("Unit Information")]
     public Unit unit;
     public Image portrait;
@@ -69,9 +72,13 @@ public class UI_Operator : MonoBehaviour
 
     public IEnumerator PhaseDisplay()
     {
-        phasePanel.SetActive(true);
+
+        //phasePanel.SetActive(true);
+        Debug.Log("bbbb");
         yield return new WaitForSeconds(2);
-        phasePanel.SetActive(false);
+        phaseAnimator.SetTrigger("New Trigger");
+        Debug.Log("asdf");
+        //phasePanel.SetActive(false);
     }
 
 
