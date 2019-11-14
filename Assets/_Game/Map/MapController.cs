@@ -14,6 +14,23 @@ public class MapController : MonoBehaviour
 
     public Dictionary<Vector2Int, int> weightedMap;
 
+    /// <summary>
+    /// scannedMap represents the entire map, scanned to find the distances between all points
+    /// it should be created once, and only once, for each map.
+    /// This object's existence, once created, makes pathfinding, bounds-checking, etc. more or less constant time
+    /// 
+    /// Its data structure is a Dictionary
+    /// The keys represent a specific tile on the map, as a starting point.
+    /// the value represents a list, with each index in that list representing a movement amount
+    /// At each index will be a Dictionary representing all tiles that can be reached from the start using the given amount of movement.
+    /// It's keys represent a specific tile on the map, as an ending point.
+    /// it's values are Queue's representing the shortest pathway that was taken to reach that tile
+    /// 
+    /// For example: scannedMap[(0,0)][3][(3, 0)]
+    /// the starting tile is (0, 0), and returns the Queue shortest path in order to reach (3, 0) using exactly 3 movement
+    /// </summary>
+    private Dictionary<Vector2Int, List<Dictionary<Vector2Int, Queue<Vector2Int>>>> scannedMap;
+
     //integers that store the maximal/minimal values for each direction
     public int mostWest;
     public int mostEast;
@@ -23,6 +40,7 @@ public class MapController : MonoBehaviour
     private void Awake()
     {
         weightedMap = new Dictionary<Vector2Int, int>();
+        scannedMap = new Dictionary<Vector2Int, List<Dictionary<Vector2Int, Queue<Vector2Int>>>>();
         //each scene load I want a new instance of the mapcontroller but it needs to stay static
         //needs to load start again in each scene
         if (instance == null)
@@ -34,6 +52,7 @@ public class MapController : MonoBehaviour
             Destroy(this.gameObject);
         }
         InitMap();
+        ScanMap();
     }
 
     // Start is called before the first frame update
@@ -89,6 +108,15 @@ public class MapController : MonoBehaviour
         Debug.Log("most south: " + mostSouth);
         Debug.Log("most north: " + mostNorth);
         */
+    }
+
+    // this scans the map and creates scannedMap
+    public void ScanMap()
+    {
+        if (weightedMap.Count <= 0)
+            return;
+
+
     }
 }
 
