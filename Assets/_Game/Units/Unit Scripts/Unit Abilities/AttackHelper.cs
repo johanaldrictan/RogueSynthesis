@@ -116,7 +116,7 @@ public static class AttackHelper
         Vector2Int? searchResult = null;
         foreach (Vector2Int tile in pushbackArea)
         {
-            if (MapController.instance.map[tile.x, tile.y] == (int)TileWeight.OBSTRUCTED)
+            if (MapController.instance.weightedMap[tile] == (int)TileWeight.OBSTRUCTED)
             {
                 searchResult = tile;
                 break;

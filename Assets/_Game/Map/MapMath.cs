@@ -8,7 +8,7 @@ public static class MapMath
 
     // Grid: Unity Tilemap Units
     
-    // Map: 2D Array in MapController.cs
+    // weightedMap: 2D Array in MapController.cs
 
     public static Vector2Int RelativeNorth = new Vector2Int(0, 1);
     public static Vector2Int RelativeSouth = new Vector2Int(0, -1);
@@ -17,11 +17,13 @@ public static class MapMath
 
     public static Vector2Int GridToMap(Vector3Int gridUnits)
     {
+        Vector2Int converted = new Vector2Int(-gridUnits.y, gridUnits.x);
+        /*
         Vector2Int converted = new Vector2Int
         {
             x = -gridUnits.y + MapController.instance.mapHeightOffset,
             y = gridUnits.x - MapController.instance.mapWidthOffset
-        };
+        };*/
         return converted;
     }
 
@@ -32,11 +34,13 @@ public static class MapMath
 
     public static Vector3Int MapToGrid(int x, int y)
     {
+        Vector3Int converted = new Vector3Int(y, -x, 0);
+        /*
         Vector3Int converted = new Vector3Int
         {
             x = y + MapController.instance.mapWidthOffset,
             y = -x + MapController.instance.mapHeightOffset
-        };
+        };*/
         return converted;
     }
 
@@ -62,16 +66,7 @@ public static class MapMath
     //TODO: might need to fix for non square maps
     public static bool InMapBounds(Vector2Int loc)
     {
-        //check x
-        if(loc.x >= MapController.instance.map.GetLowerBound(0) && loc.x <= MapController.instance.map.GetUpperBound(0))
-        {
-            //check y
-            if(loc.y >= MapController.instance.map.GetLowerBound(1) && loc.y <= MapController.instance.map.GetUpperBound(1))
-            {
-                return true;
-            }
-        }
-        return false;
+        return MapController.instance.weightedMap.ContainsKey(loc);
     }
 
     //can probably do this mathematically
@@ -141,6 +136,8 @@ public static class MapMath
         neighbors.Add(new Vector2Int(curr.x + 1, curr.y), Direction.E);
         return neighbors;
     }
+
+    //public static 
 }
 
 public enum Direction

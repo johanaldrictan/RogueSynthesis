@@ -12,6 +12,7 @@ public class BoundsHelper : MonoBehaviour
 
     void Awake()
     {
+        /*
         tilemap = this.GetComponent<Tilemap>();
         parent = this.GetComponentInParent<MapController>();
  
@@ -32,5 +33,6 @@ public class BoundsHelper : MonoBehaviour
         // tilemap.BoxFill(Vector3Int.zero, previewTile, parent.mapWidthOffset, parent.mapHeightOffset - parent.mapHeight, parent.mapWidth + parent.mapWidthOffset, parent.mapHeightOffset);
         // Debug.Log(new Vector4(parent.mapWidthOffset, parent.mapHeightOffset - parent.mapHeight, parent.mapWidth + parent.mapWidthOffset, parent.mapHeightOffset));
         // tilemap.ResizeBounds();
+        */
     }
 }

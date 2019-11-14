@@ -70,8 +70,8 @@ public abstract class Unit : MonoBehaviour
     public virtual void Start()
     {
         mapPosition = MapMath.WorldToMap(this.transform.position);
-        tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
-        MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
+        tile = (TileWeight)MapController.instance.weightedMap[mapPosition];
+        MapController.instance.weightedMap[mapPosition] = (int)TileWeight.OBSTRUCTED;
     }
 
     // parses unitData to set own variables
@@ -100,10 +100,10 @@ public abstract class Unit : MonoBehaviour
     }
 
 
-    public Dictionary<Vector2Int, Direction> FindMoveableTiles(int[,] map, int moveSpeed = -100)
+    public Dictionary<Vector2Int, Direction> FindMoveableTiles(Dictionary<Vector2Int, int> weightedMap, int moveSpeed = -100)
     {
         if (moveSpeed == -100) { moveSpeed = this.moveSpeed; }
-        return Unit.FindMoveableTiles(map, this.mapPosition, moveSpeed);
+        return Unit.FindMoveableTiles(weightedMap, this.mapPosition, moveSpeed);
     }
     /*
     public static Dictionary<Vector2Int, Direction> FindMoveableTilesStraight(int[,] map, Vector2Int mapPosition, int moveSpeed)
@@ -137,7 +137,7 @@ public abstract class Unit : MonoBehaviour
         
     }*/
 
-    public static Dictionary<Vector2Int, Direction> FindMoveableTiles(int[,] map, Vector2Int mapPosition, int moveSpeed)
+    public static Dictionary<Vector2Int, Direction> FindMoveableTiles(Dictionary<Vector2Int, int> map, Vector2Int mapPosition, int moveSpeed)
     {
         Dictionary<Vector2Int, Direction> shortestFrom = new Dictionary<Vector2Int, Direction>();
         Dictionary<Vector2Int, int> movementCost = new Dictionary<Vector2Int, int>();
@@ -157,7 +157,7 @@ public abstract class Unit : MonoBehaviour
             foreach (Vector2Int neighbor in neighbors.Keys)
             {
                 if (visited.Contains(neighbor) || !MapMath.InMapBounds(neighbor)) { continue; }
-                int nextDist = MapController.instance.map[neighbor.x, neighbor.y] + movementCost[visiting];
+                int nextDist = MapController.instance.weightedMap[neighbor] + movementCost[visiting];
                 if (nextDist > moveSpeed) { continue; }
                 if (!movementCost.ContainsKey(neighbor) || nextDist < movementCost[neighbor])
                 {
@@ -212,7 +212,7 @@ public abstract class Unit : MonoBehaviour
         globalPositionalData.RemoveUnit(mapPosition);
 
         // restore old tilevalue
-        MapController.instance.map[mapPosition.x, mapPosition.y] = (int)tile;
+        MapController.instance.weightedMap[mapPosition] = (int)tile;
 
         // set new coordinates
         mapPosition.x = x;
@@ -221,8 +221,8 @@ public abstract class Unit : MonoBehaviour
         // update the globalPositionalData
         globalPositionalData.AddUnit(mapPosition, this);
 
-        tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
-        MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
+        tile = (TileWeight)MapController.instance.weightedMap[mapPosition];
+        MapController.instance.weightedMap[mapPosition] = (int)TileWeight.OBSTRUCTED;
         this.transform.position = MapMath.MapToWorld(new Vector2Int(x, y));
         hasMoved = true;
     }
@@ -257,7 +257,7 @@ public abstract class Unit : MonoBehaviour
         hasActed = true;
         this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         globalPositionalData.RemoveUnit(mapPosition);
-        MapController.instance.map[mapPosition.x, mapPosition.y] = (int)tile;
+        MapController.instance.weightedMap[mapPosition] = (int)tile;
 
         // "Hey guys, I'm dying. If anyone needs a reference to me, here it is."
         DeathEvent.Invoke(this);
@@ -274,8 +274,8 @@ public abstract class Unit : MonoBehaviour
         hasActed = false;
         this.gameObject.GetComponent<SpriteRenderer>().enabled = true;
         globalPositionalData.AddUnit(mapPosition, this);
-        tile = (TileWeight)MapController.instance.map[mapPosition.x, mapPosition.y];
-        MapController.instance.map[mapPosition.x, mapPosition.y] = (int)TileWeight.OBSTRUCTED;
+        tile = (TileWeight)MapController.instance.weightedMap[mapPosition];
+        MapController.instance.weightedMap[mapPosition] = (int)TileWeight.OBSTRUCTED;
         SetDirection(Direction.S);
     }
 

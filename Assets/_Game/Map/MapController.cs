@@ -10,17 +10,19 @@ public class MapController : MonoBehaviour
     public Tilemap walkableTiles;
 
     //2D grid. value is the weight of the tile
-    public int[,] map;
+    //public int[,] map;
 
-    //change origin. these offsets are the actual coordinates of the left corner tile
-    public int mapHeightOffset;
-    public int mapWidthOffset;
+    public Dictionary<Vector2Int, int> weightedMap;
 
-    public int mapWidth;
-    public int mapHeight;
+    //integers that store the maximal/minimal values for each direction
+    public int mostWest;
+    public int mostEast;
+    public int mostNorth;
+    public int mostSouth;
 
     private void Awake()
     {
+        weightedMap = new Dictionary<Vector2Int, int>();
         //each scene load I want a new instance of the mapcontroller but it needs to stay static
         //needs to load start again in each scene
         if (instance == null)
@@ -42,40 +44,51 @@ public class MapController : MonoBehaviour
 
     private void InitMap()
     {
-        //This method of programmatically figuring out what the layout of the map is to ease the workload of designing maps
-        //But this is not really optimal for load times??
-        //initialize map
-        //                x         y
-        map = new int[mapWidth+1, mapHeight+1];
+        mostWest = 0;
+        mostEast = 0;
+        mostNorth = 0;
+        mostSouth = 0;
+        HashSet<Vector2Int> visited = new HashSet<Vector2Int>();
+        Queue<Vector2Int> frontier = new Queue<Vector2Int>();
+        Vector2Int origin = new Vector2Int(0, 0);
+        frontier.Enqueue(origin); // Should only contain tiles in range
+        weightedMap.Add(origin, (int)(walkableTiles.GetTile(new Vector3Int(origin.x, origin.y, 0)) as WeightedTile).weight);
 
-        for (int x = mapWidthOffset; x < mapWidthOffset + mapWidth; x++)
+        while (frontier.Count != 0)
         {
-            //Debug.Log("MapHeightOffset: " + mapHeightOffset);
-            //Debug.Log("MapWidthOffset: " + mapWidthOffset);
-            //Debug.Log("map bound: " + (mapHeightOffset - mapHeight));
-            //Debug.Log("X: " + x);           
-            for (int y = mapHeightOffset; y > (mapHeightOffset - mapHeight); y--)
+            Vector2Int visiting = frontier.Dequeue();
+            if (visited.Contains(visiting)) { continue; } // TODO: Implement changing priority in the PQ, and remove this.
+            mostEast = Mathf.Max(mostEast, visiting.y);
+            mostWest = Mathf.Min(mostWest, visiting.y);
+            mostNorth = Mathf.Max(mostNorth, visiting.x);
+            mostSouth = Mathf.Min(mostSouth, visiting.x);
+
+            Dictionary<Vector2Int, Direction> neighbors = MapMath.GetNeighbors(visiting);
+            foreach (Vector2Int neighbor in neighbors.Keys)
             {
-                Vector2Int currCoords = MapMath.GridToMap(new Vector3Int(x, y, 0));
-                //Debug.Log(currCoords.ToString());
-                //Debug.Log("X: " + x + " Y: " + y);
-                if (MapMath.InMapBounds(currCoords))
+                //check if there are tiles in that location, check if its not in weightedMap dict
+                if (walkableTiles.GetTile(new Vector3Int(neighbor.x, neighbor.y, 0)))
                 {
-                    map[currCoords.x, currCoords.y] = (int)TileWeight.OBSTRUCTED;
-                    //null check
-                    if (walkableTiles.GetTile(new Vector3Int(x, y, 0)))
+                    if (!visited.Contains(neighbor) && !MapMath.InMapBounds(neighbor))
                     {
-                        // if(TileDatabase.instance.tileDB.ContainsKey(walkableTiles.GetTile(new Vector3Int(x, y, 0)).name))
-                        if (walkableTiles.GetTile(new Vector3Int(x, y, 0)) is WeightedTile)
+                        frontier.Enqueue(neighbor);
+                        if (walkableTiles.GetTile(new Vector3Int(neighbor.x, neighbor.y, 0)) is WeightedTile)
                         {
-                            // map[currCoords.x, currCoords.y] = (int)TileDatabase.instance.tileDB[walkableTiles.GetTile(new Vector3Int(x, y, 0)).name];
-                            map[currCoords.x, currCoords.y] = (int)(walkableTiles.GetTile(new Vector3Int(x, y, 0)) as WeightedTile).weight;
+                            //Debug.Log(neighbor);
+                            weightedMap.Add(neighbor, (int)(walkableTiles.GetTile(new Vector3Int(neighbor.x, neighbor.y, 0)) as WeightedTile).weight);
                         }
                     }
                 }
             }
 
+            visited.Add(visiting);
         }
+        /*
+        Debug.Log("most east: " + mostEast);
+        Debug.Log("most west: " + mostWest);
+        Debug.Log("most south: " + mostSouth);
+        Debug.Log("most north: " + mostNorth);
+        */
     }
 }
 
