@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -53,6 +54,12 @@ public class MapController : MonoBehaviour
         }
         InitMap();
         ScanMap();
+
+        Queue<Vector2Int> path = GetShortestPath(new Vector2Int(0, 0), new Vector2Int(8, 8));
+        foreach(Vector2Int tile in path.ToArray())
+        {
+            Debug.Log(tile);
+        }
     }
 
     // Start is called before the first frame update
@@ -110,20 +117,73 @@ public class MapController : MonoBehaviour
         */
     }
 
+
     // this scans the map and creates scannedMap
     public void ScanMap()
     {
-        if (weightedMap.Count <= 0)
-            return;
-
         scannedMap.Clear();
-        HashSet<Vector2Int> toVisit = new HashSet<Vector2Int>(weightedMap.Keys);
-        recursiveScan(new Vector2Int(0, 0), new HashSet<Vector2Int>(), toVisit, new Queue<Vector2Int>(), 0);
+        foreach(Vector2Int key in weightedMap.Keys)
+            ScanFromStart(key);
     }
 
-    private void recursiveScan(Vector2Int current, HashSet<Vector2Int> visited, HashSet<Vector2Int> toVisit, Queue<Vector2Int> path, int movement)
-    {
 
+    // Takes a single tile on the map and calculates all paths to every other tile, starting from that initial tile
+    private void ScanFromStart(Vector2Int start)
+    {
+        HashSet<Vector2Int> visited = new HashSet<Vector2Int>();
+        Queue<MutableTuple<Vector2Int, MutableTuple<Queue<Vector2Int>, int>>> toVisit = new Queue<MutableTuple<Vector2Int, MutableTuple<Queue<Vector2Int>, int>>>();
+
+        scannedMap.Add(start, new Dictionary<int, Dictionary<Vector2Int, Queue<Vector2Int>>>());
+        toVisit.Enqueue(new MutableTuple<Vector2Int, MutableTuple<Queue<Vector2Int>, int>>(start, new MutableTuple<Queue<Vector2Int>, int>(new Queue<Vector2Int>(), 0)));
+
+        while (toVisit.Count != 0)
+        {
+            MutableTuple<Vector2Int, MutableTuple<Queue<Vector2Int>, int>> current = toVisit.Dequeue();
+
+            if (visited.Contains(current.Item1) || (!weightedMap.ContainsKey(current.Item1)) || weightedMap[current.Item1] == (int)TileWeight.OBSTRUCTED)
+                continue;
+
+
+            if (!scannedMap[start].ContainsKey(current.Item2.Item2))
+            {
+                scannedMap[start].Add(current.Item2.Item2, new Dictionary<Vector2Int, Queue<Vector2Int>>());
+            }
+
+            if (!scannedMap[start][current.Item2.Item2].ContainsKey(current.Item1))
+            {
+                scannedMap[start][current.Item2.Item2].Add(current.Item1, current.Item2.Item1);
+            }
+
+            Dictionary<Vector2Int, Direction> neighbors = MapMath.GetNeighbors(current.Item1);
+            foreach (Vector2Int neighbor in neighbors.Keys)
+            {
+                int movement = current.Item2.Item2;
+                if (weightedMap.ContainsKey(neighbor))
+                    movement = weightedMap[neighbor] + current.Item2.Item2;
+
+                Queue<Vector2Int> newPath = new Queue<Vector2Int>(current.Item2.Item1.ToArray());
+                newPath.Enqueue(neighbor);
+
+                toVisit.Enqueue(new MutableTuple<Vector2Int, MutableTuple<Queue<Vector2Int>, int>>(neighbor, new MutableTuple<Queue<Vector2Int>, int>(newPath, movement)));
+            }
+
+            visited.Add(current.Item1);
+        }
+    }
+
+    public Queue<Vector2Int> GetShortestPath(Vector2Int start, Vector2Int end)
+    {
+        if (!scannedMap.ContainsKey(start) || !scannedMap.ContainsKey(end))
+            return null;
+
+        for (int i = 0; i < int.MaxValue; i++)
+        {
+            if (scannedMap[start].ContainsKey(i) && scannedMap[start][i].ContainsKey(end))
+            {
+                return scannedMap[start][i][end];
+            }
+        }
+        return null;
     }
 }
 
