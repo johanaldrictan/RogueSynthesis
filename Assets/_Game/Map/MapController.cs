@@ -21,15 +21,15 @@ public class MapController : MonoBehaviour
     /// 
     /// Its data structure is a Dictionary
     /// The keys represent a specific tile on the map, as a starting point.
-    /// the value represents a list, with each index in that list representing a movement amount
-    /// At each index will be a Dictionary representing all tiles that can be reached from the start using the given amount of movement.
+    /// the value represents a Dictionary, with each key in that list representing a movement amount
+    /// At each index will be a value of Dictionary representing all tiles that can be reached from the start using the given amount of movement.
     /// It's keys represent a specific tile on the map, as an ending point.
-    /// it's values are Queue's representing the shortest pathway that was taken to reach that tile
+    /// it's values are Queues representing the shortest pathway that was taken to reach that tile
     /// 
     /// For example: scannedMap[(0,0)][3][(3, 0)]
     /// the starting tile is (0, 0), and returns the Queue shortest path in order to reach (3, 0) using exactly 3 movement
     /// </summary>
-    private Dictionary<Vector2Int, List<Dictionary<Vector2Int, Queue<Vector2Int>>>> scannedMap;
+    private Dictionary<Vector2Int, Dictionary<int, Dictionary<Vector2Int, Queue<Vector2Int>>>> scannedMap;
 
     //integers that store the maximal/minimal values for each direction
     public int mostWest;
@@ -40,7 +40,7 @@ public class MapController : MonoBehaviour
     private void Awake()
     {
         weightedMap = new Dictionary<Vector2Int, int>();
-        scannedMap = new Dictionary<Vector2Int, List<Dictionary<Vector2Int, Queue<Vector2Int>>>>();
+        scannedMap = new Dictionary<Vector2Int, Dictionary<int, Dictionary<Vector2Int, Queue<Vector2Int>>>>();
         //each scene load I want a new instance of the mapcontroller but it needs to stay static
         //needs to load start again in each scene
         if (instance == null)
@@ -116,6 +116,13 @@ public class MapController : MonoBehaviour
         if (weightedMap.Count <= 0)
             return;
 
+        scannedMap.Clear();
+        HashSet<Vector2Int> toVisit = new HashSet<Vector2Int>(weightedMap.Keys);
+        recursiveScan(new Vector2Int(0, 0), new HashSet<Vector2Int>(), toVisit, new Queue<Vector2Int>(), 0);
+    }
+
+    private void recursiveScan(Vector2Int current, HashSet<Vector2Int> visited, HashSet<Vector2Int> toVisit, Queue<Vector2Int> path, int movement)
+    {
 
     }
 }
