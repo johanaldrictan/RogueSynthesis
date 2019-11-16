@@ -12,7 +12,6 @@ public class MapController : MonoBehaviour
 
     //2D grid. value is the weight of the tile
     //public int[,] map;
-
     public Dictionary<Vector2Int, int> weightedMap;
 
     /// <summary>
@@ -54,21 +53,6 @@ public class MapController : MonoBehaviour
         }
         InitMap();
         ScanMap();
-
-        //Queue<Vector2Int> path = GetShortestPath(new Vector2Int(-8, -5), new Vector2Int(-8, 3));
-        foreach(int tile in scannedMap[new Vector2Int(-8, -8)].Keys)
-        {
-            Debug.Log(tile);
-            foreach(Vector2Int tiles in scannedMap[new Vector2Int(-8, -8)][tile].Keys)
-            {
-                Debug.Log(tiles);
-
-            }
-            // if (scannedMap[new Vector2Int(-8, -8)][tile].ContainsKey(new Vector2Int(-8, 3)))
-            // Debug.Log(scannedMap[new Vector2Int(-8, -8)][tile][new Vector2Int(-8, 3)]);
-            //else
-            //Debug.Log(tile + " nah");
-        }
     }
 
     // Start is called before the first frame update
@@ -127,26 +111,31 @@ public class MapController : MonoBehaviour
     }
 
 
-    // this scans the map and creates scannedMap
+    /// <summary>
+    ///  Scans the map and creates scannedMap
+    /// </summary>
     public void ScanMap()
     {
         scannedMap.Clear();
-        ScanFromStart(new Vector2Int(-8, -8));
-        /*foreach (Vector2Int key in weightedMap.Keys)
+        // for every tile on the map:
+        foreach (Vector2Int key in weightedMap.Keys)
         {
-            Debug.Log("Starting at " + key);
+            // starting from this tile, calculate the shortest distance to every other tile
             ScanFromStart(key);
-        }*/
-            
+        }
     }
 
 
-    // Takes a single tile on the map and calculates all paths to every other tile, starting from that initial tile
+    /// <summary>
+    /// Takes a single tile on the map and calculates all paths to every other tile, starting from that initial tile.
+    /// Stores those pathways into scannedMap
+    /// </summary>
+    /// <param name="start"> (x, y) coordinate to start from</param>
     private void ScanFromStart(Vector2Int start)
     {
-        if (!weightedMap.ContainsKey(start))
-            return;
-
+        // create two data structures: tiles that need to be visited and tiles already visited
+        // visited is just a set of Vector2Int
+        // toVisit is a queue, storing the tile to visit, the path taken to get there, and the total movement spent to reach the tile
         HashSet <Vector2Int> visited = new HashSet<Vector2Int>();
         Queue<MutableTuple<Vector2Int, MutableTuple<Queue<Vector2Int>, int>>> toVisit = new Queue<MutableTuple<Vector2Int, MutableTuple<Queue<Vector2Int>, int>>>();
 
@@ -155,25 +144,30 @@ public class MapController : MonoBehaviour
 
         while (toVisit.Count != 0)
         {
+            // get the next tile in line to visit
             MutableTuple<Vector2Int, MutableTuple<Queue<Vector2Int>, int>> current = toVisit.Dequeue();
 
+            // make sure that this tile is valid to be visited. an Invalid tile:
+            //      has already been visited            does not exist within weightedMap         or has a weight of OBSTRUCTED
             if (visited.Contains(current.Item1) || (!weightedMap.ContainsKey(current.Item1)) || weightedMap[current.Item1] == (int)TileWeight.OBSTRUCTED)
                 continue;
 
+            // this is the first time that we've reached a tile this much movement away. set it up.
             if (!scannedMap[start].ContainsKey(current.Item2.Item2))
             {
                 scannedMap[start].Add(current.Item2.Item2, new Dictionary<Vector2Int, Queue<Vector2Int>>());
             }
 
+            // This is the first time that we've reached this tile with this amount of movement. it is the shortest path. store it
             if (!scannedMap[start][current.Item2.Item2].ContainsKey(current.Item1))
             {
                 scannedMap[start][current.Item2.Item2].Add(current.Item1, current.Item2.Item1);
             }
 
+            // check each neighbor of this tile
             Dictionary<Vector2Int, Direction> neighbors = MapMath.GetNeighbors(current.Item1);
             foreach (Vector2Int neighbor in neighbors.Keys)
             {
-                
                 int movement = current.Item2.Item2;
                 if (weightedMap.ContainsKey(neighbor))
                     movement += weightedMap[neighbor];
@@ -184,15 +178,20 @@ public class MapController : MonoBehaviour
                 toVisit.Enqueue(new MutableTuple<Vector2Int, MutableTuple<Queue<Vector2Int>, int>>(neighbor, new MutableTuple<Queue<Vector2Int>, int>(newPath, movement)));
             }
 
+            // this tile has been officially 'visited'
             visited.Add(current.Item1);
-            if (current.Item1.x == -8 && current.Item1.y == -5)
-            {
-                Debug.Log(current.Item1 + ": " + current.Item2.Item1.Count + ", " + current.Item2.Item2);
-                Debug.Log(weightedMap[current.Item1]);
-            }
         }
     }
 
+    /// <summary>
+    /// Gets the shortest pathway from the start tile to the end tile
+    /// </summary>
+    /// <remarks>
+    /// O(n) time, where n is the movement required to move between start and end
+    /// </remarks>
+    /// <param name="start"> (x, y) coordinate to start from</param>
+    /// <param name="end"> (x, y) coordinate to end at</param>
+    /// <returns> Shortest pathway from start to end; null if nonexistent or invalid argumnts</returns>
     public Queue<Vector2Int> GetShortestPath(Vector2Int start, Vector2Int end)
     {
         if (!scannedMap.ContainsKey(start) || !scannedMap.ContainsKey(end))
@@ -206,6 +205,30 @@ public class MapController : MonoBehaviour
             }
         }
         return null;
+    }
+
+    /// <summary>
+    /// Gets the smallest amount of movement required to move from start to end
+    /// </summary>
+    /// <remarks>
+    /// O(n) time, where n is the movement required to move between start and end
+    /// </remarks>
+    /// <param name="start"> (x, y) coordinate to start from</param>
+    /// <param name="end"> (x, y) coordinate to end at</param>
+    /// <returns> Smallest movement required; -1 if nonexistent or invalid argumnts</returns>
+    public int GetDistance(Vector2Int start, Vector2Int end)
+    {
+        if (!scannedMap.ContainsKey(start) || !scannedMap.ContainsKey(end))
+            return -1;
+
+        for (int i = 0; i < int.MaxValue; i++)
+        {
+            if (scannedMap[start].ContainsKey(i) && scannedMap[start][i].ContainsKey(end))
+            {
+                return i;
+            }
+        }
+        return -1;
     }
 }
 
