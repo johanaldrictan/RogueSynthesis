@@ -104,13 +104,13 @@ public class MapController : MonoBehaviour
                 //check if there are tiles in that location, check if its not in weightedMap dict
                 if (walkableTiles.GetTile(new Vector3Int(neighbor.x, neighbor.y, 0)))
                 {
-                    if (!visited.Contains(neighbor) && !MapMath.InMapBounds(neighbor))
+                    if (!visited.Contains(neighbor) && !MapMath.InMapBounds(MapMath.GridToMap(neighbor)))
                     {
                         frontier.Enqueue(neighbor);
                         if (walkableTiles.GetTile(new Vector3Int(neighbor.x, neighbor.y, 0)) is WeightedTile)
                         {
                             //Debug.Log(neighbor);
-                            weightedMap.Add(neighbor, (int)(walkableTiles.GetTile(new Vector3Int(neighbor.x, neighbor.y, 0)) as WeightedTile).weight);
+                            weightedMap.Add(MapMath.GridToMap(neighbor), (int)(walkableTiles.GetTile(new Vector3Int(neighbor.x, neighbor.y, 0)) as WeightedTile).weight);
                         }
                     }
                 }
