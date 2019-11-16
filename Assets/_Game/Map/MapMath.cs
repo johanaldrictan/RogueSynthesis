@@ -26,6 +26,11 @@ public static class MapMath
         };*/
         return converted;
     }
+    public static Vector2Int GridToMap(Vector2Int gridUnits)
+    {
+        Vector2Int converted = new Vector2Int(-gridUnits.y, gridUnits.x);
+        return converted;
+    }
 
     public static Vector3Int MapToGrid(Vector2Int mapUnits)
     {
