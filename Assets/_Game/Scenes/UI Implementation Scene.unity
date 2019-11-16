@@ -391,9 +391,9 @@ MonoBehaviour:
   - data: {fileID: 11400000, guid: 22c2139a50d01e24fa0148c0f24b93a5, type: 2}
     spawnPosition: {x: 5, y: 3}
   - data: {fileID: 11400000, guid: 22c2139a50d01e24fa0148c0f24b93a5, type: 2}
-    spawnPosition: {x: 6, y: 7}
+    spawnPosition: {x: -8, y: -5}
   - data: {fileID: 11400000, guid: 22c2139a50d01e24fa0148c0f24b93a5, type: 2}
-    spawnPosition: {x: 12, y: 11}
+    spawnPosition: {x: -8, y: 3}
   abilityPanel: {fileID: 1549085493}
   UI: {fileID: 826912452}
   playerID: 0

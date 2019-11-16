@@ -56,13 +56,18 @@ public class MapController : MonoBehaviour
         ScanMap();
 
         //Queue<Vector2Int> path = GetShortestPath(new Vector2Int(-8, -5), new Vector2Int(-8, 3));
-        foreach(int tile in scannedMap[new Vector2Int(-8, -5)].Keys)
+        foreach(int tile in scannedMap[new Vector2Int(-8, -8)].Keys)
         {
             Debug.Log(tile);
-            if (scannedMap[new Vector2Int(-8, -5)][tile].ContainsKey(new Vector2Int(-8, 3)))
-                Debug.Log(scannedMap[new Vector2Int(-8, -5)][tile][new Vector2Int(-8, 3)]);
-            else
-                Debug.Log("nah");
+            foreach(Vector2Int tiles in scannedMap[new Vector2Int(-8, -8)][tile].Keys)
+            {
+                Debug.Log(tiles);
+
+            }
+            // if (scannedMap[new Vector2Int(-8, -8)][tile].ContainsKey(new Vector2Int(-8, 3)))
+            // Debug.Log(scannedMap[new Vector2Int(-8, -8)][tile][new Vector2Int(-8, 3)]);
+            //else
+            //Debug.Log(tile + " nah");
         }
     }
 
@@ -126,11 +131,12 @@ public class MapController : MonoBehaviour
     public void ScanMap()
     {
         scannedMap.Clear();
-        foreach (Vector2Int key in weightedMap.Keys)
+        ScanFromStart(new Vector2Int(-8, -8));
+        /*foreach (Vector2Int key in weightedMap.Keys)
         {
             Debug.Log("Starting at " + key);
             ScanFromStart(key);
-        }
+        }*/
             
     }
 
@@ -138,8 +144,10 @@ public class MapController : MonoBehaviour
     // Takes a single tile on the map and calculates all paths to every other tile, starting from that initial tile
     private void ScanFromStart(Vector2Int start)
     {
-        
-        HashSet<Vector2Int> visited = new HashSet<Vector2Int>();
+        if (!weightedMap.ContainsKey(start))
+            return;
+
+        HashSet <Vector2Int> visited = new HashSet<Vector2Int>();
         Queue<MutableTuple<Vector2Int, MutableTuple<Queue<Vector2Int>, int>>> toVisit = new Queue<MutableTuple<Vector2Int, MutableTuple<Queue<Vector2Int>, int>>>();
 
         scannedMap.Add(start, new Dictionary<int, Dictionary<Vector2Int, Queue<Vector2Int>>>());
@@ -149,34 +157,11 @@ public class MapController : MonoBehaviour
         {
             MutableTuple<Vector2Int, MutableTuple<Queue<Vector2Int>, int>> current = toVisit.Dequeue();
 
-            if (visited.Contains(current.Item1))
-            {
-                if (start == new Vector2Int(-8, -5))
-                    Debug.Log("1 " + current.Item1);
-            }
-            if ((!weightedMap.ContainsKey(current.Item1)))
-            {
-                if (start == new Vector2Int(-8, -5))
-                    Debug.Log("2 " + current.Item1);
-            }
-            if (!walkableTiles.GetTile(new Vector3Int(current.Item1.x, current.Item1.y, 0)))
-            {
-                if (start == new Vector2Int(-8, -5))
-                    Debug.Log("3 " + current.Item1);
-            }
-            if (weightedMap[current.Item1] != (int)TileWeight.OBSTRUCTED)
-            {
-                if (start == new Vector2Int(-8, -5))
-                    Debug.Log("4 " + current.Item1);
-            }
-
-            if (visited.Contains(current.Item1) || (!weightedMap.ContainsKey(current.Item1)) || !walkableTiles.GetTile(new Vector3Int(current.Item1.x, current.Item1.y, 0)) || weightedMap[current.Item1] != (int)TileWeight.OBSTRUCTED)
+            if (visited.Contains(current.Item1) || (!weightedMap.ContainsKey(current.Item1)) || weightedMap[current.Item1] == (int)TileWeight.OBSTRUCTED)
                 continue;
-
 
             if (!scannedMap[start].ContainsKey(current.Item2.Item2))
             {
-                Debug.Log(current.Item1 + " | " + current.Item2.Item2);
                 scannedMap[start].Add(current.Item2.Item2, new Dictionary<Vector2Int, Queue<Vector2Int>>());
             }
 
@@ -191,7 +176,7 @@ public class MapController : MonoBehaviour
                 
                 int movement = current.Item2.Item2;
                 if (weightedMap.ContainsKey(neighbor))
-                    movement = weightedMap[neighbor] + current.Item2.Item2;
+                    movement += weightedMap[neighbor];
 
                 Queue<Vector2Int> newPath = new Queue<Vector2Int>(current.Item2.Item1.ToArray());
                 newPath.Enqueue(neighbor);
@@ -200,6 +185,11 @@ public class MapController : MonoBehaviour
             }
 
             visited.Add(current.Item1);
+            if (current.Item1.x == -8 && current.Item1.y == -5)
+            {
+                Debug.Log(current.Item1 + ": " + current.Item2.Item1.Count + ", " + current.Item2.Item2);
+                Debug.Log(weightedMap[current.Item1]);
+            }
         }
     }
 
