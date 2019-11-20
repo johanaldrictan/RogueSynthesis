@@ -29,7 +29,7 @@ public class Dialogue : MonoBehaviour
 
     void Update()
     {
-        if (textDisplay.text == dialogArray[index].sentence && (Input.GetKeyDown("space") || Input.GetMouseButtonDown(0)))
+        if (textDisplay.text == dialogArray[index].sentence && Input.GetKeyDown("space"))
         {
             NextSentence();
         }
@@ -64,16 +64,21 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
-            portrait.sprite = null;
-            nameDisplay.text = "";
-            textDisplay.text = "";
-            //complete = true;
-            //Debug.Log("Next");
-            animator.SetTrigger("New Trigger");
-            if (levelChanger != null)
-            {
-                levelChanger.GetComponent<LevelChanger>().FadeToNextLevel();
-            }
+            Proceed();
+        }
+    }
+
+    public void Proceed()
+    {
+        portrait.sprite = null;
+        nameDisplay.text = "";
+        textDisplay.text = "";
+        //complete = true;
+        //Debug.Log("Next");
+        animator.SetTrigger("New Trigger");
+        if (levelChanger != null)
+        {
+            levelChanger.GetComponent<LevelChanger>().FadeToNextLevel();
         }
     }
 
