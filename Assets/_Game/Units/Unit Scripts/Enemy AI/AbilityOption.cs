@@ -154,4 +154,19 @@ public class AbilityOption
         }
     }
 
+    // This function takes a location and direction in which the ability this object stores would activate from
+    // it returns all of the Units that would be within the area of effect.
+    public List<Unit> GetAffectedUnits(Vector2Int source, Direction direction)
+    {
+        List<Unit> result = new List<Unit>();
+        List<Vector2Int> areaOfEffect = (ability as Attack).GetAreaOfEffect(source, direction);
+        foreach(Vector2Int tile in areaOfEffect)
+        {
+            Unit searchResult = sourceUnit.globalPositionalData.SearchLocation(tile);
+            if (searchResult != null)
+                result.Add(searchResult);
+        }
+        return result;
+    }
+
 }

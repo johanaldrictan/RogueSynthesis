@@ -36,7 +36,7 @@ public class Aggro : EnemyAction
         option.SetSignificance(0.0f);
 
         // get variables
-        Vector2Int bestTarget = new Vector2Int(-1, -1);
+        Vector2Int bestTarget = new Vector2Int(int.MaxValue, int.MaxValue);
         Dictionary<Vector2Int, MutableTuple<Unit, float>> affectableUnits = option.GetAffectableUnits();
         bool unitIsAffectable;
 
@@ -119,7 +119,7 @@ public class Aggro : EnemyAction
                         break;
                 }
                 // We have a new Best Target IF: its viably affectable AND: there isn't one OR this significance is bigger than the current best
-                if ( unitIsAffectable && ((bestTarget.x == -1 && bestTarget.y == -1) || (affectableUnits[key].Item2 >= affectableUnits[bestTarget].Item2)) )
+                if ( unitIsAffectable && ((bestTarget.x == int.MaxValue && bestTarget.y == int.MaxValue) || (affectableUnits[key].Item2 >= affectableUnits[bestTarget].Item2)) )
                 {
                     bestTarget = key;
                 }
@@ -128,7 +128,7 @@ public class Aggro : EnemyAction
 
         // If this Ability cannot affect any meaningful Units: Do NOT use it
         // IF:    This ability deals some sort of effect   AND      either: there is no bestTarget NOR affectable Unit
-        if ( option.GetAbility().GetEffectState().Count > 0 && ((bestTarget.x == -1 && bestTarget.y == -1) || affectableUnits.Keys.Count <= 0) )
+        if ( option.GetAbility().GetEffectState().Count > 0 && ((bestTarget.x == int.MaxValue && bestTarget.y == int.MaxValue) || affectableUnits.Keys.Count <= 0) )
         {
             option.SetSignificance(float.NegativeInfinity);
         }
@@ -149,15 +149,47 @@ public class Aggro : EnemyAction
 
     protected override Tuple<Vector2Int, Direction> CommitMovement()
     {
+        // default return value: stay where you are, point South
         Tuple<Vector2Int, Direction> result = new Tuple<Vector2Int, Direction>(myUnit.GetMapPosition(), Direction.S);
 
         // get the affectable Units
         Dictionary<Vector2Int, MutableTuple<Unit, float>> affectableUnits = committedAbilityOption.GetAffectableUnits();
 
-        // if there are no Units that can be affected with the chosen Ability, or that Ability is Wait
-        if (affectableUnits.Keys.Count <= 0 || committedAbilityOption.GetAbility() is Wait)
+        // if there are no Units that can be affected with the chosen Ability, or that Ability is not an Attack
+        if (affectableUnits.Keys.Count <= 0 || !(committedAbilityOption.GetAbility().GetType().IsSubclassOf(typeof(Attack))))
         {
-            
+            // finding the path to the closest Unit...
+            Tuple<Queue<Vector2Int>, int> bestPath = new Tuple<Queue<Vector2Int>, int>(new Queue<Vector2Int>(), int.MaxValue);
+            // check the path to the adjacent squares of each Unit on the map
+            foreach(Vector2Int current in myUnit.globalPositionalData.GetLocations())
+            {
+                Unit unit = myUnit.globalPositionalData.SearchLocation(current);
+                Dictionary<Vector2Int, Direction> neighbors = MapMath.GetNeighbors(current);
+                foreach (Vector2Int neighbor in neighbors.Keys)
+                {
+                    Tuple<Queue<Vector2Int>, int> currentPath = MapController.instance.GetShortestPath(myUnit.shortestPaths, neighbor);
+                    // IF the current path exists, is for a non-EnemyUnit, and has a shorter distance
+                    if (currentPath != null && !(unit is EnemyUnit) && currentPath.Item2 < bestPath.Item2)
+                    {
+                        bestPath = new Tuple<Queue<Vector2Int>, int>(currentPath.Item1, currentPath.Item2);
+                    }
+                }
+            }
+
+            // from that path, find the farthest tile that the Unit can reach and set it as the result
+            Queue<Vector2Int> closestPath = bestPath.Item1;
+            Vector2Int finalTile = myUnit.GetMapPosition();
+            while (closestPath.Count != 0)
+            {
+                Vector2Int currentTile = closestPath.Dequeue();
+                if (myUnit.MoveableTiles.ContainsKey(currentTile) && MapController.instance.weightedMap[currentTile] != (int)TileWeight.OBSTRUCTED)
+                {
+                    finalTile = currentTile;
+                }
+                else
+                    break;
+            }
+            result = new Tuple<Vector2Int, Direction>(finalTile, Direction.S);
         }
 
         // if there is a Unit that can be affected
@@ -165,19 +197,52 @@ public class Aggro : EnemyAction
         {
             // get the variable bestTarget, storing the tile containing the most effective Unit to strike
             List<Vector2Int> keys = new List<Vector2Int>(affectableUnits.Keys);
-            Vector2Int bestTarget = keys[0];
+            Vector2Int bestTarget = new Vector2Int(int.MaxValue, int.MaxValue);
+            float bestValue = int.MinValue;
             foreach (Vector2Int key in keys)
             {
-                if (affectableUnits[key].Item2 >= affectableUnits[bestTarget].Item2)
+                if (affectableUnits[key].Item2 >= bestValue)
                 {
                     bestTarget = key;
+                    bestValue = affectableUnits[key].Item2;
                 }
             }
 
-            // get the HashSet containing all possible (x, y) + Direction combinations that can hit the bestTarget (x, y) coordinate
+            // iterate through HashSet containing all possible (x, y) + Direction combinations that can hit the bestTarget (x, y) coordinate
+            // find the one that is the most reasonable, using a similar but lesser significance system to other sections of this AI
             HashSet<Tuple<Vector2Int, Direction>> possibleMovements = committedAbilityOption.GetAffectableTiles()[bestTarget];
+            float bestVal = float.MinValue;
+            foreach(Tuple<Vector2Int, Direction> current in possibleMovements)
+            {
+                List<Unit> affectedUnits = committedAbilityOption.GetAffectedUnits(current.Item1, current.Item2);
+                float currentVal = 0.0f;
+                float friendlies = 0.0f;
+                float hostiles = 0.0f;
+                foreach(Unit unit in affectedUnits)
+                {
+                    if (unit is EnemyUnit && currentVal <= (float.MinValue / 2)) // this current selection would hit a friendly Unit as well, making this way less likely to do
+                    {
+                        currentVal = (float.MinValue / 2);
+                    }
+                }
+                foreach (Vector2Int tile in myUnit.globalPositionalData.GetLocations())
+                {
+                    if (Math.Abs((tile-current.Item1).magnitude) <= myUnit.GetMoveSpeed())
+                    {
+                        if (myUnit.globalPositionalData.SearchLocation(tile) is EnemyUnit)
+                            friendlies++;
+                        else if (myUnit.globalPositionalData.SearchLocation(tile) is AlliedUnit)
+                            hostiles++;
+                    }
+                }
 
-
+                currentVal += friendlies / hostiles;
+                if (currentVal >= bestVal)
+                {
+                    bestVal = currentVal;
+                    result = current;
+                }
+            }
         }
 
         return result;

@@ -52,7 +52,7 @@ public class MapController : MonoBehaviour
             Destroy(this.gameObject);
         }
         InitMap();
-        ScanMap();
+        // ScanMap();
     }
 
     // Start is called before the first frame update
@@ -114,24 +114,26 @@ public class MapController : MonoBehaviour
     /// <summary>
     ///  Scans the map and creates scannedMap
     /// </summary>
-    public void ScanMap()
+    private void ScanMap()
     {
         scannedMap.Clear();
         // for every tile on the map:
         foreach (Vector2Int key in weightedMap.Keys)
         {
             // starting from this tile, calculate the shortest distance to every other tile
-            ScanFromStart(key);
+           scannedMap[key] = ScanFromStart(key);
         }
     }
 
 
     /// <summary>
     /// Takes a single tile on the map and calculates all paths to every other tile, starting from that initial tile.
-    /// Stores those pathways into scannedMap
+    /// returns those pathways as a Dictionary
+    /// it's keys are ints representing the distance required to travel
+    /// its values are dictionaries with keys representing the destination and values representing the Queue path to follow
     /// </summary>
     /// <param name="start"> (x, y) coordinate to start from</param>
-    private void ScanFromStart(Vector2Int start)
+    public Dictionary<int, Dictionary<Vector2Int, Queue<Vector2Int>>> ScanFromStart(Vector2Int start)
     {
         // create two data structures: tiles that need to be visited and tiles already visited
         // visited is just a set of Vector2Int
@@ -139,7 +141,7 @@ public class MapController : MonoBehaviour
         HashSet <Vector2Int> visited = new HashSet<Vector2Int>();
         Queue<MutableTuple<Vector2Int, MutableTuple<Queue<Vector2Int>, int>>> toVisit = new Queue<MutableTuple<Vector2Int, MutableTuple<Queue<Vector2Int>, int>>>();
 
-        scannedMap.Add(start, new Dictionary<int, Dictionary<Vector2Int, Queue<Vector2Int>>>());
+        Dictionary<int, Dictionary<Vector2Int, Queue<Vector2Int>>> result = new Dictionary<int, Dictionary<Vector2Int, Queue<Vector2Int>>>();
         toVisit.Enqueue(new MutableTuple<Vector2Int, MutableTuple<Queue<Vector2Int>, int>>(start, new MutableTuple<Queue<Vector2Int>, int>(new Queue<Vector2Int>(), 0)));
 
         while (toVisit.Count != 0)
@@ -148,20 +150,20 @@ public class MapController : MonoBehaviour
             MutableTuple<Vector2Int, MutableTuple<Queue<Vector2Int>, int>> current = toVisit.Dequeue();
 
             // make sure that this tile is valid to be visited. an Invalid tile:
-            //      has already been visited            does not exist within weightedMap         or has a weight of OBSTRUCTED
-            if (visited.Contains(current.Item1) || (!weightedMap.ContainsKey(current.Item1)) || weightedMap[current.Item1] == (int)TileWeight.OBSTRUCTED)
+            //      has already been visited            does not exist within weightedMap         or has a weight of OBSTRUCTED AND is not the starting tile
+            if (visited.Contains(current.Item1) || (!weightedMap.ContainsKey(current.Item1)) || (weightedMap[current.Item1] == (int)TileWeight.OBSTRUCTED && current.Item1 != start))
                 continue;
 
             // this is the first time that we've reached a tile this much movement away. set it up.
-            if (!scannedMap[start].ContainsKey(current.Item2.Item2))
+            if (!result.ContainsKey(current.Item2.Item2))
             {
-                scannedMap[start].Add(current.Item2.Item2, new Dictionary<Vector2Int, Queue<Vector2Int>>());
+                result.Add(current.Item2.Item2, new Dictionary<Vector2Int, Queue<Vector2Int>>());
             }
 
             // This is the first time that we've reached this tile with this amount of movement. it is the shortest path. store it
-            if (!scannedMap[start][current.Item2.Item2].ContainsKey(current.Item1))
+            if (!result[current.Item2.Item2].ContainsKey(current.Item1))
             {
-                scannedMap[start][current.Item2.Item2].Add(current.Item1, current.Item2.Item1);
+                result[current.Item2.Item2].Add(current.Item1, current.Item2.Item1);
             }
 
             // check each neighbor of this tile
@@ -174,13 +176,15 @@ public class MapController : MonoBehaviour
 
                 Queue<Vector2Int> newPath = new Queue<Vector2Int>(current.Item2.Item1.ToArray());
                 newPath.Enqueue(neighbor);
-
+                // Debug.Log("Need to visit Tile " + neighbor);
                 toVisit.Enqueue(new MutableTuple<Vector2Int, MutableTuple<Queue<Vector2Int>, int>>(neighbor, new MutableTuple<Queue<Vector2Int>, int>(newPath, movement)));
             }
 
             // this tile has been officially 'visited'
             visited.Add(current.Item1);
         }
+
+        return result;
     }
 
     /// <summary>
@@ -189,19 +193,28 @@ public class MapController : MonoBehaviour
     /// <remarks>
     /// O(n) time, where n is the movement required to move between start and end
     /// </remarks>
-    /// <param name="start"> (x, y) coordinate to start from</param>
+    /// <param name="map"> map representing all shortest paths from starting point</param>
     /// <param name="end"> (x, y) coordinate to end at</param>
     /// <returns> Shortest pathway from start to end; null if nonexistent or invalid argumnts</returns>
-    public Queue<Vector2Int> GetShortestPath(Vector2Int start, Vector2Int end)
+    public Tuple<Queue<Vector2Int>, int> GetShortestPath(Dictionary<int, Dictionary<Vector2Int, Queue<Vector2Int>>> map, Vector2Int end)
     {
-        if (!scannedMap.ContainsKey(start) || !scannedMap.ContainsKey(end))
-            return null;
-
+        int foundIndexes = 0;
         for (int i = 0; i < int.MaxValue; i++)
         {
-            if (scannedMap[start].ContainsKey(i) && scannedMap[start][i].ContainsKey(end))
+            if (map.ContainsKey(i))
             {
-                return scannedMap[start][i][end];
+                if (map[i].ContainsKey(end))
+                {
+                    return new Tuple<Queue<Vector2Int>, int>(map[i][end], i);
+                }
+                else
+                {
+                    foundIndexes += 1;
+                    if (foundIndexes == map.Keys.Count)
+                    {
+                        return null;
+                    }
+                }
             }
         }
         return null;
@@ -213,19 +226,28 @@ public class MapController : MonoBehaviour
     /// <remarks>
     /// O(n) time, where n is the movement required to move between start and end
     /// </remarks>
-    /// <param name="start"> (x, y) coordinate to start from</param>
+    /// <param name="map"> map representing all shortest paths from start</param>
     /// <param name="end"> (x, y) coordinate to end at</param>
     /// <returns> Smallest movement required; -1 if nonexistent or invalid argumnts</returns>
-    public int GetDistance(Vector2Int start, Vector2Int end)
+    public int GetDistance(Dictionary<int, Dictionary<Vector2Int, Queue<Vector2Int>>> map, Vector2Int end)
     {
-        if (!scannedMap.ContainsKey(start) || !scannedMap.ContainsKey(end))
-            return -1;
-
+        int foundIndexes = 0;
         for (int i = 0; i < int.MaxValue; i++)
         {
-            if (scannedMap[start].ContainsKey(i) && scannedMap[start][i].ContainsKey(end))
+            if (map.ContainsKey(i))
             {
-                return i;
+                if (map[i].ContainsKey(end))
+                {
+                    return i;
+                }
+                else
+                {
+                    foundIndexes += 1;
+                    if (foundIndexes == map.Keys.Count)
+                    {
+                        return -1;
+                    }
+                }
             }
         }
         return -1;
