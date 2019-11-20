@@ -6,6 +6,8 @@ using TMPro;
 
 public class Dialogue : MonoBehaviour
 {
+    public LevelChanger levelChanger;
+
     public Image portrait;
     public TextMeshProUGUI nameDisplay;
     public TextMeshProUGUI textDisplay;
@@ -14,7 +16,7 @@ public class Dialogue : MonoBehaviour
 
     private int index;
     public float typingSpeed = 0.02f;
-    private bool complete;
+    //private bool complete;
 
     void Start()
     {
@@ -54,8 +56,12 @@ public class Dialogue : MonoBehaviour
         else
         {
             textDisplay.text = "";
-            complete = true;
+            //complete = true;
             Debug.Log("Next");
+            if (levelChanger != null)
+            {
+                levelChanger.GetComponent<LevelChanger>().FadeToNextLevel();
+            }
         }
     }
 
