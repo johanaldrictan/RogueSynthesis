@@ -154,10 +154,43 @@ public class Aggro : EnemyAction
         // get the affectable Units
         Dictionary<Vector2Int, MutableTuple<Unit, float>> affectableUnits = committedAbilityOption.GetAffectableUnits();
 
-        // if there are no Units that can be affected with the chosen Ability, or that Ability is Wait
-        if (affectableUnits.Keys.Count <= 0 || committedAbilityOption.GetAbility() is Wait)
+        // if there are no Units that can be affected with the chosen Ability, or that Ability is not an Attack
+        if (affectableUnits.Keys.Count <= 0 || !(committedAbilityOption.GetAbility().GetType().IsSubclassOf(typeof(Attack))))
         {
-            
+            // find the path to the closest Unit
+            Vector2Int closest = myUnit.GetMapPosition();
+            int bestDistance = int.MaxValue;
+            Queue<Vector2Int> bestPath = new Queue<Vector2Int>();
+            foreach(Vector2Int current in myUnit.globalPositionalData.GetLocations())
+            {
+                Unit unit = myUnit.globalPositionalData.SearchLocation(current);
+                Queue<Vector2Int> currentPath = MapController.instance.GetShortestPath(myUnit.shortestPaths, current);
+                if (!(unit is EnemyUnit) && currentPath.Count < bestDistance)
+                {
+                    closest = current;
+                    bestDistance = currentPath.Count;
+                    bestPath = currentPath;
+                }
+            }
+
+            // from that path, find the farthest tile that the Unit can reach and set it as the result
+            Vector2Int subFinalTile = myUnit.GetMapPosition();
+            Vector2Int finalTile = myUnit.GetMapPosition();
+            while (bestPath.Count != 0)
+            {
+                Vector2Int currentTile = bestPath.Dequeue();
+                if (myUnit.MoveableTiles.ContainsKey(currentTile) && MapController.instance.weightedMap[currentTile] != (int)TileWeight.OBSTRUCTED)
+                {
+                    subFinalTile = finalTile;
+                    finalTile = currentTile;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            Vector2Int difference = finalTile - subFinalTile;
+            result = new Tuple<Vector2Int, Direction>(finalTile, MapMath.LocToDirection(difference));
         }
 
         // if there is a Unit that can be affected

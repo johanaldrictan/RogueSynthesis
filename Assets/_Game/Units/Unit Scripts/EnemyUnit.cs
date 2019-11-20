@@ -15,6 +15,10 @@ public class EnemyUnit : Unit
     // a Dictionary storing the possible tiles that this unit can move into during its turn
     public Dictionary<Vector2Int, Direction> MoveableTiles;
 
+    // shortestPaths stores the shortest paths from this Unit's current position to every other tile on the map
+    // Keys are the distance required to travel values are dictionaries with key destination and value pathway
+    public Dictionary<int, Dictionary<Vector2Int, Queue<Vector2Int>>> shortestPaths;
+
     // possibleActions is the List of actions that this EnemyUnit can choose to take.
     // each of these actions are evaluated and one is executed on its turn.
     private List<EnemyAction> possibleActions;
@@ -118,6 +122,11 @@ public class EnemyUnit : Unit
     public List<AbilityOption> GetAbilityOptions()
     {
         return possibleAbilities;
+    }
+
+    public void ScanMap()
+    {
+        shortestPaths = MapController.instance.ScanFromStart(GetMapPosition());
     }
    
 }

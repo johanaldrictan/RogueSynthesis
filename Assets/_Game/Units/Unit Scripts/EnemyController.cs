@@ -41,6 +41,7 @@ public class EnemyController : UnitController
         // if the unit hasn't moved or attacked, get new ActionData and move
         if (!units[activeUnit].hasMoved && !units[activeUnit].hasActed)
         {
+            (units[activeUnit] as EnemyUnit).ScanMap();
             (units[activeUnit] as EnemyUnit).NewActionData();
             (units[activeUnit] as EnemyUnit).ChooseMovement();
             return;

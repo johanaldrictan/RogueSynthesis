@@ -70,6 +70,16 @@ public class UnitPositionStorage
         }
     }
 
+    public List<Vector2Int> GetLocations()
+    {
+        return new List<Vector2Int>(storage.Keys);
+    }
+
+    public List<Unit> GetUnits()
+    {
+        return new List<Unit>(storage.Values);
+    }
+
     // Debugging function. Prints the contents of storage
     public void DebugPrint()
     {
