@@ -259,6 +259,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bcecb4ce913e44d2a8203d717de5244, type: 3}
+--- !u!95 &19475770 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5789415662597480654, guid: 6bcecb4ce913e44d2a8203d717de5244,
+    type: 3}
+  m_PrefabInstance: {fileID: 19475769}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &19500430 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1227644127292060798, guid: 6bcecb4ce913e44d2a8203d717de5244,
@@ -4418,6 +4424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelChanger: {fileID: 346104108}
+  animator: {fileID: 19475770}
   portrait: {fileID: 19500430}
   nameDisplay: {fileID: 84567518}
   textDisplay: {fileID: 356388932}

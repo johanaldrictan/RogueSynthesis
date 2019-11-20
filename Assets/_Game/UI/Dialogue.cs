@@ -7,6 +7,7 @@ using TMPro;
 public class Dialogue : MonoBehaviour
 {
     public LevelChanger levelChanger;
+    public Animator animator;
 
     public Image portrait;
     public TextMeshProUGUI nameDisplay;
@@ -68,6 +69,7 @@ public class Dialogue : MonoBehaviour
             textDisplay.text = "";
             //complete = true;
             //Debug.Log("Next");
+            animator.SetTrigger("New Trigger");
             if (levelChanger != null)
             {
                 levelChanger.GetComponent<LevelChanger>().FadeToNextLevel();

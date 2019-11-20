@@ -879,6 +879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelChanger: {fileID: 1909094207}
+  animator: {fileID: 2110012353}
   portrait: {fileID: 182285602}
   nameDisplay: {fileID: 1895756643}
   textDisplay: {fileID: 2121037631}
@@ -5226,6 +5227,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e276f9376d94f148d16fd29d2f008a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &2110012353 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5789415662597480654, guid: 6bcecb4ce913e44d2a8203d717de5244,
+    type: 3}
+  m_PrefabInstance: {fileID: 1227644127446499676}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2121037631 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1227644126412371555, guid: 6bcecb4ce913e44d2a8203d717de5244,

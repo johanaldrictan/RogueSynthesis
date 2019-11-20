@@ -322,6 +322,7 @@ GameObject:
   - component: {fileID: 1227644126955832683}
   - component: {fileID: 1227644126955832682}
   - component: {fileID: 1227644126955832681}
+  - component: {fileID: 5789415662597480654}
   m_Layer: 5
   m_Name: DialogueCanvas
   m_TagString: Untagged
@@ -413,6 +414,25 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!95 &5789415662597480654
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227644126955832680}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4e981481f36d946c7b43809bf8e3aa50, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1227644127065955261
 GameObject:
   m_ObjectHideFlags: 0
