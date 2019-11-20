@@ -39,7 +39,15 @@ public class Dialogue : MonoBehaviour
         foreach (char letter in dialogArray[index].sentence)
         {
             textDisplay.text += letter;
-            yield return new WaitForSeconds(typingSpeed);
+            if (Input.GetKey(KeyCode.Space))
+            {
+                yield return new WaitForSeconds(0.001f);
+            }
+            else
+            {
+                yield return new WaitForSeconds(typingSpeed);
+            }
+            
         }
     }
 
@@ -55,9 +63,11 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
+            portrait.sprite = null;
+            nameDisplay.text = "";
             textDisplay.text = "";
             //complete = true;
-            Debug.Log("Next");
+            //Debug.Log("Next");
             if (levelChanger != null)
             {
                 levelChanger.GetComponent<LevelChanger>().FadeToNextLevel();
