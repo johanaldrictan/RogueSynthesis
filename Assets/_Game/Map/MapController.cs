@@ -176,7 +176,7 @@ public class MapController : MonoBehaviour
 
                 Queue<Vector2Int> newPath = new Queue<Vector2Int>(current.Item2.Item1.ToArray());
                 newPath.Enqueue(neighbor);
-
+                // Debug.Log("Need to visit Tile " + neighbor);
                 toVisit.Enqueue(new MutableTuple<Vector2Int, MutableTuple<Queue<Vector2Int>, int>>(neighbor, new MutableTuple<Queue<Vector2Int>, int>(newPath, movement)));
             }
 
@@ -196,7 +196,7 @@ public class MapController : MonoBehaviour
     /// <param name="map"> map representing all shortest paths from starting point</param>
     /// <param name="end"> (x, y) coordinate to end at</param>
     /// <returns> Shortest pathway from start to end; null if nonexistent or invalid argumnts</returns>
-    public Queue<Vector2Int> GetShortestPath(Dictionary<int, Dictionary<Vector2Int, Queue<Vector2Int>>> map, Vector2Int end)
+    public Tuple<Queue<Vector2Int>, int> GetShortestPath(Dictionary<int, Dictionary<Vector2Int, Queue<Vector2Int>>> map, Vector2Int end)
     {
         int foundIndexes = 0;
         for (int i = 0; i < int.MaxValue; i++)
@@ -205,7 +205,7 @@ public class MapController : MonoBehaviour
             {
                 if (map[i].ContainsKey(end))
                 {
-                    return map[i][end];
+                    return new Tuple<Queue<Vector2Int>, int>(map[i][end], i);
                 }
                 else
                 {

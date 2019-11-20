@@ -389,11 +389,11 @@ MonoBehaviour:
   activeUnit: 0
   unitSpawnData:
   - data: {fileID: 11400000, guid: 22c2139a50d01e24fa0148c0f24b93a5, type: 2}
-    spawnPosition: {x: -7, y: -6}
+    spawnPosition: {x: -8, y: -8}
   - data: {fileID: 11400000, guid: 22c2139a50d01e24fa0148c0f24b93a5, type: 2}
-    spawnPosition: {x: -6, y: -5}
+    spawnPosition: {x: -7, y: -8}
   - data: {fileID: 11400000, guid: 22c2139a50d01e24fa0148c0f24b93a5, type: 2}
-    spawnPosition: {x: -8, y: -5}
+    spawnPosition: {x: -8, y: -7}
   abilityPanel: {fileID: 1549085493}
   UI: {fileID: 826912452}
   playerID: 0
@@ -5134,11 +5134,11 @@ MonoBehaviour:
   activeUnit: 0
   unitSpawnData:
   - data: {fileID: 11400000, guid: 87fc11b9e22649f4490c8d684c736026, type: 2}
-    spawnPosition: {x: 5, y: 5}
+    spawnPosition: {x: 8, y: 8}
   - data: {fileID: 11400000, guid: 87fc11b9e22649f4490c8d684c736026, type: 2}
-    spawnPosition: {x: 5, y: 7}
+    spawnPosition: {x: 7, y: 8}
   - data: {fileID: 11400000, guid: 87fc11b9e22649f4490c8d684c736026, type: 2}
-    spawnPosition: {x: 4, y: 6}
+    spawnPosition: {x: 8, y: 7}
   abilityPanel: {fileID: 1549085493}
   UI: {fileID: 826912452}
   playerID: 1

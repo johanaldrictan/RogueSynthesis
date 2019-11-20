@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // EnemyUnit: A type of Unit that is controller by AI. 
-// Work in progress... just a copy-paste of AlliedUnit right now
 // Refer to Unit.cs if you want to see how a Unit ought to behave
 
 public class EnemyUnit : Unit
 {
+    // boxedIn signifies whether or not this Unit has been "boxed in" and cannot make much movement
+    // being "boxed in" will be defined as follows: the Unit is unable to move along any path that has a total movement equal to this Unit's movement speed
+    // as in, there is no path this Unit can take which allows it to move its maximum possible distance
+    public bool boxedIn;
+
     // plannedActionData is a place to store the action that this particular unit has decided to execute.
     // its value is either null or contains the action that it will next execute.
     private ActionData plannedActionData;
@@ -32,6 +36,7 @@ public class EnemyUnit : Unit
     {
         hasActed = false;
         hasMoved = false;
+        boxedIn = false;
         m_SpriteRenderer = this.GetComponent<SpriteRenderer>();
         m_SpriteRenderer.sortingOrder = 99;
         Deaths = new Stack<DeathData>();
@@ -127,6 +132,22 @@ public class EnemyUnit : Unit
     public void ScanMap()
     {
         shortestPaths = MapController.instance.ScanFromStart(GetMapPosition());
+    }
+
+    // determines if this Enemy Unit is "boxed in" by other obstructions, limiting its movement
+    // the function updates the boxedIn attribute
+    public void EvaluateBoxIn()
+    {
+        foreach(int i in shortestPaths.Keys)
+        {
+            if (i >= this.moveSpeed && shortestPaths[i].Keys.Count >= 0)
+            {
+                boxedIn = false;
+                return;
+            }
+        }
+        boxedIn = true;
+        return;
     }
    
 }

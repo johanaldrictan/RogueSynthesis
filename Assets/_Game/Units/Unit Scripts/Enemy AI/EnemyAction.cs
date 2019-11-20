@@ -51,7 +51,7 @@ public abstract class EnemyAction
         {
             // evaluate the significance of this particular option
             SignifyAbility(options[i]);
-            Debug.Log("Ability: " + options[i].GetAbility() + " | Significance: " + options[i].GetSignificance());
+            // Debug.Log("Ability: " + options[i].GetAbility() + " | Significance: " + options[i].GetSignificance());
 
             // check if it has the highest significance
             if (options[i].GetSignificance() >= highestSignificance)
