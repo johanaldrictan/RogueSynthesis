@@ -13,8 +13,8 @@ public class EnemyController : UnitController
 
     public static int ability;
 
-    public GameObject abilityPanel;
-    public GameObject UI;
+    //public GameObject abilityPanel;
+    //public GameObject UI;
     public int playerID;
 
 
@@ -81,8 +81,8 @@ public class EnemyController : UnitController
         {
             ResetUnits();
             EndTurnEvent.Invoke(this);
-            UI.GetComponent<UI_Operator>().SetPhaseText(playerID);
-            UI.GetComponent<UI_Operator>().PhaseTextDisplay();
+            //UI.GetComponent<UI_Operator>().SetPhaseText(playerID);
+            //UI.GetComponent<UI_Operator>().PhaseTextDisplay();
         }
     }
 
