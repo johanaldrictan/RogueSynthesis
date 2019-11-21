@@ -265,8 +265,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e877059a6d0de4119936db53ccb55370, type: 2}
+  m_sharedMaterial: {fileID: -4735485086155253800, guid: e877059a6d0de4119936db53ccb55370,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -291,8 +292,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1033,31 +1034,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72897cc08d62b429a994f96e73a5838d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelChanger: {fileID: 0}
+  animator: {fileID: 0}
   portrait: {fileID: 907131814}
   nameDisplay: {fileID: 848937743}
   textDisplay: {fileID: 65426693}
-  sentences:
-  - Why are you here, Captain?
-  - What do you mean?
-  - What drives you? Why are you here?
-  - "Fighting the Rogue Mind? It\u2019s the only thing we can do. And it\u2019s the
-    right thing to do."
-  - "Is it? You don\u2019t sound so convinced."
-  - What is this, Dr.?
-  - I need to know that the fate of humanity is in the right hands. That you will
-    do what needs to be done, whatever it takes. Because our enemy will use any means
-    to its end, and how are we to match that? So I ask again, what are you fighting
-    for Captain?
-  - "I\u2026 I miss the things we had before."
-  - No amount of fighting can change what has already happened. You cannot bring back
-    the past.
-  - No, but the Rogue Mind took so much from us. I miss my friends, my family. I want
-    to fight to take back a future where we can live our own lives again. I want to
-    be able to take a moment and think of anything other than the threat out there.
-  - You want peace, not unlike the Rogue Mind as we call it. If that is what gives
-    you and your troops strength, I will not question it. But your strength will be
-    tested, and for the sake of humanity and the future you desire, I hope that it
-    is enough.
   dialogArray:
   - portrait: {fileID: 21300000, guid: 37a31cafd595d42088f5023af4521034, type: 3}
     name: Lissandra
