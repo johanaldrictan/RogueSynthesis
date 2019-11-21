@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e74963ca174570c46a672d0da3303ef4, type: 3}
   m_Name: Infector
   m_EditorClassIdentifier: 
-  north: {fileID: 21300000, guid: b2c35b79f8e4b5d4498247e64b0a567d, type: 3}
-  south: {fileID: 21300000, guid: 41427ddf20b9d36458e936342ef36af6, type: 3}
-  east: {fileID: 21300000, guid: 95f7abbd0e834a242b3cb7196bdf04e2, type: 3}
-  west: {fileID: 21300000, guid: 32a2bf5b94db14f4d8ebe411f4d847aa, type: 3}
+  north: {fileID: 21300000, guid: e945bd725cd7c4b3d8231076d209f1e7, type: 3}
+  south: {fileID: 21300000, guid: 5d2f562677922434082c28f392ca95da, type: 3}
+  east: {fileID: 21300000, guid: 4fbd72d7a300142ee88d5e6a848f4f1a, type: 3}
+  west: {fileID: 21300000, guid: 71b3617da669d430bab87cfdf22137ea, type: 3}
   portrait: {fileID: 21300000, guid: 513b544aaeda145cc81407a38e476d59, type: 3}

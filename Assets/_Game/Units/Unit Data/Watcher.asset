@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Watcher
   unitType: 1
-  sprites: {fileID: 11400000, guid: b54cf5dca119eea4184c22aac68bba6e, type: 2}
+  sprites: {fileID: 11400000, guid: 7b705425f58c94e218c3a09cd0a174f1, type: 2}
   portrait: {fileID: 21300000, guid: 513b544aaeda145cc81407a38e476d59, type: 3}
   moveSpeed: 7
   health: 45

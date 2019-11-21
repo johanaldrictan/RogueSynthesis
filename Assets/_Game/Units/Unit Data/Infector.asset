@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Infector
   unitType: 1
-  sprites: {fileID: 11400000, guid: fcc9a15448d28154baa837f16849079f, type: 2}
+  sprites: {fileID: 11400000, guid: a291b0db8f5d1452296d85120893df10, type: 2}
   portrait: {fileID: 21300000, guid: 513b544aaeda145cc81407a38e476d59, type: 3}
   moveSpeed: 11
   health: 1
