@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e74963ca174570c46a672d0da3303ef4, type: 3}
   m_Name: Abductor
   m_EditorClassIdentifier: 
-  north: {fileID: 0}
-  south: {fileID: 0}
-  east: {fileID: 0}
-  west: {fileID: 0}
-  portrait: {fileID: 0}
+  north: {fileID: 21300000, guid: 0466f2983a8521246aa7ce8f44ec7a28, type: 3}
+  south: {fileID: 21300000, guid: d38eff2b2d2c2c84994df0ec5b98cb77, type: 3}
+  east: {fileID: 21300000, guid: da2ecc4cf146d8f4fbe554c519cfa3e6, type: 3}
+  west: {fileID: 21300000, guid: 772eb1cc8bb56754c91e58435e1f84fd, type: 3}
+  portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
