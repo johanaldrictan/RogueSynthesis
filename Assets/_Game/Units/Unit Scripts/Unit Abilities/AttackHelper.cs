@@ -36,10 +36,6 @@ public static class AttackHelper
             if (MapMath.InMapBounds(new Vector2Int(origin.x, origin.y + 1))) { result.Add(new Vector2Int(origin.x, origin.y + 1)); }
             if (MapMath.InMapBounds(new Vector2Int(origin.x, origin.y - 1))) { result.Add(new Vector2Int(origin.x, origin.y - 1)); }
         }
-        foreach(Vector2Int target in result)
-        {
-            Debug.Log("Cleaving at " + target);
-        }
         return result;
     }
 
