@@ -5685,11 +5685,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeUnit: 0
   unitSpawnData:
-  - data: {fileID: 0}
+  - data: {fileID: 11400000, guid: d540f41856b5a4e289dfc0ce32113e90, type: 2}
     spawnPosition: {x: 0, y: 4}
-  - data: {fileID: 11400000, guid: 87fc11b9e22649f4490c8d684c736026, type: 2}
+  - data: {fileID: 11400000, guid: 82f147c4043c6486e8642ecf8aedf02b, type: 2}
     spawnPosition: {x: 5, y: 7}
-  - data: {fileID: 11400000, guid: 87fc11b9e22649f4490c8d684c736026, type: 2}
+  - data: {fileID: 11400000, guid: d540f41856b5a4e289dfc0ce32113e90, type: 2}
     spawnPosition: {x: 4, y: 6}
   playerID: 1
 --- !u!4 &1582521908
