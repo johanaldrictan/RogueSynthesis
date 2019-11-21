@@ -133,7 +133,10 @@ public class TurnController : MonoBehaviour
             EndController(currentTurn);
             currentTurn = ((currentTurn + 1) % controllers.Count);
             if (currentTurn == 0)
-            { currentRound += 1; }
+            { 
+                currentRound += 1;
+                Debug.Log("Round: " + currentRound);
+            }
 
             // if there's any Allied Units that died to enemy units, convert them to enemies
             // IF:                     I'm an AlliedUnit  AND  The person who most recently killed me is an EnemyUnit
