@@ -31,11 +31,10 @@ public class Infect : Attack
             {
                 searchResult.ChangeHealth((GetDamage() * -1) / 3, source, this);
                 Vector2Int diff = searchResult.GetMapPosition() - origin;
-                AttackHelper.DisplaceUnit(searchResult, source, this, 1, MapMath.LocToDirection(diff));
+                // AttackHelper.DisplaceUnit(searchResult, source, this, 1, MapMath.LocToDirection(diff));
             }
-        }       
-        DeathData data = new DeathData(source, this, 99, source.GetMapPosition());
-        source.KillMe(data);
+        }
+        source.ChangeHealth((GetDamage() * (-1)), source, this);
     }
 
     public override List<Vector2Int> GetAreaOfEffect(Vector2Int source, Direction direction)

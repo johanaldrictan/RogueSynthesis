@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69221c0b80c9fdc46952d2b8669c5bc4, type: 3}
   m_Name: Abductor
   m_EditorClassIdentifier: 
-  unitName: 
-  unitType: 0
-  sprites: {fileID: 0}
-  portrait: {fileID: 0}
-  moveSpeed: 0
-  health: 0
-  abilities: 
+  unitName: Abductor
+  unitType: 1
+  sprites: {fileID: 11400000, guid: 7b705425f58c94e218c3a09cd0a174f1, type: 2}
+  portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
+  moveSpeed: 6
+  health: 50
+  abilities: 040000000300000000000000

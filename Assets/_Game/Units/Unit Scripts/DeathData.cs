@@ -50,6 +50,6 @@ public class DeathData
     //  prints the contents of this object to the Debug Console
     public void DebugLog()
     {
-        Debug.Log("Killer: " + killer + "; Finishing Ability: " + finishingAbility + "; Damage Taken: " + damageTaken + "; Location: " + deathLocation);
+        Debug.Log("Killer: " + killer.GetName() + "; Finishing Ability: " + finishingAbility + "; Damage Taken: " + damageTaken + "; Location: " + deathLocation);
     }
 }

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69221c0b80c9fdc46952d2b8669c5bc4, type: 3}
   m_Name: Watcher
   m_EditorClassIdentifier: 
-  unitName: 
-  unitType: 0
-  sprites: {fileID: 0}
-  portrait: {fileID: 0}
-  moveSpeed: 0
-  health: 0
-  abilities: 
+  unitName: Watcher
+  unitType: 1
+  sprites: {fileID: 11400000, guid: 7b705425f58c94e218c3a09cd0a174f1, type: 2}
+  portrait: {fileID: 21300000, guid: 513b544aaeda145cc81407a38e476d59, type: 3}
+  moveSpeed: 7
+  health: 45
+  abilities: 07000000060000000500000000000000
