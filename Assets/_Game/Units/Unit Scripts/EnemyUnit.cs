@@ -95,7 +95,7 @@ public class EnemyUnit : Unit
             plannedActionData = bestAction.GetActionData();
 
             // This useful Debug statement will print to the console the details of what this Unit committed to doing
-            Debug.Log("EnemyUnit " + this + " at Starting Position " + this.GetMapPosition()
+            Debug.Log(this.GetName() + " at Starting Position " + this.GetMapPosition()
                 + " has committed to moving to " + plannedActionData.GetEndingPosition() + " and using " 
                 + this.AvailableAbilities[plannedActionData.GetAbilityIndex()] + " in direction " 
                 + plannedActionData.GetAbilityDirection());
