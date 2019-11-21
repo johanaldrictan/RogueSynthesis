@@ -235,7 +235,9 @@ public class Aggro : EnemyAction
                             hostiles++;
                     }
                 }
-
+                // the AI has a VERY slight bias towards staying where it is
+                if (current.Item1 == myUnit.GetMapPosition())
+                    currentVal += 0.01f;
                 currentVal += friendlies / hostiles;
                 if (currentVal >= bestVal)
                 {
