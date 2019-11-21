@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // An EnemyController is an object that inherits from the UnitController (see UnitController.cs)
-// It is a variety that is NOT (Shouldn't be, but is right now lol) user-controlled
+// It is a variety that is NOT user-controlled, but instead controlled by an AI.
 // see the UnitController Abstract Class for more information about how this class ought to behave
-// work in progress... currently just a copy-paste of PlayerController
 
 public class EnemyController : UnitController
 {
@@ -41,6 +40,14 @@ public class EnemyController : UnitController
         // if the unit hasn't moved or attacked, get new ActionData and move
         if (!units[activeUnit].hasMoved && !units[activeUnit].hasActed)
         {
+            (units[activeUnit] as EnemyUnit).ScanMap();
+            (units[activeUnit] as EnemyUnit).EvaluateBoxIn();
+            if ((units[activeUnit] as EnemyUnit).boxedIn && !TotalBoxIn())
+            {
+                GetNextUnit();
+                return;
+            }
+
             (units[activeUnit] as EnemyUnit).NewActionData();
             (units[activeUnit] as EnemyUnit).ChooseMovement();
             return;
@@ -91,6 +98,39 @@ public class EnemyController : UnitController
         {
             SelectUnit(GetNextIndex());
         }
+    }
+
+    public override void ResetUnits()
+    {
+        for (int i = 0; i < units.Count; i++)
+        {
+            units[i].damageReductionBuffed = false;
+            if (units[i].isImmobilized)
+            {
+                units[i].isImmobilized = false;
+                continue;
+            }
+            else
+            {
+                units[i].hasActed = false;
+                units[i].hasMoved = false;
+                units[i].hasPivoted = false;
+                (units[i] as EnemyUnit).boxedIn = false;
+            }
+        }
+    }
+
+    // returns whether or not there is a Total Box-In
+    // a Total Box-In is when every Unit that can still take actions is classified as "Boxed-In"
+    public bool TotalBoxIn()
+    {
+        foreach (Unit unit in units)
+        {
+            // IF   the Unit is not boxed in    AND   the Unit has either not acted or not moved
+            if ( !((unit as EnemyUnit).boxedIn) && (!unit.hasActed || !unit.hasMoved))
+                return false;
+        }
+        return true;
     }
 
     // selects the unit at the given Index, setting necessary data

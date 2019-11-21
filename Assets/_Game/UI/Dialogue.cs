@@ -6,6 +6,9 @@ using TMPro;
 
 public class Dialogue : MonoBehaviour
 {
+    public LevelChanger levelChanger;
+    public Animator animator;
+
     public Image portrait;
     public TextMeshProUGUI nameDisplay;
     public TextMeshProUGUI textDisplay;
@@ -14,7 +17,7 @@ public class Dialogue : MonoBehaviour
 
     private int index;
     public float typingSpeed = 0.02f;
-    private bool complete;
+    //private bool complete;
 
     void Start()
     {
@@ -26,7 +29,7 @@ public class Dialogue : MonoBehaviour
 
     void Update()
     {
-        if (textDisplay.text == dialogArray[index].sentence && (Input.GetKeyDown("space") || Input.GetMouseButtonDown(0)))
+        if (textDisplay.text == dialogArray[index].sentence && Input.GetKeyDown("space"))
         {
             NextSentence();
         }
@@ -37,7 +40,15 @@ public class Dialogue : MonoBehaviour
         foreach (char letter in dialogArray[index].sentence)
         {
             textDisplay.text += letter;
-            yield return new WaitForSeconds(typingSpeed);
+            if (Input.GetKey(KeyCode.Space))
+            {
+                yield return new WaitForSeconds(0.001f);
+            }
+            else
+            {
+                yield return new WaitForSeconds(typingSpeed);
+            }
+            
         }
     }
 
@@ -53,8 +64,21 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
-            textDisplay.text = "";
-            complete = true;
+            Proceed();
+        }
+    }
+
+    public void Proceed()
+    {
+        portrait.sprite = null;
+        nameDisplay.text = "";
+        textDisplay.text = "";
+        //complete = true;
+        //Debug.Log("Next");
+        animator.SetTrigger("New Trigger");
+        if (levelChanger != null)
+        {
+            levelChanger.GetComponent<LevelChanger>().FadeToNextLevel();
         }
     }
 

@@ -67,7 +67,7 @@ public class Graveyard : MonoBehaviour
             // if the given conditions are met with this particular unit
             if (comparator(deadUnits[i]))
             {
-                Debug.Log("Converting Unit " + deadUnits[i].GetName() + " into EnemyUnit");
+                Debug.Log("Converting Unit " + deadUnits[i].GetName() + " at Location " + deadUnits[i].GetMapPosition() + " into EnemyUnit...");
 
                 // Get references
                 var oldComponent = deadUnits[i];

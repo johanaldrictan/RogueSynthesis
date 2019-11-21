@@ -51,7 +51,7 @@ public abstract class EnemyAction
         {
             // evaluate the significance of this particular option
             SignifyAbility(options[i]);
-            Debug.Log("Ability: " + options[i].GetAbility() + " | Significance: " + options[i].GetSignificance());
+            // Debug.Log("Ability: " + options[i].GetAbility() + " | Significance: " + options[i].GetSignificance());
 
             // check if it has the highest significance
             if (options[i].GetSignificance() >= highestSignificance)
@@ -88,18 +88,26 @@ public abstract class EnemyAction
     public void SetSignificance(float newValue)
     {
         significance = newValue;
+        if (significance > 10.0f && significance != float.PositiveInfinity)
+        {
+            significance = 10.0f;
+        }
+        else if (significance < 0.0f && significance != float.NegativeInfinity)
+        {
+            significance = 0.0f;
+        }
     }
 
     public void AddToSignificance(float rightHandValue)
     {
         significance += rightHandValue;
-        if (significance < 0.0f)
-        {
-            significance = 0.0f;
-        }
-        else if (significance > 10.0f)
+        if (significance > 10.0f && significance != float.PositiveInfinity)
         {
             significance = 10.0f;
+        }
+        else if (significance < 0.0f && significance != float.NegativeInfinity)
+        {
+            significance = 0.0f;
         }
     }
 

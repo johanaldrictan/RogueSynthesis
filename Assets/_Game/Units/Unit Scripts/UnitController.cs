@@ -197,10 +197,23 @@ public abstract class UnitController : MonoBehaviour
             {
                 newActiveUnit = (newActiveUnit + 1) % units.Count;
             }
-            while (!units[newActiveUnit].gameObject.activeInHierarchy || (units[newActiveUnit].hasActed && units[newActiveUnit].hasMoved));
+            while (units[newActiveUnit].GetHealth() <= 0 || !units[newActiveUnit].gameObject.activeInHierarchy || (units[newActiveUnit].hasActed && units[newActiveUnit].hasMoved));
         }
 
         return newActiveUnit;
+    }
+
+    public int GetNumberOfActiveUnits()
+    {
+        int result = 0;
+        foreach (Unit unit in units)
+        {
+            if (unit.gameObject.activeInHierarchy && (!unit.hasActed || !unit.hasMoved))
+            {
+                result += 1;
+            }
+        }
+        return result;
     }
 
     public int getActiveUnit()

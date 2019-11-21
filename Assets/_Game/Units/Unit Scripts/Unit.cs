@@ -88,14 +88,7 @@ public abstract class Unit : MonoBehaviour
         // convert the unitData's list of ability enums into real abilities, and store them
         AvailableAbilities = AbilityDatabase.GetAbilities(StartData.abilities);
 
-        /*
-        for (int i = 0; i < availableAbilities.Count; i++)
-        {
-            Debug.Log(availableAbilities[i]);
-        }
-        */
-
-        // set the direction to itself (in order to set the sprite)
+        // positional setup
         ChangeDirection(Direction.S);
     }
 

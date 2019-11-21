@@ -25,21 +25,21 @@ public class AbilityOption
 
     // affectableUnits is a dictionary storing all possible Units that this particular ability can affect
     // the keys are (x, y) coordinates of the Unit's position
-    // the values are the Units themselves
-    private Dictionary<Vector2Int, Unit> affectableUnits;
+    // the values are Tuples containing: the Units themselves and a significance value for each one
+    private Dictionary<Vector2Int, MutableTuple<Unit, float>> affectableUnits;
 
     // significance is the float value that represents how useful this particular Ability would be compared to others.
     // the higher this float is, the more effective and realistic activating this ability should be.
     // a value of 0.0 signifies the lowest possible significance, and 10.0 represents the highest possible significance.
     private float significance;
-
+    
     // basic constructor
     public AbilityOption(EnemyUnit source, UnitAbility abil)
     {
         sourceUnit = source;
         ability = abil;
         affectableTiles = new Dictionary<Vector2Int, HashSet<Tuple<Vector2Int, Direction>>>();
-        affectableUnits = new Dictionary<Vector2Int, Unit>();
+        affectableUnits = new Dictionary<Vector2Int, MutableTuple<Unit, float>>();
         significance = 0.0f;
     }
 
@@ -56,16 +56,24 @@ public class AbilityOption
     public void SetSignificance(float newValue)
     {
         significance = newValue;
+        if (significance > 10.0f && significance != float.PositiveInfinity)
+        {
+            significance = 10.0f;
+        }
+        else if (significance < 0.0f && significance != float.NegativeInfinity)
+        {
+            significance = 0.0f;
+        }
     }
 
     public void AddToSignificance(float rightHandValue)
     {
         significance += rightHandValue;
-        if (significance < 0.0f)
+        if (significance < 0.0f && significance != float.NegativeInfinity)
         {
             significance = 0.0f;
         }
-        else if (significance > 10.0f)
+        else if (significance > 10.0f && significance != float.PositiveInfinity)
         {
             significance = 10.0f;
         }
@@ -81,7 +89,7 @@ public class AbilityOption
         affectableTiles.Clear();
     }
 
-    public Dictionary<Vector2Int, Unit> GetAffectableUnits()
+    public Dictionary<Vector2Int, MutableTuple<Unit, float>> GetAffectableUnits()
     {
         return affectableUnits;
     }
@@ -99,7 +107,7 @@ public class AbilityOption
 
         // Attacks have affectable areas. Therefore, only those types of UnitAbilities need to be evaluated
         // if not an Attack, this function will only add the tile that the unit is occupying
-        if (! ability.GetType().IsSubclassOf(typeof(Attack)))
+        if (! (ability.GetType().IsSubclassOf(typeof(Attack))) )
         {
             // add to affectableTiles, creating a new set at the key if it hasn't been made yet
             if (! affectableTiles.ContainsKey(sourceUnit.GetMapPosition()))
@@ -108,12 +116,12 @@ public class AbilityOption
             }
             affectableTiles[sourceUnit.GetMapPosition()].Add(new Tuple<Vector2Int, Direction>(sourceUnit.GetMapPosition(), Direction.S));
 
-            affectableUnits[sourceUnit.GetMapPosition()] = sourceUnit;
+            affectableUnits[sourceUnit.GetMapPosition()] = new MutableTuple<Unit, float>(sourceUnit, 0.0f);
             return;
         }
 
         // otherwise, if this ability is a type of Attack, iterate through
-        else if (ability.GetType().IsSubclassOf(typeof(Attack)))
+        else
         {
             // iterate three times: first for all possible moveable tiles, second for all cardinal directions, third for each tile in the area of effect at that location
             List<Direction> directionsToCheck = new List<Direction> {Direction.N, Direction.S, Direction.E, Direction.W};
@@ -135,7 +143,7 @@ public class AbilityOption
                             Unit searchResult = sourceUnit.globalPositionalData.SearchLocation(affectedTile);
                             if (searchResult != null && !affectableUnits.ContainsKey(affectedTile))
                             {
-                                affectableUnits[affectedTile] = searchResult;
+                                affectableUnits[affectedTile] = new MutableTuple<Unit, float>(searchResult, 0.0f);
                             }
                         }
                         // add the movement information to the HashSet at this Key. (If it already exists, it will automatically do nothing since its a Set)
@@ -144,6 +152,21 @@ public class AbilityOption
                 }
             }
         }
+    }
+
+    // This function takes a location and direction in which the ability this object stores would activate from
+    // it returns all of the Units that would be within the area of effect.
+    public List<Unit> GetAffectedUnits(Vector2Int source, Direction direction)
+    {
+        List<Unit> result = new List<Unit>();
+        List<Vector2Int> areaOfEffect = (ability as Attack).GetAreaOfEffect(source, direction);
+        foreach(Vector2Int tile in areaOfEffect)
+        {
+            Unit searchResult = sourceUnit.globalPositionalData.SearchLocation(tile);
+            if (searchResult != null)
+                result.Add(searchResult);
+        }
+        return result;
     }
 
 }
