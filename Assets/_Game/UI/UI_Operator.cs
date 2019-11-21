@@ -41,8 +41,8 @@ public class UI_Operator : MonoBehaviour
         nameText.text = unit.GetName();
         statText.text = "Move Speed: " + unit.GetMoveSpeed();
         portrait.sprite = unit.GetPortrait();
-        ability1.text = unit.AvailableAbilities[1].ToString();
-        ability2.text = unit.AvailableAbilities[2].ToString();
+        ability1.text = unit.AvailableAbilities[0].ToString();
+        ability2.text = unit.AvailableAbilities[1].ToString();
     }
 
     public void SetPhaseText(int playerID)
