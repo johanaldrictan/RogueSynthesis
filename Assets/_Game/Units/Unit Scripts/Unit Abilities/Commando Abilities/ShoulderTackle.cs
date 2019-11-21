@@ -114,6 +114,11 @@ public class ShoulderTackle : Attack
         return new List<EffectState> { EffectState.DAMAGE, EffectState.KNOCKBACK };
     }
 
+    public override string GetName()
+    {
+        return "Shoulder Tackle";
+    }
+
     public override int GetRange()
     {
         return 3;

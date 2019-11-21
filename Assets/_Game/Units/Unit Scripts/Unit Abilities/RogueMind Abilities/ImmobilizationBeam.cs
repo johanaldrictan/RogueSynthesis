@@ -37,6 +37,11 @@ public class ImmobilizationBeam : Attack
         return new List<EffectState>() { EffectState.DAMAGE, EffectState.STUN };
     }
 
+    public override string GetName()
+    {
+        return "Immobilization Beam";
+    }
+
     public override int GetRange()
     {
         return 13;

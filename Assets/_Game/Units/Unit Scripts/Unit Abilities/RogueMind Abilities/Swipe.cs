@@ -47,4 +47,9 @@ public class Swipe : Attack
     {
         return new List<EffectState> { EffectState.DAMAGE };
     }
+
+    public override string GetName()
+    {
+        return "Swipe";
+    }
 }

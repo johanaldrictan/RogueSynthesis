@@ -27,6 +27,7 @@ public class UI_Operator : MonoBehaviour
     public GameObject flavorText;
     public TextMeshProUGUI ability1;
     public TextMeshProUGUI ability2;
+    public TextMeshProUGUI ability3;
 
     private int randomIndex;
 
@@ -41,8 +42,9 @@ public class UI_Operator : MonoBehaviour
         nameText.text = unit.GetName();
         statText.text = "Move Speed: " + unit.GetMoveSpeed();
         portrait.sprite = unit.GetPortrait();
-        ability1.text = unit.AvailableAbilities[0].ToString();
-        ability2.text = unit.AvailableAbilities[1].ToString();
+        ability1.text = unit.AvailableAbilities[0].GetName();
+        ability2.text = unit.AvailableAbilities[1].GetName();
+        ability3.text = unit.AvailableAbilities[2].GetName();
     }
 
     public void SetPhaseText(int playerID)

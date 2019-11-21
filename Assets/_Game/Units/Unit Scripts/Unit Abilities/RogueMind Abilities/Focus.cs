@@ -19,6 +19,11 @@ public class Focus : UnitAbility
         return new List<EffectState>() { EffectState.BUFF_DR };
     }
 
+    public override string GetName()
+    {
+        return "Focus";
+    }
+
     public override int GetRange()
     {
         return 0;

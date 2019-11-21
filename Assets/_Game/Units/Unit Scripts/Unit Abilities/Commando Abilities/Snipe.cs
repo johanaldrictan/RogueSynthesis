@@ -33,6 +33,11 @@ public class Snipe : Attack
         return new List<EffectState> { EffectState.DAMAGE };
     }
 
+    public override string GetName()
+    {
+        return "Snipe";
+    }
+
     public override int GetRange()
     {
         return 16;

@@ -66,6 +66,11 @@ public class Infect : Attack
         return new List<EffectState>() { EffectState.DAMAGE, EffectState.KNOCKBACK };
     }
 
+    public override string GetName()
+    {
+        return "Infect";
+    }
+
     public override int GetRange()
     {
         return 1;

@@ -39,4 +39,9 @@ public class Aim : Attack
     {
         return (inQuestion.GetType() == typeof(Aim));
     }
+
+    public override string GetName()
+    {
+        return "Aim";
+    }
 }
