@@ -127,7 +127,7 @@ public class TurnController : MonoBehaviour
         {
             CycleEffects(false);
 
-            if (controllers[currentTurn] is PlayerController)
+            if (controllers[currentTurn] is PlayerController && controllers[currentTurn].units.Count > 0)
             { (controllers[currentTurn] as PlayerController).ClearSpotlight(); }
 
             EndController(currentTurn);
@@ -143,10 +143,16 @@ public class TurnController : MonoBehaviour
             ToEnemyEvent.Invoke(unit => unit is AlliedUnit && unit.Deaths.Peek().GetKiller() is EnemyUnit);
 
             StartController(currentTurn);
+            // wrap around the unit List to select the first valid unit
+            if (controllers[currentTurn].units.Count > 0)
+            {
+                controllers[currentTurn].setActiveUnit(controllers[currentTurn].units.Count - 1);
+                controllers[currentTurn].GetNextUnit();
+            }
 
             CycleEffects(true);
 
-            if (controllers[currentTurn] is PlayerController)
+            if (controllers[currentTurn] is PlayerController && controllers[currentTurn].units.Count > 0)
             { (controllers[currentTurn] as PlayerController).SpotlightActiveUnit(); }
         }
     }
