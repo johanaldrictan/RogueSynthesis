@@ -4344,23 +4344,23 @@ MonoBehaviour:
   activeUnit: 0
   unitSpawnData:
   - data: {fileID: 11400000, guid: 22c2139a50d01e24fa0148c0f24b93a5, type: 2}
-    spawnPosition: {x: 8, y: 22}
+    spawnPosition: {x: 0, y: 9}
   - data: {fileID: 11400000, guid: 22c2139a50d01e24fa0148c0f24b93a5, type: 2}
-    spawnPosition: {x: 9, y: 22}
+    spawnPosition: {x: 1, y: 9}
   - data: {fileID: 11400000, guid: 22c2139a50d01e24fa0148c0f24b93a5, type: 2}
-    spawnPosition: {x: 10, y: 6}
+    spawnPosition: {x: 2, y: -7}
   - data: {fileID: 11400000, guid: 81b28dd47fb28ec408ee7d8447a3e011, type: 2}
-    spawnPosition: {x: 7, y: 22}
+    spawnPosition: {x: -1, y: 9}
   - data: {fileID: 11400000, guid: 81b28dd47fb28ec408ee7d8447a3e011, type: 2}
-    spawnPosition: {x: 10, y: 22}
+    spawnPosition: {x: 2, y: 9}
   - data: {fileID: 11400000, guid: 81b28dd47fb28ec408ee7d8447a3e011, type: 2}
-    spawnPosition: {x: 8, y: 5}
+    spawnPosition: {x: 0, y: -8}
   - data: {fileID: 11400000, guid: 23124b95da0635844b1d2a4477d8d8e6, type: 2}
-    spawnPosition: {x: 8, y: 23}
+    spawnPosition: {x: 0, y: 10}
   - data: {fileID: 11400000, guid: 23124b95da0635844b1d2a4477d8d8e6, type: 2}
-    spawnPosition: {x: 9, y: 23}
+    spawnPosition: {x: 1, y: 10}
   - data: {fileID: 11400000, guid: 8cf4f04d113ded8469ec51271e15dff5, type: 2}
-    spawnPosition: {x: 9, y: 6}
+    spawnPosition: {x: 1, y: -7}
   abilityPanel: {fileID: 1264711667}
   UI: {fileID: 837371595}
   playerID: 0
@@ -5710,12 +5710,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeUnit: 0
   unitSpawnData:
-  - data: {fileID: 11400000, guid: 87fc11b9e22649f4490c8d684c736026, type: 2}
-    spawnPosition: {x: 0, y: 4}
   - data: {fileID: 11400000, guid: 82f147c4043c6486e8642ecf8aedf02b, type: 2}
-    spawnPosition: {x: 5, y: 7}
-  - data: {fileID: 11400000, guid: d540f41856b5a4e289dfc0ce32113e90, type: 2}
-    spawnPosition: {x: 4, y: 6}
+    spawnPosition: {x: -3, y: -13}
+  - data: {fileID: 11400000, guid: 82f147c4043c6486e8642ecf8aedf02b, type: 2}
+    spawnPosition: {x: -3, y: -11}
+  - data: {fileID: 11400000, guid: 82f147c4043c6486e8642ecf8aedf02b, type: 2}
+    spawnPosition: {x: -2, y: -12}
+  - data: {fileID: 11400000, guid: 82f147c4043c6486e8642ecf8aedf02b, type: 2}
+    spawnPosition: {x: -1, y: -11}
+  - data: {fileID: 11400000, guid: 82f147c4043c6486e8642ecf8aedf02b, type: 2}
+    spawnPosition: {x: 0, y: -10}
+  - data: {fileID: 11400000, guid: 82f147c4043c6486e8642ecf8aedf02b, type: 2}
+    spawnPosition: {x: 0, y: -13}
+  - data: {fileID: 11400000, guid: 82f147c4043c6486e8642ecf8aedf02b, type: 2}
+    spawnPosition: {x: 1, y: -12}
+  - data: {fileID: 11400000, guid: 82f147c4043c6486e8642ecf8aedf02b, type: 2}
+    spawnPosition: {x: 2, y: -13}
+  - data: {fileID: 11400000, guid: 82f147c4043c6486e8642ecf8aedf02b, type: 2}
+    spawnPosition: {x: 3, y: -13}
+  - data: {fileID: 11400000, guid: 82f147c4043c6486e8642ecf8aedf02b, type: 2}
+    spawnPosition: {x: 3, y: -11}
+  - data: {fileID: 11400000, guid: 3d33a57f58c5640da84dd8dc2eaecef5, type: 2}
+    spawnPosition: {x: -2, y: -10}
+  - data: {fileID: 11400000, guid: 3d33a57f58c5640da84dd8dc2eaecef5, type: 2}
+    spawnPosition: {x: -1, y: -12}
+  - data: {fileID: 11400000, guid: 3d33a57f58c5640da84dd8dc2eaecef5, type: 2}
+    spawnPosition: {x: 0, y: -11}
+  - data: {fileID: 11400000, guid: 3d33a57f58c5640da84dd8dc2eaecef5, type: 2}
+    spawnPosition: {x: 2, y: -11}
+  - data: {fileID: 11400000, guid: 3d33a57f58c5640da84dd8dc2eaecef5, type: 2}
+    spawnPosition: {x: 3, y: -12}
   playerID: 1
 --- !u!4 &1582521908
 Transform:
