@@ -44,7 +44,8 @@ public static class AbilityDatabase
         new Focus(),
         new ImmobilizationBeam(),
         new WatcherGaze(),
-        new Infect()
+        new Infect(),
+        new Protect()
     };
 }
 
@@ -63,5 +64,6 @@ public enum Ability // ****************
     ImmobilizationBeam = 6,
     WatcherGaze = 7,
     Infect = 8,
+    Protect = 9
 
 };

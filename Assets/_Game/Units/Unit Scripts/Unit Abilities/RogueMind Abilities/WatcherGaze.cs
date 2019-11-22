@@ -33,6 +33,11 @@ public class WatcherGaze : Attack
         return new List<EffectState> { EffectState.DAMAGE};
     }
 
+    public override string GetName()
+    {
+        return "Watcher's Gaze";
+    }
+
     public override int GetRange()
     {
         return 3;

@@ -14,6 +14,11 @@ public class Protect : UnitAbility
         return new List<EffectState>() { EffectState.BUFF_DR };
     }
 
+    public override string GetName()
+    {
+        return "Protect";
+    }
+
     public override int GetRange()
     {
         return 0;

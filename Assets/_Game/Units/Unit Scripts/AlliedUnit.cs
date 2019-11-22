@@ -110,9 +110,17 @@ public class AlliedUnit : Unit
         }
 
         // 1 on the NumPad
-        else if (Input.GetKeyDown(KeyCode.Keypad1) || PlayerController.ability == 2)
+        if (Input.GetKeyDown(KeyCode.Keypad1) || PlayerController.ability == 2)
         {
             AvailableAbilities[1].Execute(this, direction); // CHANGE THIS
+            hasActed = true;
+            PlayerController.ability = 0;
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Keypad2) || PlayerController.ability == 3)
+        {
+            AvailableAbilities[2].Execute(this, direction); // CHANGE THIS
             hasActed = true;
             PlayerController.ability = 0;
             return;

@@ -7,6 +7,8 @@ using UnityEngine;
 
 public abstract class UnitAbility
 {
+    public abstract string GetName();
+
     public abstract List<EffectState> GetEffectState();
 
     // every Ability must have a range, regardless of whether or not it is used

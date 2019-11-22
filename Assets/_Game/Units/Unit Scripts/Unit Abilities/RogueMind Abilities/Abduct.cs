@@ -35,6 +35,11 @@ public class Abduct : Attack
         return new List<EffectState> { EffectState.DAMAGE, EffectState.DISABLE };
     }
 
+    public override string GetName()
+    {
+        return "Abduct";
+    }
+
     public override int GetRange()
     {
         return 1;

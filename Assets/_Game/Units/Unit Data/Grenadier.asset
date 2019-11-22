@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69221c0b80c9fdc46952d2b8669c5bc4, type: 3}
   m_Name: Grenadier
   m_EditorClassIdentifier: 
-  unitName: 
+  unitName: Grenadier
   unitType: 0
-  sprites: {fileID: 0}
-  moveSpeed: 0
-  health: 0
-  abilities: 
+  sprites: {fileID: 11400000, guid: ce4e78ea9ee586141b652c5b9176045d, type: 2}
+  portrait: {fileID: 21300000, guid: c3efcec83f76c4c5983cf78660dc97c6, type: 3}
+  moveSpeed: 7
+  health: 16
+  abilities: 00000000
