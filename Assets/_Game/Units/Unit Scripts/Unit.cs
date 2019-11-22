@@ -20,9 +20,12 @@ public abstract class Unit : MonoBehaviour
     [SerializeField] public bool hasActed;
     [SerializeField] public bool hasMoved;
     [SerializeField] public bool hasPivoted;
-    [SerializeField] public bool isImmobilized;
     [SerializeField] public bool attackBuffed;
     [SerializeField] public bool damageReductionBuffed;
+
+    // conditions
+    [SerializeField] protected int immobilizedDuration;
+    [SerializeField] protected int disabledDuration;
 
     // positional data
     [SerializeField] protected Direction direction;
@@ -58,7 +61,8 @@ public abstract class Unit : MonoBehaviour
     {
         hasActed = false;
         hasMoved = false;
-        isImmobilized = false;
+        immobilizedDuration = 0;
+        disabledDuration = 0;
         attackBuffed = false;
         damageReductionBuffed = false;
         m_SpriteRenderer = this.GetComponent<SpriteRenderer>();
@@ -307,6 +311,36 @@ public abstract class Unit : MonoBehaviour
             data.DebugLog();
             KillMe(data);
         }
+    }
+
+    public int GetImmobilizedDuration()
+    { return immobilizedDuration; }
+
+    public void SetImmobilizedDuration(int amount)
+    {
+        if (amount > immobilizedDuration)
+            immobilizedDuration = amount;
+    }
+
+    public void Immobilize(int duration)
+    {
+        hasMoved = true;
+        immobilizedDuration = duration - 1;
+    }
+
+    public int GetDisabledDuration()
+    { return disabledDuration; }
+
+    public void SetDisabledDuration(int amount)
+    {
+        if (amount > disabledDuration)
+            disabledDuration = amount;
+    }
+
+    public void Disable(int duration)
+    {
+        hasActed = true;
+        disabledDuration = duration - 1;
     }
 
     public int GetMoveSpeed()

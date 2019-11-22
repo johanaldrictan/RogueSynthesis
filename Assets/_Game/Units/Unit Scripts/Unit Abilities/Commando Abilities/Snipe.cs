@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class Snipe : Attack
 {
-    public Snipe()
+    public override bool isAOE()
     {
-        isAOE = false;
-        damageBuff = 10;
+        return false;
     }
+
     public override void DealEffects(Unit target, Unit source)
     {
-        int attackModifier = 0;
+        int bonusDamage = 0;
         if (source.attackBuffed)
-            attackModifier = damageBuff;
-        target.ChangeHealth(((GetDamage() + attackModifier) * (-1)), source, this);
+            bonusDamage = 10;
+        
+        target.ChangeHealth(((GetDamage() + bonusDamage) * (-1)), source, this);
     }
 
     public override List<Vector2Int> GetAreaOfEffect(Vector2Int source, Direction direction)

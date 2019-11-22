@@ -6,21 +6,22 @@ using UnityEngine;
 // Cleave hits opponents from an origin based on the unit's facing direction and range, 
 // and also damages tiles so that the area of effect forms a perpendicular line of 3 tiles long
 // simply put, deals damage in front of the unit, in a 3 tile wide perpendicular line
+// Cleave also Immobilized all Units attacked (cannot move during its next turn)
 
 // If you want to create a new UnitAbility, refer to the comments/code on UnitAbility.cs and AbilityDatabase.cs
 
 public class Cleave : Attack
 {
-    public Cleave()
+    public override bool isAOE()
     {
-        isAOE = true;
+        return true;
     }
 
     // We're just doing straight damage here
     public override void DealEffects(Unit target, Unit source)
     {
         target.ChangeHealth( (GetDamage()*(-1)), source, this );
-        target.isImmobilized = true;
+        target.Immobilize(1);
     }
 
     // we're making a list of coordinates that this attack reaches
@@ -38,7 +39,7 @@ public class Cleave : Attack
 
     public override List<EffectState> GetEffectState()
     {
-        return new List<EffectState> { EffectState.DAMAGE, EffectState.STUN };
+        return new List<EffectState> { EffectState.DAMAGE, EffectState.IMMOBILIZE };
     }
 
     public override string GetName()

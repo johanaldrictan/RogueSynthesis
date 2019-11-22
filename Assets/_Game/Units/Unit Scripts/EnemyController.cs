@@ -104,26 +104,6 @@ public class EnemyController : UnitController
         }
     }
 
-    public override void ResetUnits()
-    {
-        for (int i = 0; i < units.Count; i++)
-        {
-            units[i].damageReductionBuffed = false;
-            if (units[i].isImmobilized)
-            {
-                units[i].isImmobilized = false;
-                continue;
-            }
-            else
-            {
-                units[i].hasActed = false;
-                units[i].hasMoved = false;
-                units[i].hasPivoted = false;
-                (units[i] as EnemyUnit).boxedIn = false;
-            }
-        }
-    }
-
     // returns whether or not there is a Total Box-In
     // a Total Box-In is when every Unit that can still take actions is classified as "Boxed-In"
     public bool TotalBoxIn()

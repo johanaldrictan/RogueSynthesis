@@ -88,9 +88,9 @@ public class Aggro : EnemyAction
                         }
                         break;
 
-                    case EffectState.STUN:
+                    case EffectState.IMMOBILIZE:
                         // viable units are (nonfriendly) non-EnemyUnits that are not stunned
-                        if (!(affectableUnits[key].Item1 is EnemyUnit) && !affectableUnits[key].Item1.isImmobilized)
+                        if (!(affectableUnits[key].Item1 is EnemyUnit) && !(affectableUnits[key].Item1.GetImmobilizedDuration() > 0))
                         {
                             unitIsAffectable = true;
                             affectableUnits[key].Item2 += 2.0f;
@@ -108,7 +108,7 @@ public class Aggro : EnemyAction
 
                     case EffectState.DISABLE:
                         // viable units are (nonfriendly) non-EnemyUnits
-                        if (!(affectableUnits[key].Item1 is EnemyUnit) && !affectableUnits[key].Item1.isImmobilized)
+                        if (!(affectableUnits[key].Item1 is EnemyUnit) && !(affectableUnits[key].Item1.GetDisabledDuration() > 0))
                         {
                             unitIsAffectable = true;
                             affectableUnits[key].Item2 += 1.5f;

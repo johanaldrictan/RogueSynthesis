@@ -6,10 +6,11 @@ using UnityEngine;
 
 public class Abduct : Attack
 {
-    public Abduct()
+    public override bool isAOE()
     {
-        isAOE = true;
+        return true;
     }
+
     // We're just doing straight damage here
     public override void DealEffects(Unit target, Unit source)
     {
