@@ -34,6 +34,10 @@ public class EnemyController : UnitController
         if (!myTurn)
         { return; }
 
+        // dead men tell no... uh... commands to the game engine
+        if (units[activeUnit].GetHealth() <= 0)
+        { GetNextUnit(); }
+
         // No logic runs without a unit.
         if (units.Count == 0) { return; }
 
@@ -86,7 +90,7 @@ public class EnemyController : UnitController
         }
     }
 
-    public void GetNextUnit()
+    public override void GetNextUnit()
     {
         if (IsTurnOver())
         {
@@ -96,7 +100,7 @@ public class EnemyController : UnitController
 
         else
         {
-            SelectUnit(GetNextIndex());
+            setActiveUnit(GetNextIndex());
         }
     }
 
@@ -131,13 +135,6 @@ public class EnemyController : UnitController
                 return false;
         }
         return true;
-    }
-
-    // selects the unit at the given Index, setting necessary data
-    public void SelectUnit(int newIndex)
-    {
-        // set up the new unit
-        setActiveUnit(newIndex);
     }
 
     public void AbilityManual(int abilityID)

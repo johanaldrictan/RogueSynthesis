@@ -127,23 +127,32 @@ public class TurnController : MonoBehaviour
         {
             CycleEffects(false);
 
-            if (controllers[currentTurn] is PlayerController)
+            if (controllers[currentTurn] is PlayerController && controllers[currentTurn].units.Count > 0)
             { (controllers[currentTurn] as PlayerController).ClearSpotlight(); }
 
             EndController(currentTurn);
             currentTurn = ((currentTurn + 1) % controllers.Count);
             if (currentTurn == 0)
-            { currentRound += 1; }
+            { 
+                currentRound += 1;
+                Debug.Log("Round: " + currentRound);
+            }
 
             // if there's any Allied Units that died to enemy units, convert them to enemies
             // IF:                     I'm an AlliedUnit  AND  The person who most recently killed me is an EnemyUnit
             ToEnemyEvent.Invoke(unit => unit is AlliedUnit && unit.Deaths.Peek().GetKiller() is EnemyUnit);
 
             StartController(currentTurn);
+            // wrap around the unit List to select the first valid unit
+            if (controllers[currentTurn].units.Count > 0)
+            {
+                controllers[currentTurn].setActiveUnit(controllers[currentTurn].units.Count - 1);
+                controllers[currentTurn].GetNextUnit();
+            }
 
             CycleEffects(true);
 
-            if (controllers[currentTurn] is PlayerController)
+            if (controllers[currentTurn] is PlayerController && controllers[currentTurn].units.Count > 0)
             { (controllers[currentTurn] as PlayerController).SpotlightActiveUnit(); }
         }
     }

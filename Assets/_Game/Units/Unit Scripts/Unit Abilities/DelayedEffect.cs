@@ -78,6 +78,22 @@ public class DelayedEffect
                 Unit searchResult = globalPositionalData.SearchLocation(coordinate);
                 if (searchResult != null)
                 {
+                    Debug.Log("Delayed Effect by Unit " + sourceUnit.GetName() + " is triggering at:");
+                    if (effectTargets != null)
+                    {
+                        foreach (Unit target in effectTargets)
+                        {
+                            Debug.Log(target.GetName());
+                        }
+                    }
+                    if (areaOfEffect != null)
+                    {
+                        foreach (Vector2Int tile in areaOfEffect)
+                        {
+                            Debug.Log(tile);
+                        }
+                    }
+
                     effect(searchResult, sourceUnit);
                 }
             }

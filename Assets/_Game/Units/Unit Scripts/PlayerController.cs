@@ -26,13 +26,14 @@ public class PlayerController : UnitController
 
     public override void Update()
     {
-        AlliedUnit theUnit = units[activeUnit] as AlliedUnit;
         // if it's not currently this controller's turn, it's not allowed to do anything
         if (!myTurn)
         { return; }
 
         // No logic runs without a unit.
         if (units.Count == 0) { return; }
+
+        AlliedUnit theUnit = units[activeUnit] as AlliedUnit;
 
         //check for tab input
         //select next unit
@@ -99,7 +100,7 @@ public class PlayerController : UnitController
         }
     }
 
-    public void GetNextUnit()
+    public override void GetNextUnit()
     {
         ClearSpotlight();
 

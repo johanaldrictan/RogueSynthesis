@@ -152,8 +152,8 @@ public abstract class UnitController : MonoBehaviour
     {
         for (int i = 0; i < units.Count; i++)
         {
-            // if a unit that hasn't moved or attacked exists
-            if (!units[i].hasActed || !units[i].hasMoved)
+            // if a living unit that hasn't moved or attacked exists
+            if (units[i].GetHealth() > 0 && (!units[i].hasActed || !units[i].hasMoved))
             {
                 // Debug.Log("Turn not over");
                 return false;
@@ -185,6 +185,8 @@ public abstract class UnitController : MonoBehaviour
         }
     }
 
+    public abstract void GetNextUnit();
+
     // find the next Index in the list of Units that is available
     public int GetNextIndex()
     {
@@ -192,7 +194,7 @@ public abstract class UnitController : MonoBehaviour
 
         if (units.Count != 0)
         {
-            // go through the list, skipping units that are inactive in the heirarchy, or have both moved and attacked already
+            // go through the list, skipping units that are inactive in the heirarchy, dead, or have both moved and attacked already
             do
             {
                 newActiveUnit = (newActiveUnit + 1) % units.Count;
@@ -202,6 +204,8 @@ public abstract class UnitController : MonoBehaviour
 
         return newActiveUnit;
     }
+
+
 
     public int GetNumberOfActiveUnits()
     {
