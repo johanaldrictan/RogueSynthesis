@@ -45,6 +45,11 @@ public class EMPGrenade : Attack
         return 7;
     }
 
+    public override string GetSoundEvent()
+    {
+        return "event:/GRE/GRE_EMP";
+    }
+
     public override bool isAOE()
     {
         return false;

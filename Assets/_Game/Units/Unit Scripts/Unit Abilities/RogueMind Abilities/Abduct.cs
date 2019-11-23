@@ -69,4 +69,9 @@ public class Abduct : Attack
     {
         return (inQuestion.GetType() == typeof(Abduct));
     }
+
+    public override string GetSoundEvent()
+    {
+        throw new System.NotImplementedException();
+    }
 }

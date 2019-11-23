@@ -33,4 +33,8 @@ public class Aim : UnitAbility
         return "Aim";
     }
 
+    public override string GetSoundEvent()
+    {
+        return "event:/SHA/SHA_Aim";
+    }
 }

@@ -50,4 +50,9 @@ public class Snipe : Attack
     {
         return (inQuestion.GetType() == typeof(Snipe));
     }
+
+    public override string GetSoundEvent()
+    {
+        return "event:/SHA/SHA_Snipe";
+    }
 }

@@ -26,6 +26,11 @@ public class Protect : UnitAbility
         return 0;
     }
 
+    public override string GetSoundEvent()
+    {
+        return "event:/PRO1/PRO_Protect";
+    }
+
     protected override bool InferiorComparator(UnitAbility inQuestion)
     {
         return (inQuestion.GetType() == typeof(Protect));

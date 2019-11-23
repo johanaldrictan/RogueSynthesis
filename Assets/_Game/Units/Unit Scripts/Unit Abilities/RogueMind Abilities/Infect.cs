@@ -81,4 +81,9 @@ public class Infect : Attack
     {
         return (inQuestion.GetType() == typeof(Infect));
     }
+
+    public override string GetSoundEvent()
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -56,4 +56,9 @@ public class Cleave : Attack
     {
         return (inQuestion.GetType() == typeof(Cleave));
     }
+
+    public override string GetSoundEvent()
+    {
+        return "event:/PRO1/PRO_Cleave";
+    }
 }

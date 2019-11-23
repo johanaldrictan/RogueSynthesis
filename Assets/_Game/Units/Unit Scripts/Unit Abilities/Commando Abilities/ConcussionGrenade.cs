@@ -44,6 +44,11 @@ public class ConcussionGrenade : Attack
         return 6;
     }
 
+    public override string GetSoundEvent()
+    {
+        return "event:/GRE/GRE_Concussion";
+    }
+
     public override bool isAOE()
     {
         return false;

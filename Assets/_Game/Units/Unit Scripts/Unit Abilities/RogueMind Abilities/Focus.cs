@@ -29,6 +29,11 @@ public class Focus : UnitAbility
         return 0;
     }
 
+    public override string GetSoundEvent()
+    {
+        throw new System.NotImplementedException();
+    }
+
     protected override bool InferiorComparator(UnitAbility inQuestion)
     {
         return (inQuestion.GetType() == typeof(Focus));

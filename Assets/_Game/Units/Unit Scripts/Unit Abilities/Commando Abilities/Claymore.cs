@@ -29,6 +29,11 @@ public class Claymore : UnitAbility
         return 2;
     }
 
+    public override string GetSoundEvent()
+    {
+        return "event:/SHA_ClaymorePlace";
+    }
+
     protected override bool InferiorComparator(UnitAbility inQuestion)
     {
         return (inQuestion.GetType() == typeof(Claymore));

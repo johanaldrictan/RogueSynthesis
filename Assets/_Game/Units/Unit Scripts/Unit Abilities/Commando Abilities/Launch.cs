@@ -34,6 +34,11 @@ public class Launch : Attack
         return 8;
     }
 
+    public override string GetSoundEvent()
+    {
+        return "event:/GRE/GRE_Launch";
+    }
+
     public override bool isAOE()
     {
         return false;

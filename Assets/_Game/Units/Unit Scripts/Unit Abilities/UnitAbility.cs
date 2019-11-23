@@ -9,7 +9,7 @@ using UnityEngine;
 public abstract class UnitAbility
 {
     //obtains the relevant string data for determining what events a unit ability triggers
-    public abstract List<string> GetSoundEvents();
+    public abstract string GetSoundEvent();
 
     // simply returns the in-game name of the Ability
     public abstract string GetName();

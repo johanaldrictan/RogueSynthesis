@@ -132,5 +132,10 @@ public class ShoulderTackle : Attack
     {
         return (inQuestion.GetType() == typeof(ShoulderTackle));
     }
+
+    public override string GetSoundEvent()
+    {
+        return "event:/PRO1/PRO_ShoulderTackle";
+    }
 }
 
