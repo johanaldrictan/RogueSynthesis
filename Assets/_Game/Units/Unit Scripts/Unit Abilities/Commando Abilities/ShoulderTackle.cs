@@ -9,7 +9,6 @@ using UnityEngine;
 
 public class ShoulderTackle : Attack
 {
-    // TODO: NEED TO FIX CASE WHEN THERE IS SOMETHING BEHIND TARGET
     public override void DealEffects(Unit target, Unit source)
     {
         int pushback = 5;
