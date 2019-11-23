@@ -13,7 +13,7 @@ public class Swipe : Attack
 
     public override void DealEffects(Unit target, Unit source)
     {
-        DelayedEffect delayedEffect = new DelayedEffect(SwipeAttack, source.globalPositionalData, 1, UnitType.AlliedUnit, true, GetAreaOfEffect(source.GetMapPosition(), source.GetDirection()), source);
+        DelayedEffect delayedEffect = new DelayedEffect(SwipeAttack, source.globalPositionalData, 1, UnitType.EnemyUnit, true, GetAreaOfEffect(source.GetMapPosition(), source.GetDirection()), source);
         NewDelayedEffectEvent.Invoke(delayedEffect);
     }
 

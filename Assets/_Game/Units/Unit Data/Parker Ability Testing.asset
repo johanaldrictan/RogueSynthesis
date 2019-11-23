@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Parker Ability Testing
   m_EditorClassIdentifier: 
   unitName: Tester
-  unitType: 0
-  sprites: {fileID: 11400000, guid: ce4e78ea9ee586141b652c5b9176045d, type: 2}
+  unitType: 1
+  sprites: {fileID: 11400000, guid: 7b705425f58c94e218c3a09cd0a174f1, type: 2}
   portrait: {fileID: 21300000, guid: c3efcec83f76c4c5983cf78660dc97c6, type: 3}
-  moveSpeed: 10
+  moveSpeed: 4
   health: 50
-  abilities: 0c0000000100000000000000
+  abilities: 0400000000000000

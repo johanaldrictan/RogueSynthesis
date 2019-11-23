@@ -121,6 +121,7 @@ public class TurnController : MonoBehaviour
     // This function adds the object to the front, because when evaluating the List it starts from the back
     protected void EnqueueDelayedEffect(DelayedEffect effect)
     {
+        Debug.Log("Adding...");
         delayedEffects.Insert(0, effect);
     }
 
