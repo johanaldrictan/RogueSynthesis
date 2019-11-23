@@ -93,7 +93,7 @@ public class Aggro : EnemyAction
                         if (!(affectableUnits[key].Item1 is EnemyUnit) && !(affectableUnits[key].Item1.GetImmobilizedDuration() > 0))
                         {
                             unitIsAffectable = true;
-                            affectableUnits[key].Item2 += 2.0f;
+                            affectableUnits[key].Item2 += 2.5f;
                         }
                         break;
 
@@ -111,7 +111,7 @@ public class Aggro : EnemyAction
                         if (!(affectableUnits[key].Item1 is EnemyUnit) && !(affectableUnits[key].Item1.GetDisabledDuration() > 0))
                         {
                             unitIsAffectable = true;
-                            affectableUnits[key].Item2 += 1.5f;
+                            affectableUnits[key].Item2 += 3.5f;
                         }
                         break;
 

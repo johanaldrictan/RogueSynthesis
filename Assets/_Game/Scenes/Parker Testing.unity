@@ -4345,8 +4345,10 @@ MonoBehaviour:
   unitSpawnData:
   - data: {fileID: 11400000, guid: 81b28dd47fb28ec408ee7d8447a3e011, type: 2}
     spawnPosition: {x: 0, y: -5}
-  - data: {fileID: 11400000, guid: 22c2139a50d01e24fa0148c0f24b93a5, type: 2}
+  - data: {fileID: 11400000, guid: 23124b95da0635844b1d2a4477d8d8e6, type: 2}
     spawnPosition: {x: -1, y: -5}
+  - data: {fileID: 11400000, guid: 22c2139a50d01e24fa0148c0f24b93a5, type: 2}
+    spawnPosition: {x: 1, y: -5}
   abilityPanel: {fileID: 1264711667}
   UI: {fileID: 837371595}
   playerID: 0
@@ -5698,6 +5700,8 @@ MonoBehaviour:
   unitSpawnData:
   - data: {fileID: 11400000, guid: 7fa99d57b2b2c8545bec27880ab80865, type: 2}
     spawnPosition: {x: 0, y: 2}
+  - data: {fileID: 11400000, guid: 7fa99d57b2b2c8545bec27880ab80865, type: 2}
+    spawnPosition: {x: 0, y: 3}
   playerID: 1
 --- !u!4 &1582521908
 Transform:
