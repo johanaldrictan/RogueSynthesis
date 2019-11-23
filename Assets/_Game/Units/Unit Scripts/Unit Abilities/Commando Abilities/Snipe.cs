@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Snipe is an Attack that deals damage in a long-range straight line
+// it attacks the first Unit that is in the way of the attack; it does not go through that Unit
+
 public class Snipe : Attack
 {
     public override bool isAOE()
@@ -20,8 +23,7 @@ public class Snipe : Attack
 
     public override List<Vector2Int> GetAreaOfEffect(Vector2Int source, Direction direction)
     {
-        List<Vector2Int> result = AttackHelper.GetLineAOE(source, direction, GetRange());
-        return result;
+        return AttackHelper.GetLineAOE(source, direction, GetRange());
     }
 
     public override int GetDamage()
