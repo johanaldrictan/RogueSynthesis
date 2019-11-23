@@ -22,6 +22,12 @@ public abstract class Attack : UnitAbility
     // This funciton takes a Unit that is to be hit with the Attack. The function deals the associated effects of the attack to the given Unit
     public abstract void DealEffects(Unit target, Unit source);
 
+    // Takes a Unit as a parameter and returns whether or not this Ability would kill that target
+    public virtual bool LethalAttack(Unit target)
+    {
+        return (target.GetHealth() + target.GetDamageReduction() <= this.GetDamage());
+    }
+
     // get the area of effect. iterate through it, dealing effects to each unit found in the area
     public override void Execute(Unit source, Direction direction)
     {

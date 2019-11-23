@@ -55,7 +55,7 @@ public class Aggro : EnemyAction
                             unitIsAffectable = true;
                             // if using this ability would reduce this Unit's HP to 0 or below,
                             // definitely consider doing this.
-                            if (affectableUnits[key].Item1.GetHealth() + affectableUnits[key].Item1.GetDamageReduction() <= (option.GetAbility() as Attack).GetDamage())
+                            if ((option.GetAbility() as Attack).LethalAttack(affectableUnits[key].Item1))
                             {
                                 affectableUnits[key].Item2 = float.PositiveInfinity;
                             }

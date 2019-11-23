@@ -4343,9 +4343,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeUnit: 0
   unitSpawnData:
-  - data: {fileID: 11400000, guid: 22c2139a50d01e24fa0148c0f24b93a5, type: 2}
+  - data: {fileID: 11400000, guid: 81b28dd47fb28ec408ee7d8447a3e011, type: 2}
     spawnPosition: {x: 0, y: -5}
-  - data: {fileID: 11400000, guid: 22c2139a50d01e24fa0148c0f24b93a5, type: 2}
+  - data: {fileID: 11400000, guid: 81b28dd47fb28ec408ee7d8447a3e011, type: 2}
     spawnPosition: {x: -2, y: -5}
   abilityPanel: {fileID: 1264711667}
   UI: {fileID: 837371595}
