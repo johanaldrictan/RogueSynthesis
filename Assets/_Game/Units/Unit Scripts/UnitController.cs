@@ -194,6 +194,7 @@ public abstract class UnitController : MonoBehaviour
             if (units[i].GetDisabledDuration() > 0)
             {
                 units[i].hasMoved = true;
+                units[i].hasActed = true;
                 units[i].SetDisabledDuration(units[i].GetDisabledDuration() - 1);
             }
         }

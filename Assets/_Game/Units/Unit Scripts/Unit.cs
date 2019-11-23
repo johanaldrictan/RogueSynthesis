@@ -222,6 +222,8 @@ public abstract class Unit : MonoBehaviour
         MapController.instance.weightedMap[mapPosition] = (int)TileWeight.OBSTRUCTED;
         this.transform.position = MapMath.MapToWorld(new Vector2Int(x, y));
         hasMoved = true;
+        if (TurnController.instance != null)
+            TurnController.instance.trapPositionalData.CheckTraps();
     }
 
     public void ChangeDirection(Direction newDirection)
@@ -340,12 +342,13 @@ public abstract class Unit : MonoBehaviour
     public void Disable(int duration)
     {
         hasActed = true;
+        hasMoved = true;
         disabledDuration = duration - 1;
     }
 
     public int GetMoveSpeed()
     {
-        if (GetImmobilizedDuration() > 0)
+        if (GetImmobilizedDuration() > 0 || GetDisabledDuration() > 0)
             return 0;
         return moveSpeed;
     }

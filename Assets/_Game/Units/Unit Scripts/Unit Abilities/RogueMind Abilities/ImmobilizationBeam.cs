@@ -18,7 +18,7 @@ public class ImmobilizationBeam : Attack
         if (target != null)
         {
             target.ChangeHealth((GetDamage() * (-1)), source, this);
-            target.Disable(1);
+            target.Immobilize(1);
         }
     }
 

@@ -47,7 +47,11 @@ public static class AbilityDatabase
         new Infect(),
         new Protect(),
         new Aim(),
-        new Snipe()
+        new Snipe(), 
+        new Claymore(),
+        new Launch(),
+        new ConcussionGrenade(),
+        new EMPGrenade()
     };
 }
 
@@ -68,6 +72,9 @@ public enum Ability // ****************
     Infect = 8,
     Protect = 9,
     Aim = 10,
-    Snipe = 11
-
+    Snipe = 11,
+    Claymore = 12,
+    Launch = 13, 
+    ConcussionGrenade = 14,
+    EMPGrenade = 15
 };

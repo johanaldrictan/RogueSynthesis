@@ -71,7 +71,7 @@ public class EnemyUnit : Unit
         if (possibleActions.Count != 0)
         {
             // get data about the board-state, possible options, etc
-            if (GetImmobilizedDuration() > 0)
+            if (GetImmobilizedDuration() > 0 || GetDisabledDuration() > 0)
             {
                 MoveableTiles = new Dictionary<Vector2Int, Direction>();
                 MoveableTiles.Add(GetMapPosition(), Direction.NO_DIR);

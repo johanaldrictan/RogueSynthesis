@@ -13,13 +13,10 @@ public class Swipe : Attack
 
     public override void DealEffects(Unit target, Unit source)
     {
-        DelayedEffect delayedEffect = new DelayedEffect(SwipeAttack, source.globalPositionalData, 1, UnitType.AlliedUnit, true, GetAreaOfEffect(source.GetMapPosition(), source.GetDirection()), source);
+        DelayedEffect delayedEffect = new DelayedEffect((Unit targ, Unit sour) => target.ChangeHealth((GetDamage() * (-1)), source, this), source.globalPositionalData, 1, UnitType.EnemyUnit, true, GetAreaOfEffect(source.GetMapPosition(), source.GetDirection()), source);
         NewDelayedEffectEvent.Invoke(delayedEffect);
-    }
-
-    public void SwipeAttack(Unit target, Unit source)
-    {
-        target.ChangeHealth((GetDamage() * (-1)), source, this);
+        delayedEffect = new DelayedEffect((Unit targ, Unit sour) => source.Disable(1), source.globalPositionalData, 0, UnitType.EnemyUnit, true, new List<Unit> { source }, source);
+        NewDelayedEffectEvent.Invoke(delayedEffect);
     }
 
     public override List<Vector2Int> GetAreaOfEffect(Vector2Int source, Direction direction)
