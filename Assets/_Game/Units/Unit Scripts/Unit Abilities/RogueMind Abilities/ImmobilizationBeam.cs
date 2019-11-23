@@ -52,4 +52,9 @@ public class ImmobilizationBeam : Attack
     {
         return (inQuestion.GetType() == typeof(ImmobilizationBeam));
     }
+
+    public override string GetSoundEvent()
+    {
+        return "event:/WAT/WAT_ImmoBeam";
+    }
 }

@@ -72,6 +72,6 @@ public class Abduct : Attack
 
     public override string GetSoundEvent()
     {
-        throw new System.NotImplementedException();
+        return "event:/ABD/ABD_Abduct";
     }
 }

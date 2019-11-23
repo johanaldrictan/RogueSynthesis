@@ -31,7 +31,7 @@ public class Focus : UnitAbility
 
     public override string GetSoundEvent()
     {
-        throw new System.NotImplementedException();
+        return "event:/WAT/WAT_Focus";
     }
 
     protected override bool InferiorComparator(UnitAbility inQuestion)

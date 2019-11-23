@@ -84,6 +84,6 @@ public class Infect : Attack
 
     public override string GetSoundEvent()
     {
-        throw new System.NotImplementedException();
+        return "event:/INF/INF_Infect";
     }
 }

@@ -48,4 +48,9 @@ public class WatcherGaze : Attack
     {
         return (inQuestion.GetType() == typeof(WatcherGaze));
     }
+
+    public override string GetSoundEvent()
+    {
+        return "event:/WAT/WAT_WatcherEye";
+    }
 }

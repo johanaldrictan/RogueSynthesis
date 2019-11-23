@@ -50,4 +50,9 @@ public class Swipe : Attack
     {
         return "Swipe";
     }
+
+    public override string GetSoundEvent()
+    {
+        return "event:/ABD/ABD_Swipe";
+    }
 }
