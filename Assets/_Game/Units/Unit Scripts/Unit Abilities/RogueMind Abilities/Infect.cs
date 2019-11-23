@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class Infect : Attack
 {
+    public Infect()
+    {
+        abilitySoundEvent = FMODUnity.RuntimeManager.CreateInstance(GetSoundEvent());
+    }
     public override bool isAOE()
     {
         return false;

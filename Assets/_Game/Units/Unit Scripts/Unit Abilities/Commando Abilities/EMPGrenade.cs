@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EMPGrenade : Attack
 {
+    public EMPGrenade()
+    {
+        abilitySoundEvent = FMODUnity.RuntimeManager.CreateInstance(GetSoundEvent());
+    }
     public override void DealEffects(Unit target, Unit source)
     {
         Vector2Int origin = target.GetMapPosition();

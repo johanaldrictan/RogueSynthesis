@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMOD.Studio;
 
 // A Unit is the base abstract form of, well, a Unit. Every kind of Unit does what's defined here
 
@@ -52,6 +53,9 @@ public abstract class Unit : MonoBehaviour
     // It passes a reference to itself so that other scripts can do what they need to do
     public static UnitUnityEvent DeathEvent = new UnitUnityEvent();
 
+    public EventInstance moveSoundEvent;
+    public EventInstance deathSoundEvent;
+    public EventInstance selectSoundEvent;
 
 
     // a Unit needs to be able to choose its Ability after it has moved but before its turn has ended
@@ -94,6 +98,17 @@ public abstract class Unit : MonoBehaviour
 
         // positional setup
         ChangeDirection(Direction.S);
+        if(StartData.moveSoundEventName != "")
+            moveSoundEvent = FMODUnity.RuntimeManager.CreateInstance(StartData.moveSoundEventName);
+        if (!moveSoundEvent.isValid()) { Debug.LogWarning("Move Event for " + unitName + " invalid."); }
+
+        if(StartData.deathSoundEventName != "")
+            deathSoundEvent = FMODUnity.RuntimeManager.CreateInstance(StartData.deathSoundEventName);
+        if (!deathSoundEvent.isValid()) { Debug.LogWarning("Death Event for " + unitName + " invalid."); }
+
+        if(StartData.selectSoundEventName != "")
+            selectSoundEvent = FMODUnity.RuntimeManager.CreateInstance(StartData.selectSoundEventName);
+        if (!moveSoundEvent.isValid()) { Debug.LogWarning("Select Event for " + unitName + " invalid."); }
     }
 
 
@@ -204,6 +219,8 @@ public abstract class Unit : MonoBehaviour
 
     public virtual void Move(int x, int y)
     {
+        if(moveSoundEvent.isValid())
+            moveSoundEvent.start();
         attackBuffed = false;
         // remove old coordinates from globalPositionalData
         globalPositionalData.RemoveUnit(mapPosition);
@@ -250,6 +267,8 @@ public abstract class Unit : MonoBehaviour
     // it then calls out that it's dying, so that other scripts can do what they're supposed to
     public virtual void KillMe(DeathData data)
     {
+        if(deathSoundEvent.isValid())
+            deathSoundEvent.start();
         health = 0;
         Deaths.Push(data);
         hasMoved = true;

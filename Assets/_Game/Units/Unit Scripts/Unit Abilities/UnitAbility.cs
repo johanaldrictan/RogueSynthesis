@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using FMOD.Studio;
 
 // UnitAbility is an abstract class that represents an action a Unit can take
 // If you want to make a new Ability, read this and AbilityDatabase.cs
 
 public abstract class UnitAbility
 {
+    public EventInstance abilitySoundEvent;
     //obtains the relevant string data for determining what events a unit ability triggers
     public abstract string GetSoundEvent();
 

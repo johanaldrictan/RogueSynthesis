@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ConcussionGrenade : Attack
 {
+    public ConcussionGrenade()
+    {
+        abilitySoundEvent = FMODUnity.RuntimeManager.CreateInstance(GetSoundEvent());
+    }
     public override void DealEffects(Unit target, Unit source)
     {
         Vector2Int origin = target.GetMapPosition();

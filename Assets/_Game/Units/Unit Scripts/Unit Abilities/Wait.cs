@@ -29,6 +29,11 @@ public class Wait : UnitAbility
         return 0;
     }
 
+    public override string GetSoundEvent()
+    {
+        return "";
+    }
+
     protected override bool InferiorComparator(UnitAbility inQuestion)
     {
         return (inQuestion.GetType() == typeof(Wait));

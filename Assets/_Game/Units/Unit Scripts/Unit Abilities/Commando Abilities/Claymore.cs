@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class Claymore : UnitAbility
 {
+    public Claymore()
+    {
+        abilitySoundEvent = FMODUnity.RuntimeManager.CreateInstance(GetSoundEvent());
+    }
     public override void Execute(Unit source, Direction direction)
     {
+        abilitySoundEvent.start();
         Vector2Int position = MapMath.DirToRelativeLoc(direction) + source.GetMapPosition();
         // make sure the place this wants to be put is not obstructed
         if (MapController.instance.weightedMap[position] != (int)TileWeight.OBSTRUCTED && TurnController.instance != null)
@@ -31,7 +36,7 @@ public class Claymore : UnitAbility
 
     public override string GetSoundEvent()
     {
-        return "event:/SHA_ClaymorePlace";
+        return "event:/SHA/SHA_ClaymorePlace";
     }
 
     protected override bool InferiorComparator(UnitAbility inQuestion)

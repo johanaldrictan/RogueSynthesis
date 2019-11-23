@@ -149,7 +149,8 @@ public class PlayerController : UnitController
         SpotlightActiveUnit();
         UI.GetComponent<UI_Operator>().unit = units[activeUnit];
         UI.GetComponent<UI_Operator>().SetInfo();
-        
+        if(units[activeUnit].selectSoundEvent.isValid())
+            units[activeUnit].selectSoundEvent.start();
     }
 
     public void AbilityManual(int abilityID)

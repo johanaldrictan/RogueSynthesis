@@ -7,6 +7,10 @@ using UnityEngine;
 
 public class ImmobilizationBeam : Attack
 {
+    public ImmobilizationBeam()
+    {
+        abilitySoundEvent = FMODUnity.RuntimeManager.CreateInstance(GetSoundEvent());
+    }
     public override bool isAOE()
     {
         return false;

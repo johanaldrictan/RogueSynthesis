@@ -8,6 +8,11 @@ public class Abduct : Attack
 {
     private Direction startingDirection;
 
+    public Abduct()
+    {
+        abilitySoundEvent = FMODUnity.RuntimeManager.CreateInstance(GetSoundEvent());
+    }
+
     public override bool isAOE()
     {
         return false;

@@ -65,6 +65,8 @@ public class AlliedUnit : Unit
 
     public override void Move(int x, int y)
     {
+        if (moveSoundEvent.isValid())
+            moveSoundEvent.start();
         // remember where we started first
         positionMemory = mapPosition;
 

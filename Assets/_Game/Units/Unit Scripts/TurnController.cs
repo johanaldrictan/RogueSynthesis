@@ -222,6 +222,7 @@ public class TurnController : MonoBehaviour
         newTrap.AddComponent<SpriteRenderer>();
         Sprite newSprite = Resources.Load<Sprite>(newTrapComponent.GetResourcePath());
         newTrap.GetComponent<SpriteRenderer>().sprite = newSprite;
+        newTrap.GetComponent<SpriteRenderer>().sortingOrder = 98;
         trapPositionalData.AddTrap(position, newTrapComponent);
     }
 

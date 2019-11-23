@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Launch : Attack
 {
+    public Launch()
+    {
+        abilitySoundEvent = FMODUnity.RuntimeManager.CreateInstance(GetSoundEvent());
+    }
     public override void DealEffects(Unit target, Unit source)
     {
         target.ChangeHealth((GetDamage() * (-1)), source, this);

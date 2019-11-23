@@ -15,6 +15,11 @@ public class UnitData : ScriptableObject
     public int moveSpeed;
     public int health;
 
+    public string moveSoundEventName;
+    public string deathSoundEventName;
+    public string selectSoundEventName;
+
+
     public List<Ability> abilities;
 }
 

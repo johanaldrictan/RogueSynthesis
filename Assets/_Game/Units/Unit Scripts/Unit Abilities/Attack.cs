@@ -31,6 +31,8 @@ public abstract class Attack : UnitAbility
     // get the area of effect. iterate through it, dealing effects to each unit found in the area
     public override void Execute(Unit source, Direction direction)
     {
+        if(abilitySoundEvent.isValid())
+            abilitySoundEvent.start();
         List<Vector2Int> area = GetAreaOfEffect(source.GetMapPosition(), direction);
 
         //if it is an aoe attack, deal effects to every unit 
@@ -61,5 +63,5 @@ public abstract class Attack : UnitAbility
             DealEffects(searchResult, source);
         }
     }
-
+    
 }

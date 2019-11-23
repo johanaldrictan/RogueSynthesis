@@ -8,9 +8,14 @@ using UnityEngine;
 
 public class Aim : UnitAbility
 {
+    public Aim()
+    {
+        abilitySoundEvent = FMODUnity.RuntimeManager.CreateInstance(GetSoundEvent());
+    }
     public override void Execute(Unit source, Direction direction)
     {
         source.attackBuffed = true;
+        abilitySoundEvent.start();
     }
 
     public override int GetRange()
