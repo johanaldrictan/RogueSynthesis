@@ -121,7 +121,6 @@ public class TurnController : MonoBehaviour
     // This function adds the object to the front, because when evaluating the List it starts from the back
     protected void EnqueueDelayedEffect(DelayedEffect effect)
     {
-        Debug.Log("Adding...");
         delayedEffects.Insert(0, effect);
     }
 
@@ -130,7 +129,7 @@ public class TurnController : MonoBehaviour
         // make sure that the controller asking for the next turn currently has control
         if (controllers[currentTurn] == controller && controller.IsMyTurn())
         {
-            CycleEffects(false);
+            CycleEffects(true);
 
             if (controllers[currentTurn] is PlayerController && controllers[currentTurn].units.Count > 0)
             { (controllers[currentTurn] as PlayerController).ClearSpotlight(); }
@@ -155,7 +154,7 @@ public class TurnController : MonoBehaviour
                 controllers[currentTurn].GetNextUnit();
             }
 
-            CycleEffects(true);
+            CycleEffects(false);
 
             if (controllers[currentTurn] is PlayerController && controllers[currentTurn].units.Count > 0)
             { (controllers[currentTurn] as PlayerController).SpotlightActiveUnit(); }
@@ -175,12 +174,12 @@ public class TurnController : MonoBehaviour
             {
                 case UnitType.AlliedUnit:
                     if (controllers[currentTurn] is PlayerController && atEnd == delayedEffects[i].AtEnd())
-                    { delayedEffects[i].Tick(); }
+                    {  delayedEffects[i].Tick(); }
                     break;
 
                 case UnitType.EnemyUnit:
                     if (controllers[currentTurn] is EnemyController && atEnd == delayedEffects[i].AtEnd())
-                    { delayedEffects[i].Tick(); }
+                    {  delayedEffects[i].Tick(); }
                     break;
 
                 default:

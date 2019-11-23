@@ -15,6 +15,13 @@ public class Swipe : Attack
     {
         DelayedEffect delayedEffect = new DelayedEffect(SwipeAttack, source.globalPositionalData, 1, UnitType.EnemyUnit, true, GetAreaOfEffect(source.GetMapPosition(), source.GetDirection()), source);
         NewDelayedEffectEvent.Invoke(delayedEffect);
+        delayedEffect = new DelayedEffect(Delay, source.globalPositionalData, 0, UnitType.EnemyUnit, true, new List<Unit> { source }, source);
+        NewDelayedEffectEvent.Invoke(delayedEffect);
+    }
+
+    public void Delay(Unit target, Unit source)
+    {
+        source.Disable(1);
     }
 
     public void SwipeAttack(Unit target, Unit source)
