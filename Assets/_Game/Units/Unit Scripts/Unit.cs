@@ -344,7 +344,11 @@ public abstract class Unit : MonoBehaviour
     }
 
     public int GetMoveSpeed()
-    { return moveSpeed; }
+    {
+        if (GetImmobilizedDuration() > 0)
+            return 0;
+        return moveSpeed;
+    }
 
     public void SetMoveSpeed(int amount)
     { moveSpeed += amount; }

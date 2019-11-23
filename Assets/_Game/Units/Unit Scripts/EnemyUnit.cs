@@ -71,9 +71,17 @@ public class EnemyUnit : Unit
         if (possibleActions.Count != 0)
         {
             // get data about the board-state, possible options, etc
-            MoveableTiles = FindMoveableTiles(MapController.instance.weightedMap);
-            
-            foreach(AbilityOption option in possibleAbilities)
+            if (GetImmobilizedDuration() > 0)
+            {
+                MoveableTiles = new Dictionary<Vector2Int, Direction>();
+                MoveableTiles.Add(GetMapPosition(), Direction.NO_DIR);
+            }
+            else
+            {
+                MoveableTiles = FindMoveableTiles(MapController.instance.weightedMap);
+            }
+
+            foreach (AbilityOption option in possibleAbilities)
             { option.EvaluateAffectableTiles(); }
 
             EnemyAction bestAction = null;

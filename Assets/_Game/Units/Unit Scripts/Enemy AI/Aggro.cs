@@ -136,6 +136,9 @@ public class Aggro : EnemyAction
         {
             // wait should be zero, AKA it should only be chosen if everything else is an awful choice
             option.SetSignificance(0.0f);
+            // a disabled Unit MUST wait
+            if (myUnit.GetDisabledDuration() > 0)
+                option.SetSignificance(float.PositiveInfinity);
         }
         else
         {

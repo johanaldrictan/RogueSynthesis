@@ -41,8 +41,8 @@ public class EnemyController : UnitController
         // No logic runs without a unit.
         if (units.Count == 0) { return; }
 
-        // if the unit hasn't moved or attacked, get new ActionData and move
-        if (!units[activeUnit].hasMoved && !units[activeUnit].hasActed)
+        // decide what to do if you haven't yet
+        if ((units[activeUnit] as EnemyUnit).plannedActionData == null)
         {
             (units[activeUnit] as EnemyUnit).ScanMap();
             (units[activeUnit] as EnemyUnit).EvaluateBoxIn();
@@ -53,6 +53,12 @@ public class EnemyController : UnitController
             }
 
             (units[activeUnit] as EnemyUnit).NewActionData();
+            return;
+        }
+
+        // if the unit hasn't moved or attacked, and move
+        if (!units[activeUnit].hasMoved && !units[activeUnit].hasActed)
+        {
             (units[activeUnit] as EnemyUnit).ChooseMovement();
             return;
         }

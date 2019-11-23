@@ -174,7 +174,10 @@ public abstract class UnitController : MonoBehaviour
             units[i].hasMoved = false;
             units[i].hasPivoted = false;
             if (units[i] is EnemyUnit)
+            {
                 (units[i] as EnemyUnit).boxedIn = false;
+                (units[i] as EnemyUnit).plannedActionData = null;
+            }
 
             // reduce status conditions
             if (units[i].GetImmobilizedDuration() > 0)
