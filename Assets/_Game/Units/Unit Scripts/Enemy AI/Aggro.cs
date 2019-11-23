@@ -55,7 +55,7 @@ public class Aggro : EnemyAction
                             unitIsAffectable = true;
                             // if using this ability would reduce this Unit's HP to 0 or below,
                             // definitely consider doing this.
-                            if (affectableUnits[key].Item1.GetHealth() + affectableUnits[key].Item1.GetDamageReduction() <= (option.GetAbility() as Attack).GetDamage())
+                            if ((option.GetAbility() as Attack).LethalAttack(affectableUnits[key].Item1))
                             {
                                 affectableUnits[key].Item2 = float.PositiveInfinity;
                             }
@@ -88,9 +88,9 @@ public class Aggro : EnemyAction
                         }
                         break;
 
-                    case EffectState.STUN:
+                    case EffectState.IMMOBILIZE:
                         // viable units are (nonfriendly) non-EnemyUnits that are not stunned
-                        if (!(affectableUnits[key].Item1 is EnemyUnit) && !affectableUnits[key].Item1.isImmobilized)
+                        if (!(affectableUnits[key].Item1 is EnemyUnit) && !(affectableUnits[key].Item1.GetImmobilizedDuration() > 0))
                         {
                             unitIsAffectable = true;
                             affectableUnits[key].Item2 += 2.0f;
@@ -108,7 +108,7 @@ public class Aggro : EnemyAction
 
                     case EffectState.DISABLE:
                         // viable units are (nonfriendly) non-EnemyUnits
-                        if (!(affectableUnits[key].Item1 is EnemyUnit) && !affectableUnits[key].Item1.isImmobilized)
+                        if (!(affectableUnits[key].Item1 is EnemyUnit) && !(affectableUnits[key].Item1.GetDisabledDuration() > 0))
                         {
                             unitIsAffectable = true;
                             affectableUnits[key].Item2 += 1.5f;
@@ -136,6 +136,9 @@ public class Aggro : EnemyAction
         {
             // wait should be zero, AKA it should only be chosen if everything else is an awful choice
             option.SetSignificance(0.0f);
+            // a disabled Unit MUST wait
+            if (myUnit.GetDisabledDuration() > 0)
+                option.SetSignificance(float.PositiveInfinity);
         }
         else
         {

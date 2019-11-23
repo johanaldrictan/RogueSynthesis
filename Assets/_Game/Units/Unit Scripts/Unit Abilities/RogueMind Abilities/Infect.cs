@@ -6,10 +6,11 @@ using UnityEngine;
 
 public class Infect : Attack
 {
-    public Infect()
+    public override bool isAOE()
     {
-        isAOE = false;
+        return false;
     }
+
     // We're just doing straight damage here
     public override void DealEffects(Unit target, Unit source)
     {

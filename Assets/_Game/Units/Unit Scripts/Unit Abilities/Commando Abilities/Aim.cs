@@ -2,27 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Aim : Attack
+// Aim is a type of UnitAbility that makes its user deal more damage
+// if the user, after using this Ability, uses the Snipe ability, it will do more damage
+// This bonus is lost if the user moves
+
+public class Aim : UnitAbility
 {
-    public Aim()
-    {
-        isAOE = false;
-    }
-    public override void DealEffects(Unit target, Unit source)
+    public override void Execute(Unit source, Direction direction)
     {
         source.attackBuffed = true;
-    }
-
-    public override List<Vector2Int> GetAreaOfEffect(Vector2Int source, Direction direction)
-    {
-        List<Vector2Int> result = new List<Vector2Int>();
-        result.Add(source);
-        return result;
-    }
-
-    public override int GetDamage()
-    {
-        return 0;
     }
 
     public override int GetRange()
@@ -44,4 +32,5 @@ public class Aim : Attack
     {
         return "Aim";
     }
+
 }

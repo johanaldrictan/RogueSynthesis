@@ -7,11 +7,12 @@ using UnityEngine;
 
 public class WatcherGaze : Attack
 {
-    public WatcherGaze()
+    public override bool isAOE()
     {
-        isAOE = true;
+        return true;
     }
-    // We're just doing straight damage here
+
+
     public override void DealEffects(Unit target, Unit source)
     {
         target.ChangeHealth( (GetDamage()*(-1)), source, this);

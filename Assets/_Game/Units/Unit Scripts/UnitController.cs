@@ -170,17 +170,25 @@ public abstract class UnitController : MonoBehaviour
     {
         for (int i = 0; i < units.Count; i++)
         {
-            units[i].damageReductionBuffed = false;
-            if (units[i].isImmobilized)
+            units[i].hasActed = false;
+            units[i].hasMoved = false;
+            units[i].hasPivoted = false;
+            if (units[i] is EnemyUnit)
             {
-                units[i].isImmobilized = false;
-                continue;
+                (units[i] as EnemyUnit).boxedIn = false;
+                (units[i] as EnemyUnit).plannedActionData = null;
             }
-            else
+
+            // reduce status conditions
+            if (units[i].GetImmobilizedDuration() > 0)
             {
-                units[i].hasActed = false;
-                units[i].hasMoved = false;
-                units[i].hasPivoted = false;
+                units[i].hasMoved = true;
+                units[i].SetImmobilizedDuration(units[i].GetImmobilizedDuration() - 1);
+            }
+            if (units[i].GetDisabledDuration() > 0)
+            {
+                units[i].hasMoved = true;
+                units[i].SetDisabledDuration(units[i].GetDisabledDuration() - 1);
             }
         }
     }

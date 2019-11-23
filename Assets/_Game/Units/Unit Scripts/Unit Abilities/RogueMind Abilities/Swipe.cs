@@ -6,10 +6,11 @@ using UnityEngine;
 
 public class Swipe : Attack
 {
-    public Swipe()
+    public override bool isAOE()
     {
-        isAOE = true;
+        return true;
     }
+
     public override void DealEffects(Unit target, Unit source)
     {
         DelayedEffect delayedEffect = new DelayedEffect(SwipeAttack, source.globalPositionalData, 1, UnitType.AlliedUnit, true, GetAreaOfEffect(source.GetMapPosition(), source.GetDirection()), source);

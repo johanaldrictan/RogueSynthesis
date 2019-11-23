@@ -12,7 +12,7 @@ public class ShoulderTackle : Attack
     // TODO: NEED TO FIX CASE WHEN THERE IS SOMETHING BEHIND TARGET
     public override void DealEffects(Unit target, Unit source)
     {
-        int pushback = 3;
+        int pushback = 5;
 
         if (target != null)
         {
@@ -102,6 +102,11 @@ public class ShoulderTackle : Attack
             result.Add(origin);
         }
         return result;
+    }
+
+    public override bool isAOE()
+    {
+        return false;
     }
 
     public override int GetDamage()

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69221c0b80c9fdc46952d2b8669c5bc4, type: 3}
-  m_Name: Sharpshooter
+  m_Name: Parker Ability Testing
   m_EditorClassIdentifier: 
-  unitName: Sharpshooter
-  unitType: 0
-  sprites: {fileID: 11400000, guid: ce4e78ea9ee586141b652c5b9176045d, type: 2}
+  unitName: Tester
+  unitType: 1
+  sprites: {fileID: 11400000, guid: 7b705425f58c94e218c3a09cd0a174f1, type: 2}
   portrait: {fileID: 21300000, guid: c3efcec83f76c4c5983cf78660dc97c6, type: 3}
-  moveSpeed: 7
-  health: 12
-  abilities: 0b0000000a00000000000000
+  moveSpeed: 3
+  health: 50
+  abilities: 0100000000000000

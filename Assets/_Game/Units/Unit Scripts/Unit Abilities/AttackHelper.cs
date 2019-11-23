@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 /// <summary>
 /// Class containing a list of attack patterns 
 /// </summary>
@@ -18,11 +19,6 @@ public static class AttackHelper
 
         if (!MapMath.InMapBounds(origin))
         { return result; }
-
-        /*
-        Debug.Log( "Unit at (" + source.x + ", " + source.y + ") " 
-            + direction + " is Cleaving at Origin Point (" + origin.x + ", " + origin.y + ")" );
-        */
 
         result.Add(origin);
 
@@ -50,10 +46,6 @@ public static class AttackHelper
         if (!MapMath.InMapBounds(origin))
         { return result; }
 
-        /*
-        Debug.Log( "Unit at (" + source.GetMapPosition().x + ", " + source.GetMapPosition().y + ") " 
-            + source.GetDirection() + " is Cleaving at Origin Point (" + origin.x + ", " + origin.y + ")" );
-        */
         //one tile forward
         result.Add(origin);
 
@@ -102,6 +94,8 @@ public static class AttackHelper
 
         return circleList;
     }
+
+
     /// <summary>
     /// Knocks target unit in a line with a given direction.
     /// </summary>
@@ -148,7 +142,10 @@ public static class AttackHelper
             //Debug.Log(newLocation);
         }
         if (MapMath.InMapBounds(pushbackLoc))
+        {
             target.Move(pushbackLoc.x, pushbackLoc.y);
+            target.hasMoved = false;
+        }
         //else if()
         else
         {
