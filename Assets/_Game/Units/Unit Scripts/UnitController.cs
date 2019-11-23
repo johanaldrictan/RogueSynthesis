@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using FMOD.Studio;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,6 +33,9 @@ public abstract class UnitController : MonoBehaviour
     // Event for asking a TurnController to end this controller's turn
     public static UnitControllerUnityEvent EndTurnEvent = new UnitControllerUnityEvent();
 
+    public EventInstance PhaseChange;
+    public string EventPath;
+
     // this can be overridden in subclasses.
     // Things done here should probably be done there a well.
     protected virtual void Awake()
@@ -39,6 +43,7 @@ public abstract class UnitController : MonoBehaviour
         myTurn = true;
         activeUnit = 0;
         units = new List<Unit>();
+        PhaseChange = FMODUnity.RuntimeManager.CreateInstance(EventPath);
     }
 
     private void OnEnable()
@@ -168,6 +173,7 @@ public abstract class UnitController : MonoBehaviour
 
     public virtual void ResetUnits()
     {
+        PhaseChange.start();
         for (int i = 0; i < units.Count; i++)
         {
             units[i].hasActed = false;

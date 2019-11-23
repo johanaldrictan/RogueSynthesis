@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using FMOD.Studio;
 
 // PlayerController is an object that inherits from the UnitController (see UnitController.cs)
 // It is a variety that is user-controlled

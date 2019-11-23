@@ -447,6 +447,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1934942567}
+        m_MethodName: PlayConfirm
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &136129781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -884,6 +895,7 @@ GameObject:
   - component: {fileID: 530869123}
   - component: {fileID: 530869122}
   - component: {fileID: 530869121}
+  - component: {fileID: 530869124}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -956,6 +968,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &530869124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530869120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ListenerNumber: -1
 --- !u!1 &530882665
 GameObject:
   m_ObjectHideFlags: 0
@@ -1785,6 +1810,7 @@ GameObject:
   - component: {fileID: 1282322468}
   - component: {fileID: 1282322467}
   - component: {fileID: 1282322471}
+  - component: {fileID: 1282322472}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1872,6 +1898,7 @@ RectTransform:
   - {fileID: 530882666}
   - {fileID: 733154270}
   - {fileID: 512274619}
+  - {fileID: 1934942566}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1894,6 +1921,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 25b262bfd0f754ed387b855da1e8e388, type: 2}
   resolutionDropdown: {fileID: 977031569}
+--- !u!114 &1282322472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1282322466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Title Music
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 1
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
 --- !u!1 &1300492126
 GameObject:
   m_ObjectHideFlags: 0
@@ -1949,69 +1999,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'UCI VGDC Spring 2019
-
-
-    Team Members:
-
-    Andrew Park
-
-    Johan Tan
-
-    Ken Zhou
-
-    Oscar Amarillas
-
-    Parker Levin
-
-    Ryan Chang
-
-
-    Team Lead:
-
-    Johan Tan
-
-
-    Game Design:
-
-    Ken Zhou
-
-    Oscar Amarillas
-
-
-    Programmers:
-
-    Andrew Park
-
-    Johan Tan
-
-    Parker Levin
-
-    Ryan Chang
-
-
-    Audio:
-
-    Johan Tan
-
-
-    Art:
-
-    Andrew Park
-
-    Carolee Nguyen
-
-
-    UI:
-
-    Andrew Park
-
-
-    Level Design:
-
-    Ken Zhou
-
-    Oscar Amarillas'
+  m_text: "UCI VGDC Spring 2019 - Fall 2019\n\nWriting:\n\tRiley Park(Summer - Fall)\n\nAudio:\n\tJohan
+    Tan\n\tKen Zhou\n\nProduction: \n\tTakeshi Simon (Fall)\n\tJohan Tan\n\nProgramming:\n\tJohan
+    Tan - Audio, Gameplay, Map\n\tParker Levin - Gameplay, AI\n\tAndrew Park - UI,
+    Animations\n\tRyan Chang - Camera, Map(Spring)\n\nDesign:\n\tKen Zhou - Combat
+    Design\n\tChase Taylor - Level Design(Fall)\n\tOscar Amarillas - Level Design(Spring)\n\nArt:\n\tCarolee
+    Nguyen - Tiles\n\tAndrew Park - UI\n\tRami Shreim - Portraits\n\tAlexa - Rogue
+    Mind Units\n\tBianca - Commando Units\n\nVoice Actors:\n\tBrandon Nguyen - Protector,
+    Rogue Mind Units\n\tAnthony Kano - Rogue Mind, Amos\n\tKiara Mendaros - Grenadier\n\tMegan
+    Strand - Laurentia\n\tOscar Amarillas - Sna...Sharpshooter"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2433,6 +2429,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1934942567}
+        m_MethodName: PlayConfirm
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1477576994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2843,6 +2850,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2093198970}
         m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1934942567}
+        m_MethodName: PlayCancel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8447,6 +8465,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1934942567}
+        m_MethodName: PlayConfirm
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1933111288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8483,6 +8512,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1933111285}
   m_CullTransparentMesh: 0
+--- !u!1 &1934942565
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1934942566}
+  - component: {fileID: 1934942567}
+  m_Layer: 5
+  m_Name: UI Sounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1934942566
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934942565}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1282322470}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1934942567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934942565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e93fa58f09188f4b89e1e2fb6899958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1962194416
 GameObject:
   m_ObjectHideFlags: 0
@@ -8890,11 +8967,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7656379060574255759, guid: 4ab28817789d64a2a99b9d314bc8e7e2,
-        type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1282322471}
     - target: {fileID: 7656379061294470862, guid: 4ab28817789d64a2a99b9d314bc8e7e2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9005,6 +9077,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7656379060574255759, guid: 4ab28817789d64a2a99b9d314bc8e7e2,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1282322471}
     - target: {fileID: 7656379061149080300, guid: 4ab28817789d64a2a99b9d314bc8e7e2,
         type: 3}
       propertyPath: m_AnchorMin.x
