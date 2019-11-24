@@ -145,9 +145,22 @@ public abstract class UnitController : MonoBehaviour
         foreach (Unit unit in inputList)
         {
             units.Add(unit);
-            if (unit.GetHealth() == 0)
+            if (unit.GetHealth() <= 0)
             {
-                unit.Revive(unit.Deaths.Peek().GetDeathLocation());
+                // find the first tile (starting with the original position) that isn't occupied to revive the Unit onto through a breadth-first search
+                Vector2Int spawnPosition = new Vector2Int(int.MaxValue, int.MaxValue);
+                Queue<Vector2Int> toVisit = new Queue<Vector2Int>();
+                toVisit.Enqueue(unit.GetMapPosition());
+                do
+                {
+                    spawnPosition = toVisit.Dequeue();
+                    foreach (Vector2Int tile in MapMath.GetNeighbors(spawnPosition).Keys)
+                    {
+                        toVisit.Enqueue(tile);
+                    }
+                }
+                while (unit.globalPositionalData.SearchLocation(spawnPosition) != null);
+                unit.Revive(spawnPosition);
             }
         }
     }

@@ -43,7 +43,7 @@ public class Cleave : Attack
 
     public override List<EffectState> GetEffectState()
     {
-        return new List<EffectState> { EffectState.DAMAGE, EffectState.IMMOBILIZE };
+        return new List<EffectState> { EffectState.DAMAGE, EffectState.DISABLE };
     }
 
     public override string GetName()
