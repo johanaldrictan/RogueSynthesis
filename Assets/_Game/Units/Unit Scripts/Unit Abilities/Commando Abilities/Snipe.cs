@@ -7,10 +7,6 @@ using UnityEngine;
 
 public class Snipe : Attack
 {
-    public Snipe()
-    {
-        abilitySoundEvent = FMODUnity.RuntimeManager.CreateInstance(GetSoundEvent());
-    }
     public override bool isAOE()
     {
         return false;

@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class ConcussionGrenade : Attack
 {
-    public ConcussionGrenade()
-    {
-        abilitySoundEvent = FMODUnity.RuntimeManager.CreateInstance(GetSoundEvent());
-    }
     public override void DealEffects(Unit target, Unit source)
     {
-        Vector2Int origin = target.GetMapPosition();
-        target.ChangeHealth((GetDamage() * (-1)), source, this);
-        foreach (Vector2Int tile in MapMath.GetNeighbors(origin).Keys)
+        if (target != null)
         {
-            Unit searchResult = source.globalPositionalData.SearchLocation(tile);
-            if (searchResult != null)
+            Vector2Int origin = target.GetMapPosition();
+            target.ChangeHealth((GetDamage() * (-1)), source, this);
+            foreach (Vector2Int tile in MapMath.GetNeighbors(origin).Keys)
             {
-                Vector2Int diff = tile - origin;
-                AttackHelper.DisplaceUnit(searchResult, source, this, 1, MapMath.LocToDirection(diff));
+                Unit searchResult = source.globalPositionalData.SearchLocation(tile);
+                if (searchResult != null)
+                {
+                    Vector2Int diff = tile - origin;
+                    AttackHelper.DisplaceUnit(searchResult, source, this, 1, MapMath.LocToDirection(diff));
+                }
             }
         }
     }

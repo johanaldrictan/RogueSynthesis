@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class EMPGrenade : Attack
 {
-    public EMPGrenade()
-    {
-        abilitySoundEvent = FMODUnity.RuntimeManager.CreateInstance(GetSoundEvent());
-    }
     public override void DealEffects(Unit target, Unit source)
     {
-        Vector2Int origin = target.GetMapPosition();
-        target.ChangeHealth((GetDamage() * (-1)), source, this);
-        target.Disable(1);
-        foreach (Vector2Int tile in MapMath.GetNeighbors(origin).Keys)
+        if (target != null)
         {
-            Unit searchResult = source.globalPositionalData.SearchLocation(tile);
-            if (searchResult != null)
+            Vector2Int origin = target.GetMapPosition();
+            target.ChangeHealth((GetDamage() * (-1)), source, this);
+            target.Disable(1);
+            foreach (Vector2Int tile in MapMath.GetNeighbors(origin).Keys)
             {
-                searchResult.ChangeHealth((GetDamage() * (-1)), source, this);
-                searchResult.Disable(1);
+                Unit searchResult = source.globalPositionalData.SearchLocation(tile);
+                if (searchResult != null)
+                {
+                    searchResult.ChangeHealth((GetDamage() * (-1)), source, this);
+                    searchResult.Disable(1);
+                }
             }
         }
     }

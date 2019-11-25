@@ -8,6 +8,11 @@ using FMOD.Studio;
 
 public abstract class UnitAbility
 {
+    public UnitAbility()
+    {
+        if(GetSoundEvent() != "")
+            abilitySoundEvent = FMODUnity.RuntimeManager.CreateInstance(GetSoundEvent());
+    }
     public EventInstance abilitySoundEvent;
     //obtains the relevant string data for determining what events a unit ability triggers
     public abstract string GetSoundEvent();

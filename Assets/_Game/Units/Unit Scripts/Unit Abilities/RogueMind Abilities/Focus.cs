@@ -7,13 +7,10 @@ using UnityEngine;
 
 public class Focus : UnitAbility
 {
-    public Focus()
-    {
-        abilitySoundEvent = FMODUnity.RuntimeManager.CreateInstance(GetSoundEvent());
-    }
     public override void Execute(Unit source, Direction direction)
     {
-        abilitySoundEvent.start();
+        if(abilitySoundEvent.isValid())
+            abilitySoundEvent.start();
         if (source.GetDamageReduction() < 5)
             source.SetDamageReduction(1);
     }

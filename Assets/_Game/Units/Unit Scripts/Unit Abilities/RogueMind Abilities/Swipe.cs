@@ -6,10 +6,6 @@ using UnityEngine;
 
 public class Swipe : Attack
 {
-    public Swipe()
-    {
-        abilitySoundEvent = FMODUnity.RuntimeManager.CreateInstance(GetSoundEvent());
-    }
     public override bool isAOE()
     {
         return true;

@@ -9,10 +9,6 @@ using UnityEngine;
 
 public class ShoulderTackle : Attack
 {
-    public ShoulderTackle()
-    {
-        abilitySoundEvent = FMODUnity.RuntimeManager.CreateInstance(GetSoundEvent());
-    }
     public override void DealEffects(Unit target, Unit source)
     {
         int pushback = 5;

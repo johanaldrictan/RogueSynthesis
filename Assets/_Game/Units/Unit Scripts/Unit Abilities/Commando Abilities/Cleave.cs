@@ -12,10 +12,6 @@ using UnityEngine;
 
 public class Cleave : Attack
 {
-    public Cleave()
-    {
-        abilitySoundEvent = FMODUnity.RuntimeManager.CreateInstance(GetSoundEvent());
-    }
     public override bool isAOE()
     {
         return true;
