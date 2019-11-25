@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// A Claymore is a type of Trap
 /// It triggers when a Unit ends its movement ontop of the same tile that this object inhabits
-/// Triggering a Claymore will deal damage to the Unit that triggered it and immobilize it for 1 turn
+/// Triggering a Claymore will deal damage to the Unit that triggered it and disable it for 1 turn
 /// </summary>
 
 public class ClaymoreTrap : Trap
