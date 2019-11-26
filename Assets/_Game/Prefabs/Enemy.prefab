@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1263404428881898100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1263404428881898098}
+  - component: {fileID: 1263404428881898101}
+  m_Layer: 0
+  m_Name: Enemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1263404428881898098
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263404428881898100}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.033500772, y: 0.17600578, z: -0.2949821}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1263404428881898101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263404428881898100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3692ae158d4fef4b8f4857330e708ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeUnit: 0
+  unitSpawnData:
+  - data: {fileID: 11400000, guid: 82f147c4043c6486e8642ecf8aedf02b, type: 2}
+    spawnPosition: {x: -3, y: -13}
+  - data: {fileID: 11400000, guid: 82f147c4043c6486e8642ecf8aedf02b, type: 2}
+    spawnPosition: {x: -3, y: -11}
+  - data: {fileID: 11400000, guid: 82f147c4043c6486e8642ecf8aedf02b, type: 2}
+    spawnPosition: {x: -2, y: -12}
+  - data: {fileID: 11400000, guid: 82f147c4043c6486e8642ecf8aedf02b, type: 2}
+    spawnPosition: {x: -1, y: -11}
+  - data: {fileID: 11400000, guid: 82f147c4043c6486e8642ecf8aedf02b, type: 2}
+    spawnPosition: {x: 0, y: -10}
+  - data: {fileID: 11400000, guid: 82f147c4043c6486e8642ecf8aedf02b, type: 2}
+    spawnPosition: {x: 0, y: -13}
+  - data: {fileID: 11400000, guid: 82f147c4043c6486e8642ecf8aedf02b, type: 2}
+    spawnPosition: {x: 1, y: -12}
+  - data: {fileID: 11400000, guid: 82f147c4043c6486e8642ecf8aedf02b, type: 2}
+    spawnPosition: {x: 2, y: -13}
+  - data: {fileID: 11400000, guid: 82f147c4043c6486e8642ecf8aedf02b, type: 2}
+    spawnPosition: {x: 3, y: -13}
+  - data: {fileID: 11400000, guid: 82f147c4043c6486e8642ecf8aedf02b, type: 2}
+    spawnPosition: {x: 3, y: -11}
+  - data: {fileID: 11400000, guid: 3d33a57f58c5640da84dd8dc2eaecef5, type: 2}
+    spawnPosition: {x: -2, y: -10}
+  - data: {fileID: 11400000, guid: 3d33a57f58c5640da84dd8dc2eaecef5, type: 2}
+    spawnPosition: {x: -1, y: -12}
+  - data: {fileID: 11400000, guid: 3d33a57f58c5640da84dd8dc2eaecef5, type: 2}
+    spawnPosition: {x: 0, y: -11}
+  - data: {fileID: 11400000, guid: 3d33a57f58c5640da84dd8dc2eaecef5, type: 2}
+    spawnPosition: {x: 2, y: -11}
+  - data: {fileID: 11400000, guid: 3d33a57f58c5640da84dd8dc2eaecef5, type: 2}
+    spawnPosition: {x: 3, y: -12}
+  EventPath: event:/Combat/PhaseInto_Player
+  playerID: 1
