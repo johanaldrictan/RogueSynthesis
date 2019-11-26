@@ -113,7 +113,8 @@ public class PlayerController : UnitController
 
         else
         {
-            SelectUnit(GetNextIndex());
+            StopAllCoroutines();
+            StartCoroutine(SelectUnit(GetNextIndex()));
         }
     }
 
@@ -142,7 +143,7 @@ public class PlayerController : UnitController
     }
 
     // selects the unit at the given Index, highlighting the relevant tiles and setting necessary data
-    public void SelectUnit(int newIndex)
+    public IEnumerator SelectUnit(int newIndex)
     {
         // set up the new unit
         setActiveUnit(newIndex);
@@ -154,6 +155,7 @@ public class PlayerController : UnitController
             units[activeUnit].selectSoundEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             units[activeUnit].selectSoundEvent.start();
         }
+        yield return new WaitForSeconds(1);
     }
 
     public void AbilityManual(int abilityID)
