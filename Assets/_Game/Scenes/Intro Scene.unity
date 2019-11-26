@@ -311,6 +311,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogueCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1227644126656590399, guid: 6bcecb4ce913e44d2a8203d717de5244,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1227644126656590399, guid: 6bcecb4ce913e44d2a8203d717de5244,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1227644126656590399, guid: 6bcecb4ce913e44d2a8203d717de5244,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1227644126656590399, guid: 6bcecb4ce913e44d2a8203d717de5244,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1227644126955832676, guid: 6bcecb4ce913e44d2a8203d717de5244,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -436,26 +456,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -56.59999
       objectReference: {fileID: 0}
-    - target: {fileID: 1227644126656590399, guid: 6bcecb4ce913e44d2a8203d717de5244,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1227644126656590399, guid: 6bcecb4ce913e44d2a8203d717de5244,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1227644126656590399, guid: 6bcecb4ce913e44d2a8203d717de5244,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1227644126656590399, guid: 6bcecb4ce913e44d2a8203d717de5244,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4465060693655326909, guid: 6bcecb4ce913e44d2a8203d717de5244,
         type: 3}
       propertyPath: m_Enabled
@@ -529,6 +529,7 @@ GameObject:
   - component: {fileID: 1228941949}
   - component: {fileID: 1228941948}
   - component: {fileID: 1228941947}
+  - component: {fileID: 1228941950}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -601,6 +602,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1228941950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228941946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ListenerNumber: -1
 --- !u!1 &1478981287 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1227644126955832680, guid: 6bcecb4ce913e44d2a8203d717de5244,
@@ -660,30 +674,38 @@ MonoBehaviour:
   portrait: {fileID: 2059397741}
   nameDisplay: {fileID: 1091429906}
   textDisplay: {fileID: 1954456306}
+  dialogueEvent: event:/Dialogue
   dialogArray:
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: I remember this place.
+    dialogueSoundKey: 01 - Intro/S1L1
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: There was once a mine nearby that we played in. We dreamed up adventures
       and fought made up monsters.
+    dialogueSoundKey: 01 - Intro/S1L2
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: Simpler times.
+    dialogueSoundKey: 01 - Intro/S1L3
   - portrait: {fileID: 21300000, guid: 480e60ecc4ca14b4d85f0691ba8bc4a0, type: 3}
     name: Soldier
     sentence: Captain! Reporting from the lookout!
+    dialogueSoundKey: 01 - Intro/S1L4
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: "What\u2019s going on, Soldier?"
+    dialogueSoundKey: 01 - Intro/S1L5
   - portrait: {fileID: 21300000, guid: 480e60ecc4ca14b4d85f0691ba8bc4a0, type: 3}
     name: Soldier
     sentence: We spotted the scouting party, but a small force of Turned drones are
       in pursuit.
+    dialogueSoundKey: 01 - Intro/S1L6
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: Commandos, prepare to engage!
+    dialogueSoundKey: 01 - Intro/S1L7
   typingSpeed: 0.01
 --- !u!4 &1501390220
 Transform:
