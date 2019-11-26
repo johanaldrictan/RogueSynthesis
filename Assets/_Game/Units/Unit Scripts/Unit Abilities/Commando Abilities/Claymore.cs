@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Claymore : UnitAbility
 {
-    public Claymore()
-    {
-        abilitySoundEvent = FMODUnity.RuntimeManager.CreateInstance(GetSoundEvent());
-    }
     public override void Execute(Unit source, Direction direction)
     {
         abilitySoundEvent.start();

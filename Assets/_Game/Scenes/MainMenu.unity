@@ -1919,7 +1919,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbba242646ec4cb1b342800af8eff76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 25b262bfd0f754ed387b855da1e8e388, type: 2}
   resolutionDropdown: {fileID: 977031569}
 --- !u!114 &1282322472
 MonoBehaviour:
@@ -8962,11 +8961,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: OptionsMenu
       objectReference: {fileID: 0}
-    - target: {fileID: 7656379061294470865, guid: 4ab28817789d64a2a99b9d314bc8e7e2,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7656379061294470862, guid: 4ab28817789d64a2a99b9d314bc8e7e2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9072,31 +9066,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7656379059691313349, guid: 4ab28817789d64a2a99b9d314bc8e7e2,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7656379060574255759, guid: 4ab28817789d64a2a99b9d314bc8e7e2,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1282322471}
-    - target: {fileID: 7656379061149080300, guid: 4ab28817789d64a2a99b9d314bc8e7e2,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7656379061149080300, guid: 4ab28817789d64a2a99b9d314bc8e7e2,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7656379061149080300, guid: 4ab28817789d64a2a99b9d314bc8e7e2,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7656379060023053826, guid: 4ab28817789d64a2a99b9d314bc8e7e2,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -9107,22 +9081,6 @@ PrefabInstance:
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1282322471}
-    - target: {fileID: 7656379059759228379, guid: 4ab28817789d64a2a99b9d314bc8e7e2,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7656379059759228379, guid: 4ab28817789d64a2a99b9d314bc8e7e2,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7656379059691313347, guid: 4ab28817789d64a2a99b9d314bc8e7e2,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: fdd4296ddb8034bda82de751a02803a3,
-        type: 3}
     - target: {fileID: 7656379060586913755, guid: 4ab28817789d64a2a99b9d314bc8e7e2,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

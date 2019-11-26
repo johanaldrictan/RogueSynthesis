@@ -6,13 +6,10 @@ using UnityEngine;
 
 public class Protect : UnitAbility
 {
-    public Protect()
-    {
-        abilitySoundEvent = FMODUnity.RuntimeManager.CreateInstance(GetSoundEvent());
-    }
     public override void Execute(Unit source, Direction direction)
     {
-        abilitySoundEvent.start();
+        if(abilitySoundEvent.isValid())
+            abilitySoundEvent.start();
     }
 
     public override List<EffectState> GetEffectState()

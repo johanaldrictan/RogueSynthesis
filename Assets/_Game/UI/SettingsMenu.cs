@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using FMOD.Studio;
 
 public class SettingsMenu : MonoBehaviour
 {
-
-    public AudioMixer audioMixer;
+    //Audio Buses
+    Bus masterBus;
+    Bus sfxBus;
+    Bus musicBus;
+    Bus voiceBus;
+    float MusicVolume = .5f;
+    float SFXVolume = .5f;
+    float VoiceVolume = .5f;
+    float MasterVolume = 1f;
 
     public Dropdown resolutionDropdown;
 
@@ -15,6 +23,12 @@ public class SettingsMenu : MonoBehaviour
 
     void Start()
     {
+        masterBus = FMODUnity.RuntimeManager.GetBus("bus:/Master");
+        sfxBus = FMODUnity.RuntimeManager.GetBus("bus:/Master/SFX");
+        musicBus = FMODUnity.RuntimeManager.GetBus("bus:/Master/Music");
+        voiceBus = FMODUnity.RuntimeManager.GetBus("bus:/Master/Voice");
+        masterBus.setVolume(.5f);
+
         resolutions = Screen.resolutions;
 
         resolutionDropdown.ClearOptions();
@@ -48,7 +62,8 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetVolume (float volume)
     {
-        audioMixer.SetFloat("Volume", volume);
+        //Master Volume
+        masterBus.setVolume(volume / 50);
     }
 
     public void SetFullscreen(bool isFullscreen)
