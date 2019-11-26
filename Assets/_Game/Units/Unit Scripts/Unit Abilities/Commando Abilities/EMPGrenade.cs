@@ -1,7 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+    EMP Grenade: 
+    The player selects a tile in a line within a given range
+    Once the tile has been selected. Damage is received by the 
+    selected tile and the tiles adjacent to it. Addtionally, those
+    units become disabled for 1 turn
+*/
 public class EMPGrenade : Attack
 {
     public override void DealEffects(Unit target, Unit source)

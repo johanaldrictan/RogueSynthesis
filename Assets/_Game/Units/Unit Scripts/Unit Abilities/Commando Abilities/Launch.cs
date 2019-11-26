@@ -1,7 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+    Launch: 
+    The player selects a tile in a line within a given range
+    Once the tile has been selected. Damage is received by the 
+    selected tile and the tiles adjacent to it. 
+*/
 public class Launch : Attack
 {
     public override void DealEffects(Unit target, Unit source)

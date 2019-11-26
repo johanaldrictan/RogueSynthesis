@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+    Concussion Grenade: 
+    The player selects a tile in a line within a given range
+    Once the tile has been selected. Damage is received by the 
+    selected tile and the tiles adjacent to it. Additionally, the
+    affected units are pushed back away from the center tile
+*/
 public class ConcussionGrenade : Attack
 {
     public override void DealEffects(Unit target, Unit source)
