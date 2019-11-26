@@ -11,15 +11,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/PRO1/PRO_Move
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/PRO1/PRO_Move
   guid: 570aa513d393c9469ab05cba1c388b26
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -38,15 +34,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/UI/Cancel
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/UI/Cancel
   guid: cf75465aa094194d97900d1309adafae
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -65,15 +57,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SHA/SHA_ClaymoreTrigger
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/SHA/SHA_ClaymoreTrigger
   guid: 0aeb7f8e4a0bde419b15a3121dfe3adb
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -92,15 +80,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Combat/PhaseInto_RogueMind
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/Combat/PhaseInto_RogueMind
   guid: c07fd913c3b88840bb8c1a1812162a57
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -119,15 +103,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Title Music
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/Title Music
   guid: 7ae52066114d70498b8656061a68d3d9
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -146,15 +126,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/INF/INF_Infect
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/INF/INF_Infect
   guid: 939160d55d81bf43b31b95b78c90ec91
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -173,15 +149,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/GRE/GRE_EMP
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/GRE/GRE_EMP
   guid: abc74441b8377144a8ce5aa35e1b53ad
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -200,15 +172,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/PRO1/PRO_Protect
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/PRO1/PRO_Protect
   guid: 9ba79adc2f26774d9db9fa45727cd103
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -227,15 +195,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/WAT/WAT_WatcherEye
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/WAT/WAT_WatcherEye
   guid: 23d87d61c754874ca4d29100bd2463f9
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -254,15 +218,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Combat/UnitTurned
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/Combat/UnitTurned
   guid: f3293fd427bb034dbb0740c8fbb2e975
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -281,15 +241,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/UI/Select
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/UI/Select
   guid: b583b4929460874faf2af7c16825bcac
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -308,7 +264,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/SHA_Snipe/IsKillingMove
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Name: IsKillingMove
   Min: 0
   Max: 1
@@ -325,15 +281,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/ABD/ABD_Abduct
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/ABD/ABD_Abduct
   guid: ef1d0aacbf101746b386e6bfdc277f0c
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -352,15 +304,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/ABD/ABD_Swipe
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/ABD/ABD_Swipe
   guid: 73eddf8bc2e2dc4e8af4682b2aa27784
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -379,9 +327,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master Bank.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: FMODBuilds/Desktop/Master Bank.bank
-  SubDir: 
+  SubDir:
   lastModified: 637100824766697472
   LoadResult: 0
   FileSizes: []
@@ -397,15 +345,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/GRE/GRE_Concussion
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/GRE/GRE_Concussion
   guid: 3f1eafea2cc1124c84ac753b8cce722f
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -424,15 +368,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SHA/SHA_Select
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/SHA/SHA_Select
   guid: 99749f14fb440f49814ac71d3f3d2fdb
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -451,15 +391,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/PRO1/PRO_Select
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/PRO1/PRO_Select
   guid: aa3524c57f18944aab8c3dd4e5684993
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -478,9 +414,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master Bank.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: FMODBuilds/Desktop/Master Bank.bank
-  SubDir: 
+  SubDir:
   lastModified: 637100430742167992
   LoadResult: 0
   FileSizes: []
@@ -496,9 +432,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master Bank.strings.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: RogueSynthesisAudio/RS/Build/Desktop/Master Bank.strings.bank
-  SubDir: 
+  SubDir:
   lastModified: 637100430742187937
   LoadResult: 0
   FileSizes:
@@ -516,15 +452,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/UI/Confirm
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/UI/Confirm
   guid: a3fe8be7a6ead548a573e0ef1924fda4
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -543,7 +475,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/SHA_Snipe/IsKillingMove
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Name: IsKillingMove
   Min: 0
   Max: 1
@@ -560,14 +492,10 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master Bank.strings.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: FMODBuilds/Desktop/Master Bank.strings.bank
-  SubDir: 
-<<<<<<< HEAD
+  SubDir:
   lastModified: 637100889140000000
-=======
-  lastModified: 637103024545005578
->>>>>>> master
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -584,15 +512,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/GRE/GRE_Launch
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/GRE/GRE_Launch
   guid: 6f76bd28bd10784f8fd15dc302c06e64
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -611,7 +535,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/SHA_Snipe/IsKillingMove
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Name: IsKillingMove
   Min: 0
   Max: 1
@@ -628,15 +552,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/PRO1/PRO_ShoulderTackle
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/PRO1/PRO_ShoulderTackle
   guid: 1a6b1f652cf547429f277c365e685ab1
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -655,9 +575,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master Bank.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: FMODBuilds/Desktop/Master Bank.bank
-  SubDir: 
+  SubDir:
   lastModified: 637100748231694647
   LoadResult: 0
   FileSizes: []
@@ -673,15 +593,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/GRE/GRE_Death
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/GRE/GRE_Death
   guid: af2ff623faf8214b863d2173394db654
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -700,14 +616,10 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
   m_Name: FMODStudioCache
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   EditorBanks:
   - {fileID: -3047940710911534042}
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   EditorEvents:
   - {fileID: -8318695815426954832}
   - {fileID: -2126762056113024943}
@@ -746,17 +658,10 @@ MonoBehaviour:
   - {fileID: 5393555514207615264}
   EditorParameters: []
   MasterBanks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
   StringsBanks:
   - {fileID: -3047940710911534042}
   stringsBankWriteTime: 637100889140000000
-=======
-  - {fileID: 8409213833235825428}
-  StringsBanks:
-  - {fileID: -3047940710911534042}
-  stringsBankWriteTime: 637103024545005578
->>>>>>> master
   cacheVersion: 3
 --- !u!114 &71454760652382336
 MonoBehaviour:
@@ -769,15 +674,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/GRE/GRE_Select
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/GRE/GRE_Select
   guid: 92c4d3906a4c7b40aa4b517ee27b94ff
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -796,9 +697,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master Bank.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: FMODBuilds/Desktop/Master Bank.bank
-  SubDir: 
+  SubDir:
   lastModified: 637100811207978197
   LoadResult: 0
   FileSizes: []
@@ -814,15 +715,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Combat/Battle Lose
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/Combat/Battle Lose
   guid: d17e4a0214bed343a3f810217f33b9b3
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -841,15 +738,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Combat/PhaseInto_Player
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/Combat/PhaseInto_Player
   guid: 99529635f9f50248be65fd86c172e7e1
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -868,15 +761,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SHA/SHA_ClaymorePlace
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/SHA/SHA_ClaymorePlace
   guid: 80138804fe298948b172d652c8a73a5d
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -895,15 +784,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/WAT/WAT_Focus
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/WAT/WAT_Focus
   guid: 66678a04513476459dda5352784f15c5
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -922,7 +807,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/SHA_Snipe/IsKillingMove
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Name: IsKillingMove
   Min: 0
   Max: 1
@@ -939,7 +824,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/SHA_Snipe/IsKillingMove
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Name: IsKillingMove
   Min: 0
   Max: 1
@@ -956,15 +841,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/PRO1/PRO_Cleave
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/PRO1/PRO_Cleave
   guid: cce3ac8bef332349880a7a35dcfe3574
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -983,24 +864,16 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SHA/SHA_Snipe
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/SHA/SHA_Snipe
   guid: c04116538a31404785d1edf049789e49
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters:
-<<<<<<< HEAD
   - {fileID: -3990136069008335666}
-=======
-  - {fileID: 8752947378456900443}
->>>>>>> master
   MinDistance: 0
   MaxDistance: 0
   Length: 5500
@@ -1015,7 +888,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/SHA_Snipe/IsKillingMove
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Name: IsKillingMove
   Min: 0
   Max: 1
@@ -1032,7 +905,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/SHA_Snipe/IsKillingMove
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Name: IsKillingMove
   Min: 0
   Max: 1
@@ -1049,7 +922,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/SHA_Snipe/IsKillingMove
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Name: IsKillingMove
   Min: 0
   Max: 1
@@ -1066,9 +939,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master Bank.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: FMODBuilds/Desktop/Master Bank.bank
-  SubDir: 
+  SubDir:
   lastModified: 637101207679239801
   LoadResult: 0
   FileSizes: []
@@ -1084,9 +957,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master Bank.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: FMODBuilds/Desktop/Master Bank.bank
-  SubDir: 
+  SubDir:
   lastModified: 637103010174959940
   LoadResult: 0
   FileSizes: []
@@ -1102,9 +975,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master Bank.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: FMODBuilds/Desktop/Master Bank.bank
-  SubDir: 
+  SubDir:
   lastModified: 637100805573392864
   LoadResult: 0
   FileSizes: []
@@ -1120,7 +993,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/SHA_Snipe/IsKillingMove
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Name: IsKillingMove
   Min: 0
   Max: 1
@@ -1137,9 +1010,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master Bank.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: FMODBuilds/Desktop/Master Bank.bank
-  SubDir: 
+  SubDir:
   lastModified: 637100824324358215
   LoadResult: 0
   FileSizes: []
@@ -1155,7 +1028,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/SHA_Snipe/IsKillingMove
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Name: IsKillingMove
   Min: 0
   Max: 1
@@ -1172,15 +1045,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Combat/Battle Start
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/Combat/Battle Start
   guid: dda6a53b916c7f45bccf4c5a30952cfa
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1199,7 +1068,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/SHA_Snipe/IsKillingMove
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Name: IsKillingMove
   Min: 0
   Max: 1
@@ -1216,9 +1085,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master Bank.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: FMODBuilds/Desktop/Master Bank.bank
-  SubDir: 
+  SubDir:
   lastModified: 637100741201808228
   LoadResult: 0
   FileSizes: []
@@ -1234,15 +1103,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/GRE/GRE_Move
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/GRE/GRE_Move
   guid: a4c21819861d9d4090108e2597703910
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1261,9 +1126,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master Bank.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: FMODBuilds/Desktop/Master Bank.bank
-  SubDir: 
+  SubDir:
   lastModified: 637100889140000000
   LoadResult: 0
   FileSizes: []
@@ -1279,15 +1144,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/WAT/WAT_ImmoBeam
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/WAT/WAT_ImmoBeam
   guid: f6636ebaa6b12e4e8128543b5f5945cb
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1306,9 +1167,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master Bank.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: FMODBuilds/Desktop/Master Bank.bank
-  SubDir: 
+  SubDir:
   lastModified: 637101086545744664
   LoadResult: 0
   FileSizes: []
@@ -1324,9 +1185,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master Bank.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: RogueSynthesisAudio/RS/Build/Desktop/Master Bank.bank
-  SubDir: 
+  SubDir:
   lastModified: 637100430742167992
   LoadResult: 0
   FileSizes: []
@@ -1342,15 +1203,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SHA/SHA_Move
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/SHA/SHA_Move
   guid: 4688076ac357a54f92a23a0387803686
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1369,15 +1226,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SHA/SHA_Aim
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/SHA/SHA_Aim
   guid: 63562c1e11441e45b8c684f3d5533132
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1396,15 +1249,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Battle_Music
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/Battle_Music
   guid: 58093849dbd77a4986caf95e8467e15e
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -1423,15 +1272,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SHA/SHA_Death
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/SHA/SHA_Death
   guid: 3aa7456fc3752647abc497682515a7ba
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1450,15 +1295,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/PRO1/PRO_Death
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/PRO1/PRO_Death
   guid: 1bb7f2ee22d29944bfc6404d071740d0
   Banks:
-<<<<<<< HEAD
   - {fileID: 5211366913473487639}
-=======
-  - {fileID: 8409213833235825428}
->>>>>>> master
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1477,9 +1318,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master Bank.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: FMODBuilds/Desktop/Master Bank.bank
-  SubDir: 
+  SubDir:
   lastModified: 637100744198173328
   LoadResult: 0
   FileSizes: []
@@ -1495,9 +1336,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master Bank.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: FMODBuilds/Desktop/Master Bank.bank
-  SubDir: 
+  SubDir:
   lastModified: 637103018151395509
   LoadResult: 0
   FileSizes: []
@@ -1513,9 +1354,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master Bank.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: FMODBuilds/Desktop/Master Bank.bank
-  SubDir: 
+  SubDir:
   lastModified: 637103024544965675
   LoadResult: 0
   FileSizes: []
@@ -1531,7 +1372,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/SHA_Snipe/IsKillingMove
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Name: IsKillingMove
   Min: 0
   Max: 1
@@ -1548,7 +1389,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/SHA_Snipe/IsKillingMove
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Name: IsKillingMove
   Min: 0
   Max: 1
