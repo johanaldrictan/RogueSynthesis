@@ -15,8 +15,11 @@ public class UnitData : ScriptableObject
     public int moveSpeed;
     public int health;
 
+    [FMODUnity.EventRef]
     public string moveSoundEventName;
+    [FMODUnity.EventRef]
     public string deathSoundEventName;
+    [FMODUnity.EventRef]
     public string selectSoundEventName;
 
 

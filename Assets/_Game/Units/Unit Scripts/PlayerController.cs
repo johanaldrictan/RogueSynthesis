@@ -36,6 +36,19 @@ public class PlayerController : UnitController
 
         AlliedUnit theUnit = units[activeUnit] as AlliedUnit;
 
+        //left click to choose unit
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector2Int selectedLoc = MapUIController.instance.cursorPosition;
+            int? selectedIndex = FindUnit(selectedLoc);
+            if(selectedIndex != null)
+            {
+                ClearSpotlight();
+                SelectUnit((int)selectedIndex);
+            }
+
+        }
+
         //check for tab input
         //select next unit
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -113,12 +126,20 @@ public class PlayerController : UnitController
 
         else
         {
-            StopAllCoroutines();
-            StartCoroutine(SelectUnit(GetNextIndex()));
+            SelectUnit(GetNextIndex());
         }
     }
 
-    
+    public int? FindUnit(Vector2Int selected)
+    {
+        for(int i = 0; i < units.Count; i++)
+        {
+            if (units[i].GetMapPosition().Equals(selected))
+                return (int?)i;
+        }
+        return null;
+    }
+
     // clears highlighting for relevant tiles on the current indexed unit
     public void ClearSpotlight()
     {
@@ -143,7 +164,7 @@ public class PlayerController : UnitController
     }
 
     // selects the unit at the given Index, highlighting the relevant tiles and setting necessary data
-    public IEnumerator SelectUnit(int newIndex)
+    public void SelectUnit(int newIndex)
     {
         // set up the new unit
         setActiveUnit(newIndex);
@@ -155,7 +176,6 @@ public class PlayerController : UnitController
             units[activeUnit].selectSoundEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             units[activeUnit].selectSoundEvent.start();
         }
-        yield return new WaitForSeconds(1);
     }
 
     public void AbilityManual(int abilityID)

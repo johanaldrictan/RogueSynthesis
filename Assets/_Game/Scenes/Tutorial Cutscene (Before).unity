@@ -132,6 +132,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogueCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1227644126656590399, guid: 6bcecb4ce913e44d2a8203d717de5244,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1227644126656590399, guid: 6bcecb4ce913e44d2a8203d717de5244,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1227644126656590399, guid: 6bcecb4ce913e44d2a8203d717de5244,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1227644126656590399, guid: 6bcecb4ce913e44d2a8203d717de5244,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1227644126955832676, guid: 6bcecb4ce913e44d2a8203d717de5244,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -235,26 +255,6 @@ PrefabInstance:
     - target: {fileID: 1227644126955832676, guid: 6bcecb4ce913e44d2a8203d717de5244,
         type: 3}
       propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1227644126656590399, guid: 6bcecb4ce913e44d2a8203d717de5244,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1227644126656590399, guid: 6bcecb4ce913e44d2a8203d717de5244,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1227644126656590399, guid: 6bcecb4ce913e44d2a8203d717de5244,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1227644126656590399, guid: 6bcecb4ce913e44d2a8203d717de5244,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1834616029020469514, guid: 6bcecb4ce913e44d2a8203d717de5244,
@@ -4524,35 +4524,45 @@ MonoBehaviour:
   portrait: {fileID: 19500430}
   nameDisplay: {fileID: 84567518}
   textDisplay: {fileID: 356388932}
+  dialogueEvent: event:/Dialogue
   dialogArray:
   - portrait: {fileID: 21300000, guid: 480e60ecc4ca14b4d85f0691ba8bc4a0, type: 3}
     name: Soldier
     sentence: "I don\u2019t want to die, I don\u2019t want to die!"
+    dialogueSoundKey: 
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: Then keep running fool! Help will arrive soon.
+    dialogueSoundKey: 
   - portrait: {fileID: 21300000, guid: 480e60ecc4ca14b4d85f0691ba8bc4a0, type: 3}
     name: Soldier
     sentence: "I can\u2019t..."
+    dialogueSoundKey: 
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: A shame. Another drone for the Turned.
+    dialogueSoundKey: 
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: Fire!
+    dialogueSoundKey: 
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: You there! Take this and install it! It will give you a tactical advantage!
+    dialogueSoundKey: 
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: "Now isn\u2019t the time for doubt. I\u2019m not a hacker."
+    dialogueSoundKey: 
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: "I\u2019ve given you humanity\u2019s last hope! Use it to stop the Turned
       without losing any more to the Rogue Mind\u2019s ranks!"
+    dialogueSoundKey: 
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: Seize the future in your hands and right my wrongs
+    dialogueSoundKey: 
   typingSpeed: 0.01
 --- !u!4 &1546149934
 Transform:

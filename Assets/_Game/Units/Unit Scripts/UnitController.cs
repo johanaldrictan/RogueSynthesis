@@ -34,6 +34,8 @@ public abstract class UnitController : MonoBehaviour
     public static UnitControllerUnityEvent EndTurnEvent = new UnitControllerUnityEvent();
 
     public EventInstance PhaseChange;
+
+    [FMODUnity.EventRef]
     public string EventPath;
 
     // this can be overridden in subclasses.
