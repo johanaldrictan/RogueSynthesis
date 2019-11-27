@@ -90,6 +90,7 @@ public class Dialogue : MonoBehaviour
         //complete = true;
         //Debug.Log("Next");
         animator.SetTrigger("New Trigger");
+        StopPreviousDialogue();
         if (levelChanger != null)
         {
             levelChanger.GetComponent<LevelChanger>().FadeToNextLevel();
@@ -104,7 +105,7 @@ public class Dialogue : MonoBehaviour
 
         dialogueInstance.setCallback(dialogueCallback);
         dialogueInstance.start();
-        //dialogueInstance.release();
+        dialogueInstance.release();
     }
 
     void StopPreviousDialogue()
