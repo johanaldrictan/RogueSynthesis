@@ -445,42 +445,66 @@ MonoBehaviour:
   textDisplay: {fileID: 356388932}
   dialogueEvent: event:/Dialogue
   dialogArray:
-  - portrait: {fileID: 21300000, guid: 480e60ecc4ca14b4d85f0691ba8bc4a0, type: 3}
-    name: Soldier
-    sentence: "I don\u2019t want to die, I don\u2019t want to die!"
-    dialogueSoundKey: 
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
-    sentence: Then keep running fool! Help will arrive soon.
-    dialogueSoundKey: 
-  - portrait: {fileID: 21300000, guid: 480e60ecc4ca14b4d85f0691ba8bc4a0, type: 3}
-    name: Soldier
-    sentence: "I can\u2019t..."
-    dialogueSoundKey: 
-  - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
-    name: Amos
-    sentence: A shame. Another drone for the Turned.
+    sentence: We're approaching the facility that holds the Rogue Mind.
     dialogueSoundKey: 
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
-    sentence: Fire!
+    sentence: Always hated how the center of scientific advancement was surrounded
+      by green in miles of cityscape.
+    dialogueSoundKey: 
+  - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
+    name: Laurentia
+    sentence: Restricted to the public, of course
     dialogueSoundKey: 
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
-    sentence: You there! Take this and install it! It will give you a tactical advantage!
+    sentence: We can't change the past. Only the future is in control.
+    dialogueSoundKey: 
+  - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
+    name: Laurentia
+    sentence: Right. We'll make things better. When we get to the Rogue Mind, how
+      do we shut it off?
     dialogueSoundKey: 
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
-    sentence: "Now isn\u2019t the time for doubt. I\u2019m not a hacker."
+    sentence: The Laser Drill should break through the outer shell. We can go through
+      and access the Rogue Mind's interface
     dialogueSoundKey: 
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
-    sentence: "I\u2019ve given you humanity\u2019s last hope! Use it to stop the Turned
-      without losing any more to the Rogue Mind\u2019s ranks!"
+    sentence: This isn't like shutting off a kitchen appliance. And shooting it won't
+      do anything.
+    dialogueSoundKey: 
+  - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
+    name: Laurentia
+    sentence: So what, is there a secret code to wipe the Rogue Mind?
     dialogueSoundKey: 
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
-    sentence: Seize the future in your hands and right my wrongs
+    sentence: 'We use this. A virus I created to destroy any and all traces of the
+      Rogue Mind. '
+    dialogueSoundKey: 
+  - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
+    name: Laurentia
+    sentence: Is there any way to stop it?
+    dialogueSoundKey: 
+  - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
+    name: Amos
+    sentence: There is one other option, but this is a guaranteed victory.
+    dialogueSoundKey: 
+  - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
+    name: Laurentia
+    sentence: I don't...
+    dialogueSoundKey: 
+  - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
+    name: Laurentia
+    sentence: Start powering the drill, we have a fight in our hands.
+    dialogueSoundKey: 
+  - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
+    name: Amos
+    sentence: Hold them off until we're ready!
     dialogueSoundKey: 
   typingSpeed: 0.01
 --- !u!4 &1546149934
