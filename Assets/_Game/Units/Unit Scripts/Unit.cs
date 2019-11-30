@@ -217,30 +217,82 @@ public abstract class Unit : MonoBehaviour
         return path;
     }
 
-    public virtual void Move(int x, int y)
+
+    public IEnumerator Move(Queue<Vector2Int> path, MovementType type)
     {
+        foreach(Vector2Int tile in path)
+        { Debug.Log(tile); }
+
         if(moveSoundEvent.isValid())
+        {
+            if (this is AlliedUnit)
+            {
+                moveSoundEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                MapUIController.instance.ClearPathHighlight();
+                MapUIController.instance.ClearRangeHighlight();
+                (this as AlliedUnit).plannedPath.Clear();
+            }
             moveSoundEvent.start();
+        }
+            
         attackBuffed = false;
-        // remove old coordinates from globalPositionalData
-        globalPositionalData.RemoveUnit(mapPosition);
 
-        // restore old tilevalue
-        MapController.instance.weightedMap[mapPosition] = (int)tile;
+        Vector2Int currentTile = GetMapPosition();
+        while (path.Count > 0)
+        {
+            // get the next tile to move to
+            currentTile = path.Dequeue();
 
-        // set new coordinates
-        mapPosition.x = x;
-        mapPosition.y = y;
+            // remove old coordinates from globalPositionalData
+            globalPositionalData.RemoveUnit(mapPosition);
+            // restore old tilevalue
+            MapController.instance.weightedMap[mapPosition] = (int)tile;
+            // set new coordinates
+            mapPosition = currentTile;
+            // update the globalPositionalData
+            globalPositionalData.AddUnit(mapPosition, this);
+            // remember the weight of the tile being occupied
+            tile = (TileWeight)MapController.instance.weightedMap[mapPosition];
+            // set the occupied tile to OBSTRUCTED
+            MapController.instance.weightedMap[mapPosition] = (int)TileWeight.OBSTRUCTED;
 
-        // update the globalPositionalData
-        globalPositionalData.AddUnit(mapPosition, this);
+            // visualize the movement made from one tile to another, based on the type of movement
+            switch (type)
+            {
+                case MovementType.DASH:
+                    this.transform.position = MapMath.MapToWorld(currentTile);
+                    yield return new WaitForSecondsRealtime(0.1f);
+                    break;
 
-        tile = (TileWeight)MapController.instance.weightedMap[mapPosition];
-        MapController.instance.weightedMap[mapPosition] = (int)TileWeight.OBSTRUCTED;
-        this.transform.position = MapMath.MapToWorld(new Vector2Int(x, y));
+                case MovementType.KNOCKBACK:
+                    this.transform.position = MapMath.MapToWorld(currentTile);
+                    yield return new WaitForSecondsRealtime(0.1f);
+                    break;
+
+                case MovementType.TELEPORT:
+                    this.transform.position = MapMath.MapToWorld(currentTile);
+                    yield return new WaitForSecondsRealtime(0.1f);
+                    break;
+
+                case MovementType.WALK:
+                    this.transform.position = MapMath.MapToWorld(currentTile);
+                    yield return new WaitForSecondsRealtime(0.1f);
+                    break;
+
+                default:
+                    this.transform.position = MapMath.MapToWorld(currentTile);
+                    yield return new WaitForSecondsRealtime(0.1f);
+                    break;
+            }
+
+            if (TurnController.instance != null)
+            {
+                TurnController.instance.trapPositionalData.CheckTraps();
+            }
+        }
+
+        this.transform.position = MapMath.MapToWorld(currentTile);
         hasMoved = true;
-        if (TurnController.instance != null)
-            TurnController.instance.trapPositionalData.CheckTraps();
     }
 
     public void ChangeDirection(Direction newDirection)
@@ -401,5 +453,13 @@ public abstract class Unit : MonoBehaviour
     public void UnhighlightUnit()
     { m_SpriteRenderer.color = Color.white; }
 
+}
+
+public enum MovementType
+{
+    WALK,
+    DASH,
+    KNOCKBACK,
+    TELEPORT
 }
 

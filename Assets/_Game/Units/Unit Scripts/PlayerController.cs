@@ -92,7 +92,14 @@ public class PlayerController : UnitController
             {
                 if (theUnit.plannedPath.Contains(dest)) // Commit to the path
                 {
-                    theUnit.Move(dest.x, dest.y);
+                    Queue<Vector2Int> movementPath = new Queue<Vector2Int>();
+                    for (int i = 0; i < theUnit.plannedPath.Count; i++)
+                    {
+                        movementPath.Enqueue(theUnit.plannedPath[i]);
+                        if (theUnit.plannedPath[i] == dest)
+                            break;
+                    }
+                    StartCoroutine(theUnit.Move(movementPath, MovementType.WALK));
                     ClearSpotlight();
                 }
                 else

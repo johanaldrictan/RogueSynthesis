@@ -13,16 +13,16 @@ public class ActionData
     private Direction abilityDirection;
 
     // the (x, y) coordinates the unit ends at after moving
-    private Vector2Int endingPosition;
+    private Queue<Vector2Int> movementPath;
 
     // the index of the Unit's Ability list to activate after it moves
     private int abilityIndex;
 
     // Constructor. Takes the variables necessary for the object and stores them
-    public ActionData(Vector2Int end, Direction direction, int index)
+    public ActionData(Queue<Vector2Int> path, Direction direction, int index)
     {
         abilityDirection = direction;
-        endingPosition = end;
+        movementPath = path;
         abilityIndex = index;
     }
 
@@ -31,13 +31,24 @@ public class ActionData
         return abilityDirection;
     }
     
-    public Vector2Int GetEndingPosition()
+    public Queue<Vector2Int> GetMovementPath()
     {
-        return endingPosition;
+        return movementPath;
     }
 
     public int GetAbilityIndex()
     {
         return abilityIndex;
+    }
+
+    public Vector2Int GetEndingPosition()
+    {
+        Queue<Vector2Int> clone = new Queue<Vector2Int>(movementPath);
+        Vector2Int result = clone.Dequeue();
+        while (clone.Count >= 0)
+        {
+            result = clone.Dequeue();
+        }
+        return result;
     }
 }

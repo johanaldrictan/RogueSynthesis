@@ -143,7 +143,7 @@ public static class AttackHelper
         }
         if (MapMath.InMapBounds(pushbackLoc))
         {
-            target.Move(pushbackLoc.x, pushbackLoc.y);
+            // ******************************** target.Move(pushbackLoc.x, pushbackLoc.y, MovementType.KNOCKBACK);
             target.hasMoved = false;
         }
         //else if()

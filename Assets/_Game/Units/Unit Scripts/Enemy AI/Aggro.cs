@@ -150,10 +150,10 @@ public class Aggro : EnemyAction
 
 
 
-    protected override Tuple<Vector2Int, Direction> CommitMovement()
+    protected override Tuple<Queue<Vector2Int>, Direction> CommitMovement()
     {
         // default return value: stay where you are, point South
-        Tuple<Vector2Int, Direction> result = new Tuple<Vector2Int, Direction>(myUnit.GetMapPosition(), Direction.S);
+        Tuple<Queue<Vector2Int>, Direction> result = new Tuple<Queue<Vector2Int>, Direction>(new Queue<Vector2Int>(), Direction.S);
 
         // get the affectable Units
         Dictionary<Vector2Int, MutableTuple<Unit, float>> affectableUnits = committedAbilityOption.GetAffectableUnits();
@@ -187,12 +187,11 @@ public class Aggro : EnemyAction
                 Vector2Int currentTile = closestPath.Dequeue();
                 if (myUnit.MoveableTiles.ContainsKey(currentTile) && MapController.instance.weightedMap[currentTile] != (int)TileWeight.OBSTRUCTED)
                 {
-                    finalTile = currentTile;
+                    result.Item1.Enqueue(currentTile);
                 }
                 else
                     break;
             }
-            result = new Tuple<Vector2Int, Direction>(finalTile, Direction.S);
         }
 
         // if there is a Unit that can be affected
@@ -215,6 +214,7 @@ public class Aggro : EnemyAction
             // find the one that is the most reasonable, using a similar but lesser significance system to other sections of this AI
             HashSet<Tuple<Vector2Int, Direction>> possibleMovements = committedAbilityOption.GetAffectableTiles()[bestTarget];
             float bestVal = float.MinValue;
+            Tuple<Vector2Int, Direction> bestEndingPosition = new Tuple<Vector2Int, Direction>(myUnit.GetMapPosition(), Direction.S);
             foreach(Tuple<Vector2Int, Direction> current in possibleMovements)
             {
                 List<Unit> affectedUnits = committedAbilityOption.GetAffectedUnits(current.Item1, current.Item2);
@@ -245,9 +245,11 @@ public class Aggro : EnemyAction
                 if (currentVal >= bestVal)
                 {
                     bestVal = currentVal;
-                    result = current;
+                    bestEndingPosition = current;
                 }
             }
+            Queue<Vector2Int> finalPath = MapController.instance.GetShortestPath(myUnit.shortestPaths, bestEndingPosition.Item1).Item1;
+            result = new Tuple<Queue<Vector2Int>, Direction>(finalPath, result.Item2);
         }
 
         return result;
