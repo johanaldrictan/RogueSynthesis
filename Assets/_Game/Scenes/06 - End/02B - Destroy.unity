@@ -680,10 +680,6 @@ MonoBehaviour:
     name: Laurentia
     sentence: Amos, the virus.
     dialogueSoundKey: 
-  - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
-    name: Amos
-    sentence: You're doing the right thing.
-    dialogueSoundKey: 
   - portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
     name: Rogue Mind
     sentence: Yes, yes. Well done, hero. You've saved so many by stopping progress
