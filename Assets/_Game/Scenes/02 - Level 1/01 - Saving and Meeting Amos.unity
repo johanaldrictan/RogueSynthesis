@@ -4542,6 +4542,10 @@ MonoBehaviour:
     name: Amos
     sentence: A shame. Another drone for the Turned.
     dialogueSoundKey: 
+  - portrait: {fileID: 21300000, guid: 480e60ecc4ca14b4d85f0691ba8bc4a0, type: 3}
+    name: 
+    sentence: '...'
+    dialogueSoundKey: 
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: Fire!
@@ -4549,6 +4553,10 @@ MonoBehaviour:
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: You there! Take this and install it! It will give you a tactical advantage!
+    dialogueSoundKey: 
+  - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
+    name: Laurentia
+    sentence: '...'
     dialogueSoundKey: 
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
