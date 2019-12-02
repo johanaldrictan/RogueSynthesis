@@ -120,6 +120,75 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &51153576
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4677004795173944573, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_Name
+      value: Forest Dialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d18947a5cab2be342b71b98e09ba6b01, type: 3}
 --- !u!1001 &160382193
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -679,106 +748,106 @@ MonoBehaviour:
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: Alright, who are you?
-    dialogueSoundKey: 
+    dialogueSoundKey: 04 - Laurentia and Amos/S4L1
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: My name is Doctor Amos Caustaway.
-    dialogueSoundKey: 
+    dialogueSoundKey: 04 - Laurentia and Amos/S4L2
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: Father of the future? Didn't think a Purist like you would make it this
       long.
-    dialogueSoundKey: 
+    dialogueSoundKey: 04 - Laurentia and Amos/S4L3
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: 'Societal notions of a bygone age have little importance. '
-    dialogueSoundKey: 
+    dialogueSoundKey: 04 - Laurentia and Amos/S4L4
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: All that matters now is stopping the Rogue Mind.
-    dialogueSoundKey: 
+    dialogueSoundKey: 04 - Laurentia and Amos/S4L5
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: And the device you gave me, what i it?
-    dialogueSoundKey: 
+    dialogueSoundKey: 04 - Laurentia and Amos/S4L6
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: 'I call it the Kairoseer, a device that lets you see a glimpse of the
       future. '
-    dialogueSoundKey: 
+    dialogueSoundKey: 04 - Laurentia and Amos/S4L7
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: 'The Rogue Mind has predictive software and near limitless capacity
       for reasoning, but it cannot actually see what is yet to happen. '
-    dialogueSoundKey: 
+    dialogueSoundKey: 04 - Laurentia and Amos/S4L8
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: 'I destroyed all my data and ran away with the only prototype. '
-    dialogueSoundKey: 
+    dialogueSoundKey: 04 - Laurentia and Amos/S4L9
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: What would've been an upgrade for the machine is now our best hope to
       beat it.
-    dialogueSoundKey: 
+    dialogueSoundKey: 04 - Laurentia and Amos/S4L10
   - portrait: {fileID: 21300000, guid: 480e60ecc4ca14b4d85f0691ba8bc4a0, type: 3}
     name: Soldier
     sentence: Coming from the Purist who got us into this mess? The Rogue Mind is
       his creation.
-    dialogueSoundKey: 
+    dialogueSoundKey: 04 - Laurentia and Amos/S4L11
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: Let him speak. The enemy is out there.
-    dialogueSoundKey: 
+    dialogueSoundKey: 04 - Laurentia and Amos/S4L12
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: My team and I sought to create a device to help all of humankind, modified
       or not.
-    dialogueSoundKey: 
+    dialogueSoundKey: 04 - Laurentia and Amos/S4L13
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: The Clear Mind project clearly failed, but the Kairoseer could make
       things right.
-    dialogueSoundKey: 
+    dialogueSoundKey: 04 - Laurentia and Amos/S4L14
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: And now we can use it to fight the Turned.
-    dialogueSoundKey: 
+    dialogueSoundKey: 04 - Laurentia and Amos/S4L15
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: Precisely. The device should make your small force as effective as a
       thousand.
-    dialogueSoundKey: 
+    dialogueSoundKey: 04 - Laurentia and Amos/S4L16
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: So we take the fight to the Rogue Mind and shut it down.
-    dialogueSoundKey: 
+    dialogueSoundKey: 04 - Laurentia and Amos/S4L17
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: Well, we could get there, but you would need megatons of explosive force
       to even touch its defenses.
-    dialogueSoundKey: 
+    dialogueSoundKey: 04 - Laurentia and Amos/S4L18
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: We simply don't have that much firepower!
-    dialogueSoundKey: 
+    dialogueSoundKey: 04 - Laurentia and Amos/S4L19
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: Are you good with machines?
-    dialogueSoundKey: 
+    dialogueSoundKey: 04 - Laurentia and Amos/S4L20
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: I'm a doctor, not a mechanic, but I should be able to repair a simple
       device.
-    dialogueSoundKey: 
+    dialogueSoundKey: 04 - Laurentia and Amos/S4L21
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: I think I know where to find the firepower, just don't make it turn
       against humanity this time.
-    dialogueSoundKey: 
+    dialogueSoundKey: 04 - Laurentia and Amos/S4L22
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: Commando's, we have our next target. We're going digging!
-    dialogueSoundKey: 
+    dialogueSoundKey: 04 - Laurentia and Amos/S4L23
   typingSpeed: 0.01
 --- !u!4 &1501390220
 Transform:

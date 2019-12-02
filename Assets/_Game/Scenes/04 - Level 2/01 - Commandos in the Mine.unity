@@ -120,6 +120,80 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &10163063
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4677004795173944573, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_Name
+      value: Forest Dialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944575, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d18947a5cab2be342b71b98e09ba6b01, type: 3}
 --- !u!1001 &19475769
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -670,5 +744,30 @@ PrefabInstance:
       propertyPath: textDisplay
       value: 
       objectReference: {fileID: 356388932}
+    - target: {fileID: 3024854904605904621, guid: 78239f0fa0c8a4741881961bdfff7f8f,
+        type: 3}
+      propertyPath: dialogArray.Array.data[0].dialogueSoundKey
+      value: 05 - Commandos in the Mine/S5L1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024854904605904621, guid: 78239f0fa0c8a4741881961bdfff7f8f,
+        type: 3}
+      propertyPath: dialogArray.Array.data[1].dialogueSoundKey
+      value: 05 - Commandos in the Mine/S5L2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024854904605904621, guid: 78239f0fa0c8a4741881961bdfff7f8f,
+        type: 3}
+      propertyPath: dialogArray.Array.data[2].dialogueSoundKey
+      value: 05 - Commandos in the Mine/S5L3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024854904605904621, guid: 78239f0fa0c8a4741881961bdfff7f8f,
+        type: 3}
+      propertyPath: dialogArray.Array.data[3].dialogueSoundKey
+      value: 05 - Commandos in the Mine/S5L4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024854904605904621, guid: 78239f0fa0c8a4741881961bdfff7f8f,
+        type: 3}
+      propertyPath: dialogArray.Array.data[4].dialogueSoundKey
+      value: 05 - Commandos in the Mine/S5L5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78239f0fa0c8a4741881961bdfff7f8f, type: 3}

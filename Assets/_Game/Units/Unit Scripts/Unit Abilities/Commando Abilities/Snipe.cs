@@ -53,6 +53,6 @@ public class Snipe : Attack
 
     public override string GetSoundEvent()
     {
-        return "event:/SHA/SHA_Snipe";
+        return "event:/SHA/SHA1/SHA_Snipe";
     }
 }
