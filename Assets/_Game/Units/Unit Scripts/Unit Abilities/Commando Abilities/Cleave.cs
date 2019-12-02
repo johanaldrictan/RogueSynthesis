@@ -59,6 +59,6 @@ public class Cleave : Attack
 
     public override string GetSoundEvent()
     {
-        return "event:/PRO1/PRO_Cleave";
+        return "event:/PRO/PRO1/PRO_Cleave";
     }
 }

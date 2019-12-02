@@ -4529,31 +4529,31 @@ MonoBehaviour:
   - portrait: {fileID: 21300000, guid: 480e60ecc4ca14b4d85f0691ba8bc4a0, type: 3}
     name: Soldier
     sentence: "I don\u2019t want to die, I don\u2019t want to die!"
-    dialogueSoundKey: 
+    dialogueSoundKey: 02 - Saving Amos/S2L1
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: Then keep running fool! Help will arrive soon.
-    dialogueSoundKey: 
+    dialogueSoundKey: 02 - Saving Amos/S2L2
   - portrait: {fileID: 21300000, guid: 480e60ecc4ca14b4d85f0691ba8bc4a0, type: 3}
     name: Soldier
     sentence: "I can\u2019t..."
-    dialogueSoundKey: 
+    dialogueSoundKey: 02 - Saving Amos/S2L3
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: A shame. Another drone for the Turned.
-    dialogueSoundKey: 
+    dialogueSoundKey: 02 - Saving Amos/S2L4
   - portrait: {fileID: 21300000, guid: 480e60ecc4ca14b4d85f0691ba8bc4a0, type: 3}
     name: 
     sentence: '...'
-    dialogueSoundKey: 
+    dialogueSoundKey: 02 - Saving Amos/S2L5
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: Fire!
-    dialogueSoundKey: 
+    dialogueSoundKey: 02 - Saving Amos/S2L6
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: You there! Take this and install it! It will give you a tactical advantage!
-    dialogueSoundKey: 
+    dialogueSoundKey: 02 - Saving Amos/S2L7
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: '...'
@@ -4561,16 +4561,16 @@ MonoBehaviour:
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: "Now isn\u2019t the time for doubt. I\u2019m not a hacker."
-    dialogueSoundKey: 
+    dialogueSoundKey: 02 - Saving Amos/S2L8
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: "I\u2019ve given you humanity\u2019s last hope! Use it to stop the Turned
       without losing any more to the Rogue Mind\u2019s ranks!"
-    dialogueSoundKey: 
+    dialogueSoundKey: 02 - Saving Amos/S2L9
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: Seize the future in your hands and right my wrongs
-    dialogueSoundKey: 
+    dialogueSoundKey: 02 - Saving Amos/S2L10
   typingSpeed: 0.01
 --- !u!4 &1546149934
 Transform:
@@ -5472,3 +5472,77 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbb030d27aa05476d85dbf4019c199da, type: 3}
+--- !u!1001 &1996773229
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4677004795173944573, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_Name
+      value: Forest Dialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944575, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d18947a5cab2be342b71b98e09ba6b01, type: 3}

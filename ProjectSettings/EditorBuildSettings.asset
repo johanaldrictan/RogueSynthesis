@@ -23,6 +23,33 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game/Scenes/02 - Level 1/03 - Rogue Mind's Message.unity
     guid: db8f6edcceabf4b5485683791960ffff
+  - enabled: 1
+    path: Assets/_Game/Scenes/03- Level 1 Intermission/01 - Laurentia and Amos.unity
+    guid: db433fea83d96a1439455063e792375f
+  - enabled: 1
+    path: Assets/_Game/Scenes/04 - Level 2/01 - Commandos in the Mine.unity
+    guid: f19434f576724be4b98e34d2af8626e0
+  - enabled: 1
+    path: Assets/_Game/Scenes/04 - Level 2/02 - Crossroads.unity
+    guid: a319a98d45314434b8d9e76fe17ff6ef
+  - enabled: 1
+    path: Assets/_Game/Scenes/04 - Level 2/03 - Drill Aquired.unity
+    guid: ca932ddcf58e1ee4594782d9ee7bd9c4
+  - enabled: 1
+    path: Assets/_Game/Scenes/05 - Level 3/01 - Final Fight(Before).unity
+    guid: 41b3c0f81ccbd934391d1c3d4fdc747a
+  - enabled: 1
+    path: Assets/_Game/Scenes/05 - Level 3/03 - Final Fight(After).unity
+    guid: f651eb5377f6abe478370de7ae85beb6
+  - enabled: 1
+    path: Assets/_Game/Scenes/06 - End/01 - The End.unity
+    guid: 3cad7ae989b5a7c488eca732dd168086
+  - enabled: 0
+    path: Assets/_Game/Scenes/06 - End/02A - Replace.unity
+    guid: d7091886f4c4c5348a9893b596a791a9
+  - enabled: 0
+    path: Assets/_Game/Scenes/06 - End/02B - Destroy.unity
+    guid: a53a41a7444bfa446bad1e67794f42d9
   - enabled: 0
     path: Assets/_Game/Scenes/UI Implementation Scene.unity
     guid: 29b125f74362545b38c6ad408fb6a254

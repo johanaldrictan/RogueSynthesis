@@ -5226,6 +5226,80 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &533688319
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4677004795173944573, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_Name
+      value: Forest Dialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944575, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d18947a5cab2be342b71b98e09ba6b01, type: 3}
 --- !u!1 &680597714
 GameObject:
   m_ObjectHideFlags: 0
@@ -6272,28 +6346,28 @@ MonoBehaviour:
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: So Doc, simple enough for you?
-    dialogueSoundKey: 
+    dialogueSoundKey: 06 - Drill Aquired/S6L1
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: That's a John Tanner Triaxial Laser Drill, top of the line! When you
       said old I was expecting a physical auger!
-    dialogueSoundKey: 
+    dialogueSoundKey: 06 - Drill Aquired/S6L2
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: Closest thing to a planet cracker that humanity had made. Should get
       us in right?
-    dialogueSoundKey: 
+    dialogueSoundKey: 06 - Drill Aquired/S6L3
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: It'll take on hell of a time to charge, but it should do.
-    dialogueSoundKey: 
+    dialogueSoundKey: 06 - Drill Aquired/S6L4
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: Alright Commandos, grab the drill and let's move. Amos, get to repairing
       the device.
-    dialogueSoundKey: 
+    dialogueSoundKey: 06 - Drill Aquired/S6L5
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: Understood.
-    dialogueSoundKey: 
+    dialogueSoundKey: 06 - Drill Aquired/S6L6
   typingSpeed: 0.01

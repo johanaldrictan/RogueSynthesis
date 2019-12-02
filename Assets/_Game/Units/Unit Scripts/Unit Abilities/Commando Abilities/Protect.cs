@@ -29,7 +29,7 @@ public class Protect : UnitAbility
 
     public override string GetSoundEvent()
     {
-        return "event:/PRO1/PRO_Protect";
+        return "event:/PRO/PRO1/PRO_Protect";
     }
 
     protected override bool InferiorComparator(UnitAbility inQuestion)
