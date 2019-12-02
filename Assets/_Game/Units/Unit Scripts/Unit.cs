@@ -220,9 +220,6 @@ public abstract class Unit : MonoBehaviour
 
     public IEnumerator Move(Queue<Vector2Int> path, MovementType type)
     {
-        foreach(Vector2Int tile in path)
-        { Debug.Log(tile); }
-
         if(moveSoundEvent.isValid())
         {
             if (this is AlliedUnit)

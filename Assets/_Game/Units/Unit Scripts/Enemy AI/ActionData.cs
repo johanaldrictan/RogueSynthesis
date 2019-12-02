@@ -12,7 +12,7 @@ public class ActionData
     // the cardinal direction that the Unit faces to execute its ability
     private Direction abilityDirection;
 
-    // the (x, y) coordinates the unit ends at after moving
+    // the path the Unit has committed to moving through
     private Queue<Vector2Int> movementPath;
 
     // the index of the Unit's Ability list to activate after it moves
@@ -43,9 +43,11 @@ public class ActionData
 
     public Vector2Int GetEndingPosition()
     {
+        
+
         Queue<Vector2Int> clone = new Queue<Vector2Int>(movementPath);
-        Vector2Int result = clone.Dequeue();
-        while (clone.Count >= 0)
+        Vector2Int result = new Vector2Int(int.MaxValue, int.MaxValue);
+        while (clone.Count > 0)
         {
             result = clone.Dequeue();
         }
