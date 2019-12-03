@@ -6321,6 +6321,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 231132592320097345, guid: f17b8085ba2808748ae0ae20a499be3a,
+        type: 3}
+      propertyPath: abilityPanel
+      value: 
+      objectReference: {fileID: 1264711667}
+    - target: {fileID: 231132592320097345, guid: f17b8085ba2808748ae0ae20a499be3a,
+        type: 3}
+      propertyPath: UI
+      value: 
+      objectReference: {fileID: 37818624}
     - target: {fileID: 231132592320097346, guid: f17b8085ba2808748ae0ae20a499be3a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6376,15 +6386,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 231132592320097345, guid: f17b8085ba2808748ae0ae20a499be3a,
-        type: 3}
-      propertyPath: abilityPanel
-      value: 
-      objectReference: {fileID: 1264711667}
-    - target: {fileID: 231132592320097345, guid: f17b8085ba2808748ae0ae20a499be3a,
-        type: 3}
-      propertyPath: UI
-      value: 
-      objectReference: {fileID: 37818624}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f17b8085ba2808748ae0ae20a499be3a, type: 3}
