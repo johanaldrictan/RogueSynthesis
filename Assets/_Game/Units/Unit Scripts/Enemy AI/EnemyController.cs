@@ -31,15 +31,12 @@ public class EnemyController : UnitController
     public override void Update()
     {
         // if it's not currently this controller's turn, it's not allowed to do anything
-        if (!myTurn)
+        if (!myTurn || units.Count == 0 || EventManager.instance.EventsExist())
         { return; }
 
-        // dead men tell no... uh... commands to the game engine
+        // Dead men tell no... uh... commands to the game engine
         if (units[activeUnit].GetHealth() <= 0)
         { GetNextUnit(); }
-
-        // No logic runs without a unit.
-        if (units.Count == 0) { return; }
 
         // decide what to do if you haven't yet
         if ((units[activeUnit] as EnemyUnit).plannedActionData == null)
