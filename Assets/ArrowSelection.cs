@@ -24,7 +24,7 @@ public class ArrowSelection : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        Debug.Log(ObjectHitByMouse.collider.gameObject);
+        //Debug.Log(ObjectHitByMouse.collider.gameObject);
 
         if (Physics.Raycast(ray.origin, ray.direction, out ObjectHitByMouse, 2000))
         {
