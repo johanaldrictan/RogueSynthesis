@@ -176,7 +176,10 @@ public class PlayerController : UnitController
         SpotlightActiveUnit();
         UI.GetComponent<UI_Operator>().unit = units[activeUnit];
         UI.GetComponent<UI_Operator>().SetInfo();
-        directionSelector.transform.position = MapMath.MapToGrid(units[activeUnit].GetMapPosition());
+        Vector2Int unitPosition = units[activeUnit].GetMapPosition();
+        //Vector3 truePosition = MapMath.MapToWorld(unitPosition);
+        directionSelector.transform.position = MapMath.MapToWorld(unitPosition);
+        directionSelector.transform.position = new Vector3(directionSelector.transform.position.x, directionSelector.transform.position.y + 1.506f, directionSelector.transform.position.z);
         if (units[activeUnit].selectSoundEvent.isValid())
         {
             units[activeUnit].selectSoundEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
