@@ -23,6 +23,7 @@ public class PlayerController : UnitController
 
     public GameObject abilityPanel;
     public GameObject UI;
+    public GameObject directionSelector;
     public int playerID;
 
     public override void Update()
@@ -175,6 +176,7 @@ public class PlayerController : UnitController
         SpotlightActiveUnit();
         UI.GetComponent<UI_Operator>().unit = units[activeUnit];
         UI.GetComponent<UI_Operator>().SetInfo();
+        directionSelector.transform.position = MapMath.MapToGrid(units[activeUnit].GetMapPosition());
         if (units[activeUnit].selectSoundEvent.isValid())
         {
             units[activeUnit].selectSoundEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);

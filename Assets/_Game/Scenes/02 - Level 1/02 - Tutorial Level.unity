@@ -6700,6 +6700,11 @@ PrefabInstance:
       propertyPath: UI
       value: 
       objectReference: {fileID: 37818624}
+    - target: {fileID: 231132592320097345, guid: f17b8085ba2808748ae0ae20a499be3a,
+        type: 3}
+      propertyPath: directionSelector
+      value: 
+      objectReference: {fileID: 1035268006}
     - target: {fileID: 231132592320097346, guid: f17b8085ba2808748ae0ae20a499be3a,
         type: 3}
       propertyPath: m_LocalPosition.x
