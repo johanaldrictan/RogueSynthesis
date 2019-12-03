@@ -9,10 +9,9 @@ using UnityEngine;
 
 public class ShoulderTackle : Attack
 {
-    // TODO: NEED TO FIX CASE WHEN THERE IS SOMETHING BEHIND TARGET
     public override void DealEffects(Unit target, Unit source)
     {
-        int pushback = 3;
+        int pushback = 5;
 
         if (target != null)
         {
@@ -104,6 +103,11 @@ public class ShoulderTackle : Attack
         return result;
     }
 
+    public override bool isAOE()
+    {
+        return false;
+    }
+
     public override int GetDamage()
     {
         return 3;
@@ -127,6 +131,11 @@ public class ShoulderTackle : Attack
     protected override bool InferiorComparator(UnitAbility inQuestion)
     {
         return (inQuestion.GetType() == typeof(ShoulderTackle));
+    }
+
+    public override string GetSoundEvent()
+    {
+        return "event:/PRO/PRO1/PRO_ShoulderTackle";
     }
 }
 

@@ -7,9 +7,10 @@ using UnityEngine;
 
 public class Focus : UnitAbility
 {
-    
     public override void Execute(Unit source, Direction direction)
     {
+        if(abilitySoundEvent.isValid())
+            abilitySoundEvent.start();
         if (source.GetDamageReduction() < 5)
             source.SetDamageReduction(1);
     }
@@ -27,6 +28,11 @@ public class Focus : UnitAbility
     public override int GetRange()
     {
         return 0;
+    }
+
+    public override string GetSoundEvent()
+    {
+        return "event:/WAT/WAT_Focus";
     }
 
     protected override bool InferiorComparator(UnitAbility inQuestion)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using FMOD.Studio;
 
 // PlayerController is an object that inherits from the UnitController (see UnitController.cs)
 // It is a variety that is user-controlled
@@ -34,6 +35,19 @@ public class PlayerController : UnitController
         if (units.Count == 0) { return; }
 
         AlliedUnit theUnit = units[activeUnit] as AlliedUnit;
+
+        //left click to choose unit
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector2Int selectedLoc = MapUIController.instance.cursorPosition;
+            int? selectedIndex = FindUnit(selectedLoc);
+            if(selectedIndex != null)
+            {
+                ClearSpotlight();
+                SelectUnit((int)selectedIndex);
+            }
+
+        }
 
         //check for tab input
         //select next unit
@@ -116,7 +130,16 @@ public class PlayerController : UnitController
         }
     }
 
-    
+    public int? FindUnit(Vector2Int selected)
+    {
+        for(int i = 0; i < units.Count; i++)
+        {
+            if (units[i].GetMapPosition().Equals(selected))
+                return (int?)i;
+        }
+        return null;
+    }
+
     // clears highlighting for relevant tiles on the current indexed unit
     public void ClearSpotlight()
     {
@@ -148,7 +171,11 @@ public class PlayerController : UnitController
         SpotlightActiveUnit();
         UI.GetComponent<UI_Operator>().unit = units[activeUnit];
         UI.GetComponent<UI_Operator>().SetInfo();
-        
+        if (units[activeUnit].selectSoundEvent.isValid())
+        {
+            units[activeUnit].selectSoundEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            units[activeUnit].selectSoundEvent.start();
+        }
     }
 
     public void AbilityManual(int abilityID)

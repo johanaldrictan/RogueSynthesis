@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e74963ca174570c46a672d0da3303ef4, type: 3}
+  m_Name: Protector
+  m_EditorClassIdentifier: 
+  north: {fileID: 21300000, guid: 78691856541bde347a5de0854623d550, type: 3}
+  south: {fileID: 21300000, guid: d50f44998cec43545a773c727300da02, type: 3}
+  east: {fileID: 21300000, guid: 18fa9eee29b66044c8ddb56eec13e6e0, type: 3}
+  west: {fileID: 21300000, guid: e12136bc377d2ec49a9c4c5dcb966073, type: 3}
+  portrait: {fileID: 0}

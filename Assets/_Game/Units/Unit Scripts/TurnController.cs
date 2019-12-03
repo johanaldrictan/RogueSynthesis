@@ -17,6 +17,9 @@ public class TurnController : MonoBehaviour
     // storage of Unit Positional Data
     private UnitPositionStorage globalPositionalData;
 
+    // storage of Trap positional Data
+    public TrapPositionStorage trapPositionalData;
+
     // the index of the controllers List that is currently the active controller
     private int currentTurn;
 
@@ -52,6 +55,7 @@ public class TurnController : MonoBehaviour
         currentRound = 1;
         controllers = new List<UnitController>();
         globalPositionalData = new UnitPositionStorage();
+        trapPositionalData = new TrapPositionStorage(globalPositionalData);
         delayedEffects = new List<DelayedEffect>();
     }
 
@@ -125,7 +129,7 @@ public class TurnController : MonoBehaviour
         // make sure that the controller asking for the next turn currently has control
         if (controllers[currentTurn] == controller && controller.IsMyTurn())
         {
-            CycleEffects(false);
+            CycleEffects(true);
 
             if (controllers[currentTurn] is PlayerController && controllers[currentTurn].units.Count > 0)
             { (controllers[currentTurn] as PlayerController).ClearSpotlight(); }
@@ -150,7 +154,7 @@ public class TurnController : MonoBehaviour
                 controllers[currentTurn].GetNextUnit();
             }
 
-            CycleEffects(true);
+            CycleEffects(false);
 
             if (controllers[currentTurn] is PlayerController && controllers[currentTurn].units.Count > 0)
             { (controllers[currentTurn] as PlayerController).SpotlightActiveUnit(); }
@@ -170,12 +174,12 @@ public class TurnController : MonoBehaviour
             {
                 case UnitType.AlliedUnit:
                     if (controllers[currentTurn] is PlayerController && atEnd == delayedEffects[i].AtEnd())
-                    { delayedEffects[i].Tick(); }
+                    {  delayedEffects[i].Tick(); }
                     break;
 
                 case UnitType.EnemyUnit:
                     if (controllers[currentTurn] is EnemyController && atEnd == delayedEffects[i].AtEnd())
-                    { delayedEffects[i].Tick(); }
+                    {  delayedEffects[i].Tick(); }
                     break;
 
                 default:
@@ -189,6 +193,37 @@ public class TurnController : MonoBehaviour
                 delayedEffects.RemoveAt(i);
             }
         }
+    }
+
+    // this creates a GameObject with a corresponding Trap on it, and stores it inside of the trapPositionalData
+    public void SetTrap(Vector2Int position, TrapType trap, Unit source, UnitAbility ability)
+    {
+        // parse the spawn location and spawn a new object there
+        Vector3 pos = MapMath.MapToWorld(position.x, position.y);
+        GameObject shell = new GameObject();
+        GameObject newTrap = Instantiate(shell, pos, Quaternion.identity);
+        Destroy(shell);
+
+        // add the correct inherited member of Trap to the object
+        Trap newTrapComponent = null;
+        switch(trap)
+        {
+            case TrapType.Claymore:
+                newTrapComponent = newTrap.AddComponent<ClaymoreTrap>() as ClaymoreTrap;
+                break;
+
+            default:
+                break;
+        }
+
+        newTrapComponent.mapPosition = position;
+        newTrapComponent.sourceUnit = source;
+        newTrapComponent.placingAbility = ability;
+        newTrap.AddComponent<SpriteRenderer>();
+        Sprite newSprite = Resources.Load<Sprite>(newTrapComponent.GetResourcePath());
+        newTrap.GetComponent<SpriteRenderer>().sprite = newSprite;
+        newTrap.GetComponent<SpriteRenderer>().sortingOrder = 98;
+        trapPositionalData.AddTrap(position, newTrapComponent);
     }
 
 

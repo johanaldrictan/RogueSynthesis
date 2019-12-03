@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMOD.Studio;
 
 // A Unit is the base abstract form of, well, a Unit. Every kind of Unit does what's defined here
 
@@ -20,9 +21,12 @@ public abstract class Unit : MonoBehaviour
     [SerializeField] public bool hasActed;
     [SerializeField] public bool hasMoved;
     [SerializeField] public bool hasPivoted;
-    [SerializeField] public bool isImmobilized;
     [SerializeField] public bool attackBuffed;
     [SerializeField] public bool damageReductionBuffed;
+
+    // conditions
+    [SerializeField] protected int immobilizedDuration;
+    [SerializeField] protected int disabledDuration;
 
     // positional data
     [SerializeField] protected Direction direction;
@@ -49,6 +53,9 @@ public abstract class Unit : MonoBehaviour
     // It passes a reference to itself so that other scripts can do what they need to do
     public static UnitUnityEvent DeathEvent = new UnitUnityEvent();
 
+    public EventInstance moveSoundEvent;
+    public EventInstance deathSoundEvent;
+    public EventInstance selectSoundEvent;
 
 
     // a Unit needs to be able to choose its Ability after it has moved but before its turn has ended
@@ -58,7 +65,8 @@ public abstract class Unit : MonoBehaviour
     {
         hasActed = false;
         hasMoved = false;
-        isImmobilized = false;
+        immobilizedDuration = 0;
+        disabledDuration = 0;
         attackBuffed = false;
         damageReductionBuffed = false;
         m_SpriteRenderer = this.GetComponent<SpriteRenderer>();
@@ -90,6 +98,17 @@ public abstract class Unit : MonoBehaviour
 
         // positional setup
         ChangeDirection(Direction.S);
+        if(StartData.moveSoundEventName != "" || StartData.moveSoundEventName == null)
+            moveSoundEvent = FMODUnity.RuntimeManager.CreateInstance(StartData.moveSoundEventName);
+        if (!moveSoundEvent.isValid()) { Debug.LogWarning("Move Event for " + unitName + " invalid."); }
+
+        if(StartData.deathSoundEventName != "" || StartData.deathSoundEventName == null)
+            deathSoundEvent = FMODUnity.RuntimeManager.CreateInstance(StartData.deathSoundEventName);
+        if (!deathSoundEvent.isValid()) { Debug.LogWarning("Death Event for " + unitName + " invalid."); }
+
+        if(StartData.selectSoundEventName != "" || StartData.selectSoundEventName == null)
+            selectSoundEvent = FMODUnity.RuntimeManager.CreateInstance(StartData.selectSoundEventName);
+        if (!moveSoundEvent.isValid()) { Debug.LogWarning("Select Event for " + unitName + " invalid."); }
     }
 
 
@@ -200,6 +219,8 @@ public abstract class Unit : MonoBehaviour
 
     public virtual void Move(int x, int y)
     {
+        if(moveSoundEvent.isValid())
+            moveSoundEvent.start();
         attackBuffed = false;
         // remove old coordinates from globalPositionalData
         globalPositionalData.RemoveUnit(mapPosition);
@@ -218,6 +239,8 @@ public abstract class Unit : MonoBehaviour
         MapController.instance.weightedMap[mapPosition] = (int)TileWeight.OBSTRUCTED;
         this.transform.position = MapMath.MapToWorld(new Vector2Int(x, y));
         hasMoved = true;
+        if (TurnController.instance != null)
+            TurnController.instance.trapPositionalData.CheckTraps();
     }
 
     public void ChangeDirection(Direction newDirection)
@@ -244,6 +267,8 @@ public abstract class Unit : MonoBehaviour
     // it then calls out that it's dying, so that other scripts can do what they're supposed to
     public virtual void KillMe(DeathData data)
     {
+        if(deathSoundEvent.isValid())
+            deathSoundEvent.start();
         health = 0;
         Deaths.Push(data);
         hasMoved = true;
@@ -266,9 +291,9 @@ public abstract class Unit : MonoBehaviour
         hasMoved = false;
         hasActed = false;
         this.gameObject.GetComponent<SpriteRenderer>().enabled = true;
-        globalPositionalData.AddUnit(mapPosition, this);
-        tile = (TileWeight)MapController.instance.weightedMap[mapPosition];
-        MapController.instance.weightedMap[mapPosition] = (int)TileWeight.OBSTRUCTED;
+        globalPositionalData.AddUnit(position, this);
+        tile = (TileWeight)MapController.instance.weightedMap[position];
+        MapController.instance.weightedMap[position] = (int)TileWeight.OBSTRUCTED;
         SetDirection(Direction.S);
     }
 
@@ -309,8 +334,43 @@ public abstract class Unit : MonoBehaviour
         }
     }
 
+    public int GetImmobilizedDuration()
+    { return immobilizedDuration; }
+
+    public void SetImmobilizedDuration(int amount)
+    {
+        if (amount > immobilizedDuration)
+            immobilizedDuration = amount;
+    }
+
+    public void Immobilize(int duration)
+    {
+        hasMoved = true;
+        immobilizedDuration = duration - 1;
+    }
+
+    public int GetDisabledDuration()
+    { return disabledDuration; }
+
+    public void SetDisabledDuration(int amount)
+    {
+        if (amount > disabledDuration)
+            disabledDuration = amount;
+    }
+
+    public void Disable(int duration)
+    {
+        hasActed = true;
+        hasMoved = true;
+        disabledDuration = duration - 1;
+    }
+
     public int GetMoveSpeed()
-    { return moveSpeed; }
+    {
+        if (GetImmobilizedDuration() > 0 || GetDisabledDuration() > 0)
+            return 0;
+        return moveSpeed;
+    }
 
     public void SetMoveSpeed(int amount)
     { moveSpeed += amount; }

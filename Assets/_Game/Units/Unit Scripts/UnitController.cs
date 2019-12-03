@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using FMOD.Studio;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,6 +33,11 @@ public abstract class UnitController : MonoBehaviour
     // Event for asking a TurnController to end this controller's turn
     public static UnitControllerUnityEvent EndTurnEvent = new UnitControllerUnityEvent();
 
+    public EventInstance PhaseChange;
+
+    [FMODUnity.EventRef]
+    public string EventPath;
+
     // this can be overridden in subclasses.
     // Things done here should probably be done there a well.
     protected virtual void Awake()
@@ -39,6 +45,7 @@ public abstract class UnitController : MonoBehaviour
         myTurn = true;
         activeUnit = 0;
         units = new List<Unit>();
+        PhaseChange = FMODUnity.RuntimeManager.CreateInstance(EventPath);
     }
 
     private void OnEnable()
@@ -140,9 +147,22 @@ public abstract class UnitController : MonoBehaviour
         foreach (Unit unit in inputList)
         {
             units.Add(unit);
-            if (unit.GetHealth() == 0)
+            if (unit.GetHealth() <= 0)
             {
-                unit.Revive(unit.Deaths.Peek().GetDeathLocation());
+                // find the first tile (starting with the original position) that isn't occupied to revive the Unit onto through a breadth-first search
+                Vector2Int spawnPosition = new Vector2Int(int.MaxValue, int.MaxValue);
+                Queue<Vector2Int> toVisit = new Queue<Vector2Int>();
+                toVisit.Enqueue(unit.GetMapPosition());
+                do
+                {
+                    spawnPosition = toVisit.Dequeue();
+                    foreach (Vector2Int tile in MapMath.GetNeighbors(spawnPosition).Keys)
+                    {
+                        toVisit.Enqueue(tile);
+                    }
+                }
+                while (unit.globalPositionalData.SearchLocation(spawnPosition) != null);
+                unit.Revive(spawnPosition);
             }
         }
     }
@@ -168,19 +188,29 @@ public abstract class UnitController : MonoBehaviour
 
     public virtual void ResetUnits()
     {
+        PhaseChange.start();
         for (int i = 0; i < units.Count; i++)
         {
-            units[i].damageReductionBuffed = false;
-            if (units[i].isImmobilized)
+            units[i].hasActed = false;
+            units[i].hasMoved = false;
+            units[i].hasPivoted = false;
+            if (units[i] is EnemyUnit)
             {
-                units[i].isImmobilized = false;
-                continue;
+                (units[i] as EnemyUnit).boxedIn = false;
+                (units[i] as EnemyUnit).plannedActionData = null;
             }
-            else
+
+            // reduce status conditions
+            if (units[i].GetImmobilizedDuration() > 0)
             {
-                units[i].hasActed = false;
-                units[i].hasMoved = false;
-                units[i].hasPivoted = false;
+                units[i].hasMoved = true;
+                units[i].SetImmobilizedDuration(units[i].GetImmobilizedDuration() - 1);
+            }
+            if (units[i].GetDisabledDuration() > 0)
+            {
+                units[i].hasMoved = true;
+                units[i].hasActed = true;
+                units[i].SetDisabledDuration(units[i].GetDisabledDuration() - 1);
             }
         }
     }

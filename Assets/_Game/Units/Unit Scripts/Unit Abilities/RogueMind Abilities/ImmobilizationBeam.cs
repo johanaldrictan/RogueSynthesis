@@ -7,17 +7,18 @@ using UnityEngine;
 
 public class ImmobilizationBeam : Attack
 {
-    public ImmobilizationBeam()
+    public override bool isAOE()
     {
-        isAOE = false;
+        return false;
     }
+
     // We're just doing straight damage here
     public override void DealEffects(Unit target, Unit source)
     {
         if (target != null)
         {
             target.ChangeHealth((GetDamage() * (-1)), source, this);
-            target.isImmobilized = true;
+            target.Immobilize(1);
         }
     }
 
@@ -34,7 +35,7 @@ public class ImmobilizationBeam : Attack
 
     public override List<EffectState> GetEffectState()
     {
-        return new List<EffectState>() { EffectState.DAMAGE, EffectState.STUN };
+        return new List<EffectState>() { EffectState.DAMAGE, EffectState.IMMOBILIZE };
     }
 
     public override string GetName()
@@ -50,5 +51,10 @@ public class ImmobilizationBeam : Attack
     protected override bool InferiorComparator(UnitAbility inQuestion)
     {
         return (inQuestion.GetType() == typeof(ImmobilizationBeam));
+    }
+
+    public override string GetSoundEvent()
+    {
+        return "event:/WAT/WAT_ImmoBeam";
     }
 }

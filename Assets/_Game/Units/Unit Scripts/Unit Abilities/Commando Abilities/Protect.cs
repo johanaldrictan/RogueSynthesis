@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// UNINPLEMENTED
+
 public class Protect : UnitAbility
 {
     public override void Execute(Unit source, Direction direction)
     {
-        
+        if(abilitySoundEvent.isValid())
+            abilitySoundEvent.start();
     }
 
     public override List<EffectState> GetEffectState()
@@ -22,6 +25,11 @@ public class Protect : UnitAbility
     public override int GetRange()
     {
         return 0;
+    }
+
+    public override string GetSoundEvent()
+    {
+        return "event:/PRO/PRO1/PRO_Protect";
     }
 
     protected override bool InferiorComparator(UnitAbility inQuestion)

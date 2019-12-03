@@ -15,6 +15,8 @@ public class MapController : MonoBehaviour
     public Dictionary<Vector2Int, int> weightedMap;
 
     /// <summary>
+    /// THIS SPECIFIC VARIABLE IS NOT CURRENTLY BEING USED. PIECES OF IT ARE GENERATED DYNAMICALLY WHEN NEEDED
+    /// 
     /// scannedMap represents the entire map, scanned to find the distances between all points
     /// it should be created once, and only once, for each map.
     /// This object's existence, once created, makes pathfinding, bounds-checking, etc. more or less constant time

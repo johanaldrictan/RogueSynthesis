@@ -6,19 +6,17 @@ using UnityEngine;
 
 public class Swipe : Attack
 {
-    public Swipe()
+    public override bool isAOE()
     {
-        isAOE = true;
-    }
-    public override void DealEffects(Unit target, Unit source)
-    {
-        DelayedEffect delayedEffect = new DelayedEffect(SwipeAttack, source.globalPositionalData, 1, UnitType.AlliedUnit, true, GetAreaOfEffect(source.GetMapPosition(), source.GetDirection()), source);
-        NewDelayedEffectEvent.Invoke(delayedEffect);
+        return true;
     }
 
-    public void SwipeAttack(Unit target, Unit source)
+    public override void DealEffects(Unit target, Unit source)
     {
-        target.ChangeHealth((GetDamage() * (-1)), source, this);
+        DelayedEffect delayedEffect = new DelayedEffect((Unit targ, Unit sour) => target.ChangeHealth((GetDamage() * (-1)), source, this), source.globalPositionalData, 1, UnitType.EnemyUnit, true, GetAreaOfEffect(source.GetMapPosition(), source.GetDirection()), source);
+        NewDelayedEffectEvent.Invoke(delayedEffect);
+        delayedEffect = new DelayedEffect((Unit targ, Unit sour) => source.Disable(1), source.globalPositionalData, 0, UnitType.EnemyUnit, true, new List<Unit> { source }, source);
+        NewDelayedEffectEvent.Invoke(delayedEffect);
     }
 
     public override List<Vector2Int> GetAreaOfEffect(Vector2Int source, Direction direction)
@@ -51,5 +49,10 @@ public class Swipe : Attack
     public override string GetName()
     {
         return "Swipe";
+    }
+
+    public override string GetSoundEvent()
+    {
+        return "event:/ABD/ABD_Swipe";
     }
 }

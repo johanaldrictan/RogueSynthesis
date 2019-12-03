@@ -7,11 +7,12 @@ using UnityEngine;
 
 public class WatcherGaze : Attack
 {
-    public WatcherGaze()
+    public override bool isAOE()
     {
-        isAOE = true;
+        return true;
     }
-    // We're just doing straight damage here
+
+
     public override void DealEffects(Unit target, Unit source)
     {
         target.ChangeHealth( (GetDamage()*(-1)), source, this);
@@ -46,5 +47,10 @@ public class WatcherGaze : Attack
     protected override bool InferiorComparator(UnitAbility inQuestion)
     {
         return (inQuestion.GetType() == typeof(WatcherGaze));
+    }
+
+    public override string GetSoundEvent()
+    {
+        return "event:/WAT/WAT_WatcherEye";
     }
 }

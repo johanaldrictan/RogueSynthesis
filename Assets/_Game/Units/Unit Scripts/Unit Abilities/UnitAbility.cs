@@ -1,23 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using FMOD.Studio;
 
 // UnitAbility is an abstract class that represents an action a Unit can take
+// If you want to make a new Ability, read this and AbilityDatabase.cs
 
 public abstract class UnitAbility
 {
+    public UnitAbility()
+    {
+        if(GetSoundEvent() != "")
+            abilitySoundEvent = FMODUnity.RuntimeManager.CreateInstance(GetSoundEvent());
+    }
+    public EventInstance abilitySoundEvent;
+    //obtains the relevant string data for determining what events a unit ability triggers
+    public abstract string GetSoundEvent();
+
+    // simply returns the in-game name of the Ability
     public abstract string GetName();
 
+    // The List of all of the different types of effects that this Ability does 
     public abstract List<EffectState> GetEffectState();
 
     // every Ability must have a range, regardless of whether or not it is used
     public abstract int GetRange();
 
-    // execute() does the action's job, and sets the unit's hasActed to True
+    // execute() is called in order to do the action's job.
     public abstract void Execute(Unit source, Direction direction);
 
-    // takes a UnitAbility object, returns True when the parameter shouldn't exist with this one at the same time
+    // takes a UnitAbility object, returns True when the parameter shouldn't exist with this particular Ability at the same time
     // Examples: the same Ability, inferior versions of this Ability (Gun IV > Gun III)
     protected abstract bool InferiorComparator(UnitAbility inQuestion);
 
@@ -44,12 +56,14 @@ public abstract class UnitAbility
         return false;
     }
 }
+
+// UnitAbilities deal varying types of effects. These effects are categorized to assist logic
 public enum EffectState
 {
     DAMAGE,
     BUFF_DR,
     BUFF_DMG,
-    STUN,
+    IMMOBILIZE,
     KNOCKBACK,
     DISABLE
 }

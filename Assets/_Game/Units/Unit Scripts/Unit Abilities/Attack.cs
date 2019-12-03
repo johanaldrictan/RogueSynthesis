@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Attack is an Abstract UnitAbility that deals damage, plus maybe more. Hits opponents in the corresponding direction/area
+// Attack is an Abstract type of UnitAbility that deals damage, plus maybe more. Hits opponents in the corresponding direction/area
 
 // If you want to create a new UnitAbility, refer to the comments/code on UnitAbility.cs and AbilityDatabase.cs
 
@@ -11,8 +11,7 @@ public abstract class Attack : UnitAbility
     // signifies whether or not this Attack is an Area-of-Effect (AOE)
     // AOE's will deal effects to all Units found in the Area
     // Non-AOE's will deal the effect to the first Unit found only
-    public bool isAOE;
-    public int damageBuff;
+    public abstract bool isAOE();
 
     // Attacks deal damage, and need a variable for how much damage it does
     public abstract int GetDamage();
@@ -23,15 +22,21 @@ public abstract class Attack : UnitAbility
     // This funciton takes a Unit that is to be hit with the Attack. The function deals the associated effects of the attack to the given Unit
     public abstract void DealEffects(Unit target, Unit source);
 
-    // get the area of effect. iterate through it, dealing effects to each unit found
+    // Takes a Unit as a parameter and returns whether or not this Ability would kill that target
+    public virtual bool LethalAttack(Unit target)
+    {
+        return (target.GetHealth() + target.GetDamageReduction() <= this.GetDamage());
+    }
+
+    // get the area of effect. iterate through it, dealing effects to each unit found in the area
     public override void Execute(Unit source, Direction direction)
     {
+        if(abilitySoundEvent.isValid())
+            abilitySoundEvent.start();
         List<Vector2Int> area = GetAreaOfEffect(source.GetMapPosition(), direction);
 
-        //Debug.Log(direction);
-
         //if it is an aoe attack, deal effects to every unit 
-        if (isAOE)
+        if (isAOE())
         {
             foreach (Vector2Int tile in area)
             {
@@ -42,6 +47,7 @@ public abstract class Attack : UnitAbility
                 }
             }
         }
+
         //if it is not an aoe attack, deal effects to the first unit
         else
         {
@@ -57,5 +63,5 @@ public abstract class Attack : UnitAbility
             DealEffects(searchResult, source);
         }
     }
-
+    
 }

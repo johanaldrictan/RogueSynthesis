@@ -45,7 +45,13 @@ public static class AbilityDatabase
         new ImmobilizationBeam(),
         new WatcherGaze(),
         new Infect(),
-        new Protect()
+        new Protect(),
+        new Aim(),
+        new Snipe(), 
+        new Claymore(),
+        new Launch(),
+        new ConcussionGrenade(),
+        new EMPGrenade()
     };
 }
 
@@ -64,6 +70,11 @@ public enum Ability // ****************
     ImmobilizationBeam = 6,
     WatcherGaze = 7,
     Infect = 8,
-    Protect = 9
-
+    Protect = 9,
+    Aim = 10,
+    Snipe = 11,
+    Claymore = 12,
+    Launch = 13, 
+    ConcussionGrenade = 14,
+    EMPGrenade = 15
 };

@@ -6,28 +6,48 @@ using UnityEngine;
 
 public class Abduct : Attack
 {
-    public Abduct()
+    private Direction startingDirection;
+
+    public override bool isAOE()
     {
-        isAOE = true;
+        return false;
     }
-    // We're just doing straight damage here
+
     public override void DealEffects(Unit target, Unit source)
     {
-        
+        target.ChangeHealth(GetDamage() * (-1), source, this);
+        target.Disable(1);
+        NewDelayedEffectEvent.Invoke(new DelayedEffect(AbductTarget, source.globalPositionalData, 0, UnitType.AlliedUnit, false, new List<Unit> { target }, source));
+        NewDelayedEffectEvent.Invoke(new DelayedEffect(Root, source.globalPositionalData, 0, UnitType.EnemyUnit, false, new List<Unit> { source }, source));
+    }
+
+    public void AbductTarget(Unit target, Unit source)
+    {
+        if (source.GetHealth() > 0 && GetAreaOfEffect(source.GetMapPosition(), startingDirection).Contains(target.GetMapPosition()))
+        {
+            target.Disable(1);
+            NewDelayedEffectEvent.Invoke(new DelayedEffect(AbductTarget, source.globalPositionalData, 1, UnitType.AlliedUnit, false, new List<Unit>{ target }, source));
+        }
+    }
+
+    public void Root(Unit target, Unit source)
+    {
+        if (target.GetHealth() > 0 && GetAreaOfEffect(source.GetMapPosition(), startingDirection).Contains(target.GetMapPosition()))
+        {
+            source.Immobilize(1);
+            NewDelayedEffectEvent.Invoke(new DelayedEffect(Root, source.globalPositionalData, 1, UnitType.EnemyUnit, false, new List<Unit> { source }, source));
+        }
     }
 
     public override List<Vector2Int> GetAreaOfEffect(Vector2Int source, Direction direction)
     {
-        List<Vector2Int> result = new List<Vector2Int>();
-        
-        
-
-        return result;
+        startingDirection = direction;
+        return AttackHelper.GetLineAOE(source, direction, GetRange());
     }
 
     public override int GetDamage()
     {
-        return 5;
+        return 3;
     }
 
     public override List<EffectState> GetEffectState()
@@ -48,5 +68,10 @@ public class Abduct : Attack
     protected override bool InferiorComparator(UnitAbility inQuestion)
     {
         return (inQuestion.GetType() == typeof(Abduct));
+    }
+
+    public override string GetSoundEvent()
+    {
+        return "event:/ABD/ABD_Abduct";
     }
 }
