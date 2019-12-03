@@ -31,7 +31,7 @@ public class EnemyController : UnitController
     public override void Update()
     {
         // if it's not currently this controller's turn, it's not allowed to do anything
-        if (!myTurn || units.Count == 0 || EventManager.instance.EventsExist())
+        if (!myTurn || units.Count == 0 || EventsManager.instance.EventsExist())
         { return; }
 
         // Dead men tell no... uh... commands to the game engine

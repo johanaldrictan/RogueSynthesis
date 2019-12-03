@@ -221,7 +221,7 @@ public abstract class Unit : MonoBehaviour
     public IEnumerator Move(Queue<Vector2Int> path, MovementType type)
     {
         // I am moving. do not let any controllers do anything
-        EventManager.instance.AddEvent("move");
+        EventsManager.instance.AddEvent("move");
 
         if(moveSoundEvent.isValid())
         {
@@ -293,7 +293,7 @@ public abstract class Unit : MonoBehaviour
 
         this.transform.position = MapMath.MapToWorld(currentTile);
         hasMoved = true;
-        EventManager.instance.RemoveEvent("move");
+        EventsManager.instance.RemoveEvent("move");
     }
 
     public void ChangeDirection(Direction newDirection)
