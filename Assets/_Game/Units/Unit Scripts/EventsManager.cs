@@ -8,7 +8,7 @@ using UnityEngine;
 /// For example, the event involving a Unit moving to new space should inhibit the ability to move other Units until that event finishes
 /// </summary>
 
-public class EventManager : MonoBehaviour
+public class EventsManager : MonoBehaviour
 {
     /// <summary>
     /// storage is a Dictionary with key string and value int
@@ -17,7 +17,7 @@ public class EventManager : MonoBehaviour
     /// </summary>
     [System.NonSerialized] private Dictionary<string, int> storage;
 
-    public static EventManager instance;
+    public static EventsManager instance;
 
     private void Awake()
     {

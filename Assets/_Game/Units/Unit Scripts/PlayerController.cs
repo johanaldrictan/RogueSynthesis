@@ -28,7 +28,7 @@ public class PlayerController : UnitController
     public override void Update()
     {
         // if it's not currently this controller's turn, the controller has no Units, or there are active events, it's not allowed to do anything
-        if (!myTurn || units.Count == 0 || EventManager.instance.EventsExist())
+        if (!myTurn || units.Count == 0 || EventsManager.instance.EventsExist())
         { return; }
 
         AlliedUnit theUnit = units[activeUnit] as AlliedUnit;
