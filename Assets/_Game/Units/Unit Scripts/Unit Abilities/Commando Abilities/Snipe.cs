@@ -14,11 +14,15 @@ public class Snipe : Attack
 
     public override void DealEffects(Unit target, Unit source)
     {
+        GameObject bullet = GameObject.Instantiate(Resources.Load("Prefabs/Bullet"), source.transform.position, Quaternion.Euler(new Vector3(0,0, (float)source.GetDirection()))) as GameObject;
+        GameObject.Destroy(bullet, .5f);
         int bonusDamage = 0;
         if (source.attackBuffed)
             bonusDamage = 10;
-        
-        target.ChangeHealth(((GetDamage() + bonusDamage) * (-1)), source, this);
+        if (target != null)
+        {
+            target.ChangeHealth(((GetDamage() + bonusDamage) * (-1)), source, this);
+        }
     }
 
     public override List<Vector2Int> GetAreaOfEffect(Vector2Int source, Direction direction)

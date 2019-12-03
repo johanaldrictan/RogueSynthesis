@@ -108,7 +108,6 @@ public abstract class UnitController : MonoBehaviour
                     newUnitComponent = newUnit.AddComponent<AlliedUnit>() as AlliedUnit;
                     break;
             }
-
             // give this new Unit the raw data for creating it, set its direction
             newUnitComponent.StartData = unitSpawnData[i].data;
             newUnitComponent.SetDirection(Direction.S);

@@ -147,9 +147,9 @@ public static class MapMath
 
 public enum Direction
 {
-    N,
-    W,
-    E,
-    S,
+    N = 60,
+    W = -60,
+    E = -120,
+    S = 120,
     NO_DIR
 }
