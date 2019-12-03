@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e74963ca174570c46a672d0da3303ef4, type: 3}
+  m_Name: Watcher
+  m_EditorClassIdentifier: 
+  north: {fileID: 21300000, guid: 5853523fd0cec5c4c8b0858022e35201, type: 3}
+  south: {fileID: 21300000, guid: 5cfc84df20fc7d2458fbfaf821db72a2, type: 3}
+  east: {fileID: 21300000, guid: 9494e7527057ab644bef255a608d27d6, type: 3}
+  west: {fileID: 21300000, guid: 6c5ab058541a71b4da7547c04b104468, type: 3}
+  portrait: {fileID: 0}

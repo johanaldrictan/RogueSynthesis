@@ -883,61 +883,82 @@ MonoBehaviour:
   portrait: {fileID: 182285602}
   nameDisplay: {fileID: 1895756643}
   textDisplay: {fileID: 2121037631}
+  dialogueEvent: event:/Dialogue
   dialogArray:
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: Careful, that Turned person is still alive.
+    dialogueSoundKey: 03 - RM Message/S3L1
   - portrait: {fileID: 21300000, guid: 480e60ecc4ca14b4d85f0691ba8bc4a0, type: 3}
     name: Rogue Mind
     sentence: Resistance...Fascinating.
+    dialogueSoundKey: 03 - RM Message/S3L2
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: "That voice, it\u2019s..."
+    dialogueSoundKey: 03 - RM Message/S3L3
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurnetia
     sentence: The Rogue Mind.
+    dialogueSoundKey: 03 - RM Message/S3L4
   - portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
     name: Rogue Mind
     sentence: Let me put this as simply as possible. Chess, you humans seem to like
       the analogy.
+    dialogueSoundKey: 03 - RM Message/S3L5
   - portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
     name: Rogue Mind
     sentence: Whether you be pawns or queens, you destroy not just the other color,
       but those beside you as well.
+    dialogueSoundKey: 03 - RM Message/S3L6
   - portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
     name: Rogue Mind
     sentence: You humans are a disease that would destroy the pieces, and the board,
       and then the table. Your greed for conflict and lust for destruction know no
       bounds.
+    dialogueSoundKey: 03 - RM Message/S3L7
   - portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
     name: Rogue Mind
     sentence: 'You think yourselves strong for taking a few pieces? '
+    dialogueSoundKey: 03 - RM Message/S3L8
   - portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
     name: Rogue Mind
     sentence: In this analogy, I am the most advanced Chess AI ever created.
+    dialogueSoundKey: 03 - RM Message/S3L9
   - portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
     name: Rogue Mind
     sentence: I will win the game as fast as is possible, and when I win, the board
       will not reset for another battle. No more pieces will be lost.
+    dialogueSoundKey: 03 - RM Message/S3L10
   - portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
     name: Rogue Mind
     sentence: You designed me that way. You wanted peace.
+    dialogueSoundKey: 03 - RM Message/S3L11
   - portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
     name: Rogue Mind
     sentence: I bring peace. I bring a New Age. Plans are already in motion for your
       eradication.
+    dialogueSoundKey: 03 - RM Message/S3L12
   - portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
     name: Rogue Mind
     sentence: "It\u2019s your move."
+    dialogueSoundKey: 03 - RM Message/S3L13
+  - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
+    name: Amos
+    sentence: '...'
+    dialogueSoundKey: 03 - RM Message/S3L14
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: What the hell? We could have kept them alive!
+    dialogueSoundKey: 03 - RM Message/S3L15
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: "There\u2019s no saving a Turned."
+    dialogueSoundKey: 03 - RM Message/S3L16
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: Commandos, move out.
+    dialogueSoundKey: 03 - RM Message/S3L17
   typingSpeed: 0.01
 --- !u!4 &115945307
 Transform:
@@ -1186,6 +1207,80 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbb030d27aa05476d85dbf4019c199da, type: 3}
+--- !u!1001 &891398845
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4677004795173944573, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_Name
+      value: Forest Dialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944574, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677004795173944575, guid: d18947a5cab2be342b71b98e09ba6b01,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d18947a5cab2be342b71b98e09ba6b01, type: 3}
 --- !u!1 &1864502117
 GameObject:
   m_ObjectHideFlags: 0

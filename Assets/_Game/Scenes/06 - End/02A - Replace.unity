@@ -615,6 +615,75 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ListenerNumber: -1
+--- !u!1001 &1406827799
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5941874212654855444, guid: 689dd76863c47c6488937a32dde62ad7,
+        type: 3}
+      propertyPath: m_Name
+      value: RM Lair Dialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941874212654855441, guid: 689dd76863c47c6488937a32dde62ad7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941874212654855441, guid: 689dd76863c47c6488937a32dde62ad7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941874212654855441, guid: 689dd76863c47c6488937a32dde62ad7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941874212654855441, guid: 689dd76863c47c6488937a32dde62ad7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941874212654855441, guid: 689dd76863c47c6488937a32dde62ad7,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941874212654855441, guid: 689dd76863c47c6488937a32dde62ad7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941874212654855441, guid: 689dd76863c47c6488937a32dde62ad7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941874212654855441, guid: 689dd76863c47c6488937a32dde62ad7,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941874212654855441, guid: 689dd76863c47c6488937a32dde62ad7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941874212654855441, guid: 689dd76863c47c6488937a32dde62ad7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941874212654855441, guid: 689dd76863c47c6488937a32dde62ad7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 689dd76863c47c6488937a32dde62ad7, type: 3}
 --- !u!1 &1478981287 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1227644126955832680, guid: 6bcecb4ce913e44d2a8203d717de5244,
@@ -679,54 +748,58 @@ MonoBehaviour:
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: Doctor, you once told me there was another option.
-    dialogueSoundKey: 
+    dialogueSoundKey: 10A - Replace/S10AL1
   - portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
     name: Rogue Mind
     sentence: No...
-    dialogueSoundKey: 
+    dialogueSoundKey: 10A - Replace/S10AL2
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: We could overwrite the Rogue Mind with a human conscious.
-    dialogueSoundKey: 
+    dialogueSoundKey: 10A - Replace/S10AL3
   - portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
     name: Rogue Mind
     sentence: You won't! You can't!
-    dialogueSoundKey: 
+    dialogueSoundKey: 10A - Replace/S10AL4
+  - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
+    name: Laurentia
+    sentence: I'll do it. If it means we can save the Turned.
+    dialogueSoundKey: 10A - Replace/S10AL5
   - portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
     name: Rogue Mind
     sentence: You humans are so lost that you can't imagine a world without rule?
       Overthrow me and put her in charge of humanity?
-    dialogueSoundKey: 
+    dialogueSoundKey: 10A - Replace/S10AL6
   - portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
     name: Rogue Mind
     sentence: She will betray you! All that power will corrupt her just as much of
-      the rest!
-    dialogueSoundKey: 
+      the rest!.
+    dialogueSoundKey: 10A - Replace/S10AL7
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: If anything goes wrong, use that virus on me and rebuild the world,
       make it better this time around.
-    dialogueSoundKey: 
+    dialogueSoundKey: 10A - Replace/S10AL8
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: Yes Ma'am. I understand.
-    dialogueSoundKey: 
+    dialogueSoundKey: 10A - Replace/S10AL9
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: To a brighter future.
-    dialogueSoundKey: 
+    dialogueSoundKey: 10A - Replace/S10AL10
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: To a better world.
-    dialogueSoundKey: 
+    dialogueSoundKey: 10A - Replace/S10AL11
   - portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
     name: Rogue Mind
     sentence: Nooooooooo...
-    dialogueSoundKey: 
+    dialogueSoundKey: 10A - Replace/S10AL12
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: Hello World.
-    dialogueSoundKey: 
+    dialogueSoundKey: 10A - Replace/S10AL13
   typingSpeed: 0.01
 --- !u!4 &1501390220
 Transform:

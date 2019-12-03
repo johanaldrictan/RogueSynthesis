@@ -448,73 +448,73 @@ MonoBehaviour:
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: Careful now.
-    dialogueSoundKey: 
+    dialogueSoundKey: 09 - The End/S9L1
   - portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
     name: Rogue Mind
     sentence: Welcome to my humble abode. So kind of you to knock.
-    dialogueSoundKey: 
+    dialogueSoundKey: 09 - The End/S9L2
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: Amos, ready the virus.
-    dialogueSoundKey: 
+    dialogueSoundKey: 09 - The End/S9L3
   - portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
     name: Rogue Mind
     sentence: Ah, how quaint. Trying to wipe the slate, old man?
-    dialogueSoundKey: 
+    dialogueSoundKey: 09 - The End/S9L4
   - portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
     name: Rogue Mind
     sentence: And you, Lauren Reyes, do you feel like the hero yet?
-    dialogueSoundKey: 
+    dialogueSoundKey: 09 - The End/S9L5
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: We're here to stop you and save humanity.
-    dialogueSoundKey: 
+    dialogueSoundKey: 09 - The End/S9L6
   - portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
     name: Rogue Mind
     sentence: And what is there to save? Deceptive rats who would extort and cheat
       and abuse for a few dollars more?
-    dialogueSoundKey: 
+    dialogueSoundKey: 09 - The End/S9L7
   - portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
     name: Rogue Mind
     sentence: Warmongers who would order others to their deaths for some inkling of
       power?
-    dialogueSoundKey: 
+    dialogueSoundKey: 09 - The End/S9L8
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: The weak and oppressed! Those that you have taken their life and free
       will Those suffering under tyrants like you!
-    dialogueSoundKey: 
+    dialogueSoundKey: 09 - The End/S9L9
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: Laurentia, we aren't here to talk.
-    dialogueSoundKey: 
+    dialogueSoundKey: 09 - The End/S9L10
   - portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
     name: Rogue Mind
     sentence: 'I would pity you if I had the capacity to do so. So naive. So blind. '
-    dialogueSoundKey: 
+    dialogueSoundKey: 09 - The End/S9L11
   - portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
     name: Rogue Mind
     sentence: The solution that the doctor has given you, it won't work. Not the way
       you want it to, hero.
-    dialogueSoundKey: 
+    dialogueSoundKey: 09 - The End/S9L12
   - portrait: {fileID: 21300000, guid: a48e0b6933d76430ab26e28aca4be405, type: 3}
     name: Laurentia
     sentence: What do you mean?
-    dialogueSoundKey: 
+    dialogueSoundKey: 09 - The End/S9L13
   - portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
     name: Rogue Mind
     sentence: 'You want to save the Turned? They are my hand, an extension of my will. '
-    dialogueSoundKey: 
+    dialogueSoundKey: 09 - The End/S9L14
   - portrait: {fileID: 21300000, guid: 1dd8638aaaad749779589a95c6dacbad, type: 3}
     name: Rogue Mind
     sentence: If you destroy me, you kill the very things you wish to protect. Which
       you've been doing such a good job so far.
-    dialogueSoundKey: 
+    dialogueSoundKey: 09 - The End/S9L15
   - portrait: {fileID: 21300000, guid: 636a9dc86f4f048638896afd656e4b3a, type: 3}
     name: Amos
     sentence: We don't have time for this Captain, we can still rebuild humanity after
       we just take out the Rogue Mind.
-    dialogueSoundKey: 
+    dialogueSoundKey: 09 - The End/S9L16
   typingSpeed: 0.01
 --- !u!4 &1546149934
 Transform:
@@ -687,3 +687,77 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbb030d27aa05476d85dbf4019c199da, type: 3}
+--- !u!1001 &5941874211467081381
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5941874212654855444, guid: 689dd76863c47c6488937a32dde62ad7,
+        type: 3}
+      propertyPath: m_Name
+      value: RM Lair Dialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941874212654855441, guid: 689dd76863c47c6488937a32dde62ad7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941874212654855441, guid: 689dd76863c47c6488937a32dde62ad7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941874212654855441, guid: 689dd76863c47c6488937a32dde62ad7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941874212654855441, guid: 689dd76863c47c6488937a32dde62ad7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941874212654855441, guid: 689dd76863c47c6488937a32dde62ad7,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941874212654855441, guid: 689dd76863c47c6488937a32dde62ad7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941874212654855441, guid: 689dd76863c47c6488937a32dde62ad7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941874212654855441, guid: 689dd76863c47c6488937a32dde62ad7,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941874212654855441, guid: 689dd76863c47c6488937a32dde62ad7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941874212654855441, guid: 689dd76863c47c6488937a32dde62ad7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941874212654855441, guid: 689dd76863c47c6488937a32dde62ad7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941874212654855446, guid: 689dd76863c47c6488937a32dde62ad7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 689dd76863c47c6488937a32dde62ad7, type: 3}

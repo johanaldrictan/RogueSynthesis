@@ -98,15 +98,15 @@ public abstract class Unit : MonoBehaviour
 
         // positional setup
         ChangeDirection(Direction.S);
-        if(StartData.moveSoundEventName != "")
+        if(StartData.moveSoundEventName != "" || StartData.moveSoundEventName == null)
             moveSoundEvent = FMODUnity.RuntimeManager.CreateInstance(StartData.moveSoundEventName);
         if (!moveSoundEvent.isValid()) { Debug.LogWarning("Move Event for " + unitName + " invalid."); }
 
-        if(StartData.deathSoundEventName != "")
+        if(StartData.deathSoundEventName != "" || StartData.deathSoundEventName == null)
             deathSoundEvent = FMODUnity.RuntimeManager.CreateInstance(StartData.deathSoundEventName);
         if (!deathSoundEvent.isValid()) { Debug.LogWarning("Death Event for " + unitName + " invalid."); }
 
-        if(StartData.selectSoundEventName != "")
+        if(StartData.selectSoundEventName != "" || StartData.selectSoundEventName == null)
             selectSoundEvent = FMODUnity.RuntimeManager.CreateInstance(StartData.selectSoundEventName);
         if (!moveSoundEvent.isValid()) { Debug.LogWarning("Select Event for " + unitName + " invalid."); }
     }

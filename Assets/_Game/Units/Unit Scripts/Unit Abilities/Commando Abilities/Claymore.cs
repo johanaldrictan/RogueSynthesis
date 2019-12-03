@@ -32,7 +32,7 @@ public class Claymore : UnitAbility
 
     public override string GetSoundEvent()
     {
-        return "event:/SHA/SHA_ClaymorePlace";
+        return "event:/SHA/SHA1/SHA_ClaymorePlace";
     }
 
     protected override bool InferiorComparator(UnitAbility inQuestion)

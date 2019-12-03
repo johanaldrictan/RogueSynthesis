@@ -135,7 +135,7 @@ public class ShoulderTackle : Attack
 
     public override string GetSoundEvent()
     {
-        return "event:/PRO1/PRO_ShoulderTackle";
+        return "event:/PRO/PRO1/PRO_ShoulderTackle";
     }
 }
 
