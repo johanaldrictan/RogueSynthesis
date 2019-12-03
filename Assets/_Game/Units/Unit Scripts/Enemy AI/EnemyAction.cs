@@ -26,7 +26,7 @@ public abstract class EnemyAction
     protected int committedAbilityIndex;
 
     // committedMovement is the data regarding the movement that the Unit has committed to doing
-    protected Tuple<Vector2Int, Direction> committedMovement;
+    protected Tuple<Queue<Vector2Int>, Direction> committedMovement;
 
     // constructor. Takes a unit and assigns it to myUnit
     public EnemyAction(EnemyUnit unit)
@@ -75,7 +75,7 @@ public abstract class EnemyAction
     // this is biased/has a heuristic: the ability that is being used has already been chosen at this point.
     // this function is abstract because way in which an ability is given significance is biased based on the type of EnemyAction that has been decided upon
     // for example, being Aggro will value different things when choosing an option as opposed to being Defensive
-    protected abstract Tuple<Vector2Int, Direction> CommitMovement();
+    protected abstract Tuple<Queue<Vector2Int>, Direction> CommitMovement();
 
 
 

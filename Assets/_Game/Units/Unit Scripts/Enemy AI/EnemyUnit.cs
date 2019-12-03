@@ -116,7 +116,7 @@ public class EnemyUnit : Unit
     {
         if (plannedActionData != null)
         {
-            Move(plannedActionData.GetEndingPosition().x, plannedActionData.GetEndingPosition().y);
+            StartCoroutine(Move(plannedActionData.GetMovementPath(), MovementType.WALK));
             ChangeDirection(plannedActionData.GetAbilityDirection());
         }
         hasMoved = true;

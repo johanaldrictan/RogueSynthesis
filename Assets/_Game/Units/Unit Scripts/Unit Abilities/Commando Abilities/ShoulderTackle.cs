@@ -39,14 +39,14 @@ public class ShoulderTackle : Attack
             }
             //Debug.Log(newLocation);
             //check new location for issues, if so, stay at current loc
-            source.Move(newLocation.x, newLocation.y);
+            // ********************************** source.Move(newLocation.x, newLocation.y, MovementType.DASH);
             AttackHelper.DisplaceUnit(target, source, this, pushback, source.GetDirection());
             
         }
         else
         {
             Vector2Int newLocation = source.GetMapPosition() + (MapMath.DirToRelativeLoc(source.GetDirection()) * pushback);
-            source.Move(newLocation.x, newLocation.y);
+            // ********************************** source.Move(newLocation.x, newLocation.y, MovementType.DASH);
         }
         
         

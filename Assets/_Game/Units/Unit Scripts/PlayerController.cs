@@ -27,12 +27,9 @@ public class PlayerController : UnitController
 
     public override void Update()
     {
-        // if it's not currently this controller's turn, it's not allowed to do anything
-        if (!myTurn)
+        // if it's not currently this controller's turn, the controller has no Units, or there are active events, it's not allowed to do anything
+        if (!myTurn || units.Count == 0 || EventManager.instance.EventsExist())
         { return; }
-
-        // No logic runs without a unit.
-        if (units.Count == 0) { return; }
 
         AlliedUnit theUnit = units[activeUnit] as AlliedUnit;
 
@@ -92,7 +89,14 @@ public class PlayerController : UnitController
             {
                 if (theUnit.plannedPath.Contains(dest)) // Commit to the path
                 {
-                    theUnit.Move(dest.x, dest.y);
+                    Queue<Vector2Int> movementPath = new Queue<Vector2Int>();
+                    for (int i = 0; i < theUnit.plannedPath.Count; i++)
+                    {
+                        movementPath.Enqueue(theUnit.plannedPath[i]);
+                        if (theUnit.plannedPath[i] == dest)
+                            break;
+                    }
+                    StartCoroutine(theUnit.Move(movementPath, MovementType.WALK));
                     ClearSpotlight();
                 }
                 else

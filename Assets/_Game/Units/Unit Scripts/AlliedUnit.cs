@@ -63,40 +63,6 @@ public class AlliedUnit : Unit
         }
     }
 
-    public override void Move(int x, int y)
-    {
-        if (moveSoundEvent.isValid())
-        {
-            moveSoundEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            moveSoundEvent.start();
-        }
-        // remember where we started first
-        positionMemory = mapPosition;
-
-        // remove old coordinates from globalPositionalData
-        globalPositionalData.RemoveUnit(mapPosition);
-
-        // clear the highlighting
-        MapUIController.instance.ClearPathHighlight();
-        MapUIController.instance.ClearRangeHighlight();
-
-        //restore old tilevalue
-        MapController.instance.weightedMap[mapPosition] = (int)tile;
-
-        // set new coordinates
-        mapPosition.x = x;
-        mapPosition.y = y;
-
-        // update the globalPositionalData
-        globalPositionalData.AddUnit(mapPosition, this);
-
-        tile = (TileWeight)MapController.instance.weightedMap[mapPosition];
-        MapController.instance.weightedMap[mapPosition] = (int)TileWeight.OBSTRUCTED;
-        this.transform.position = MapMath.MapToWorld(x,y);
-        plannedPath.Clear();
-        hasMoved = true;
-    }
-
 
     // this function is called in the Update Loop in other modules
     // therefore, you can treat this function as being called every frame under the correct conditions
@@ -134,7 +100,9 @@ public class AlliedUnit : Unit
         // Esc Key = cancel
         else if (Input.GetKeyDown(KeyCode.Escape) || PlayerController.ability == 3)
         {
-            Move(positionMemory.x, positionMemory.y);
+            Queue<Vector2Int> destination = new Queue<Vector2Int>();
+            destination.Enqueue(positionMemory);
+            StartCoroutine(Move(destination, MovementType.TELEPORT));
             ChangeDirection(directionMemory);
             hasMoved = false;
             hasPivoted = false;
