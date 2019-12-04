@@ -52,7 +52,7 @@ public class PlayerController : UnitController
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             GetNextUnit();
-            UI.GetComponent<UI_Operator>().InitializeUI();
+            
             return;
         }
 
@@ -139,6 +139,8 @@ public class PlayerController : UnitController
         {
             SelectUnit(GetNextIndex());
         }
+
+        UI.GetComponent<UI_Operator>().InitializeUI();
     }
 
     public int? FindUnit(Vector2Int selected)
