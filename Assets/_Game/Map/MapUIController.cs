@@ -38,7 +38,7 @@ public class MapUIController : MonoBehaviour
         {
             instance = this;
         }
-        debugText.text = "Cursor Position(Map Pos): " + cursorPosition + "Weight: ";
+        //debugText.text = "Cursor Position(Map Pos): " + cursorPosition + "Weight: ";
     }
     // Start is called before the first frame update
     void Start()
@@ -53,12 +53,12 @@ public class MapUIController : MonoBehaviour
         cursorPosition = MapMath.WorldToMap(ray.origin * -10f/ray.origin.z);
         //Debug.Log("Cursor Position(World Pos): " + ray.origin);
         //Debug.Log("Cursor Position(Grid Pos): " + MapController.instance.walkableTiles.WorldToCell(ray.origin));
-        
+        /*
         if(MapMath.InMapBounds(cursorPosition))
             debugText.text = "Cursor Position(Map Pos): " + cursorPosition + "Weight: " + MapController.instance.weightedMap[cursorPosition];
         else
             debugText.text = "Cursor Position(Map Pos): " + cursorPosition + "Weight: NULL";
-
+*/
         if (MapController.instance.walkableTiles.GetTile(MapMath.MapToGrid(cursorPosition)) != null)
             tileSelector.transform.position = MapMath.MapToWorld(cursorPosition);
 

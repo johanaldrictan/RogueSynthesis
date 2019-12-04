@@ -96,6 +96,13 @@ public class AlliedUnit : Unit
             PlayerController.ability = 0;
             return;
         }
+        if (Input.GetKeyDown(KeyCode.Keypad3) || PlayerController.ability == 4)
+        {
+            AvailableAbilities[3].Execute(this, direction); // CHANGE THIS
+            hasActed = true;
+            PlayerController.ability = 0;
+            return;
+        }
 
         // Esc Key = cancel
         else if (Input.GetKeyDown(KeyCode.Escape) || PlayerController.ability == 3)
