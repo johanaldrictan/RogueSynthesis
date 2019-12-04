@@ -58,6 +58,11 @@ public class PlayerController : UnitController
 
         if(theUnit.hasMoved && !theUnit.hasPivoted)
         {
+            Vector2Int unitPosition = units[activeUnit].GetMapPosition();
+            //Vector3 truePosition = MapMath.MapToWorld(unitPosition);
+            directionSelector.transform.position = MapMath.MapToWorld(unitPosition);
+            directionSelector.transform.position = new Vector3(directionSelector.transform.position.x, directionSelector.transform.position.y + 1.506f, directionSelector.transform.position.z);
+            directionSelector.SetActive(true);
             theUnit.ChooseDirection();
             return;
         }
@@ -65,6 +70,7 @@ public class PlayerController : UnitController
         // if the current unit has moved but hasn't attacked, it needs to select an ability
         if (theUnit.hasMoved && theUnit.hasPivoted && !theUnit.hasActed)
         {
+            directionSelector.SetActive(false);
             abilityPanel.SetActive(true);
             theUnit.ChooseAbility();
             return;
@@ -176,10 +182,8 @@ public class PlayerController : UnitController
         SpotlightActiveUnit();
         UI.GetComponent<UI_Operator>().unit = units[activeUnit];
         UI.GetComponent<UI_Operator>().SetInfo();
-        Vector2Int unitPosition = units[activeUnit].GetMapPosition();
-        //Vector3 truePosition = MapMath.MapToWorld(unitPosition);
-        directionSelector.transform.position = MapMath.MapToWorld(unitPosition);
-        directionSelector.transform.position = new Vector3(directionSelector.transform.position.x, directionSelector.transform.position.y + 1.506f, directionSelector.transform.position.z);
+        
+        directionSelector.SetActive(false);
         if (units[activeUnit].selectSoundEvent.isValid())
         {
             units[activeUnit].selectSoundEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);

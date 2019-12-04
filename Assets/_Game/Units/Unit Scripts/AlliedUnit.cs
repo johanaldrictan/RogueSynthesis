@@ -129,28 +129,32 @@ public class AlliedUnit : Unit
     public void ChooseDirection()
     {
         directionMemory = this.direction;
-        if(Input.GetKeyDown(KeyCode.UpArrow))
+        if(Input.GetKeyDown(KeyCode.UpArrow) || ArrowSelection.directionID == 2)
         {
             this.ChangeDirection(Direction.N);
             hasPivoted = true;
+            ArrowSelection.directionID = 0;
             return;
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKeyDown(KeyCode.DownArrow) || ArrowSelection.directionID == 4)
         {
             this.ChangeDirection(Direction.S);
             hasPivoted = true;
+            ArrowSelection.directionID = 0;
             return;
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) || ArrowSelection.directionID == 1)
         {
             this.ChangeDirection(Direction.W);
             hasPivoted = true;
+            ArrowSelection.directionID = 0;
             return;
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKeyDown(KeyCode.RightArrow) || ArrowSelection.directionID == 3)
         {
             this.ChangeDirection(Direction.E);
             hasPivoted = true;
+            ArrowSelection.directionID = 0;
             return;
         }
     }
