@@ -5408,7 +5408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45357accdef15994fa7403c6167d8b47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugText: {fileID: 0}
+  debugText: {fileID: 2007282046}
   cursorPosition: {x: 0, y: 0}
   tileHighlighting: {fileID: 670285419}
   pathHighlightingNS: {fileID: 1351421255}
@@ -7307,6 +7307,18 @@ Transform:
   m_Father: {fileID: 541395594}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2007282046 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 350081458, guid: ffb4facb375764f4595ea6836cd47a3c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1710308010}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1748261137635348202
 PrefabInstance:
   m_ObjectHideFlags: 0
