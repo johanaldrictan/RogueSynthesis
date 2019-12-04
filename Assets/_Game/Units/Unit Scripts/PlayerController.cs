@@ -129,6 +129,8 @@ public class PlayerController : UnitController
     {
         ClearSpotlight();
 
+        directionSelector.SetActive(false);
+
         if (IsTurnOver())
         {
             RelinquishPower();

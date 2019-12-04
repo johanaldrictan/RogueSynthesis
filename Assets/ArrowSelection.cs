@@ -51,10 +51,10 @@ public class ArrowSelection : MonoBehaviour
 
     private void OnMouseExit()
     {
-        arrow1.GetComponent<SpriteRenderer>().color = new Color(0.259434f, 0.7345216f, 1, 1);
-        arrow2.GetComponent<SpriteRenderer>().color = new Color(0.259434f, 0.7345216f, 1, 1);
-        arrow3.GetComponent<SpriteRenderer>().color = new Color(0.259434f, 0.7345216f, 1, 1);
-        arrow4.GetComponent<SpriteRenderer>().color = new Color(0.259434f, 0.7345216f, 1, 1);
+        //arrow1.GetComponent<SpriteRenderer>().color = new Color(0.259434f, 0.7345216f, 1, 1);
+        //arrow2.GetComponent<SpriteRenderer>().color = new Color(0.259434f, 0.7345216f, 1, 1);
+        //arrow3.GetComponent<SpriteRenderer>().color = new Color(0.259434f, 0.7345216f, 1, 1);
+        //arrow4.GetComponent<SpriteRenderer>().color = new Color(0.259434f, 0.7345216f, 1, 1);
     }
 
     // Update is called once per frame

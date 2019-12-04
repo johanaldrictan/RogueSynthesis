@@ -5327,8 +5327,8 @@ MonoBehaviour:
   - data: {fileID: 11400000, guid: 22c2139a50d01e24fa0148c0f24b93a5, type: 2}
     spawnPosition: {x: 0, y: -2}
   EventPath: event:/Combat/PhaseInto_RogueMind
-  abilityPanel: {fileID: 1549085493}
-  UI: {fileID: 826912452}
+  abilityPanel: {fileID: 907179267}
+  UI: {fileID: 1947568026}
   directionSelector: {fileID: 945519286}
   playerID: 0
 --- !u!4 &526139874
@@ -6403,17 +6403,17 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1710308010}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &826912452 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1748261136809697326, guid: 1f5b747a090f51f4ca08cdf997da2972,
-    type: 3}
-  m_PrefabInstance: {fileID: 1748261137635348202}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &826912453 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1748261136809697327, guid: 1f5b747a090f51f4ca08cdf997da2972,
     type: 3}
   m_PrefabInstance: {fileID: 1748261137635348202}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &907179267 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3096172760165903508, guid: ffb4facb375764f4595ea6836cd47a3c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1710308010}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &945519285
 PrefabInstance:
@@ -6828,12 +6828,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1549085493 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1748261136491685343, guid: 1f5b747a090f51f4ca08cdf997da2972,
-    type: 3}
-  m_PrefabInstance: {fileID: 1748261137635348202}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1582521906
 GameObject:
   m_ObjectHideFlags: 0
@@ -7317,6 +7311,12 @@ Transform:
   m_Father: {fileID: 541395594}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1947568026 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3096172761592195429, guid: ffb4facb375764f4595ea6836cd47a3c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1710308010}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2007282046 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 350081458, guid: ffb4facb375764f4595ea6836cd47a3c,
