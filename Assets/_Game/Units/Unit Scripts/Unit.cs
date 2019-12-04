@@ -240,6 +240,9 @@ public abstract class Unit : MonoBehaviour
         Vector2Int currentTile = GetMapPosition();
         while (path.Count > 0)
         {
+            // have the camera look here
+            CameraController.instance.targetPos = this.transform.position;
+
             // get the next tile to move to
             currentTile = path.Dequeue();
 
@@ -266,21 +269,24 @@ public abstract class Unit : MonoBehaviour
 
                 case MovementType.KNOCKBACK:
                     this.transform.position = MapMath.MapToWorld(currentTile);
-                    yield return new WaitForSecondsRealtime(0.1f);
+                    yield return new WaitForSecondsRealtime(0.01f);
                     break;
 
                 case MovementType.TELEPORT:
                     this.transform.position = MapMath.MapToWorld(currentTile);
+                    CameraController.instance.targetPos = this.transform.position;
                     yield return new WaitForSecondsRealtime(0.1f);
                     break;
 
                 case MovementType.WALK:
                     this.transform.position = MapMath.MapToWorld(currentTile);
+                    CameraController.instance.targetPos = this.transform.position;
                     yield return new WaitForSecondsRealtime(0.1f);
                     break;
 
                 default:
                     this.transform.position = MapMath.MapToWorld(currentTile);
+                    CameraController.instance.targetPos = this.transform.position;
                     yield return new WaitForSecondsRealtime(0.1f);
                     break;
             }
