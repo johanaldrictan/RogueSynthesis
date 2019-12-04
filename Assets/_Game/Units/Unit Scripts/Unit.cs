@@ -350,6 +350,7 @@ public abstract class Unit : MonoBehaviour
         hasMoved = false;
         hasActed = false;
         this.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        this.gameObject.transform.position = MapMath.MapToWorld(position);
         globalPositionalData.AddUnit(position, this);
         tile = (TileWeight)MapController.instance.weightedMap[position];
         MapController.instance.weightedMap[position] = (int)TileWeight.OBSTRUCTED;

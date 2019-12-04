@@ -23,6 +23,9 @@ public class ConversionConditionUnityEvent : UnityEvent<ConversionCondition> { }
 // Creates an event that passes an Attack with it
 public class DelayedEffectUnityEvent : UnityEvent<DelayedEffect> { }
 
+// Creates an event that triggers when a phase changes
+public class PhaseChangeUnityEvent : UnityEvent<bool, bool, int> { }
+
 // DELEGATE
 
 public delegate bool ConversionCondition(Unit inQuestion);
