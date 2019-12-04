@@ -249,7 +249,7 @@ public class Aggro : EnemyAction
                 }
             }
             Queue<Vector2Int> finalPath = MapController.instance.GetShortestPath(myUnit.shortestPaths, bestEndingPosition.Item1).Item1;
-            result = new Tuple<Queue<Vector2Int>, Direction>(finalPath, result.Item2);
+            result = new Tuple<Queue<Vector2Int>, Direction>(finalPath, bestEndingPosition.Item2);
         }
 
         return result;

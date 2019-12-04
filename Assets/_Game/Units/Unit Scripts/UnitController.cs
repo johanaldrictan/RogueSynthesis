@@ -160,7 +160,7 @@ public abstract class UnitController : MonoBehaviour
                         toVisit.Enqueue(tile);
                     }
                 }
-                while (unit.globalPositionalData.SearchLocation(spawnPosition) != null);
+                while (unit.globalPositionalData.SearchLocation(spawnPosition) != null || MapController.instance.weightedMap[spawnPosition] == (int)TileWeight.OBSTRUCTED);
                 unit.Revive(spawnPosition);
             }
         }

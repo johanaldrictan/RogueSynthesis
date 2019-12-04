@@ -15,7 +15,7 @@ public class TurnController : MonoBehaviour
     private List<UnitController> controllers;
 
     // storage of Unit Positional Data
-    private UnitPositionStorage globalPositionalData;
+    public UnitPositionStorage globalPositionalData;
 
     // storage of Trap positional Data
     public TrapPositionStorage trapPositionalData;
@@ -33,6 +33,9 @@ public class TurnController : MonoBehaviour
 
     // A UnityEvent that is called whenver a turn ends. it asks for any Units that should be turned into enemies to happen
     public static ConversionConditionUnityEvent ToEnemyEvent = new ConversionConditionUnityEvent();
+
+    // NewPhaseEvent is called whenever a phase changes.
+    public static PhaseChangeUnityEvent NewPhaseEvent = new PhaseChangeUnityEvent();
 
     public static TurnController instance;
     public List<Attack> delayedAttacks;
@@ -130,6 +133,7 @@ public class TurnController : MonoBehaviour
         if (controllers[currentTurn] == controller && controller.IsMyTurn())
         {
             CycleEffects(true);
+            NewPhaseEvent.Invoke(controllers[currentTurn] is PlayerController, false, currentRound);
 
             if (controllers[currentTurn] is PlayerController && controllers[currentTurn].units.Count > 0)
             { (controllers[currentTurn] as PlayerController).ClearSpotlight(); }
@@ -155,6 +159,7 @@ public class TurnController : MonoBehaviour
             }
 
             CycleEffects(false);
+            NewPhaseEvent.Invoke(controllers[currentTurn] is PlayerController, true, currentRound);
 
             if (controllers[currentTurn] is PlayerController && controllers[currentTurn].units.Count > 0)
             { (controllers[currentTurn] as PlayerController).SpotlightActiveUnit(); }
